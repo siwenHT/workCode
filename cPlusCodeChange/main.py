@@ -10,7 +10,7 @@ from cplus import createAttr as ATTR
 import re
 import operator
 
-lanType = 'cplus'
+lanType = 'cplus'  
 def createOneClass(params):
     if lanType == 'cplus':
        return cplusTool.createClass(params)
