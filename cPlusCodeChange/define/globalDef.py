@@ -22,3 +22,4 @@ FROMTYPE = Enum('FROMTYPE', ('add', 'old'))
 Static = "static"
 
 CPLUS = 'cplus'
+ID = 'Id'
