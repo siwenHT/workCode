@@ -1,0 +1,11 @@
+#ifndef COCOS2DX_COCOS_SCRIPTING_LUA_BINDINGS_LUA_ASSETSMANAGER_TEST_SAMPLE_H
+#define COCOS2DX_COCOS_SCRIPTING_LUA_BINDINGS_LUA_ASSETSMANAGER_TEST_SAMPLE_H
+#ifdef __cplusplus
+extern "C" {
+#endif
+#include "tolua++.h"
+#ifdef __cplusplus
+}
+#endif
+TOLUA_API int register_assetsmanager_test_sample(lua_State* tolua_S);
+#endif 

@@ -1,0 +1,12 @@
+$#include "GUI/ScrollView/YGirdViewCell.h"
+$#include "tolua_fix.h"
+$#include "LuaBasicConversions.h"
+$USING_NS_YOUNG
+class YGirdViewCell : public Node
+{
+public:
+    static YGirdViewCell *create();
+    void setIdx(int idx);
+    int getIdx() const;
+    void reset();
+};

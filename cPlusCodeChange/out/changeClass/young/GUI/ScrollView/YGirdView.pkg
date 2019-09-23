@@ -1,0 +1,51 @@
+$#include "GUI/ScrollView/YGirdView.h"
+$#include "tolua_fix.h"
+$#include "LuaBasicConversions.h"
+$USING_NS_YOUNG
+$USING_NS_CC
+class YGirdViewDelegate : public YScrollViewDelegate
+{
+public:
+    
+    virtual void girdCellTouched(YGirdView *gird, YGirdViewCell *cell);
+    
+    virtual void girdCellHighlight(YGirdView *gird, YGirdViewCell *cell);
+    
+    virtual void girdCellUnhighlight(YGirdView *gird, YGirdViewCell *cell);
+    
+    virtual void girdCellWillRecycle(YGirdView *gird, YGirdViewCell *cell);
+};
+class YGirdViewDataSource
+{
+public:
+    virtual ~YGirdViewDataSource() {}
+    virtual cocos2d::Size cellSizeForGird(YGirdView *gird);
+    
+    virtual YGirdViewCell *girdCellAtIndex(YGirdView *gird, ssize_t idx);
+    
+    virtual ssize_t numberOfCellsInGirdView(YGirdView *gird);
+    virtual ssize_t numberOfCellsInGroup(YGirdView *gird);
+};
+class YGirdView : public YScrollView, public YScrollViewDelegate
+{
+public:
+    static YGirdView *create(YGirdViewDataSource *dataSource, cocos2d::Size size);
+    bool initWithDataSource(YGirdViewDataSource *dataSource, cocos2d::Size size);
+    void setDelegate(YGirdViewDelegate *pDelegate);
+    YGirdViewDelegate *getDelegate();
+    void setDataSource(YGirdViewDataSource *source);
+    YGirdViewDataSource *getDataSource();
+    int getIndexFromGroupAndInGroup(int group, int inGroup);
+	void getGroupAndInGroupFromIndex(int index, int *group, int *inGroup);
+    
+    virtual void scrollViewDidScroll(YScrollView *view);
+    virtual void scrollViewDidZoom(YScrollView *view);
+    void updateCellAtIndex(ssize_t idx);
+    void insertCellAtIndex(ssize_t idx);
+    
+    void removeCellAtIndex(ssize_t idx);
+    YGirdViewCell *cellAtIndex(ssize_t idx);
+   
+    YGirdViewCell *dequeueCell();
+    void reloadData();
+};

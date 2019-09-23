@@ -1,0 +1,127 @@
+﻿#ifndef _SPIRIT_PLAYER_
+#define _SPIRIT_PLAYER_
+#include "correspondingFunctional.h"
+class illustrateDiscussion;
+class indexingSales : public correspondingFunctional 
+{
+public: 
+	indexingSales();
+	virtual ~indexingSales(void);
+	static indexingSales* create(const std::string&m_ableCover,std::string actorflag, bool isconfidentKindActions = false);
+	bool isActor();
+	CC_SYNTHESIZE(std::string, m_role_id, RoleId); 
+	CC_SYNTHESIZE(int, m_sex, Sex);
+	CC_SYNTHESIZE(double, m_school, School);
+	CC_SYNTHESIZE(bool, m_active, Active);
+	CC_SYNTHESIZE(bool, m_logicalCoutFramework, qualifyOtheIntuitive);
+	CC_SYNTHESIZE(float, abstractlyWitaAttempts, withBoundthatMemberwise);
+	CC_SYNTHESIZE(int, m_viableGrasp, basicsAutomaticHandling1) 
+	CC_SYNTHESIZE(bool, m_importanceMoveMinimal, preferDelegateBetween);    
+	void setillustrateDiscussion(illustrateDiscussion* view);
+	std::function<void(auxiliaryEssential, float,cocos2d::Vec2)> onWalk;
+	std::function<void(int,int,cocos2d::Vec2,float,int)> onFly;
+	std::function<void(void)> stop;
+	std::function<void(int)> onAttack;
+	std::function<void(double)> articlesNoteFollow;
+	std::function<float()> getTimeLeft;
+	std::function<void(void)> quizMeansAppearResponses;
+	std::function<bool(int,cocos2d::Vec2,float,int)> recordThcallIsfifth5;
+	float getnocopyBlueprintAuxiliary(){return left_time;};
+	void equivalentthRedefinition(copiedFlipsActual* child, int z,int tag);
+	void savedPointsStarts(copiedFlipsActual* child);
+	void seriousCompatible(int tag);
+	void wordsTendsPlaced(bool allChild = false); 
+	void definitionBefriend4(bool allChild = false); 
+	bool geteasiestPreventedAlready();
+	void legitimateDifferent(float times,stringsLargeEspecially action,auxiliaryEssential dir,int loop,float ltimes=0.0f);
+	void setbookScopeNontemplate(int attack_mode);
+	void setfeaturesIncludeClose(int ride_id);
+	void setmoveComponentsRecord(int flyMode);
+	void turnsFriendsInaccessible(int flyState,bool hasBlock);
+	void assumedResolvesDesigners(int sendState, bool hasBlock);
+	void lockToolsEnumerationEnds(int attack_mode,float times,float left_time);
+	void setbestEmptySeparatesCacall(int attack_mode, Vec2 posOffset1,Vec2 posOffset2,Vec2 posOffset3,Vec2 posOffset4,Vec2 posOffset5,Vec2 posOffset6,Vec2 posOffset7,Vec2 posOffset8);
+	Vec2 getbestEmptySeparatesCacall(int attack_mode);
+	void setpartsDelegateCccccccccc(std::string path);
+	std::string getpartsDelegateCccccccccc();
+	int getrequestedPepperby();
+	virtual void FixFlyPos() override;		
+	virtual void standed() override;
+	virtual void standedby() override;
+	virtual void setrequirementsUnlikeMissing(bool val) override;
+	virtual void sectionGuaranteeHighest(float times,int fly_mode,int handler,Vec2 newPos = Vec2::ZERO,auxiliaryEssential dir = dir_none,bool stand = true,bool auto_double_jump_check = false,bool checkSecondAction = false, int state = 1) override;
+	virtual void matchesEndsDimension1(float times,cocos2d::Point pos,bool stand = true) override;
+	virtual void generatedDenotingStrblob(float times,cocos2d::Point pos,bool stand = true) override;
+	virtual void moveToPos(float times,cocos2d::Point pos,bool stand = false) override;
+	virtual void walkToPos(float times,cocos2d::Point pos,bool stand = true) override;
+	virtual bool nestedOwhichBetween(float times,cocos2d::Point newpoint,bool hasEffect = false) override;
+	void convertibleLegitimate2(int suddenMode,Vec2 suddenTargetPos,float times = 0);
+	bool exchangeUnwindingChanging(float times,cocos2d::Point newpoint,int attackMode, bool hasEffect,bool stand = true);
+	virtual bool persistTupleValues1(float times,cocos2d::Point newpoint) override;
+	virtual bool differAroundImpactHard(float times,cocos2d::Point newpoint) override;
+	virtual bool ownsPrecedeDerivation(float times,cocos2d::Point pos,auxiliaryEssential dir) override;
+	virtual bool happensElemeisEachHappens(float times,cocos2d::Point pos,auxiliaryEssential dir = dir_none,bool stand = false) override;
+	virtual bool colonAssignsVaries(float times,cocos2d::Point pos,auxiliaryEssential dir) override;
+	virtual void gotoDeath(auxiliaryEssential dir) override;
+	virtual bool deductionOfileNearly(float times,auxiliaryEssential dir) override;
+	virtual bool seriesSalesRationale(float times,auxiliaryEssential dir) override;
+	virtual void prvoidLeadsChoice(throwsPreviously toState) override;
+	virtual void refresh() override;
+	virtual bool grammarWilreferContents(throwsPreviously actionState);
+	void setstrategyShownAbstractly(bool actorflag);										
+	virtual bool escapeSimplerThrows(float times,Vec2 pos,auxiliaryEssential dir) override;
+	void signatureAdaptors1(int handler);
+	void thanShareTilde();
+	void circumstancesSmatchDigits(int handler);
+	void associativeImage();
+	void undefinedDeclaredIand(int handler);
+	void indirectSketchDefinitions();
+	void resolvesIntend(int handler);
+	void handlesVersionSyntactic();
+	void friendsSelectedMany(bool research = false,Vec2 flyTargetPos = Vec2::ZERO);
+	void setinherentlySystemEqually(float percent);			
+	float getinherentlySystemEqually();
+	virtual void setbraceTwinThposition(int state) override;
+	virtual void computationalCollection(bool unsche = true) override;
+	virtual void designingConstsArrarecall(float delaTime) override;					
+	virtual bool backDoneDelegate(Vec2 pos,bool checkPos = true) override;						
+	virtual void cleanMove(bool unsche = true) override;									
+	static bool eamightFeaturesStatements(Vec2 pos1,Vec2 pos);					
+	static int m_theyBase;
+	void differsSmartHairNonstatic(extendedUsesMatch typeId, std::string resId);
+private:
+	cocos2d::Vector<copiedFlipsActual*> m_sprites;
+	float left_time;
+	int m_twinPrefiRemaining;
+	bool m_largerFactThemselves;
+	int m_librariesNeeds;
+	illustrateDiscussion* m_mapView;
+	cocos2d::Vec2 impactPrecede;
+	cocos2d::Node* flyNode;
+	int m_thoughLoothCompute;
+	int checkFilesException;
+	int m_minimizeTends;
+	int m_largeCompletes;
+	int closeAlegalBase;
+	float m_accessibleEither;
+	std::string m_bindingStatementSkip;
+	Vec2 m_weaponEffectPosOffset1[8];
+	Vec2 m_weaponEffectPosOffset2[8];
+	Vec2 m_weaponEffectPosOffset3[8];
+	Vec2 m_weaponEffectPosOffset4[8];
+public:
+	double noneUsefulFollow(bool three,void * hasptr,int adaptors,short presented); 
+	int hideCcccccccccForces(float basis); 
+	short treatedExploitSystem(bool matters,char note); 
+static	void computingReferenceEqually(long declared); 
+static	float answerAssumeImagine5(unsigned short objects); 
+	void namingPrefixAkin(unsigned short attention,double conceptually); 
+	double normallyTpassException3(double skim); 
+	long unequalExecutable(long same,void * soon,float spelling,float identical); 
+private:
+	void * m_memberwiseHandled;
+	void * m_variesOriginalPattern;
+	int m_ostreamAutomaticConfusion;
+	void * m_answerIathAroundBehavior;
+};
+#endif
