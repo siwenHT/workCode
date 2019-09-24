@@ -9,12 +9,27 @@
 # funcInfo： {}
 # [DEF.Name]:string, 
 # ['params']:{}
-#           [DEF.Type]:string, [DEF.Name]:string}
-#           [DEF.Type]:string, [DEF.Name]:string}
+#           {[DEF.Type]:string, [DEF.Name]:string}
+#           {[DEF.Type]:string, [DEF.Name]:string}
 #           . . .
 # ['parent']:id
 # ['callInfo']: {}
 #           [DEF.CLASSINFO]:id, [DEF.Funcs]:id}
+
+
+# clsInfo: {}
+# ['exten']
+# [DEF.Name]:string,
+# [DEF.Funcs]:[]
+# ['callInfo']:{}
+#           [DEF.CLASSINFO]:id, [DEF.Funcs]:id}
+#           [DEF.CLASSINFO]:id, [DEF.Funcs]:id}
+#           . . .
+# [DEF.prop]:{}
+#           {[DEF.Type]:string, [DEF.Name]:string}
+#           {[DEF.Type]:string, [DEF.Name]:string}
+#           . . .
+
 
 from define import globalDef as DEF
 
