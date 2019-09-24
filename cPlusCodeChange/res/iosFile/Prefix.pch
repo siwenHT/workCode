@@ -1,0 +1,17 @@
+//
+// Prefix header for all source files of the 'simulator' target in the 'simulator' project
+//
+
+#ifdef __OBJC__
+	#import <Foundation/Foundation.h>
+	#import <UIKit/UIKit.h>
+#endif
+
+#ifdef DEBUG
+#define MLog(fmt,...)  //NSLog((@"[SYMiddleWare]---%s [Line %d]--" fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+
+#else
+
+#define MLog(...)
+
+#endif

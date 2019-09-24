@@ -52,11 +52,18 @@ def randomWorldS(totalNum, ty):
             num = random.randint(1, 100)
             num = 4 if (num > 70) else 3
             randKey = getTmpName(num, False)
+        elif ty == "ocClass" or ty == 'ocAttr':
+            num = random.randint(1, 100)
+            num = 2 if (num > 50) else 3
+            randKey = getTmpName(num, False, False)
+        elif ty == 'ocFunc':
+            num = random.randint(1, 100)
+            num = 4 if (num > 70) else 3
+            randKey = getTmpName(num, False)
         
         randKey = unicodedata.normalize('NFKD',randKey).encode('ascii','ignore')
         if not randKey in retS:
             retS.append(randKey)
-
 
     return retS
 

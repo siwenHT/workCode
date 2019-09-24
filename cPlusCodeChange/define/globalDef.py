@@ -23,3 +23,7 @@ Static = "static"
 
 CPLUS = 'cplus'
 ID = 'Id'
+HEAD = 'head'
+ADDHEAD = 'addHead'
+PROP    = 'property'
+HEADDEF = 'headDef'

@@ -30,12 +30,17 @@
 #           {[DEF.Type]:string, [DEF.Name]:string}
 #           . . .
 
-
+from tool import toolsFunc as tool
+from tool import worldsDic
 from define import globalDef as DEF
 
 funcsList = []
 clsList   = []
 count = 1
+
+clsName = []
+funcName = []
+attrName = []
 
 def getInstanceID():
     global count
@@ -51,3 +56,21 @@ def appendClsList(clsInfo):
     tmpId = getInstanceID()
     clsList[tmpId] = clsInfo
     clsInfo[DEF.ID] = tmpId
+
+def getClsName():
+    global clsName
+    if not clsName:
+        clsName = worldsDic.randomWorldS(900, 'ocClass')
+    return clsName.pop()
+
+def getFuncName():
+    global funcName
+    if not funcName:
+        funcName = worldsDic.randomWorldS(900, 'ocFunc')
+    return funcName.pop()    
+
+def getAttrName():
+    global attrName
+    if not attrName:
+        attrName = worldsDic.randomWorldS(900, 'ocAttr')
+    return attrName.pop()

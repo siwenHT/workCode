@@ -6,6 +6,7 @@ from tool import worldsDic
 from cplus import index as cplusTool
 from define import globalDef as DEF
 from cplus import createAttr as ATTR
+from OC import index as osMain
 
 import re
 import operator
@@ -635,6 +636,10 @@ def setChanDIc(changeDic, itemKey, itemVal):
 def main():
     print tool.showTime() + u"准备混淆c++代码"
     worldsDic.initWorldArray('res/worldDic.txt')
+
+    if True:
+        osMain.myMain()
+        return
 
     # 确认需要创建多少类
     # 创建类
