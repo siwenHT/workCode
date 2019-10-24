@@ -48,7 +48,7 @@ def changeStrByDic(changeDic, targetStr):
     #         print targetStr + " ===== " + strA + strB
 
     #         targetStr = strA + strB
-    noChange = ['setRootViewController1', "resumeAllEffects", 'pauseAllEffects']
+    noChange = ['setRootViewController', "resumeAllEffects", 'pauseAllEffects']
     pFind = 0
     totlaItems = changeDic.items()
     while True:
@@ -67,16 +67,17 @@ def changeStrByDic(changeDic, targetStr):
                     changeItem = key
 
         noChangeFlg = False
-        for noChangeKey in noChange:
-            if noChangeKey.find(changeItem) > -1:
-                pos1 = targetStr.find(key, pFind)
-                if pos1 > -1:
-                    if pos - pos1 == len(noChangeKey) - len(changeItem):
-                        noChangeFlg = True
-                        print  targetStr[pos1 - 10: pos1 + len(noChangeKey) + 10], " the string no change !!!"
-                        break
+        if pos > -1 and changeItem:
+            for noChangeKey in noChange:
+                if noChangeKey.find(changeItem) > -1:
+                    pos1 = targetStr.find(noChangeKey, pFind)
+                    if pos1 > -1:
+                        if pos - pos1 == len(noChangeKey) - len(changeItem):
+                            noChangeFlg = True
+                            print  targetStr[pos1 - 10: pos1 + len(noChangeKey) + 10], " the string no change !!!"
+                            break
 
-        if noChangeFlg:
+        if pos > -1 and noChangeFlg:
             pFind = pos + len(changeDic[changeItem])
             continue
         elif pos > -1:
