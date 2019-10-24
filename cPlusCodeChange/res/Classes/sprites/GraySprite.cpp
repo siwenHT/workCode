@@ -1,4 +1,5 @@
 #include "GraySprite.h"
+#include "vsdef.h"
 //#include "CustomShaders.h"
 //#include "CustomShaderNames.h"
 
@@ -19,7 +20,7 @@ GraySprite *GraySprite::create(const std::string&pszFileName)
 {
     GraySprite *pRet = new GraySprite();
 	
-	//ÏÈÈ¥cacheÀïÃæÈ¥ÕÒÓÐÃ»ÓÐ¶ÔÓ¦µÄ¾«ÁéÖ¡ £¬Ã»ÓÐ°´ÕÕÕý³£µÄ·½Ê½Éú³É¾«Áé
+	//å…ˆåŽ»cacheé‡Œé¢åŽ»æ‰¾æœ‰æ²¡æœ‰å¯¹åº”çš„ç²¾çµå¸§ ï¼Œæ²¡æœ‰æŒ‰ç…§æ­£å¸¸çš„æ–¹å¼ç”Ÿæˆç²¾çµ
 	SpriteFrame *frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(pszFileName);
 	
 	if(frame!=nullptr){
@@ -41,8 +42,11 @@ GraySprite *GraySprite::create(const std::string&pszFileName)
     {
         //CC_SAFE_DELETE(pRet);
         //return NULL;
-		CCLOG("!!!!!!!!!!!!!!!!create GraySprite failure, filename %s",pszFileName.c_str());
-		pRet->initWithFile("res/empty_frame.png");
+		// CCLOG("!!!!!!!!!!!!!!!!create GraySprite failure, filename %s",pszFileName.c_str());
+		
+		int tmpSymbolKey[] = {}; //"res/empty_frame.png"
+		std::string keyA = HandleString(tmpSymbolKey, STRNUMSIG);	 
+		pRet->initWithFile(keyA.c_str());
 		return pRet;
     }
 }

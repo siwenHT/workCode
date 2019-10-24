@@ -34,7 +34,7 @@
 USING_NS_CC;
 
 #ifndef ENABLE_NETLOG
-#define ENABLE_NETLOG 1
+#define ENABLE_NETLOG 0
 #endif
 
 #if (ENABLE_NETLOG == 1) 

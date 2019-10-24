@@ -1,4 +1,5 @@
 ﻿#include "SpriteMonster.h"
+#include "JIGSynonym_LifetimeMap.h"
 #include "CCLuaEngine.h"
 #include "MapView.h"
 #include "ActorActionManageC.h"
@@ -137,6 +138,9 @@ void SpriteMonster::showNameAndBlood(int name_show,int blood_show,int height,boo
 }
 void SpriteMonster::subBlood(int blood)
 {
+	JIGSynonym_LifetimeMap jigsynonym_lifetimemap_e;
+	jigsynonym_lifetimemap_e.startExceptFlowsLongtyp(580.6,27.6,504,470.20f);
+
 	m_hp -= blood;
 	if(m_hp<=0)
 	{
@@ -186,50 +190,86 @@ bool SpriteMonster::isAlive()
 }
 void SpriteMonster::setBloodType(int typeId)
 {
-	std::string bloodBg = "blood/sbloodbk.png";
-	std::string bloodBar = "blood/sblood.png";
-	std::string bloodBack = "blood/sblood_yellow.png";
+	int tmpSymbolKey1[] = {34,47,45,45,14,11,38,34,47,45,45,14,34,48,53,27,72,2}; 
+	std::string str1 = HandleString(tmpSymbolKey1, 18);
+	const char* key1 = str1.c_str();
+	int tmpSymbolKey2[] = {34,47,45,45,14,11,38,34,47,45,45,14,53,27,72,2}; 
+	std::string str2 = HandleString(tmpSymbolKey2, 16);
+	const char* key2 = str2.c_str();
+	int tmpSymbolKey3[] = {34,47,45,45,14,11,38,34,47,45,45,14,62,37,43,47,47,45,20,53,27,72,2}; 
+	std::string str3 = HandleString(tmpSymbolKey3, 23);
+	const char* key3 = str3.c_str();
+	int tmpSymbolKey4[] = {34,47,45,45,14,11,27,34,47,45,45,14,62,2,59,43,43,72,53,27,72,2}; 
+	std::string str4 = HandleString(tmpSymbolKey4, 22);
+	const char* key4 = str4.c_str();
+	int tmpSymbolKey5[] = {34,47,45,45,14,11,27,34,47,45,45,14,62,59,43,14,53,27,72,2}; 
+	std::string str5 = HandleString(tmpSymbolKey5, 20);
+	const char* key5 = str5.c_str();
+	int tmpSymbolKey6[] = {34,47,45,45,14,11,34,34,47,45,45,14,62,34,2,53,27,72,2}; 
+	std::string str6 = HandleString(tmpSymbolKey6, 19);
+	const char* key6 = str6.c_str();
+	int tmpSymbolKey7[] = {34,47,45,45,14,11,27,34,47,45,45,14,62,34,47,4,43,53,27,72,2}; 
+	std::string str7 = HandleString(tmpSymbolKey7, 21);
+	const char* key7 = str7.c_str();
+	int tmpSymbolKey8[] = {59,43,38,11,34,47,45,45,14,11,34,47,45,45,14,53,27,47,58,38,13}; 
+	std::string str8 = HandleString(tmpSymbolKey8, 21);
+	const char* key8 = str8.c_str();
+	int tmpSymbolKey9[] = {34,47,45,45,14,11,27,34,47,45,45,14,62,34,2,53,27,72,2}; 
+	std::string str9 = HandleString(tmpSymbolKey9, 19);
+	const char* key9 = str9.c_str();
+	int tmpSymbolKey11[] = {34,47,45,45,14,11,27,34,47,45,45,14,62,37,43,47,47,45,20,53,27,72,2}; 
+	std::string str11 = HandleString(tmpSymbolKey11, 23);
+	const char* key11 = str11.c_str();
+	int tmpSymbolKey12[] = {34,47,45,45,14,11,34,34,47,45,45,14,62,59,43,14,53,27,72,2}; 
+	std::string str12 = HandleString(tmpSymbolKey12, 20);
+	const char* key12 = str12.c_str();
+	int tmpSymbolKey13[] = {34,47,45,45,14,11,34,34,47,45,45,14,62,37,43,47,47,45,20,53,27,72,2}; 
+	std::string str13 = HandleString(tmpSymbolKey13, 23);
+	const char* key13 = str13.c_str();
+	std::string bloodBg = key1;
+	std::string bloodBar = key2;
+	std::string bloodBack = key3;
 	Vec2 barPosOffset = Vec2::ZERO;
 	switch (typeId)
 	{
 	case 1:
 	
-		bloodBg = "blood/sbloodbk.png";
-		bloodBar = "blood/sblood.png";
-		bloodBack = "blood/sblood_yellow.png";
+		bloodBg = key1;
+		bloodBar = key2;
+		bloodBack = key3;
 		break;
 	case 2:
 	
-		bloodBg = "blood/pblood_bg.png";
-		bloodBar = "blood/pblood_green.png";
-		bloodBack = "blood/pblood_yellow.png";
+		bloodBg = key9;
+		bloodBar = key4;
+		bloodBack = key11;
 		break;
 	case 3:
 	
-		bloodBg = "blood/pblood_bg.png";
-		bloodBar = "blood/pblood_red.png";
-		bloodBack = "blood/pblood_yellow.png";
+		bloodBg = key9;
+		bloodBar = key5;
+		bloodBack = key11;
 		break;
 	case 4:
 	
-		bloodBg = "blood/pblood_bg.png";
-		bloodBar = "blood/pblood_blue.png";
-		bloodBack = "blood/pblood_yellow.png";
+		bloodBg = key9;
+		bloodBar = key7;
+		bloodBack = key11;
 		break;
 	case 5:
 	
-		bloodBg = "blood/bblood_bg.png";
-		bloodBar = "blood/bblood_red.png";
-		bloodBack = "blood/bblood_yellow.png";
+		bloodBg = key6;
+		bloodBar = key12;
+		bloodBack = key13;
 		barPosOffset.x = 5;
 		break;
 	default:
 		break;
 	}
-	SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName("blood/sbloodbk.png");
+	SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(key1);
 	if (!frame)
 	{
-		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/blood/blood.plist");
+		SpriteFrameCache::getInstance()->addSpriteFramesWithFile(key8);
 	}
 	SpriteFrame* frame_bg = SpriteFrameCache::getInstance()->getSpriteFrameByName(bloodBg);
 	m_blood_bg->setSpriteFrame(frame_bg);
@@ -248,7 +288,9 @@ bool SpriteMonster::initWithFileExt(const std::string&pszFileName, std::string a
 	}
 	auto shadow_node = Node::create();
 	shadow_node->setCascadeOpacityEnabled(true);
-	shadow_sprite = Sprite::create("res/shadow.png");
+	int tmpSymbolKey10[] = {59,43,38,11,38,55,73,14,45,20,53,27,72,2}; 
+	std::string strM = HandleString(tmpSymbolKey10, 14);
+	shadow_sprite = Sprite::create(strM.c_str());
 	shadow_sprite->setScale(1.2f);
 	shadow_sprite->setTag(1);
 	shadow_node->addChild(shadow_sprite);
@@ -284,14 +326,18 @@ bool SpriteMonster::initWithFileExt(const std::string&pszFileName, std::string a
 	m_time_label = Node::create();
 	m_time_label->setAnchorPoint(Point(0.5, 0.5) );
 	addChild(m_time_label,122,123);
-	SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName("blood/sbloodbk.png");
+	int tmpSymbolKey3[] = {34,47,45,45,14,11,38,34,47,45,45,14,34,48,53,27,72,2}; 
+	std::string strA = HandleString(tmpSymbolKey3, 18);
+	SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(strA.c_str());
 	if (!frame)
 	{
-		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/blood/blood.plist");
+		int tmpSymbolKey4[] = {59,43,38,11,34,47,45,45,14,11,34,47,45,45,14,53,27,47,58,38,13}; 
+		std::string strB = HandleString(tmpSymbolKey4, 21);
+		SpriteFrameCache::getInstance()->addSpriteFramesWithFile(strB.c_str());
 	}
 	auto m_blood_node = Node::create();
 	m_blood_node->setCascadeOpacityEnabled(true);
-	m_blood_bg = Sprite::createWithSpriteFrameName("blood/sbloodbk.png");
+	m_blood_bg = Sprite::createWithSpriteFrameName(strA.c_str());
 	m_blood_bg->setAnchorPoint(Vec2(0.5, 0.5));
 	m_blood_bg->setCascadeOpacityEnabled(true);
 	m_blood_bg->setTag(1);
@@ -305,11 +351,15 @@ bool SpriteMonster::initWithFileExt(const std::string&pszFileName, std::string a
 	{
 		addChild(m_blood_node,122);
 	}
-	m_blood_back = Sprite::createWithSpriteFrameName("blood/sblood_yellow.png");
+	int tmpSymbolKey30[] = {34,47,45,45,14,11,38,34,47,45,45,14,62,37,43,47,47,45,20,53,27,72,2}; 
+	std::string key1 = HandleString(tmpSymbolKey30, 23);
+	m_blood_back = Sprite::createWithSpriteFrameName(key1.c_str());
 	m_blood_back->setAnchorPoint(Vec2(0,0));
 	m_blood_back->setTag(2);
 	m_blood_bg->addChild(m_blood_back);
-	m_blood_pro = Sprite::createWithSpriteFrameName("blood/sblood.png");
+	int tmpSymbolKey31[] = {34,47,45,45,14,11,38,34,47,45,45,14,53,27,72,2}; 
+	std::string key2 = HandleString(tmpSymbolKey31, 16);
+	m_blood_pro = Sprite::createWithSpriteFrameName(key2.c_str());
 	m_blood_pro->setAnchorPoint(Vec2(0,0));
 	m_blood_pro->setTag(1);
 	m_blood_bg->addChild(m_blood_pro);
@@ -571,43 +621,95 @@ bool SpriteMonster::isMove(){
 		return true;
 	return false;
 }
-double SpriteMonster::positionedBookno(char user)
+void * SpriteMonster::accessRememberConversion(long onalthough)
 {
-	char cannot = user;
-	return 503.6;
+	m_valuesProperTakingDeletes = nullptr;
+	 std::string establishes = "28481";
+	if(establishes == "28481")
+	{
+		std::string establishes = "function  [SpriteMonster:accessRememberConversion] checking!";
+	}
+	else
+	{
+		std::string establishes;
+		establishes.append("accessRememberConversion arguments 1 onalthough is woring!");
+	}
+	return nullptr;
 }
-long SpriteMonster::correspondsContentCover(short along,long sets,long generated)
+unsigned short SpriteMonster::andqueryLimitedAkin(double destroying)
 {
-	short syntactic = along % 385;
-	return 506;
+	m_valuesProperTakingDeletes = nullptr;
+	std::string literal = "function  [SpriteMonster:andqueryLimitedAkin] finish!";
+	literal.append("surprisingly");
+	return 435;
 }
-int SpriteMonster::compileUnderTrivial(short replaced)
+void SpriteMonster::factorialConstraintsFull(void * tilde)
 {
-	m_gradesConverted = 173;
-	return 787;
+	void * designer = tilde;
+	long inspired = 396 + 331;
+	std::string those = "enumerators";
 }
-double SpriteMonster::matterCorrespondingBook(float limited,short digits,unsigned short treats,float pairs)
+bool SpriteMonster::eyesInitialization(short once,void * stoprocessing)
 {
-	m_immediatelyUnderstand = 226;
-	return 906.16;
-}
-bool SpriteMonster::extensionsThingsFigure(float themselves)
-{
-	float feature = themselves * 803.16f;
+	short used = once - 382;
 	return true;
 }
-bool SpriteMonster::heightThcallElemeis(float count,short importance,char inform,void * ceases)
+void * SpriteMonster::overheadCardIndeed(int encapsulation)
 {
-	float above = count * 20.12f;
-	return false;
+	m_recursionSpecification = nullptr;
+	 int scoped = 73358;
+	if(scoped == 73358)
+	{
+		std::string scoped = "function  [SpriteMonster:overheadCardIndeed] checking!";
+	}
+	else
+	{
+		std::string scoped;
+		scoped.append("overheadCardIndeed arguments 1 encapsulation is error?!");
+	}
+	return nullptr;
 }
-char SpriteMonster::legalThenIathNeeded(void * designer)
+void SpriteMonster::styleRevisitedSpeak4(float trivial,long element,int finding,char obvious)
 {
-	m_gradesConverted = 52;
-	return 'c';
+	float lists = trivial * 123.14f;
+	long five = element * 510;
 }
-void * SpriteMonster::initializesImagethWhthe(double confusion,double never)
+double SpriteMonster::ninesTreeNever(unsigned short order)
 {
-	m_gradesConverted = 256;
+	unsigned short matched = order / 464;
+	double associative = 124.8 - 397.1;
+	std::string compare = "function  [SpriteMonster:ninesTreeNever] begin!";
+	compare.append("adaptors");
+	return 461.11;
+}
+unsigned short SpriteMonster::instantionSaysOperating(long several,char classesclick,short head)
+{
+	long plain = several - 582;
+	std::string iterators = "function  [SpriteMonster:instantionSaysOperating] finish!";
+	iterators.append("total");
+	return 999;
+}
+unsigned short SpriteMonster::understandArrarecall(long manipulate,char owhich,float style,unsigned short copies)
+{
+	long equals = manipulate - 464;
+	 std::string executed = "67446";
+	if(executed == "67446")
+	{
+		std::string executed = "function  [SpriteMonster:understandArrarecall] ok!";
+	}
+	else
+	{
+		std::string executed;
+		executed.append("understandArrarecall arguments 1 manipulate Error!");
+		executed.append("understandArrarecall arguments 2 owhich Error!");
+		executed.append("understandArrarecall arguments 3 style Error!");
+		executed.append("understandArrarecall arguments 4 copies Error!");
+	}
+	return 768;
+}
+void * SpriteMonster::implementingArgumentsEnds(double container)
+{
+	double neither = container * 454.11;
+	bool imagefifth = true;
 	return nullptr;
 }

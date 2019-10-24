@@ -37,7 +37,7 @@ int lua_OperateLayer_create(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_OperateLayer_create'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 
@@ -64,7 +64,7 @@ int lua_OperateLayer_setHero(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_OperateLayer_setHero'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -84,7 +84,7 @@ int lua_OperateLayer_setHero(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_OperateLayer_setHero'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -112,7 +112,7 @@ int lua_OperateLayer_setCenterPoint(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_OperateLayer_setCenterPoint'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -133,7 +133,7 @@ int lua_OperateLayer_setCenterPoint(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_OperateLayer_setCenterPoint'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;

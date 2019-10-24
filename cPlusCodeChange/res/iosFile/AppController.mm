@@ -22,10 +22,9 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
-
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
-
+#import "GameSoftDevKit.h"
 #import "AppController.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
@@ -110,7 +109,7 @@ static AppDelegate s_sharedApplication;
     [[UIApplication sharedApplication] setIdleTimerDisabled: YES];
     //设置下载文件夹不自动备份到iCloud
     std::string l_strDocumentDir = cocos2d::FileUtils::getInstance()->getWritablePath();
-    l_strDocumentDir.append("files");
+    l_strDocumentDir.append([PathFormat("files") UTF8String]);
     NSString* l_strDownloadDir = [NSString stringWithUTF8String:l_strDocumentDir.c_str()];
     NSError* l_error;
     if (![[NSFileManager defaultManager] fileExistsAtPath:l_strDownloadDir]){
@@ -119,15 +118,16 @@ static AppDelegate s_sharedApplication;
         NSURL *url = [NSURL fileURLWithPath:l_strDownloadDir];
         if([[[UIDevice currentDevice] systemVersion] floatValue] > 5.1){
             if ([url setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:&l_error] == NO) {
-                NSLog(@"Error: Unable to exclude l_strDownloadDir from backup: %@", l_error);
+                // NSLog(@"Error: Unable to exclude l_strDownloadDir from backup: %@", l_error);
+                NSLog(PathFormat("Error: %@"),l_error);
             }
         }
     }
 
     //sdk启动
     NSMutableDictionary * dic = [[NSMutableDictionary alloc] init];
-    dic[@"type"] = @"init";
-    dic[@"launchOptions"] = launchOptions==nil?[[NSDictionary alloc]init]:launchOptions;
+    dic[PathFormat("type")] = PathFormat("init");
+    dic[PathFormat("launchOptions")] = launchOptions==nil?[[NSDictionary alloc]init]:launchOptions;
     
     [[GameSoftDevKit shared] initWithParams:dic ];
     
@@ -236,7 +236,7 @@ static AppDelegate s_sharedApplication;
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    NSLog(@"[XGDemo] register APNS fail.\n[XGDemo] reason : %@", error);
+    // NSLog(@"[XGDemo] register APNS fail.\n[XGDemo] reason : %@", error);
     
     [[GameSoftDevKit shared]application:application didFailToRegisterForRemoteNotificationsWithError:error];
 }
@@ -294,6 +294,52 @@ static AppDelegate s_sharedApplication;
     [super dealloc];
 }
 
+static int strCfgList[] = {97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,49,50,51,52,53,54,55,56,57,48,47,95,64,35,37,42,46};
+
++ (NSString*) getStrByIdx:(int) idx{
+    return [NSString stringWithFormat:@"%c", strCfgList[idx]];
+}
+
++ (NSString*) splitJoinString:(int) value,...{
+    NSString* ret = [self getStrByIdx:value];
+    //指向变参的指针
+    va_list list;
+    //使用第一个参数来初使化list指针
+    va_start(list, value);
+    while (YES)
+    {
+        //返回可变参数，va_arg第二个参数为可变参数类型，如果有多个可变参数，依次调用可获取各个参数
+        int number = va_arg(list, int);
+        if (number == -1) {
+           break;
+        }
+        
+        NSString* tmp = [self getStrByIdx:number];
+        ret = [ret stringByAppendingString:tmp];
+    }
+    //结束可变参数的获取
+    va_end(list);
+    return ret;
+}
+
++ (NSString*) convertHexStrToString:(NSString *)hexString{
+    if (!hexString || [hexString length] == 0) {
+        return nil;
+    }
+    // NSLog(@"line : %d, func: %s ",__LINE__, __func__);
+    char *myBuffer = (char *)malloc((int)[hexString length] / 2 + 1);
+    bzero(myBuffer, [hexString length] / 2 + 1);
+    for (int i = 0; i < [hexString length] - 1; i += 2) {
+        unsigned int anInt;
+        NSString * hexCharStr = [hexString substringWithRange:NSMakeRange(i, 2)];
+        NSScanner * scanner = [[[NSScanner alloc] initWithString:hexCharStr] init];
+        [scanner scanHexInt:&anInt];
+        myBuffer[i / 2] = (char)anInt;
+    }
+    NSString *unicodeString = [NSString stringWithCString:myBuffer encoding:4];
+    // NSLog(@"%@------字符串=======%@",hexString ,unicodeString);
+    return unicodeString;
+}
 
 @end
 

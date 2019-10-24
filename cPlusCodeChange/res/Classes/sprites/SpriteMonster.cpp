@@ -257,52 +257,100 @@ bool SpriteMonster::isAlive()
 
 
 void SpriteMonster::setBloodType(int typeId)
-{
-	std::string bloodBg = "blood/sbloodbk.png";
-	std::string bloodBar = "blood/sblood.png";
-	std::string bloodBack = "blood/sblood_yellow.png";
+{	
+	int tmpSymbolKey1[] = {}; //"blood/sbloodbk.png"
+	std::string str1 = HandleString(tmpSymbolKey1, STRNUMSIG);
+	const char* key1 = str1.c_str();
+
+	int tmpSymbolKey2[] = {}; //"blood/sblood.png"
+	std::string str2 = HandleString(tmpSymbolKey2, STRNUMSIG);
+	const char* key2 = str2.c_str();
+
+	int tmpSymbolKey3[] = {}; //"blood/sblood_yellow.png"
+	std::string str3 = HandleString(tmpSymbolKey3, STRNUMSIG);
+	const char* key3 = str3.c_str();
+
+	int tmpSymbolKey4[] = {}; //"blood/pblood_green.png"
+	std::string str4 = HandleString(tmpSymbolKey4, STRNUMSIG);
+	const char* key4 = str4.c_str();
+
+	int tmpSymbolKey5[] = {}; //"blood/pblood_red.png"
+	std::string str5 = HandleString(tmpSymbolKey5, STRNUMSIG);
+	const char* key5 = str5.c_str();
+
+	int tmpSymbolKey6[] = {}; //"blood/bblood_bg.png"
+	std::string str6 = HandleString(tmpSymbolKey6, STRNUMSIG);
+	const char* key6 = str6.c_str();
+
+	int tmpSymbolKey7[] = {}; //"blood/pblood_blue.png"
+	std::string str7 = HandleString(tmpSymbolKey7, STRNUMSIG);
+	const char* key7 = str7.c_str();
+
+	int tmpSymbolKey8[] = {}; //"res/blood/blood.plist"
+	std::string str8 = HandleString(tmpSymbolKey8, STRNUMSIG);
+	const char* key8 = str8.c_str();
+
+	int tmpSymbolKey9[] = {}; //"blood/pblood_bg.png"
+	std::string str9 = HandleString(tmpSymbolKey9, STRNUMSIG);
+	const char* key9 = str9.c_str();
+
+	int tmpSymbolKey11[] = {}; //"blood/pblood_yellow.png"
+	std::string str11 = HandleString(tmpSymbolKey11, STRNUMSIG);
+	const char* key11 = str11.c_str();
+
+	int tmpSymbolKey12[] = {}; //"blood/bblood_red.png"
+	std::string str12 = HandleString(tmpSymbolKey12, STRNUMSIG);
+	const char* key12 = str12.c_str();
+
+	int tmpSymbolKey13[] = {}; //"blood/bblood_yellow.png"
+	std::string str13 = HandleString(tmpSymbolKey13, STRNUMSIG);
+	const char* key13 = str13.c_str();
+
+	std::string bloodBg = key1;//"blood/sbloodbk.png";
+	std::string bloodBar = key2;//"blood/sblood.png";
+	std::string bloodBack = key3;//"blood/sblood_yellow.png";
 	Vec2 barPosOffset = Vec2::ZERO;
 	switch (typeId)
 	{
 	case 1:
 		//怪物血条
-		bloodBg = "blood/sbloodbk.png";
-		bloodBar = "blood/sblood.png";
-		bloodBack = "blood/sblood_yellow.png";
+		bloodBg = key1;//"blood/sbloodbk.png";
+		bloodBar = key2;//"blood/sblood.png";
+		bloodBack = key3;//"blood/sblood_yellow.png";
 		break;
 	case 2:
 		//玩家血条 绿色
-		bloodBg = "blood/pblood_bg.png";
-		bloodBar = "blood/pblood_green.png";
-		bloodBack = "blood/pblood_yellow.png";
+		bloodBg = key9;//"blood/pblood_bg.png";
+		bloodBar = key4;//"blood/pblood_green.png";
+		bloodBack = key11;// "blood/pblood_yellow.png";
 		break;
 	case 3:
 		//玩家血条 红色
-		bloodBg = "blood/pblood_bg.png";
-		bloodBar = "blood/pblood_red.png";
-		bloodBack = "blood/pblood_yellow.png";
+		bloodBg = key9;//"blood/pblood_bg.png";
+		bloodBar = key5;//"blood/pblood_red.png";
+		bloodBack = key11;//"blood/pblood_yellow.png";
 		break;
 	case 4:
 		//玩家血条 蓝色 （行会战期间 行会其它玩家）
-		bloodBg = "blood/pblood_bg.png";
-		bloodBar = "blood/pblood_blue.png";
-		bloodBack = "blood/pblood_yellow.png";
+		bloodBg = key9;//"blood/pblood_bg.png";
+		bloodBar = key7;//"blood/pblood_blue.png";
+		bloodBack = key11;//"blood/pblood_yellow.png";
 		break;
 	case 5:
 		//boss血条
-		bloodBg = "blood/bblood_bg.png";
-		bloodBar = "blood/bblood_red.png";
-		bloodBack = "blood/bblood_yellow.png";
+		bloodBg = key6;//"blood/bblood_bg.png";
+		bloodBar = key12;//"blood/bblood_red.png";
+		bloodBack = key13;//"blood/bblood_yellow.png";
 		barPosOffset.x = 5;
 		break;
 	default:
 		break;
 	}
 
-	SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName("blood/sbloodbk.png");
+	SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(key1);//"blood/sbloodbk.png"
 	if (!frame)
 	{
-		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/blood/blood.plist");
+		SpriteFrameCache::getInstance()->addSpriteFramesWithFile(key8);//"res/blood/blood.plist"
 	}
 
 	SpriteFrame* frame_bg = SpriteFrameCache::getInstance()->getSpriteFrameByName(bloodBg);
@@ -338,7 +386,10 @@ bool SpriteMonster::initWithFileExt(const std::string&pszFileName, std::string a
 	//{
 	auto shadow_node = Node::create();
 	shadow_node->setCascadeOpacityEnabled(true);
-	shadow_sprite = Sprite::create("res/shadow.png");
+
+	int tmpSymbolKey10[] = {}; //"res/shadow.png"
+	std::string strM = HandleString(tmpSymbolKey10, STRNUMSIG);	
+	shadow_sprite = Sprite::create(strM.c_str());
 	shadow_sprite->setScale(1.2f);
 	shadow_sprite->setTag(1);
 	shadow_node->addChild(shadow_sprite);
@@ -381,15 +432,19 @@ bool SpriteMonster::initWithFileExt(const std::string&pszFileName, std::string a
 	m_time_label->setAnchorPoint(Point(0.5, 0.5) );
 	addChild(m_time_label,122,123);
 
-	SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName("blood/sbloodbk.png");
+	int tmpSymbolKey3[] = {}; //"blood/sbloodbk.png"
+	std::string strA = HandleString(tmpSymbolKey3, STRNUMSIG);	
+	SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(strA.c_str());
 	if (!frame)
 	{
-		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/blood/blood.plist");
+		int tmpSymbolKey4[] = {}; //"res/blood/blood.plist"
+		std::string strB = HandleString(tmpSymbolKey4, STRNUMSIG);	
+		SpriteFrameCache::getInstance()->addSpriteFramesWithFile(strB.c_str());
 	}
 
 	auto m_blood_node = Node::create();
-	m_blood_node->setCascadeOpacityEnabled(true);
-	m_blood_bg = Sprite::createWithSpriteFrameName("blood/sbloodbk.png");
+	m_blood_node->setCascadeOpacityEnabled(true);	
+	m_blood_bg = Sprite::createWithSpriteFrameName(strA.c_str());
 	m_blood_bg->setAnchorPoint(Vec2(0.5, 0.5));
 	m_blood_bg->setCascadeOpacityEnabled(true);
 	m_blood_bg->setTag(1);
@@ -414,7 +469,9 @@ bool SpriteMonster::initWithFileExt(const std::string&pszFileName, std::string a
 	//m_blood_back->setPercentage(100);
 	//m_blood_back->setTag(2);
 	//m_blood_bg->addChild(m_blood_back);
-	m_blood_back = Sprite::createWithSpriteFrameName("blood/sblood_yellow.png");
+	int tmpSymbolKey30[] = {}; //"blood/sblood_yellow.png"
+	std::string key1 = HandleString(tmpSymbolKey30, STRNUMSIG);	
+	m_blood_back = Sprite::createWithSpriteFrameName(key1.c_str());
 	m_blood_back->setAnchorPoint(Vec2(0,0));
 	m_blood_back->setTag(2);
 	m_blood_bg->addChild(m_blood_back);
@@ -429,7 +486,9 @@ bool SpriteMonster::initWithFileExt(const std::string&pszFileName, std::string a
 	//m_blood_pro->setPercentage(100);
 	//m_blood_pro->setTag(1);
 	//m_blood_bg->addChild(m_blood_pro);
-	m_blood_pro = Sprite::createWithSpriteFrameName("blood/sblood.png");
+	int tmpSymbolKey31[] = {}; //"blood/sblood.png"
+	std::string key2 = HandleString(tmpSymbolKey31, STRNUMSIG);
+	m_blood_pro = Sprite::createWithSpriteFrameName(key2.c_str());
 	m_blood_pro->setAnchorPoint(Vec2(0,0));
 	m_blood_pro->setTag(1);
 	m_blood_bg->addChild(m_blood_pro);

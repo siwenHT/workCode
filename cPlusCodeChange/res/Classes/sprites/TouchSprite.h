@@ -32,6 +32,6 @@ private:
 	bool m_touch_enable;
 	cocos2d::Vec2 m_beginPoint;
 	bool m_isClick;
-	bool m_swallowTouch;
+	cocos2d::EventListenerTouchOneByOne* m_toucheEventLis;
 };
 #endif

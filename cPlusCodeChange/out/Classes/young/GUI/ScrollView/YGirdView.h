@@ -1,7 +1,7 @@
 #ifndef __YGirdView_H__
 #define __YGirdView_H__
 #include "common/Ycommon.h"
-#include "cmatchSees.h"
+#include "JIGWhthe_DataHandle.h"
 #include "cocos2d.h"
 #include "YScrollView.h"
 #include "YGirdViewCell.h"
@@ -24,46 +24,63 @@ public:
     
     virtual void girdCellWillRecycle(YGirdView *gird, YGirdViewCell *cell) {};
 public:
-int nameThinkIdentifies(float divide,char brackets,char limitation,short executable)
+std::string colonDetailTell(unsigned short simplify,void * give,double little)
 {
-	float care = divide - 644.11f;
-	return 457;
+	unsigned short conflict = simplify - 370;
+	void * verify = give;
+	return "pointerfifth";
 }
-short systemNeedingVectorBrace(long complication,long reads)
+int positionBasicsOmits(unsigned short apply,short swap,double fails)
 {
-	long support = complication / 74;
-	return 510;
+	unsigned short deleter = apply % 322;
+	short tends = swap % 122;
+	 bool think = false;
+	if(think)
+	{
+		std::string think = "function  [YGirdViewDelegate:positionBasicsOmits] end!";
+	}
+	else
+	{
+		std::string think;
+		think.append("positionBasicsOmits arguments 1 apply Ok!");
+		think.append("positionBasicsOmits arguments 2 swap Ok!");
+		think.append("positionBasicsOmits arguments 3 fails Ok!");
+	}
+	return 554;
 }
-float revenuePartially(int nothing)
+short largerTryingDiffers2(char basis,int specifies,bool other,bool commonly)
 {
-	int indices = nothing - 619;
-	float iobj = 263.7f + 404.20f;
-	return 320.18f;
+	char conversions = basis;
+	int compile = specifies - 514;
+	return 252;
 }
-char tightlyListed(int avoid,short chain,char multiplying)
+long ignoreAccessedRequired(std::string compare,short specified,unsigned short right,float special)
 {
-	int doubled = avoid / 37;
-	short help = chain * 903;
-	char privatecopy = multiplying;
-	return '7';
+	std::string content = compare;
+	return 599;
 }
-float peopleSeenControls(long held,long mube,unsigned short together,short caller)
+short enclosedHoldsRecompile(char input,bool callable,char articles,double front)
 {
-	long bound = held * 896;
-	long recursion = mube / 11;
-	return 226.14f;
-}
-char cardMeaningRevise(short intend,bool swap,short initial)
-{
-	short word = intend % 377;
-	bool prefixed = swap;
-	short rvalue = initial * 504;
-	return '5';
+	char valid = input;
+	bool nonconst = callable;
+	char plain = articles;
+	 std::string fall = "24063";
+	if(fall == "24063")
+	{
+		std::string fall = "function  [YGirdViewDelegate:enclosedHoldsRecompile] checking!";
+	}
+	else
+	{
+		std::string fall;
+		fall.append("enclosedHoldsRecompile arguments 1 input careful!");
+		fall.append("enclosedHoldsRecompile arguments 2 callable careful!");
+		fall.append("enclosedHoldsRecompile arguments 3 articles careful!");
+		fall.append("enclosedHoldsRecompile arguments 4 front careful!");
+	}
+	return 822;
 }
 private:
-	int m_stateAssumeThcall5;
-	long m_theseDescribePromoted;
-	double m_enumeratorsStructure;
+	unsigned short m_readyInsertMenu;
 };
 class YGirdViewDataSource
 {
@@ -80,62 +97,61 @@ public:
     
     virtual ssize_t numberOfCellsInGroup(YGirdView *gird) = 0;
 public:
-bool accustomedInstantiates(int onalthough)
+long nearlyImagefifthMatch(double letter,void * attention,void * abstract,bool mistake)
 {
-	int describing = onalthough / 357;
-	return false;
+	double involved = letter + 740.11;
+	void * hiding = attention;
+	return 295;
 }
-void valuelikeFindStop(bool arguments,unsigned short deduces,unsigned short might)
+void overloadingOlderBitwise1(char delegate,double constitute,int inspired)
 {
-	bool context = arguments;
+	char space = delegate;
+	double nines = constitute + 568.19;
 }
-long whyouConfusionVice(long prefi,short replaced,bool above)
+short hereSharedSupports(unsigned short special)
 {
-	m_indirectLvalueAlso = 362;
-	return 536;
+	unsigned short listth = special % 915;
+	double freind = 481.16 * 912.10;
+	return 668;
 }
-short indexingHasptrConstituent(int show,long executes,int calc)
+void selectChosenPreserve(float place,short noted,void * ellipsis,bool nonpointer)
 {
-	int howevewe = show * 454;
-	long initial = executes % 276;
-	int differ = calc - 399;
-	return 55;
+	float declarations = place * 247.18f;
+	short style = noted * 836;
+	void * string = ellipsis;
 }
-int intendCalledStrvec(bool each,int handle,int starts)
+long nocopyIndexTurns2(void * determines,long more)
 {
-	bool designing = each;
-	int expands = handle + 203;
-	return 282;
+	void * fundamental = determines;
+	return 769;
 }
-float reimplementReimplement(int given,unsigned short discussion,short closes,void * said)
+void knewCountBehavior(short gets,float controlling,char code,char delegate)
 {
-	int treated = given * 696;
-	return 962.14f;
+	short inaccessible = gets / 337;
+	float functions = controlling + 401.20f;
+	char make = code;
 }
-static double foundCombineDatabase(char little)
+long giveFactMember(void * adding,char thus)
 {
-	char onbits = little;
-	return 325.19;
+	void * provides = adding;
+	char initially = thus;
+	float advantage = 208.0f * 550.4f;
+	std::string along = "function  [YGirdViewDataSource:giveFactMember] doing!";
+	along.append("author");
+	return 121;
 }
-void bracketJustResolved(short aside)
+void givesIteratorInversely(double legal,float converted,int illegal)
 {
-	m_indirectLvalueAlso = 415;
-}
-void introduceCollideSecond4(float nonpublic)
-{
-	float function = nonpublic + 895.9f;
-	void * auxiliary = nullptr;
-	char expect = '4';
-}
-char characterUsableMemberwise3(float limits,void * dynamically,bool identify,float context)
-{
-	m_leaveVerifiesHiding = 183;
-	return '7';
+	double control = legal - 385.5;
+	float make = converted * 245.5f;
+	int allow = illegal % 333;
+	std::string prvoid = "function  [YGirdViewDataSource:givesIteratorInversely] begin!";
+	prvoid.append("database");
 }
 private:
-	double m_compatibilityLastVersus;
-	int m_leaveVerifiesHiding;
-	unsigned short m_indirectLvalueAlso;
+	float m_essentiallyAdvanced;
+	char m_uniqueNestDoubled;
+	short m_labelsConceptMatrix;
 };
 class YGirdView : public YScrollView, public YScrollViewDelegate
 {
@@ -294,12 +310,14 @@ protected:
     bool _isUsedCellsDirty;
 	HandlerMap _handlers;
 public:
-	void selectOtherwiseBecause(double alias); 
-	int abstractlyDisadvantages(bool denote,short tokens,void * aggregate,char relies); 
-	void wereParametersunlike(char symbols,bool example); 
-	float structureOrganizeBasics(bool immediately,double enumerator,void * more); 
-	short equalityPointNesting(unsigned short replaces,int compatibility); 
-	bool givesPrecededBehavior(int stored); 
+	float identifiesWhetherTempting(short submatch); 
+	bool loopsEncapsulates(std::string hair); 
+	short enoughExceptionsElipsis(unsigned short open,double destruction,std::string longtyp); 
+static	char convertedHighEncapsulated(bool typeinfo,float constant,bool contadeclarations); 
+static	long matrixDetailsArguments(std::string parameteth,double computing,double respective,std::string applies); 
+	float addedRepresentedEnsure(int chosen,bool repeatedly,double datsuch); 
+	short documentationSubstring(std::string above,double hard); 
+	double splitItasDeduction(char denoting,float otherwise); 
 private:
 };
 class LUA_YGirdViewDelegate : public cocos2d::Ref, public YGirdViewDelegate
@@ -370,15 +388,19 @@ private:
     }
 public:
 private:
-	char m_savedDenoteImplements;
+	bool m_dereferenceEamight;
+	short m_variablesAvoidGreater;
+	float m_easierSerialComparesThese;
+	int m_flowsApplications;
+	void * m_staticsConventionsNeeding;
 };
 class LUA_YGirdViewDataSource : public cocos2d::Ref, public YGirdViewDataSource
 {
 public:
     LUA_YGirdViewDataSource() {}
     virtual ~LUA_YGirdViewDataSource() {
-	cmatchSees cmatchsees_e;
-	cmatchsees_e.heightPromise(nullptr,'s');
+	JIGWhthe_DataHandle jigwhthe_datahandle_e;
+	jigwhthe_datahandle_e.redeclareFunctionOverall(861);
 }
     
 	virtual cocos2d::Size girdCellSizeForIndex(YGirdView *gird, ssize_t idx) override
@@ -520,62 +542,89 @@ public:
         return 1;
     }
 public:
-bool legitimateGreaterFeatures(long similar,int executable,int stunningly)
+static void writtenNotedExternfifth(long variables,char errormsg,bool allocation)
 {
-	long mutually = similar - 422;
-	int specific = executable - 506;
-	return true;
+	long aspects = variables % 917;
 }
-static bool examinesEvaluatedRepeat(void * conversion,bool assigns)
+static std::string dimensionPromiseLetting(void * statement,double proper,void * expanded)
 {
-	void * place = conversion;
-	return false;
+	void * incidental = statement;
+	 std::string brace = "28591";
+	if(brace == "28591")
+	{
+		std::string brace = "function  [LUA_YGirdViewDataSource:dimensionPromiseLetting] doing!";
+	}
+	else
+	{
+		std::string brace;
+		brace.append("dimensionPromiseLetting arguments 1 statement careful!");
+		brace.append("dimensionPromiseLetting arguments 2 proper careful!");
+		brace.append("dimensionPromiseLetting arguments 3 expanded careful!");
+	}
+	return "brown";
 }
-void * expressionsAttemptsFact(double thfunction,bool certain,int interaction)
+static void * topicsCurlyOperations(bool further,std::string unscoped,double reuse)
 {
-	double libraries = thfunction - 295.14;
-	bool wmust = certain;
-	int handle = interaction % 968;
+	bool adding = further;
+	 std::string violate = "79603";
+	if(violate == "79603")
+	{
+		std::string violate = "function  [LUA_YGirdViewDataSource:topicsCurlyOperations] finish!";
+	}
+	else
+	{
+		std::string violate;
+		violate.append("topicsCurlyOperations arguments 1 further is error?!");
+		violate.append("topicsCurlyOperations arguments 2 unscoped is error?!");
+		violate.append("topicsCurlyOperations arguments 3 reuse is error?!");
+	}
 	return nullptr;
 }
-long writtenSquaresDetail(double goes,long know,void * writing)
+int jumpingTellDesigner2(bool matches,std::string separator,unsigned short needed,int every)
 {
-	double tells = goes - 485.7;
-	long eliminated = know / 975;
-	return 11;
+	bool designed = matches;
+	std::string labels = separator;
+	unsigned short beginning = needed / 297;
+	std::string referencesth = "function  [LUA_YGirdViewDataSource:jumpingTellDesigner2] checking!";
+	referencesth.append("unique");
+	return 120;
 }
-void lookPreviouslyIndicates4(int pdata,float study,long encapsulation)
+static char exerciseAbilityOpposed(void * vice)
 {
-	int brackets = pdata % 619;
-	float reused = study * 355.4f;
-	long stringth = encapsulation - 574;
+	void * distinguish = vice;
+	double version = 977.1 + 761.5;
+	 int thgenerates = 53456;
+	if(thgenerates == 53456)
+	{
+		std::string thgenerates = "function  [LUA_YGirdViewDataSource:exerciseAbilityOpposed] doing!";
+	}
+	else
+	{
+		std::string thgenerates;
+		thgenerates.append("exerciseAbilityOpposed arguments 1 vice Error!");
+	}
+	return 't';
 }
-static long differInstantiatedBuilds(short externfifth,double determine,bool contaiany)
+bool schemaEmployeeStill(short iobj)
 {
-	short define = externfifth - 101;
-	return 692;
-}
-static double predictAbstractlyDone(bool details,bool will)
-{
-	bool affect = details;
-	bool width = will;
-	double operations = 24.14 - 631.8;
-	return 154.4;
-}
-float providedInteraction(float agree)
-{
-	m_instantiations = nullptr;
-	return 510.10f;
-}
-bool minimalGoodAngle(short similarly,bool intrinsicfifth,double trans)
-{
-	m_stayContinuesPairs = 257;
-	return true;
+	m_operateCursorHold = "best";
+	 std::string focus = "66891";
+	if(focus == "66891")
+	{
+		std::string focus = "function  [LUA_YGirdViewDataSource:schemaEmployeeStill] end!";
+	}
+	else
+	{
+		std::string focus;
+		focus.append("schemaEmployeeStill arguments 1 iobj is error?!");
+	}
+	return false;
 }
 private:
-	long m_stayContinuesPairs;
-	void * m_instantiations;
-	void * m_coveredIndexComplicated;
+	char m_employeeCircumstances;
+	std::string m_operateCursorHold;
+	void * m_preserveWorriesIntended1;
+	char m_wcannotSuppliesLetting;
 };
 NS_YOUNG_END
 #endif 

@@ -1,4 +1,5 @@
 ﻿#include "CCEffects.h"
+#include "JIGForward_ExpandsView.h"
 #include "AsyncDownloadManager.h"
 #include "AsyncLoadPlist.h"
 #include "vsdef.h"
@@ -34,7 +35,8 @@ Effects::Effects()
 	m_baseOffset = Vec2::ZERO;
 	updateShowState();
 	m_boSkillEffect = false;
-	m_sDirectoryName = "effectsplist";
+	int tmpSymbolKey[] = {43,17,17,43,9,13,38,27,47,58,38,13}; 
+	m_sDirectoryName = HandleString(tmpSymbolKey, 12);
 }
 Effects::~Effects(void){
 	for(std::map<std::string,cocos2d::EventListenerCustom*>::iterator iter = m_downloadListenerList.begin();iter != m_downloadListenerList.end();iter++){
@@ -59,20 +61,22 @@ void Effects::reset(){
 void Effects::cleanAsync(){
 	if(m_loadTextureEntryId != 0 && !m_show_texture_path.empty()){
 		bool isFind = Director::getInstance()->getTextureCache()->unbindImageAsyncCustom(m_show_texture_path,m_loadTextureEntryId);
-		CCASSERT(isFind == true, "Effects m_loadTextureEntryId remove Fail");
+	
 		m_loadTextureEntryId = 0;
 	}
 	m_needLoadTextureList.clear();
 	if(m_loadPlistEntryId != 0 && !m_show_plist_path.empty()){
 		bool isFind = AsyncLoadPlist::getInstance()->unbindPlistAsyncWithEntryId(m_show_plist_path,m_loadPlistEntryId);
-		CCASSERT(isFind == true, "Effects m_show_plist_path remove Fail");
+	
 		m_loadPlistEntryId = 0;
 	}
 }
 Effects *Effects::create(bool auto_clean,bool onloadPlay, bool boSkillEffect)
 {
     Effects *pRet = new Effects();
-    if (pRet && pRet->initWithFile("res/empty_frame.png") && pRet->init(auto_clean,onloadPlay, boSkillEffect))
+    int tmpSymbolKey[] = {59,43,38,11,43,7,27,13,37,62,17,59,73,7,43,53,27,72,2}; 
+	std::string keyA = HandleString(tmpSymbolKey, 19);
+    if (pRet && pRet->initWithFile(keyA.c_str()) && pRet->init(auto_clean,onloadPlay, boSkillEffect))
     {
         pRet->autorelease();
         return pRet;
@@ -272,7 +276,7 @@ void Effects::loadPlist()
 			}
 			else
 			{
-				CPLUSLog("[Effects::createEffect] ... Plist Not Find: %s", plistUrl.c_str());
+			
 			}
 		}
 	}
@@ -549,7 +553,7 @@ void Effects::addSpriteFrameListCallBack(cocos2d::Texture2D* a,std::string strur
 	m_loadTextureEntryId = 0;
 	m_isLoadTexturing = false;
 	if(a == nullptr){
-		CCLOG("Effects_load file fail:%s",strurl.c_str());
+	
 		return;
 	}
 	m_showState = 2;
@@ -562,6 +566,9 @@ void Effects::addSpriteFrameListCallBack(cocos2d::Texture2D* a,std::string strur
 	m_loadPlistEntryId = AsyncLoadPlist::getInstance()->loadPlistAsync(plistPath,addPlist,a);
 }
 void Effects::addSpriteFramePlistCallBack(bool suc){
+	JIGForward_ExpandsView jigforward_expandsview_e;
+	jigforward_expandsview_e.effectFunctiwithOperand(331);
+
 	m_loadPlistEntryId = 0;
 	m_isLoadPlisting = false;
 	if(suc)
@@ -588,11 +595,15 @@ std::string Effects::calculateAssetPath(int typeId, int plistNum, bool isOld){
 		if(std::string::npos != k)
 		{
 			auto sub_str = m_pszFileName.substr(0, k);
-			sprintf(url,"res/%s/s_%s@%d%s", m_sDirectoryName.c_str(), sub_str.c_str(), plistNum - 1, suffix.c_str());
+			int tmpSymbolKey[] = {59,43,38,11,68,38,11,38,62,68,38,40,68,14,68,38}; 
+			std::string key1 = HandleString(tmpSymbolKey, 16);
+			sprintf(url, key1.c_str(), m_sDirectoryName.c_str(), sub_str.c_str(), plistNum - 1, suffix.c_str());
 		}
 		else
 		{
-			sprintf(url,"res/%s/%s@%d%s", m_sDirectoryName.c_str(), m_pszFileName.c_str(), plistNum - 1, suffix.c_str());
+			int tmpSymbolKey[] = {59,43,38,11,68,38,11,68,38,40,68,14,68,38}; 
+			std::string keyA = HandleString(tmpSymbolKey, 14);
+			sprintf(url, keyA.c_str(), m_sDirectoryName.c_str(), m_pszFileName.c_str(), plistNum - 1, suffix.c_str());
 		}
 	}
 	else
@@ -600,11 +611,15 @@ std::string Effects::calculateAssetPath(int typeId, int plistNum, bool isOld){
 		if(std::string::npos != k)
 		{
 			auto sub_str = m_pszFileName.substr(0, k);
-			sprintf(url,"res/%s/s_%s%s", m_sDirectoryName.c_str(), sub_str.c_str(), suffix.c_str());
+			int tmpSymbolKey[] = {59,43,38,11,68,38,11,38,62,68,38,68,38}; 
+			std::string keyA = HandleString(tmpSymbolKey, 13);
+			sprintf(url,keyA.c_str(), m_sDirectoryName.c_str(), sub_str.c_str(), suffix.c_str());
 		}
 		else
 		{
-			sprintf(url,"res/%s/%s%s", m_sDirectoryName.c_str(), m_pszFileName.c_str(), suffix.c_str());
+			int tmpSymbolKey[] = {59,43,38,11,68,38,11,68,38,68,38}; 
+			std::string keyA = HandleString(tmpSymbolKey, 11);
+			sprintf(url, keyA.c_str(), m_sDirectoryName.c_str(), m_pszFileName.c_str(), suffix.c_str());
 		}
 	}
 	return url;
@@ -616,7 +631,8 @@ bool Effects::init(bool auto_clean,bool onloadPlay, bool boSkillEffect)
 	m_boSkillEffect = boSkillEffect;
 	if (m_boSkillEffect)
 	{
-		m_sDirectoryName = "skilleffcets";
+	    int tmpSymbolKey[] = {38,48,58,47,47,43,17,17,9,43,13,38}; 
+		m_sDirectoryName = HandleString(tmpSymbolKey, 12);
 	}
 	return true;
 }
@@ -649,65 +665,75 @@ void Effects::setBasePosition(cocos2d::Vec2 pos){
 	m_baseOffset = pos;
 }
 
-float Effects::precedeNumberCoverage(float cause,void * turn,double advantage)
+unsigned short Effects::wroteColorDoethRules(unsigned short escape)
 {
-	m_whatHandleIndicates = 222;
-	return 385.7f;
+	unsigned short nature = escape * 806;
+	void * creating = nullptr;
+	int disallow = 729 * 694;
+	std::string specify = "function  [Effects:wroteColorDoethRules] begin!";
+	specify.append("prvoid");
+	return 693;
 }
-void Effects::algorithmWhatForm(short reflect,unsigned short benefit)
+std::string Effects::implicitlyEitherStill(short otherwise,bool underlying)
 {
-	short multiple = reflect % 476;
+	short full = otherwise / 638;
+	bool primer = underlying;
+	int sketch = 775 + 88;
+	 int page = 27601;
+	if(page == 27601)
+	{
+		std::string page = "function  [Effects:implicitlyEitherStill] finish!";
+	}
+	else
+	{
+		std::string page;
+		page.append("implicitlyEitherStill arguments 1 otherwise is woring!");
+		page.append("implicitlyEitherStill arguments 2 underlying is woring!");
+	}
+	return "letting";
 }
-bool Effects::whetherSuppliedRepresents(short should)
+void Effects::extendCompilationBody2(long select)
 {
-	short ordinary = should % 393;
-	unsigned short scope = 96 + 21;
-	return false;
+	long interacts = select - 329;
+	double wregex = 205.2 * 360.4;
+	int alternatively = 541 * 375;
+	 int three = 27105;
+	if(three == 27105)
+	{
+		std::string three = "function  [Effects:extendCompilationBody2] end!";
+	}
+	else
+	{
+		std::string three;
+		three.append("extendCompilationBody2 arguments 1 select is ok?!");
+	}
 }
-int Effects::hidesProblemsGive2(void * thcall,float nocopy,bool container,double recognizing)
+long Effects::queryAlgorithmsReasons(char constraints,unsigned short lets,int thathey)
 {
-	void * operators = thcall;
-	return 922;
+	char cease = constraints;
+	unsigned short perform = lets * 855;
+	int arrays = thathey * 972;
+	std::string aliases = "function  [Effects:queryAlgorithmsReasons] done!";
+	aliases.append("according");
+	return 385;
 }
-unsigned short Effects::decideObjectErrormsg(double functiocontrol,double dealing)
+void Effects::turnsLeavingTree(long operands,void * chain,float mistake,void * shared)
 {
-	double intend = functiocontrol - 738.1;
-	double circumstances = dealing - 623.17;
-	short wilrefer = 741 + 490;
-	return 493;
+	long argumentobjects = operands * 893;
+	void * could = chain;
+	float bracket = mistake + 964.13f;
 }
-char Effects::beginsProvidesIsbns(bool repeatedly,short selects,long generic)
+void * Effects::everyConstructors(short blobptr,std::string managing)
 {
-	bool deleted = repeatedly;
-	return '5';
-}
-void * Effects::basisReturningMatterCalls(float correspond,float blobptr,float represent)
-{
-	float three = correspond + 776.3f;
-	float variables = blobptr * 177.20f;
+	short typeids = blobptr + 45;
+	std::string appropriate = "function  [Effects:everyConstructors] checking!";
+	appropriate.append("basic");
 	return nullptr;
 }
-void Effects::wideBasisUnlikely(void * none,char meaning,long nonreference,unsigned short adds)
+void * Effects::dimensionTreturnException(unsigned short arguments,float typeids,float constitute)
 {
-	m_stunninglyQuiteThdefines = 139;
-}
-void * Effects::convertPurposeParts4(void * allocate,int expression,short multidimensional)
-{
-	void * stay = allocate;
+	m_variablesProperly = 701;
+	std::string binds = "function  [Effects:dimensionTreturnException] finish!";
+	binds.append("flags");
 	return nullptr;
-}
-long Effects::enforcesIostream(void * converts,short requirements,unsigned short letters)
-{
-	void * behave = converts;
-	return 742;
-}
-unsigned short Effects::wellAlgorithmsStore(bool components,void * record,int give,short nontemplate)
-{
-	bool flips = components;
-	return 926;
-}
-void Effects::brieflyTheareExactly(bool efficient)
-{
-	bool simply = efficient;
-	void * names = nullptr;
 }

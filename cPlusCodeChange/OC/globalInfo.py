@@ -36,6 +36,9 @@ from define import globalDef as DEF
 
 funcsList = []
 clsList   = []
+
+clsNameList = {}
+funcsNameList = {}
 count = 1
 
 clsName = []
@@ -48,14 +51,28 @@ def getInstanceID():
     return count
 
 def appendFunList(funInfo):
+    global funcsList
+    global funcsNameList
     tmpId = getInstanceID()
-    funInfo[tmpId] = funInfo
+    funcsList.insert(funInfo, tmpId)
     funInfo[DEF.ID] = tmpId
+    funcsNameList[funInfo[DEF.Name]] = funInfo
 
 def appendClsList(clsInfo):
+    global clsList
+    global clsNameList
     tmpId = getInstanceID()
-    clsList[tmpId] = clsInfo
+    clsList.insert(tmpId, clsInfo)
     clsInfo[DEF.ID] = tmpId
+    clsNameList[clsInfo[DEF.Name]] = clsInfo
+
+def ClsList():
+    global clsList
+    return clsList
+
+def funcList():
+    global funcList
+    return funcList
 
 def getClsName():
     global clsName
@@ -66,11 +83,22 @@ def getClsName():
 def getFuncName():
     global funcName
     if not funcName:
-        funcName = worldsDic.randomWorldS(900, 'ocFunc')
+        funcName = worldsDic.randomWorldS(2000, 'ocFunc')
     return funcName.pop()    
 
 def getAttrName():
     global attrName
     if not attrName:
-        attrName = worldsDic.randomWorldS(900, 'ocAttr')
+        attrName = worldsDic.randomWorldS(2500, 'ocAttr')
     return attrName.pop()
+
+def getLastWord(name):
+    pos = -1
+    for i in range(len(name)):
+        if name[i].isupper():
+            pos = i
+    
+    if pos > -1:
+        return name[pos:]
+    else:
+        return name

@@ -20,7 +20,7 @@
 #include "cocos2d.h"
 USING_NS_CC;
 #ifndef ENABLE_NETLOG
-#define ENABLE_NETLOG 1
+#define ENABLE_NETLOG 0
 #endif
 #if (ENABLE_NETLOG == 1) 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
@@ -58,8 +58,6 @@ protected:
 	SOCKET m_sock;
 public:
 private:
-	unsigned short m_thingFollowsImportant;
-	void * m_partsExplaining;
-	int m_packTransactionEllipsis;
+	int m_abilityAccustomed;
 };
 #endif

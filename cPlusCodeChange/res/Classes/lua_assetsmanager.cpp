@@ -55,7 +55,7 @@ static int lua_cocos2dx_getCurrentTime(lua_State* L)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-    tolua_error(L,"#ferror in function 'getCurrentTime'.",&tolua_err);
+    tolua_error(L,"",&tolua_err);
     return 0;
 #endif
 
@@ -131,7 +131,7 @@ static int lua_cocos2dx_createDownloadDir(lua_State* L)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(L,"#ferror in function 'createDownloadDir'.",&tolua_err);
+	tolua_error(L,"",&tolua_err);
 	return 0;
 #endif
 }
@@ -210,7 +210,7 @@ static int lua_cocos2dx_createCopyfiles(lua_State* L)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(L,"#ferror in function 'createCopyfiles'.",&tolua_err);
+	tolua_error(L,"",&tolua_err);
 	return 0;
 #endif
 }
@@ -260,7 +260,7 @@ static int lua_cocos2dx_copyFile(lua_State* L)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(L,"#ferror in function 'copyFile'.",&tolua_err);
+	tolua_error(L,"",&tolua_err);
 	return 0;
 #endif
 }
@@ -311,7 +311,7 @@ static int lua_cocos2dx_copyFile2(lua_State* L)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(L,"#ferror in function 'copyFile2'.",&tolua_err);
+	tolua_error(L,"",&tolua_err);
 	return 0;
 #endif
 }
@@ -358,7 +358,7 @@ static int lua_cocos2dx_deleteDownloadDir(lua_State* L)
     
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-    tolua_error(L,"#ferror in function 'resetDownloadDir'.",&tolua_err);
+    tolua_error(L,"",&tolua_err);
     return 0;
 #endif
 }
@@ -403,7 +403,7 @@ static int lua_cocos2dx_addSearchPath(lua_State* L)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-    tolua_error(L,"#ferror in function 'addSearchPath'.",&tolua_err);
+    tolua_error(L,"",&tolua_err);
     return 0;
 #endif
 }
@@ -439,7 +439,7 @@ static int lua_cocos2dx_getMd5(lua_State* L)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-    tolua_error(L,"#ferror in function 'getMd5'.",&tolua_err);
+    tolua_error(L,"",&tolua_err);
     return 0;
 #endif
 }
@@ -463,7 +463,7 @@ static int lua_cocos2dx_ObjIsExistInC(lua_State* tolua_S)
 
 			if (!cobj) 
 			{
-				//tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_ObjIsExistInC'", nullptr);
+				//tolua_error(tolua_S,"", nullptr);
 				//lua_State* state = LuaEngine::getInstance()->getLuaStack()->getLuaState();
 
 				int top = lua_gettop(tolua_S);
@@ -507,7 +507,7 @@ RFEXIT:
 	return 0;
 
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_ObjIsExistInC'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 	return 0;
 }
 
@@ -540,7 +540,7 @@ static int lua_cocos2dx_setCharIndexReplace(lua_State* L)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(L,"#ferror in function 'setCharIndexReplace'.",&tolua_err);
+	tolua_error(L,"",&tolua_err);
 	return 0;
 #endif
 }

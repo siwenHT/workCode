@@ -110,7 +110,7 @@ int lua_cocos2dx_runtime_addSearchPath(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj)
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_FileUtils_addSearchPath'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -154,7 +154,7 @@ int lua_cocos2dx_runtime_addSearchPath(lua_State* tolua_S)
     
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_FileUtils_addSearchPath'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     
     return 0;
@@ -180,7 +180,7 @@ int lua_cocos2dx_runtime_setSearchPaths(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj)
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_runtime_setSearchPaths'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -224,7 +224,7 @@ int lua_cocos2dx_runtime_setSearchPaths(lua_State* tolua_S)
     
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_runtime_setSearchPaths'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     
     return 0;

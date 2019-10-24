@@ -34,7 +34,7 @@ int lua_MapView_create(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_create'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -80,7 +80,7 @@ int lua_MapView_create1(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_create'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -105,7 +105,7 @@ int lua_MapView_getMapScale(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 	tolua_lerror:
-				tolua_error(tolua_S, "#ferror in function 'lua_MapView_getMapScale'.", &tolua_err);
+				tolua_error(tolua_S, "", &tolua_err);
 #endif
 				return 0;
 }
@@ -126,7 +126,7 @@ int lua_MapView_setMapScale(lua_State* tolua_S)
 		ok &= luaval_to_number(tolua_S, 2, &arg0);
 		if (!ok)
 		{
-			tolua_error(tolua_S, "invalid arguments in function 'lua_MapView_setMapScale'", nullptr);
+			tolua_error(tolua_S, "", nullptr);
 			return 0;
 		}
 		MapView::setMapScale(arg0);
@@ -137,7 +137,7 @@ int lua_MapView_setMapScale(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 	tolua_lerror:
-				tolua_error(tolua_S, "#ferror in function 'lua_MapView_setMapScale'.", &tolua_err);
+				tolua_error(tolua_S, "", &tolua_err);
 #endif
 				return 0;
 }
@@ -156,7 +156,7 @@ int lua_MapView_loadMap(lua_State* tolua_S)
 	#if COCOS2D_DEBUG >= 1
 		if (!cobj) 
 		{
-			tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_setMainRole'", NULL);
+			tolua_error(tolua_S,"", NULL);
 			return 0;
 		}
 	#endif
@@ -187,7 +187,7 @@ int lua_MapView_loadMap(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_loadMap'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -206,7 +206,7 @@ int lua_MapView_loadSpritesPre(lua_State* tolua_S)
 	#if COCOS2D_DEBUG >= 1
 		if (!cobj) 
 		{
-			tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_loadSpritesPre'", NULL);
+			tolua_error(tolua_S,"", NULL);
 			return 0;
 		}
 	#endif
@@ -221,7 +221,7 @@ int lua_MapView_loadSpritesPre(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_loadSpritesPre'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -240,7 +240,7 @@ int lua_MapView_setMainRole(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_setMainRole'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -262,7 +262,7 @@ int lua_MapView_setMainRole(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_setMainRole'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -281,7 +281,7 @@ int lua_MapView_getMainRole(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_getMainRole'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -302,7 +302,7 @@ int lua_MapView_getMainRole(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_getMainRole'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -321,7 +321,7 @@ int lua_MapView_setIsLoadFinished(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_setIsLoadFinished'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -339,7 +339,7 @@ int lua_MapView_setIsLoadFinished(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_setIsLoadFinished'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -358,7 +358,7 @@ int lua_MapView_setMapSpan(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_setMapSpan'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -379,7 +379,7 @@ int lua_MapView_setMapSpan(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_setMapSpan'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -398,7 +398,7 @@ int lua_MapView_setIsResReady(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_setIsResReady'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -416,7 +416,7 @@ int lua_MapView_setIsResReady(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_setIsResReady'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -435,7 +435,7 @@ int lua_MapView_systemMoveRoleToPos(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_systemMoveRoleToPos'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -453,7 +453,7 @@ int lua_MapView_systemMoveRoleToPos(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_systemMoveRoleToPos'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -472,7 +472,7 @@ int lua_MapView_moveMapByPos(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_moveMapByPos'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -517,7 +517,7 @@ int lua_MapView_moveMapByPos(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_moveMapByPos'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -536,7 +536,7 @@ int lua_MapView_moveMonsterByPos(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_moveMonsterByPos'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -580,7 +580,7 @@ int lua_MapView_moveMonsterByPos(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_moveMonsterByPos'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -599,7 +599,7 @@ int lua_MapView_stopMonsterByPos(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_stopMonsterByPos'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -628,7 +628,7 @@ int lua_MapView_stopMonsterByPos(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 	tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_stopMonsterByPos'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -647,7 +647,7 @@ int lua_MapView_moveMapByTouch(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_moveMapByTouch'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -665,7 +665,7 @@ int lua_MapView_moveMapByTouch(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_moveMapByTouch'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -684,7 +684,7 @@ int lua_MapView_tile2Space(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_tile2Space'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -702,7 +702,7 @@ int lua_MapView_tile2Space(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_tile2Space'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -721,7 +721,7 @@ int lua_MapView_space2Tile(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_space2Tile'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -739,7 +739,7 @@ int lua_MapView_space2Tile(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_space2Tile'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -758,7 +758,7 @@ int lua_MapView_scroll2Tile(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_scroll2Tile'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -788,7 +788,7 @@ int lua_MapView_scroll2Tile(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_scroll2Tile'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -807,7 +807,7 @@ int lua_MapView_skip2Tile(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_skip2Tile'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -825,7 +825,7 @@ int lua_MapView_skip2Tile(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_skip2Tile'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -844,7 +844,7 @@ int lua_MapView_updateAllAddMapId(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_updateAllAddMapId'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -874,7 +874,7 @@ int lua_MapView_updateAllAddMapId(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_updateAllAddMapId'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -893,7 +893,7 @@ int lua_MapView_initDataAndFunc(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_initDataAndFunc'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -928,7 +928,7 @@ int lua_MapView_initDataAndFunc(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_initDataAndFunc'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -947,7 +947,7 @@ int lua_MapView_getTileByDir(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_getTileByDir'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -965,7 +965,7 @@ int lua_MapView_getTileByDir(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_getTileByDir'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -984,7 +984,7 @@ int lua_MapView_getDirByTile(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_getDirByTile'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1002,7 +1002,7 @@ int lua_MapView_getDirByTile(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_getDirByTile'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1021,7 +1021,7 @@ int lua_MapView_registerWalkCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_registerWalkCb'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1039,7 +1039,7 @@ int lua_MapView_registerWalkCb(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_registerWalkCb'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1058,7 +1058,7 @@ int lua_MapView_registerSuddenCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_registerSuddenCb'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -1076,7 +1076,7 @@ int lua_MapView_registerSuddenCb(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_registerSuddenCb'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -1095,7 +1095,7 @@ int lua_MapView_registerFlyCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_registerFlyCb'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -1113,7 +1113,7 @@ int lua_MapView_registerFlyCb(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_registerFlyCb'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -1132,7 +1132,7 @@ int lua_MapView_removeWalkCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_removeWalkCb'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1141,7 +1141,7 @@ int lua_MapView_removeWalkCb(lua_State* tolua_S)
 	return 1;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_removeWalkCb'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1160,7 +1160,7 @@ int lua_MapView_registerRockerCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_registerRockerCb'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1178,7 +1178,7 @@ int lua_MapView_registerRockerCb(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_registerRockerCb'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1197,7 +1197,7 @@ int lua_MapView_removeRockerCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_removeRockerCb'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1206,7 +1206,7 @@ int lua_MapView_removeRockerCb(lua_State* tolua_S)
 	return 1;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_removeRockerCb'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1225,7 +1225,7 @@ int lua_MapView_registerTouchMoveCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_registerTouchMoveCb'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1243,7 +1243,7 @@ int lua_MapView_registerTouchMoveCb(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_registerTouchMoveCb'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1262,7 +1262,7 @@ int lua_MapView_removeTouchMoveCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_removeTouchMoveCb'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1271,7 +1271,7 @@ int lua_MapView_removeTouchMoveCb(lua_State* tolua_S)
 	return 1;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_removeTouchMoveCb'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1290,7 +1290,7 @@ int lua_MapView_resetDisplay(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_resetDisplay'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -1320,7 +1320,7 @@ int lua_MapView_resetDisplay(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_resetDisplay'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -1339,7 +1339,7 @@ int lua_MapView_registerResetDisplayCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_removeResetDisplayCb'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1357,7 +1357,7 @@ int lua_MapView_registerResetDisplayCb(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_removeResetDisplayCb'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1376,7 +1376,7 @@ int lua_MapView_registerNoMoveCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_registerNoMoveCb'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -1400,7 +1400,7 @@ int lua_MapView_registerNoMoveCb(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_registerNoMoveCb'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -1419,7 +1419,7 @@ int lua_MapView_registerSuddenDistance(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_registerSuddenDistance'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -1441,7 +1441,7 @@ int lua_MapView_registerSuddenDistance(lua_State* tolua_S)
 	}
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_registerSuddenDistance'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -1460,7 +1460,7 @@ int lua_MapView_removeResetDisplayCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_removeResetDisplayCb'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1469,7 +1469,7 @@ int lua_MapView_removeResetDisplayCb(lua_State* tolua_S)
 	return 1;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_removeResetDisplayCb'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1488,7 +1488,7 @@ int lua_MapView_isBlock(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_isBlock'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1506,7 +1506,7 @@ int lua_MapView_isBlock(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_isBlock'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1525,7 +1525,7 @@ int lua_MapView_isLoadFinished(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_isLoadFinished'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1549,7 +1549,7 @@ int lua_MapView_isLoadFinished(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_isLoadFinished'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1568,7 +1568,7 @@ int lua_MapView_isOpacity(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_isBlock'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1586,7 +1586,7 @@ int lua_MapView_isOpacity(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_isOpacity'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1605,7 +1605,7 @@ int lua_MapView_getFlagValue(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_getFlagValue'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1623,7 +1623,7 @@ int lua_MapView_getFlagValue(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_getFlagValue'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1642,7 +1642,7 @@ int lua_MapView_cleanAstarPath(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_cleanAstarPath'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1695,7 +1695,7 @@ int lua_MapView_cleanAstarPath(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_cleanAstarPath'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1714,7 +1714,7 @@ int lua_MapView_onMoveSpeedChangeAction(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_onMoveSpeedChangeAction'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -1729,7 +1729,7 @@ int lua_MapView_onMoveSpeedChangeAction(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_onMoveSpeedChangeAction'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -1748,7 +1748,7 @@ int lua_MapView_getPathByPos(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_getPathByPos'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1788,7 +1788,7 @@ int lua_MapView_getPathByPos(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_getPathByPos'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1807,7 +1807,7 @@ int lua_MapView_resetSpeed(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_resetSpeed'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -1825,7 +1825,7 @@ int lua_MapView_resetSpeed(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_resetSpeed'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -1844,7 +1844,7 @@ int lua_MapView_getSpeed(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_getSpeed'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -1859,7 +1859,7 @@ int lua_MapView_getSpeed(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_getSpeed'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -1878,7 +1878,7 @@ int lua_MapView_getLayerSize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_getLayerSize'", nullptr);
+		tolua_error(tolua_S,"", nullptr);
 		return 0;
 	}
 #endif
@@ -1887,7 +1887,7 @@ int lua_MapView_getLayerSize(lua_State* tolua_S)
 	{
 		if(!ok)
 		{
-			tolua_error(tolua_S,"invalid arguments in function 'lua_MapView_getLayerSize'", nullptr);
+			tolua_error(tolua_S,"", nullptr);
 			return 0;
 		}
 		cocos2d::Size ret = cobj->getLayerSize();
@@ -1898,7 +1898,7 @@ int lua_MapView_getLayerSize(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_getLayerSize'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -1917,7 +1917,7 @@ int lua_MapView_getMapTileSize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_getMapTileSize'", nullptr);
+		tolua_error(tolua_S,"", nullptr);
 		return 0;
 	}
 #endif
@@ -1926,7 +1926,7 @@ int lua_MapView_getMapTileSize(lua_State* tolua_S)
 	{
 		if(!ok)
 		{
-			tolua_error(tolua_S,"invalid arguments in function 'lua_MapView_getMapTileSize'", nullptr);
+			tolua_error(tolua_S,"", nullptr);
 			return 0;
 		}
 		cocos2d::Size ret = cobj->getMapTileSize();
@@ -1937,7 +1937,7 @@ int lua_MapView_getMapTileSize(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_getLayerSize'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -1956,7 +1956,7 @@ int lua_MapView_hasBlock(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_hasBlock'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -1978,7 +1978,7 @@ int lua_MapView_hasBlock(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'hasBlock'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -1997,7 +1997,7 @@ int lua_MapView_registerAddTopHeadNodeToMapCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_registerAddTopHeadNodeToMapCb'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -2015,7 +2015,7 @@ int lua_MapView_registerAddTopHeadNodeToMapCb(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_registerAddTopHeadNodeToMapCb'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -2034,7 +2034,7 @@ int lua_MapView_removeTopHeadNodeToMapCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_removeTopHeadNodeToMapCb'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -2043,7 +2043,7 @@ int lua_MapView_removeTopHeadNodeToMapCb(lua_State* tolua_S)
 	return 1;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MapView_removeTopHeadNodeToMapCb'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -2062,7 +2062,7 @@ int lua_MapView_setResetDisplayGap(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_setResetDisplayGap'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -2079,7 +2079,7 @@ int lua_MapView_setResetDisplayGap(lua_State* tolua_S)
 	return 1;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_setResetDisplayGap'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -2098,7 +2098,7 @@ int lua_MapView_setFollowNode(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_setFollowNode'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -2122,7 +2122,7 @@ int lua_MapView_setFollowNode(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_setFollowNode'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -2141,7 +2141,7 @@ int lua_MapView_UserOldMoveMap(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapView_UserOldMoveMap'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -2159,7 +2159,7 @@ int lua_MapView_UserOldMoveMap(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_UserOldMoveMap'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -2214,7 +2214,7 @@ int lua_MapView_preAsyncLoadImg(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapView_preAsyncLoadImg'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -2317,7 +2317,7 @@ int lua_MapBackLayer_create(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapBackLayer_create'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -2336,7 +2336,7 @@ int lua_MapBackLayer_setSpeedRate(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MapBackLayer_setSpeedRate'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -2353,7 +2353,7 @@ int lua_MapBackLayer_setSpeedRate(lua_State* tolua_S)
 	return 1;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_MapBackLayer_setSpeedRate'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }

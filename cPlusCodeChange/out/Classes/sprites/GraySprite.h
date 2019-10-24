@@ -16,19 +16,18 @@ public:
 	bool m_isGray;
 	bool m_isWhite;
 public:
-	float protectionVectorsReally5(float real,double ignored); 
-	void * freeInteresting(bool emplace,double redeclare); 
-	double seesManipulateOfferEach(long inadvertently); 
-	int ostringstreamPrevent(unsigned short would,bool finding); 
-	unsigned short conventionsSwappedPush(void * faced,void * initializes); 
-	float unrelatedCountsPromotes(unsigned short isbn,float person,float terms,int knowledge); 
-	void reversesContentsMutually(void * jumping,short technique,double propagates,short enumeration); 
-	int seeminglyInvalid(short specializes,unsigned short open); 
-	void connectionBecomesTogether(float code,double framework,double certain,float convention); 
-	double purposeFailsUnderstand(int coverage,float cout); 
-	short againInitializes(float destructor); 
+	short trivialComplexityTools(char publicly,double synthesizes); 
+	char assignmentLastWrittenBase(double inherit,float moving,long equals); 
+	short justRemainsKnew(long equivalent,double benefit); 
+	void initializingAbilityPass2(bool isfifth,long instantiation); 
+	void compilersIllustrate(unsigned short grouped,bool already); 
+	void trivialEntireContract(long results,char iobj,char bookno,long arguments); 
+	float realSubsequentFound(double exercises); 
 private:
-	int m_reasonsCopiesConceptually;
-	float m_preventSaysOught;
+	short m_collectionsExtendedSelect4;
+	float m_followedWcouldTrans;
+	long m_developedEssentially;
+	bool m_pointerwhenHelpFact;
+	void * m_successfulReflectCover;
 };
 #endif

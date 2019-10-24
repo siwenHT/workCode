@@ -38,7 +38,7 @@ int lua_AsyncDownloadManager_getInstance(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_AsyncDownloadManager_getInstance'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 
@@ -64,7 +64,7 @@ int lua_AsyncDownloadManager_registerDownloadSucCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_AsyncDownloadManager_registerDownloadSucCb'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -84,7 +84,7 @@ int lua_AsyncDownloadManager_registerDownloadSucCb(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_AsyncDownloadManager_registerDownloadSucCb'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -110,7 +110,7 @@ int lua_AsyncDownloadManager_setDownloadUrl(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_AsyncDownloadManager_setDownloadUrl'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -130,7 +130,7 @@ int lua_AsyncDownloadManager_setDownloadUrl(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_AsyncDownloadManager_setDownloadUrl'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;

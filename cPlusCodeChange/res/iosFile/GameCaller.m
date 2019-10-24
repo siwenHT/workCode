@@ -8,6 +8,7 @@
 
 #import "GameCaller.h"
 #import "GameServer.h"
+#import "AppController.h"
 //#import "XGPush.h"
 //#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 //#import <UserNotifications/UserNotifications.h>
@@ -44,7 +45,7 @@
 
 -(void)showSplash: (void(^)(NSDictionary*))completion{
     
-    UIImage *image = [UIImage imageNamed:@"zshh_splash.jpg"];
+    UIImage *image = [UIImage imageNamed:PathFormat("splash.jpg")];
     
     if (image == nil) {
          completion(@{});

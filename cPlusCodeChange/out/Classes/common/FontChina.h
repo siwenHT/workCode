@@ -7,19 +7,21 @@ public:
 	~FontChina(void);
 	static const char* G2U(const char* gb2312);
 public:
-	char happenContaianySkim(unsigned short ability,bool prompt); 
-	unsigned short clearSimplyAccording(int distinguish,short resulting,long prefi); 
-	char constitutesSupports(unsigned short options,float convenient,float particular,char whose); 
-	short somewhatElemeisOtherwise(char cannot,float obvious,char assignmenclick); 
-	void striparameterReturning(char with,int oarguments,double ctype,int thumb); 
-	void synthesizedNewline(short nonpointer); 
-	float remainCapitalExpands(char presented,unsigned short null,void * ellipsis); 
-	double thusWcannotInevitably(bool brackets); 
-	unsigned short discussionWmustEamight(float generic,char list,unsigned short sets); 
-	void shareUnusualReason4(void * inevitably); 
+	void findingLookingCoupled(long current,long applied,bool enumeration,unsigned short possibly); 
+	void predictedUnscopedGives4(unsigned short distinct,std::string cars); 
+	double limitIgnoredAsfifth(bool operations); 
+	void asfifthLimitRequire(float interpreted,double constraints,void * worry,unsigned short topics); 
+	unsigned short documentationSmatch(char args); 
+	int recompilingAlongTotal(std::string returns,std::string container); 
+	unsigned short separatedSomeWhichever(char surely); 
+	int charbitsTilde(float must); 
+	double manipulateRegularExecutes3(unsigned short will,void * tokens); 
+	short statementsExpectsDelegate(double nonpointer,bool word); 
 private:
-	short m_listsStunninglyBrace;
-	unsigned short m_letterAssumingPointerlike;
-	double m_becomeStoresVarious2;
+	long m_enumeratorSingleDirectly;
+	bool m_wroteYieldsUnable;
+	char m_holdStartsThrough;
+	double m_remainingLinkageCalled;
+	std::string m_queryresultSupports;
 };
 #endif 

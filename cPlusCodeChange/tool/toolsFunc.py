@@ -118,7 +118,7 @@ def to_str(bytes_or_str):
         return bytes_or_str.decode('utf-8')
     return bytes_or_str
 def EncodeContent(content, key, signment, spaceNum, specSpace = ''):
-    if content[:len(signment)] == signment:
+    if signment and content[:len(signment)] == signment:
         return
 
     encrypt = xxteaModule.encrypt(content, key)
@@ -212,9 +212,9 @@ def matchSymbol(content, symbolBegin, symbolEnd, beginOffset = 0, endOffset = -1
     if endOffset == -1:
         endOffset = len(content) - 1
 
-    if symbolBegin == symbolEnd:
-        print 'toolsFunc.matchSymbol params error!  info: symbolBegin.' + symbolBegin + ' --- symbolEnd.' + symbolEnd
-        return -1, -1
+    # if symbolBegin == symbolEnd:
+    #     print 'toolsFunc.matchSymbol params error!  info: symbolBegin.' + symbolBegin + ' --- symbolEnd.' + symbolEnd
+    #     return -1, -1
     if endOffset != -1 and beginOffset >= endOffset:
         print 'toolsFunc.matchSymbol params error!  info: beginOffset.' + str(beginOffset) + ' --- endOffset.' + str(endOffset)
         return -1, -1
@@ -231,6 +231,8 @@ def matchSymbol(content, symbolBegin, symbolEnd, beginOffset = 0, endOffset = -1
             elif pTmpBegin > pTmpEnd:
                 bNum -= 1
                 posCheck = pTmpEnd + len(symbolEnd)
+            else:
+                pTmpEnd = content.find(symbolEnd, pTmpBegin + len(symbolBegin))
         elif pTmpBegin == -1 and pTmpEnd > -1:
             bNum -= 1
             posCheck = pTmpEnd + len(symbolBegin)
@@ -353,3 +355,63 @@ def delCplusNotes(content):
 
 def delFolders(destPath):
     shutil.rmtree(destPath, True)
+
+def popReList(valList):
+    list2 = []
+    for i in valList:
+        if i not in list2:
+            list2.append(i)
+
+    return list2
+
+# 手动创建一个编码表
+def randomStrCfg():
+    charList = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k','l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K','L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+                '/', '_', '@', '#', '%', '*', '.', ':', ' ', '?', ',', '-', '+', '!', '(', ')', '\"', '\'', '\\']
+
+    ret = []
+    while len(ret) < len(charList):
+        cho = random.choice(charList)
+        if cho not in ret:
+            ret.append(cho)
+    
+    return ret
+
+# 输出手动编码表到字符串
+def strRandomList(strList):
+    ret = ''
+    for i in strList:
+        if isinstance(i, int):
+            ret = ret + str(i) + ','
+        else:
+            ret = ret + str(ord(i)) + ','
+
+    return ret[0:-1]
+
+# 根据字符串，与字符串编码表，获得字符串对应的编码
+def getStrEnc(tmpStr, strCfg):
+    ret = []
+    for i in tmpStr:
+        if i in strCfg:
+            pos = strCfg.index(i)
+            ret.append(pos)
+        else:
+            print i , " not in strCfgList !!! ------------"
+
+    return ret
+
+# 根据字符串，与字符串编码表，获得字符串对应的编码
+def getStrEnc1(tmpStr, strCfg):
+    ret = []
+    for i in tmpStr:
+        if isinstance(i, str):
+            i = ord(i)
+        if i in strCfg:
+            pos = strCfg.index(i)
+            ret.append(pos)
+        else:
+            print i , " not in strCfgList !!! ------------"
+
+    return ret

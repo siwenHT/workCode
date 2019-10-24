@@ -35,7 +35,7 @@ int lua_YVSdkHelper_getInstacne(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_YVSdkHelper_getInstacne'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 
@@ -61,7 +61,7 @@ int lua_YVSdkHelper_doInitSDK(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_YVSdkHelper_doInitSDK'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -82,7 +82,7 @@ int lua_YVSdkHelper_doInitSDK(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_YVSdkHelper_doInitSDK'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -109,7 +109,7 @@ int lua_YVSdkHelper_cpLogin(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_YVSdkHelper_cpLogin'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -133,7 +133,7 @@ int lua_YVSdkHelper_cpLogin(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_YVSdkHelper_cpLogin'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -159,7 +159,7 @@ int lua_YVSdkHelper_setRecord(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_YVSdkHelper_setRecord'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -181,7 +181,7 @@ int lua_YVSdkHelper_setRecord(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_YVSdkHelper_setRecord'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -207,7 +207,7 @@ int lua_YVSdkHelper_startRecord(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_YVSdkHelper_startRecord'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -259,7 +259,7 @@ int lua_YVSdkHelper_startRecord(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_YVSdkHelper_startRecord'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -285,7 +285,7 @@ int lua_YVSdkHelper_stopRecord(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_YVSdkHelper_stopRecord'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -298,7 +298,7 @@ int lua_YVSdkHelper_stopRecord(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_YVSdkHelper_stopRecord'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -325,7 +325,7 @@ int lua_YVSdkHelper_playRecord(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_YVSdkHelper_playRecord'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -365,7 +365,7 @@ int lua_YVSdkHelper_playRecord(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_YVSdkHelper_playRecord'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -391,7 +391,7 @@ int lua_YVSdkHelper_stopPlay(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_YVSdkHelper_stopPlay'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -404,7 +404,7 @@ int lua_YVSdkHelper_stopPlay(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_YVSdkHelper_stopPlay'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -430,7 +430,7 @@ int lua_YVSdkHelper_upLoadFile(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_YVSdkHelper_upLoadFile'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -464,7 +464,7 @@ int lua_YVSdkHelper_upLoadFile(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_YVSdkHelper_upLoadFile'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -490,7 +490,7 @@ int lua_YVSdkHelper_speechVoice(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_YVSdkHelper_speechVoice'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -540,7 +540,7 @@ int lua_YVSdkHelper_speechVoice(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_YVSdkHelper_speechVoice'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -566,7 +566,7 @@ int lua_YVSdkHelper_registerHandler(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_YVSdkHelper_registerHandler'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -587,7 +587,7 @@ int lua_YVSdkHelper_registerHandler(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_YVSdkHelper_registerHandler'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;

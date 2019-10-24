@@ -95,7 +95,9 @@ void SkillCtrl::createChain()
 		}
 		Vec2 pos = Vec2(r*cos(DgreeToN(start_dgree-35*i)),r*sin(DgreeToN(start_dgree-35*i)));
 		//Sprite *menu_item = Sprite::create("skill.png");
-		MenuButton *menu_item = MenuButton::create("res/mainui/skill.png");
+		int tmpSymbolKeyA[] = {}; //"res/mainui/skill.png"
+		std::string keyA = HandleString(tmpSymbolKeyA, STRNUMSIG);	
+		MenuButton *menu_item = MenuButton::create(keyA.c_str());
 		menu_item->setAnchorPoint(Vec2(0.5,0.5));
 		menu_item->setRotation(rotate_dgree);
 		menu_item->setPosition(pos);
@@ -112,7 +114,9 @@ void SkillCtrl::createChain()
 	//m_center_node->setPosition(Vec2(winSize.width-100,100));
 	addChild(m_center_node,1);
 	//m_center_item = Sprite::create("ptgj.png");
-	m_center_item = MenuButton::create("res/mainui/ptgj.png");
+	int tmpSymbolKeyB[] = {}; //"res/mainui/ptgj.png"
+	std::string keyB = HandleString(tmpSymbolKeyB, STRNUMSIG);	
+	m_center_item = MenuButton::create(keyB.c_str());
 	Vec2 center_size = Vec2(m_center_item->getContentSize());
 	touch_effect1 = Effects::create(false);
 	touch_effect1->setAnchorPoint(Vec2(0.5,0.5));
@@ -121,10 +125,13 @@ void SkillCtrl::createChain()
 	//m_center_item->setScale(0.8);
 	addChild(m_center_item,1,10);
 
-	m_sprite1 = GraySprite::create("res/mainui/cg.png");
+	int tmpSymbolKeyC[] = {}; //"res/mainui/cg.png"
+	std::string keyC = HandleString(tmpSymbolKeyC, STRNUMSIG);	
+	m_sprite1 = GraySprite::create(keyC.c_str());
 	m_sprite1->setPosition(Vec2(-90-20,160+60));
 	addChild(m_sprite1,1,11);
-	m_sprite2 = GraySprite::create("res/mainui/cg.png");
+
+	m_sprite2 = GraySprite::create(keyC.c_str());
 	m_sprite2->setFlippedX(true);
 	m_sprite2->setRotation(-90);
 	m_sprite2->setPosition(Vec2(-160-20,90+60));
@@ -132,6 +139,9 @@ void SkillCtrl::createChain()
 	m_sprite1->addColorGray();
 	auto listener = EventListenerTouchOneByOne::create();
 
+
+	int tmpSymbolKeyD[] = {}; //"toucheffect"
+	std::string keyD = HandleString(tmpSymbolKeyD, STRNUMSIG);	
 	listener->onTouchBegan = [=](Touch* touch,Event* event)  
 	{
 		Vec2 touchs = touch->getLocation();
@@ -158,7 +168,7 @@ void SkillCtrl::createChain()
 						temp = Vec2(80,80);
 					}
 					touch_effect1->setPosition(m_select_item->getPosition()+temp);
-					touch_effect1->playActionData("toucheffect", 4, 0.25,1);
+					touch_effect1->playActionData(keyD.c_str(), 4, 0.25,1);
 					//touch_effect1->setAnchorPoint(m_select_item->getAnchorVec2());
 				}
 			}
@@ -180,7 +190,7 @@ void SkillCtrl::createChain()
 							if(touch_effect)
 							{
 								touch_effect->setPosition(m_select_item->getPosition());
-								touch_effect->playActionData("toucheffect", 4, 0.25,1);
+								touch_effect->playActionData(keyD.c_str(), 4, 0.25,1);
 							}
 						}
 					}

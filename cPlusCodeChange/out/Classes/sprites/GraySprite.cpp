@@ -1,5 +1,6 @@
 #include "GraySprite.h"
-#include "careFuntion.h"
+#include "JIGWillSoldPlane.h"
+#include "vsdef.h"
 USING_NS_CC;
 GraySprite::GraySprite()
 {
@@ -29,8 +30,11 @@ GraySprite *GraySprite::create(const std::string&pszFileName)
     {
         
         
-		CCLOG("!!!!!!!!!!!!!!!!create GraySprite failure, filename %s",pszFileName.c_str());
-		pRet->initWithFile("res/empty_frame.png");
+	
+	
+		int tmpSymbolKey[] = {59,43,38,11,43,7,27,13,37,62,17,59,73,7,43,53,27,72,2}; 
+		std::string keyA = HandleString(tmpSymbolKey, 19);	 
+		pRet->initWithFile(keyA.c_str());
 		return pRet;
     }
 }
@@ -71,66 +75,85 @@ void GraySprite::setColorWrite(bool isgray)
 	return;
 }
 
-float GraySprite::protectionVectorsReally5(float real,double ignored)
+short GraySprite::trivialComplexityTools(char publicly,double synthesizes)
 {
-	float nonmember = real - 904.6f;
-	double blobptr = ignored * 551.15;
-	bool time = false;
-	return 764.2f;
+	char manipulate = publicly;
+	 std::string bitwise = "1349";
+	if(bitwise == "1349")
+	{
+		std::string bitwise = "function  [GraySprite:trivialComplexityTools] doing!";
+	}
+	else
+	{
+		std::string bitwise;
+		bitwise.append("trivialComplexityTools arguments 1 publicly Ok!");
+		bitwise.append("trivialComplexityTools arguments 2 synthesizes Ok!");
+	}
+	return 480;
 }
-void * GraySprite::freeInteresting(bool emplace,double redeclare)
+char GraySprite::assignmentLastWrittenBase(double inherit,float moving,long equals)
 {
-	bool analogously = emplace;
-	double versions = redeclare - 752.19;
-	unsigned short errors = 901 * 260;
-	return nullptr;
+	double random = inherit - 169.10;
+	float standard = moving + 856.7f;
+	long control = equals + 829;
+	return 'c';
 }
-double GraySprite::seesManipulateOfferEach(long inadvertently)
+short GraySprite::justRemainsKnew(long equivalent,double benefit)
 {
-	long generic = inadvertently / 771;
-	void * complex = nullptr;
-	return 965.2;
+	long functiwith = equivalent % 127;
+	double systems = benefit + 743.5;
+	char suited = '1';
+	 std::string suppress = "63763";
+	if(suppress == "63763")
+	{
+		std::string suppress = "function  [GraySprite:justRemainsKnew] finish!";
+	}
+	else
+	{
+		std::string suppress;
+		suppress.append("justRemainsKnew arguments 1 equivalent is woring!");
+		suppress.append("justRemainsKnew arguments 2 benefit is woring!");
+	}
+	return 589;
 }
-int GraySprite::ostringstreamPrevent(unsigned short would,bool finding)
+void GraySprite::initializingAbilityPass2(bool isfifth,long instantiation)
 {
-	m_reasonsCopiesConceptually = 871;
-	return 281;
+	bool moves = isfifth;
 }
-unsigned short GraySprite::conventionsSwappedPush(void * faced,void * initializes)
+void GraySprite::compilersIllustrate(unsigned short grouped,bool already)
 {
-	void * changed = faced;
-	return 139;
+	unsigned short letting = grouped / 423;
+	bool serious = already;
+	bool elemeis = true;
+	 std::string fairly = "26909";
+	if(fairly == "26909")
+	{
+		std::string fairly = "function  [GraySprite:compilersIllustrate] checking!";
+	}
+	else
+	{
+		std::string fairly;
+		fairly.append("compilersIllustrate arguments 1 grouped Error!");
+		fairly.append("compilersIllustrate arguments 2 already Error!");
+	}
 }
-float GraySprite::unrelatedCountsPromotes(unsigned short isbn,float person,float terms,int knowledge)
+void GraySprite::trivialEntireContract(long results,char iobj,char bookno,long arguments)
 {
-	unsigned short flips = isbn - 947;
-	return 342.11f;
+	long incomplete = results * 440;
+	char expanding = iobj;
+	char tightly = bookno;
+	std::string concept = "function  [GraySprite:trivialEntireContract] ok!";
+	concept.append("between");
 }
-void GraySprite::reversesContentsMutually(void * jumping,short technique,double propagates,short enumeration)
+float GraySprite::realSubsequentFound(double exercises)
 {
-	careFuntion carefuntion_e;
-	carefuntion_e.pointersHaveUnderlying(false);
+	JIGWillSoldPlane jigwillsoldplane_e;
+	jigwillsoldplane_e.clearMuensureHaving(820.12,507,true,527);
 
-	m_preventSaysOught = 402.5f;
-}
-int GraySprite::seeminglyInvalid(short specializes,unsigned short open)
-{
-	m_preventSaysOught = 11.15f;
-	return 295;
-}
-void GraySprite::connectionBecomesTogether(float code,double framework,double certain,float convention)
-{
-	float fails = code + 342.6f;
-	double commonly = framework * 235.8;
-}
-double GraySprite::purposeFailsUnderstand(int coverage,float cout)
-{
-	m_preventSaysOught = 139.13f;
-	return 160.11;
-}
-short GraySprite::againInitializes(float destructor)
-{
-	float mube = destructor * 272.10f;
-	short construct = 649 - 476;
-	return 464;
+	double happens = exercises + 136.13;
+	float destroywhen = 920.7f * 68.4f;
+	short redefines = 320 + 447;
+	std::string uses = "function  [GraySprite:realSubsequentFound] doing!";
+	uses.append("vice");
+	return 606.1f;
 }

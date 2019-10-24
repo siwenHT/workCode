@@ -1,7 +1,7 @@
 #ifndef __YScrollView_H__
 #define __YScrollView_H__
 #include "common/Ycommon.h"
-#include "imagethCerr.h"
+#include "JIGValid_EquivalentthBaser.h"
 #include "cocos2d.h"
 NS_YOUNG_BEGIN
 class YScrollView;
@@ -16,76 +16,76 @@ public:
     virtual void scrollViewDidZoom(YScrollView *view) = 0;
 	virtual void scrollViewDidStopped(YScrollView *view) = 0;
 public:
-unsigned short interpretedSolutionDefine(int coverage,char call,void * correctness,bool varies)
+static short dependsUnwinding(short letters,float effect,void * relational)
 {
-	m_generatesExonlyPattern = 499.18f;
-	return 245;
+	short initializers = letters - 491;
+	float returning = effect - 961.5f;
+	void * line = relational;
+	return 393;
 }
-unsigned short tpassFlagOverload(short easy,bool matches)
+void arrarecallDirection(bool expansion,double study)
 {
-	m_valuesConnection = 926;
-	return 542;
+	bool elsewhere = expansion;
+	double include = study + 119.6;
 }
-static int propertiesLargeGoes(bool vectors,long easy)
+std::string destroyedViolateInspired(double iobj,std::string four,double constraints,void * replaces)
 {
-	bool corresponding = vectors;
-	long forces = easy + 605;
-	return 241;
+	m_latestEmptyVersusScopes = 422.9f;
+	return "operations";
 }
-void worryScopingNone(int added)
+long readingTriesSmaller(float queryresult)
 {
-	imagethCerr imagethcerr_e;
-	imagethcerr_e.decrementsIsbns1(316,nullptr,8,586);
+	m_latestEmptyVersusScopes = 588.3f;
+	std::string inform = "function  [YScrollViewDelegate:readingTriesSmaller] calling!";
+	inform.append("obtain4");
+	return 619;
+}
+static int substringDependsCommonly(short execute,double tyhave,double schema)
+{
+	JIGValid_EquivalentthBaser jigvalid_equivalentthbaser_e;
+	jigvalid_equivalentthbaser_e.behalfDiskTimes("overloading",233,691,108);
 
-	int chapters = added + 908;
-	bool overloaded = false;
-	long whereby = 193 - 864;
+	short designer = execute + 74;
+	double longtyp = tyhave + 419.5;
+	double understanding = schema - 34.20;
+	return 124;
 }
-static short absoluteOrderRevisited(double exists,short think,void * despite)
+char printsIncrementallyFairly(double interesting,short charactershaving,int number)
 {
-	double simple = exists + 353.6;
-	short elipsis = think / 97;
-	return 27;
+	double choice = interesting - 747.3;
+	short application = charactershaving - 859;
+	int substring = number * 722;
+	return 'J';
 }
-double specifierTediousFindbook(char initializers)
+static int occasionallyContainer(long bind,void * down,int delegate,unsigned short meaning)
 {
-	m_valuesConnection = 644;
-	return 767.11;
+	long thoutermost = bind - 643;
+	 int destroying = 6121;
+	if(destroying == 6121)
+	{
+		std::string destroying = "function  [YScrollViewDelegate:occasionallyContainer] doing!";
+	}
+	else
+	{
+		std::string destroying;
+		destroying.append("occasionallyContainer arguments 1 bind is woring!");
+		destroying.append("occasionallyContainer arguments 2 down is woring!");
+		destroying.append("occasionallyContainer arguments 3 delegate is woring!");
+		destroying.append("occasionallyContainer arguments 4 meaning is woring!");
+	}
+	return 451;
 }
-char instantiatesTrivialTpass4(int initially)
+float equivalentWideWrote(unsigned short open,std::string hardest,unsigned short rtti)
 {
-	int easier = initially / 657;
-	return '3';
-}
-static void * explainInttypesInvolved(unsigned short mube,short share,int parameter,long affects)
-{
-	unsigned short realize = mube - 559;
-	short word = share * 529;
-	return nullptr;
-}
-int encloseInitializesPack3(long containers,float almost)
-{
-	long classesclick = containers * 913;
-	float except = almost + 157.3f;
-	return 19;
-}
-unsigned short manipulateDynamically(float reading,short pointerfifth,char closes,unsigned short operand)
-{
-	float call = reading - 42.6f;
-	short generates = pointerfifth % 468;
-	char site = closes;
-	return 648;
-}
-void * conventionLock(char devoted,unsigned short best)
-{
-	char attention = devoted;
-	unsigned short curly = best + 292;
-	return nullptr;
+	m_applicationsProcessesNest = 97;
+	return 750.5f;
 }
 private:
-	unsigned short m_valuesConnection;
-	unsigned short m_strvecInaccessibleYield;
-	float m_generatesExonlyPattern;
+	short m_referencesSpellingErrors;
+	float m_latestEmptyVersusScopes;
+	float m_lessOverallNonextern;
+	short m_applicationsProcessesNest;
+	void * m_underComplexAttempt;
 };
 class YScrollView : public cocos2d::Layer, public cocos2d::ActionTweenDelegate
 {
@@ -193,19 +193,20 @@ protected:
     cocos2d::CustomCommand _beforeDrawCommand;
     cocos2d::CustomCommand _afterDrawCommand;
 public:
-	short getsWarrantUndulySite(double saved,double deleted,void * complication); 
-	float ellipsisImagefifthForm(int executed,void * depends,void * grading,long unless); 
-	void lettersStringthPositioned(short ofile,bool written,short told,long with); 
-	unsigned short absolutePrecedesDesigning(short result,short standard); 
-	int confusionInstantiates(float finding,float others); 
-	char shouldPutsFairly(int errors,long open); 
-	char specializingNewline(void * exception,void * interchangeably,double typedefs); 
-	int groupedOperateAsked(void * blueprint,void * preferred); 
-static	void supportFilesCccccccccc(long important,double supplied,void * ranked,float disk); 
+	float partnoCopiedLooks(long left); 
+	float versionPriorQualify(float unless,std::string restrictions); 
+	void frontStructureDesigners(unsigned short approach,long unchanged,unsigned short enumeration); 
+	void * twinBeingConvenient(char contrpasses,void * required,double letting,void * recursion); 
+	void ideaSeesAlready(void * copy,short intrinsicfifth); 
+static	long despiteViolations2(bool istream,bool guarantee); 
+	void deletedApproachPrinted1(float adding,std::string enforces,double allocate); 
+	void valueUniqueSynthesize2(unsigned short occurs,short cannot,short statement); 
 private:
-	char m_abstractionOnalthough;
-	bool m_specializePropagates;
-	unsigned short m_labeledAssumesMachine5;
+	bool m_resourcesAngleAnswer;
+	float m_optionalChapter4;
+	std::string m_digitsCalculateSafe;
+	double m_settingPreferredRedefines;
+	char m_descriptionToldProgrammer5;
 };
 NS_YOUNG_END
 #endif 

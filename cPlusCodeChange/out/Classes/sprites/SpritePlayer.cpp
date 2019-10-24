@@ -1,5 +1,4 @@
 ﻿#include "SpritePlayer.h"
-#include "causeSeparation.h"
 #include "CCEffects.h"
 #include "MapView.h"
 #include "CCLuaEngine.h"
@@ -940,9 +939,6 @@ bool SpritePlayer::magicUpToPos(float times,Vec2 newVec2)
 }
 void SpritePlayer::gotoDeath(Commen_Direction dir)
 {
-	causeSeparation causeseparation_e;
-	causeseparation_e.containWithoutChoice(true,463);
-
 	if(changeStateWithChildren(ACTION_STATE_DEAD))
 	{
 		setSpriteDir(dir);
@@ -1502,46 +1498,50 @@ void SpritePlayer::changeRePlayTypeAndResId(SpriteType typeId, std::string resId
 	}
 }
 
-double SpritePlayer::noneUsefulFollow(bool three,void * hasptr,int adaptors,short presented)
+void * SpritePlayer::listUnchangedBase(int infrequently,int exonly,long scopes)
 {
-	bool themselves = three;
-	void * mean = hasptr;
-	int once = adaptors % 998;
-	return 712.15;
+	m_managerLikelyVersion = 77.17f;
+	std::string familiar = "function  [SpritePlayer:listUnchangedBase] called!";
+	familiar.append("intvaluesenum");
+	return nullptr;
 }
-int SpritePlayer::hideCcccccccccForces(float basis)
+bool SpritePlayer::wordsDetailManual(long multiple)
 {
-	float variadic = basis + 998.13f;
-	short access = 880 + 233;
-	char elemtype = 'n';
-	return 513;
+	m_complicatedBound = nullptr;
+	return true;
 }
-short SpritePlayer::treatedExploitSystem(bool matters,char note)
+unsigned short SpritePlayer::mostComputationalMutually(void * affects)
 {
-	bool print = matters;
-	char clear = note;
-	return 275;
+	void * relative = affects;
+	int focus = 570 % 204;
+	long sets = 421 / 347;
+	 bool referenparameter = false;
+	if(referenparameter)
+	{
+		std::string referenparameter = "function  [SpritePlayer:mostComputationalMutually] doing!";
+	}
+	else
+	{
+		std::string referenparameter;
+		referenparameter.append("mostComputationalMutually arguments 1 affects careful!");
+	}
+	return 280;
 }
-void SpritePlayer::computingReferenceEqually(long declared)
+bool SpritePlayer::restrictionsConnection(bool structure,short exit)
 {
-	long finds = declared / 2;
+	m_managerLikelyVersion = 835.15f;
+	return true;
 }
-float SpritePlayer::answerAssumeImagine5(unsigned short objects)
+double SpritePlayer::relativeChangedCheck(long user,char sections,std::string inherit,char pscreen)
 {
-	unsigned short exclusive = objects / 574;
-	return 500.18f;
+	long completes = user % 113;
+	char compared = sections;
+	std::string currently = "function  [SpritePlayer:relativeChangedCheck] calling!";
+	currently.append("initializations");
+	return 324.9;
 }
-void SpritePlayer::namingPrefixAkin(unsigned short attention,double conceptually)
+float SpritePlayer::ctypeChainFamiliar(bool typedefs,bool changes,double expression,int rewrites)
 {
-	m_variesOriginalPattern = nullptr;
-}
-double SpritePlayer::normallyTpassException3(double skim)
-{
-	double period = skim - 445.16;
-	return 71.10;
-}
-long SpritePlayer::unequalExecutable(long same,void * soon,float spelling,float identical)
-{
-	long resulting = same + 742;
-	return 927;
+	m_managerLikelyVersion = 624.8f;
+	return 91.4f;
 }

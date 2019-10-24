@@ -27,10 +27,10 @@ public:
 	unsigned long m_data[4];
 public:
 private:
-	void * m_begunPointerwhenRequested2;
-	double m_untilPredictedSequential;
-	short m_appliedTakesInvolved;
-	char m_sensibleConfusion;
-	bool m_indicatingReferencesth;
+	long m_seriousSystemsIndex;
+	int m_takingDelegatesLetting;
+	long m_analogouslyLocalTries;
+	float m_learnControlsPurposes;
+	bool m_optionalConvertingSimply1;
 };
 #endif 

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SysInfoOC.h"
 #import "Reachability.h"
-
+#import "AppController.h"
 #include "cocos2d.h"
 #include "CCLuaEngine.h"
 #include "CCLuaBridge.h"
@@ -56,14 +56,14 @@ static SysInfoOC* s_instance = nil;
 
 +(void)playMovie:(NSDictionary *)dict{
     [SysInfoOC registerScriptHandler:dict];
-    [MoviePlayerHelper playMovieWithFile:[dict objectForKey:@"fileName"]];
+    [MoviePlayerHelper playMovieWithFile:[dict objectForKey:PathFormat(@"fileName")]];//'fileName'
     
 }
 
 
 +(void) registerScriptHandler:(NSDictionary *)dict
 {
-    [[SysInfoOC getInstance] setScriptHandler:[[dict objectForKey:@"scriptHandler"] intValue]];
+    [[SysInfoOC getInstance] setScriptHandler:[[dict objectForKey:PathFormat(@"scriptHandler")] intValue]];//'scriptHandler'
 }
 
 
@@ -74,8 +74,8 @@ static SysInfoOC* s_instance = nil;
 
 + (int)  addTwoNumbers:(NSDictionary *)dict
 {
-    int num1 = [[dict objectForKey:@"num1"] intValue];
-    int num2 = [[dict objectForKey:@"num2"] intValue];
+    int num1 = [[dict objectForKey:PathFormat("num1")] intValue];
+    int num2 = [[dict objectForKey:PathFormat("num2")] intValue];
     
     return num1 + num2;
 }

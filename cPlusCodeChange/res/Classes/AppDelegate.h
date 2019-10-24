@@ -52,19 +52,8 @@ public:
 	virtual void applicationOnExit();
 
 	// JW >>>
-	virtual void applicationOnUpdate(float dt);
-
-	void ThreadLogFunc();
-
 	void initFiles();
 
-	bool					m_fpsLogEnabled;
-	std::mutex				m_FPSlogsLock;
-	std::vector<StFPSlog>	m_vFPSlogs;
-	std::condition_variable m_sleepCondition;
-	bool					m_bLogThreadNeedQuit;
-	std::thread*			m_pLogThread;
-	std::ofstream			m_Log;
 	float					m_accumDt;
 	// <<< JW
 };

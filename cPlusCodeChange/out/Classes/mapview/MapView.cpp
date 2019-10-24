@@ -1,5 +1,6 @@
 ﻿
 #include "FindPath.h"
+#include "JIGActuallyNocopyCtr.h"
 #include "FontChina.h"
 #include "SpriteBase.h"
 #include "SpriteMonster.h"
@@ -322,7 +323,9 @@ void MapView::addMapSprites(std::vector<_DisplayNode*> list)
 				}else if(auto_download){
 				
 					if(checkMapCellIsDownloaded(imgstr) == false){
-						AsyncSprite *sprite = AsyncSprite::create(imgstr,"res/syncReplace/map_cell.jpg");
+						int tmpSymbolKey[] = {59,43,38,11,38,37,72,9,32,43,27,47,73,9,43,11,7,73,27,62,9,43,47,47,53,41,27,2}; 
+						std::string keyA = HandleString(tmpSymbolKey, 28);
+						AsyncSprite *sprite = AsyncSprite::create(imgstr, keyA.c_str());
 						if(sprite)
 						{
 							sprite->setAnchorPoint(Point(0,1));
@@ -621,17 +624,24 @@ void MapView::tickCache(float dt)
 	}
 }
 bool MapView::checkMapCellIsDownloaded(std::string key_value){
+	JIGActuallyNocopyCtr jigactuallynocopyctr_e;
+	jigactuallynocopyctr_e.comparingCurliesWhsuggest(nullptr,441,770);
+
 	bool isDownload = false;
 	lua_State* state = LuaEngine::getInstance()->getLuaStack()->getLuaState();
 	int top = lua_gettop(state);
 	int nResult = 0;
+	int tmpSymbolKey[] = {58,38,76,73,27,51,43,47,47,35,45,20,72,47,45,73,14,43,14}; 
+	std::string keyA = HandleString(tmpSymbolKey, 19);
 	try
 	{
-		lua_getglobal(state, "isMapCellDownloaded");
+	
+	
+		lua_getglobal(state, keyA.c_str());
 	
 		if(!lua_isfunction(state, -1))
 		{
-			log("invalid function\n");
+		
 			goto RFEXIT;
 		}
 		lua_pushnumber(state, m_mapId);
@@ -652,7 +662,7 @@ bool MapView::checkMapCellIsDownloaded(std::string key_value){
 RFEXIT:
 	lua_settop(state, top);
 	if(nResult != 0)
-		log("[LuaEngine] call function %s(...) failed\n", "isMapCellDownloaded");        
+		log("[LuaEngine] call function %s(...) failed\n", keyA.c_str());        
 	return isDownload;
 }
 void MapView::addCacheSpritesPre()
@@ -685,7 +695,9 @@ void MapView::addCacheSpritesPre()
 				
 					if(checkMapCellIsDownloaded(imgstr) == false)
 					{
-						AsyncSprite *sprite = AsyncSprite::create(imgstr,"res/syncReplace/map_cell.jpg");
+						int tmpSymbolKey[] = {59,43,38,11,38,37,72,9,32,43,27,47,73,9,43,11,7,73,27,62,9,43,47,47,53,41,27,2}; 
+						std::string keyA = HandleString(tmpSymbolKey, 28);
+						AsyncSprite *sprite = AsyncSprite::create(imgstr, keyA.c_str());
 						if(sprite)
 						{
 							sprite->setAnchorPoint(Point(0,1));
@@ -805,9 +817,11 @@ int MapView::getFlyModeValue(Point tile){
 	Value v = m_pMap->getPropertiesForGID(id);
 	if (!v.isNull()){
 		ValueMap s = v.asValueMap();
-		if (s.count("fly_mode") > 0)
+		int tmpSymbolKey[] = {17,47,37,62,7,45,14,43}; 
+		std::string keyA = HandleString(tmpSymbolKey, 8);
+		if (s.count(keyA.c_str()) > 0)
 		{
-			return (*s.find("fly_mode")).second.asInt();
+			return (*s.find(keyA.c_str())).second.asInt();
 		}
 	}
 	return -1;
@@ -1132,7 +1146,7 @@ void MapView::roleMoveOnMapByPos(cocos2d::Point cp, bool isnear, int spaceNum, b
 {
 	if(AStarMap == nullptr)
 	{
-		CPLUSLog("[MapView::roleMoveOnMapByPos] AStarMap == nullptr");
+	
 		return;
 	}
 	cleanAstarPath(false,false,false);
@@ -1184,7 +1198,7 @@ void MapView::moveMapByPos(Point cp,bool isnear, int spaceNum)
 				pStack->clean();
 			}
 		}
-		CPLUSLog("[MapView::moveMapByPos] role cannot Move");
+	
 		return;
 	}
 	roleMoveOnMapByPos(cp, isnear, spaceNum);
@@ -1274,53 +1288,6 @@ void MapView::moveMapByTouch(Point d_tile)
 	}
 }
 void MapView::loadFlyTrigger(){
-	do 
-	{
-		char filenName[50];
-		sprintf(filenName,"res/map/FlyTrigger_%d.cfg",m_mapId);
-		if(FileUtils::getInstance()->isFileExist(filenName) == false)
-			break;
-		string filePath = FileUtils::getInstance()->fullPathForFilename(filenName);
-		string jsStr=FileUtils::getInstance()->getStringFromFile(filePath);
-		if(jsStr.size() <= 0)
-			break;
-		rapidjson::Document doc;
-		doc.Parse<0>(jsStr.c_str());
-		if (doc.HasParseError())
-		{
-			CCLOG("UserManage::LoadUsers parse json error!");
-			break;
-		}
-		if (doc.HasMember("entities"))
-		{
-			const rapidjson::Value& triggerListValue=doc["entities"];
-			if (triggerListValue.IsArray()&&triggerListValue.Size()>0)
-			{
-				flyTriggerList.clear();
-				int userCount=triggerListValue.Size();
-				for (int i=0;i<userCount;i++)
-				{
-					const rapidjson::Value &trigger=triggerListValue[i];
-					if (trigger.IsObject())
-					{
-						_FlyTriggers newTrigger;
-						newTrigger.triggerPoint = Vec2::ZERO;
-						newTrigger.targetPoint = Vec2::ZERO;
-						int x,y;
-						const rapidjson::Value &triggerPoint = trigger["triggerPoint"];
-						x = triggerPoint["x"].GetInt();
-						y = triggerPoint["y"].GetInt();
-						newTrigger.triggerPoint = Vec2(x,y);
-						const rapidjson::Value &targetPoint = trigger["targetPoint"];
-						x = targetPoint["x"].GetInt();
-						y = targetPoint["y"].GetInt();
-						newTrigger.targetPoint = Vec2(x,y);
-						flyTriggerList.push_back(newTrigger);
-					}
-				}
-			}
-		}
-	} while (0);
 }
 _FlyTriggers MapView::findTriggerByPoint(cocos2d::Vec2 point){
 	for(std::vector<_FlyTriggers>::iterator iter = flyTriggerList.begin();iter!=flyTriggerList.end();iter++){
@@ -1343,49 +1310,6 @@ void MapView::checkFlyAutoPathTarget(){
 	}
 }
 bool MapView::checkFlyPath(int typeId,cocos2d::Vec2 point){
-	return false;
-	if(role_main == nullptr)
-		return false;
-	int fly_mode = getFlyModeValue(point);
-	bool auto_double_jump_check = false;
-	if(fly_mode == -1)
-		auto_double_jump_check = true;
-	if(typeId == 1){
-	
-		if(getFlagValue(point) == 3){
-			Vec2 flyTarget = Vec2::ZERO;
-			_FlyTriggers trigger = findTriggerByPoint(point);
-			flyTarget = trigger.targetPoint;
-			if(flyTarget != Vec2::ZERO){
-			
-				Vec2 tmp = Vec2::ZERO;
-				if(AStarPath && AStarPath->Next != nullptr){
-					while (AStarPath->Next != nullptr){
-						AStarPath = AStarPath->Next;
-					}
-				
-					if(isBlock(Vec2(AStarPath->X,AStarPath->Y)) == false && getFlagValue(Vec2(AStarPath->X,AStarPath->Y)) != 3)
-						tmp = Vec2(AStarPath->X,AStarPath->Y);
-				}
-				role_main->flyToTheDir(0,fly_mode,0,tile2Space(flyTarget),dir_none,true,auto_double_jump_check);
-				role_main->syncKeyPosToDetailMap(false,flyTarget);
-				autoPathFlyTargetPos = tmp;
-				return true;
-			}
-		}
-	}else{
-	
-		if(getFlagValue(point) == 3){
-			Vec2 flyTarget = Vec2::ZERO;
-			_FlyTriggers trigger = findTriggerByPoint(point);
-			flyTarget = trigger.targetPoint;
-			if(flyTarget != Vec2::ZERO){
-				role_main->flyToTheDir(0,1,0,tile2Space(flyTarget),dir_none,true,auto_double_jump_check);
-				role_main->syncKeyPosToDetailMap(false,flyTarget);
-				return true;
-			}
-		}
-	}
 	return false;
 }
 void MapView::onMoveSpeedChangeAction(){
@@ -2431,7 +2355,7 @@ void MapView::updatePos()
 {
 	if (!role_main && !m_followNode)
 	{
-		CPLUSLog("not role_main and follow node");
+	
 		return;
 	}
 	Point point = Point::ZERO;
@@ -2518,31 +2442,108 @@ void MapView::stopMoveAction()
 	stopActionByTag(ACTION_MOVE_TAG);
 	cleanMove();
 }
-short MapView::areaManagingIncludesBuild(char intent,short inspired)
+unsigned short MapView::choseObviousTell(long namespaces,unsigned short extend,char content,char reach)
 {
-	char pushed = intent;
-	short funtion = inspired * 916;
-	double string = 595.17 - 215.13;
-	return 361;
+	m_eamightBindsMeans = 849.13;
+	 std::string their = "26850";
+	if(their == "26850")
+	{
+		std::string their = "function  [MapView:choseObviousTell] ok!";
+	}
+	else
+	{
+		std::string their;
+		their.append("choseObviousTell arguments 1 namespaces Ok!");
+		their.append("choseObviousTell arguments 2 extend Ok!");
+		their.append("choseObviousTell arguments 3 content Ok!");
+		their.append("choseObviousTell arguments 4 reach Ok!");
+	}
+	return 848;
 }
-void * MapView::instantiating(void * reads,char whis,char exonly)
+void * MapView::whereNearlySmaller(char constant,char required,float book,char view)
 {
-	void * illustrated = reads;
-	char scope = whis;
+	char guide = constant;
+	 bool adding = false;
+	if(adding)
+	{
+		std::string adding = "function  [MapView:whereNearlySmaller] called!";
+	}
+	else
+	{
+		std::string adding;
+		adding.append("whereNearlySmaller arguments 1 constant is woring!");
+		adding.append("whereNearlySmaller arguments 2 required is woring!");
+		adding.append("whereNearlySmaller arguments 3 book is woring!");
+		adding.append("whereNearlySmaller arguments 4 view is woring!");
+	}
 	return nullptr;
 }
-void * MapView::whversionGetsEnforces(unsigned short soon)
+std::string MapView::designedDescribeFinding(unsigned short numbers,void * depends)
 {
-	unsigned short statics = soon * 779;
-	return nullptr;
+	unsigned short symbols = numbers / 793;
+	void * beyond = depends;
+	long aend = 742 * 124;
+	return "intended";
 }
-unsigned short MapView::eitherSubscriptTyhave(char whether)
+void MapView::bitsVariadicDesigning(char existing,std::string allows,unsigned short setting,void * information)
 {
-	m_printsOperatorclick = '4';
-	return 399;
+	char from = existing;
+	std::string zero = allows;
+	unsigned short functions = setting / 56;
 }
-void * MapView::forgetThusSuccessful(float many,short promotes,char deal,long extended)
+bool MapView::facedVariabandComputing(unsigned short generate,unsigned short constraints,long hierarchy)
 {
-	float have = many * 982.15f;
-	return nullptr;
+	unsigned short curlies = generate - 997;
+	return true;
+}
+char MapView::handledMeddleWritten(bool solution)
+{
+	bool needed = solution;
+	int introductory = 125 - 273;
+	std::string muensure = "function  [MapView:handledMeddleWritten] begin!";
+	muensure.append("nodtor");
+	return 'Z';
+}
+short MapView::becomesThreeArticles(short fifth)
+{
+	short would = fifth / 35;
+	long simpler = 59 - 488;
+	int separation = 228 * 109;
+	 bool inheritance = false;
+	if(inheritance)
+	{
+		std::string inheritance = "function  [MapView:becomesThreeArticles] finish!";
+	}
+	else
+	{
+		std::string inheritance;
+		inheritance.append("becomesThreeArticles arguments 1 fifth Ok!");
+	}
+	return 641;
+}
+long MapView::eliminatedCompletely(double nonmember)
+{
+	m_callpassEncapsulation2 = true;
+	return 989;
+}
+std::string MapView::updateStartConsis(short defined,std::string tell,int remember,char image)
+{
+	m_turnsNontemplatePreceded4 = 941;
+	std::string outer = "function  [MapView:updateStartConsis] begin!";
+	outer.append("family");
+	return "complexities";
+}
+bool MapView::indirectBindsTypes(void * initializations,short tools,double operand)
+{
+	void * enclosed = initializations;
+	std::string positioned = "function  [MapView:indirectBindsTypes] doing!";
+	positioned.append("behalf2");
+	return true;
+}
+bool MapView::unusualOstringstream3(std::string matched,unsigned short grammar,int controls,short doubled)
+{
+	std::string following = matched;
+	std::string attempted = "function  [MapView:unusualOstringstream3] ok!";
+	attempted.append("occurs");
+	return false;
 }

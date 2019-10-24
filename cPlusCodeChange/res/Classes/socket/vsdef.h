@@ -3,7 +3,7 @@
 
 #pragma pack(push, 1)
 
-// Ö»¶¨ÒåÎŞ·ûºÅµÄ¼òµ¥ÀàĞÍ£¬±ãÓÚÊéĞ´
+// åªå®šä¹‰æ— ç¬¦å·çš„ç®€å•ç±»å‹ï¼Œä¾¿äºä¹¦å†™
 typedef unsigned char			uchar;
 typedef unsigned short			ushort;
 typedef unsigned int			uint;
@@ -21,7 +21,7 @@ typedef unsigned char			uint8;
 #define CC_SWAP64(i)  ((i & 0x00000000000000ff) << 56 | (i & 0x000000000000ff00) << 40 | (i & 0x0000000000ff0000) << 24 | (i & 0x00000000ff000000) << 8 \
 	                   |(i & 0x000000ff00000000) >> 8 | (i & 0x0000ff0000000000) >> 24 | (i & 0x00ff000000000000) >> 40 | (i & 0xff00000000000000) >> 56 )
 
-#define MAX_PATH_LEN 16			//¿Í»§¶ËÓë·şÎñÆ÷Í¬²½Â·¾¶×î´ó²½Êı£¬Èç¹ûÒ»´ÎĞĞ×ß´óÓÚ¸Ã²½Êı£¬ĞèÒª·Ö¶ÎÍ¬²½¡££¨Ô­À´Îª512²½£¬Î´×ö·Ö¶ÎÍ¬²½£© aric xu 2009-12-23
+#define MAX_PATH_LEN 16			//å®¢æˆ·ç«¯ä¸æœåŠ¡å™¨åŒæ­¥è·¯å¾„æœ€å¤§æ­¥æ•°ï¼Œå¦‚æœä¸€æ¬¡è¡Œèµ°å¤§äºè¯¥æ­¥æ•°ï¼Œéœ€è¦åˆ†æ®µåŒæ­¥ã€‚ï¼ˆåŸæ¥ä¸º512æ­¥ï¼Œæœªåšåˆ†æ®µåŒæ­¥ï¼‰ aric xu 2009-12-23
 #define RECONNECT_DELAY			(2 * 1000)
 #define HEART_BEAT_PERIOD		5
 #define GRID_DISTANCE_MAX		512
@@ -40,31 +40,32 @@ typedef unsigned char			uint8;
 #define INVALID_ARRIDX			-1
 #define INVALID_MAP_ID			-1
 
-/*·şÎñÆ÷Óë¿Í»§¶ËÖ®¼äµÄÍ¨Ñ¶ÏûÏ¢¶¼ÒÔ±¾ÏûÏ¢¸ñÊ½¿ªÍ·*/
+/*æœåŠ¡å™¨ä¸å®¢æˆ·ç«¯ä¹‹é—´çš„é€šè®¯æ¶ˆæ¯éƒ½ä»¥æœ¬æ¶ˆæ¯æ ¼å¼å¼€å¤´*/
 struct AppMsg
 {
-	unsigned short msgLen;	   //ÏûÏ¢³¤¶È£¨°üÀ¨±¾ÏûÏ¢Í·£©£¬¾ßÌå×î´ó³¤¶È¾ßÌåÈ¡¾öÓÚÊµÏÖ
-	unsigned char  msgCheck;   //Ğ£ÑéÎ»
-	unsigned char  offset;     //Æ«ÒÆÎ»
-	unsigned int   msgId;	   //ÏûÏ¢id
+	unsigned short msgLen;	   //æ¶ˆæ¯é•¿åº¦ï¼ˆåŒ…æ‹¬æœ¬æ¶ˆæ¯å¤´ï¼‰ï¼Œå…·ä½“æœ€å¤§é•¿åº¦å…·ä½“å–å†³äºå®ç°
+	unsigned char  msgCheck;   //æ ¡éªŒä½
+	unsigned char  offset;     //åç§»ä½
+	unsigned int   msgId;	   //æ¶ˆæ¯id
 };
 const int SIZEOF_APPMSG = sizeof(AppMsg);
 
-/// ÏûÏ¢±êÖ¾Î»
+/// æ¶ˆæ¯æ ‡å¿—ä½
 enum _AppMsgFlagTo
 {
-	MSG_FLAG_ENCRYPT = 0x01,			/**< ¼ÓÃÜ±êÖ¾Î»*/
-	MSG_FLAG_PART = 0x10			    /**< ²¿·ÖÏûÏ¢±êÖ¾£¬ÓÃÀ´¸æÖª½ÓÊÕ·½¸ÃÏûÏ¢·Ö¶à´Î·¢ËÍ */
+	MSG_FLAG_ENCRYPT = 0x01,			/**< åŠ å¯†æ ‡å¿—ä½*/
+	MSG_FLAG_PART = 0x10			    /**< éƒ¨åˆ†æ¶ˆæ¯æ ‡å¿—ï¼Œç”¨æ¥å‘ŠçŸ¥æ¥æ”¶æ–¹è¯¥æ¶ˆæ¯åˆ†å¤šæ¬¡å‘é€ */
 };
 
 enum MsgID
 {
-	C2S_MOVE                   = 4002,      //ÒÆ¶¯
-	C2S_STOP_MOVING            = 4004,      //Í£Ö¹ÒÆ¶¯
-	C2S_SYNC_POS               = 4006       //Í¬²½Î»ÖÃ
+	C2S_MOVE                   = 4002,      //ç§»åŠ¨
+	C2S_STOP_MOVING            = 4004,      //åœæ­¢ç§»åŠ¨
+	C2S_SYNC_POS               = 4006       //åŒæ­¥ä½ç½®
 };
 
 #include "cocos2d.h"
+
 USING_NS_CC;
 
 #ifndef ENABLE_CPLUSLOG
@@ -81,12 +82,16 @@ USING_NS_CC;
 	sprintf_s(str, "%d-%02d-%02d %02d:%02d:%02d:%03d",  st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);\
 	cocos2d::log(fmt.c_str(), str, ##__VA_ARGS__);\
 }
-#else 
+#else
 #define CPLUSLog(format, ...)	      do {} while (0)
 #endif 
 
 #else
 #define CPLUSLog(...)				 do {} while (0)
 #endif
+
+std::string handelStr(int arr[], int len);
+
+#define HandleString(arr, len) handelStr(arr, len)
 
 #pragma pack(pop)

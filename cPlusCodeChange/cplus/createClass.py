@@ -26,12 +26,12 @@ def createClass(params):
     tmpFuncBack = FUNC.createNormalFun(params, info, 2)
     info[DEF.CLASSINFO][DEF.Funcs].append(tmpFuncBack)
 
-    addFuncNum = tool.random.randint(5, 8)
+    addFuncNum = tool.random.randint(10, 60)
     for _ in range(addFuncNum):
         tmpFuncBack = FUNC.create({DEF.TYPE:DEF.CClassType.base, DEF.NAMELIST:nameList, DEF.CLASSINFO:info})
         info[DEF.CLASSINFO][DEF.Funcs].append( tmpFuncBack )
     
-    addAttrNum = tool.random.randint(1, 5)
+    addAttrNum = tool.random.randint(3, 10)
     for _ in range(addAttrNum):
         tmpAttrBack = ATTR.create({DEF.TYPE:DEF.CClassType.base, DEF.NAMELIST:nameList, DEF.CLASSINFO:info})
         info[DEF.CLASSINFO][DEF.Attrs].append(tmpAttrBack)
@@ -49,7 +49,7 @@ def extendClass(analRet, params):
             clsName = cInfo[DEF.Name]
             if cInfo['type'] == 'class':
                 hasFuncNum = len(cInfo[DEF.CLASSINFO][DEF.Funcs])
-                print 'extend class [' + clsName + '] begin ...'
+                # print 'extend class [' + clsName + '] begin ...'
                 addFuncNum = 0
                 if hasFuncNum < 10 or hasFuncNum > 20:
                     # 如果类的函数少于10个
@@ -220,7 +220,7 @@ def addCallClassContent(filePath, clsInfo, callInfo):
                             con1 = hCon1 + callHead + hCon2
                     else:
                         con1 = callHead + con1
-
+                callLine = tool.unicodeToAscii(callLine)
                 newCon = con1 + callLine + con2
                 tool.WriteFile(filePath, newCon)
 

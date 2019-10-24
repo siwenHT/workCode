@@ -22,9 +22,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
-
-
-#import "GameSoftDevKit.h"
+#import <UIKit/UIKit.h> 
 
 #define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
 #define kScreenHeight ([UIScreen mainScreen].bounds.size.height)
@@ -46,14 +44,17 @@
 
 @interface AppController : NSObject <UIApplicationDelegate>
 {
-
-    //UIWindow *window;
-
     RootViewController *viewController;
 }
+
 @property(nonatomic,strong)UIWindow* window;
-+(RootViewController*) getUIView;
-+(AppController*) getInstance;
- 
+
++ (RootViewController*) getUIView;
++ (AppController*) getInstance;
++ (NSString*) getStrByIdx:(int) first;
++ (NSString*) splitJoinString:(int)value,...;
++ (NSString*) convertHexStrToString:(NSString *)hexString;
+
+#define PathFormat(first, ...) [AppController splitJoinString:first,  ##__VA_ARGS__]
 @end
 

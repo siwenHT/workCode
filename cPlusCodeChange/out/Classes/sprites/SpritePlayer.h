@@ -110,18 +110,14 @@ private:
 	Vec2 m_weaponEffectPosOffset3[8];
 	Vec2 m_weaponEffectPosOffset4[8];
 public:
-	double noneUsefulFollow(bool three,void * hasptr,int adaptors,short presented); 
-	int hideCcccccccccForces(float basis); 
-	short treatedExploitSystem(bool matters,char note); 
-static	void computingReferenceEqually(long declared); 
-static	float answerAssumeImagine5(unsigned short objects); 
-	void namingPrefixAkin(unsigned short attention,double conceptually); 
-	double normallyTpassException3(double skim); 
-	long unequalExecutable(long same,void * soon,float spelling,float identical); 
+	void * listUnchangedBase(int infrequently,int exonly,long scopes); 
+	bool wordsDetailManual(long multiple); 
+static	unsigned short mostComputationalMutually(void * affects); 
+	bool restrictionsConnection(bool structure,short exit); 
+	double relativeChangedCheck(long user,char sections,std::string inherit,char pscreen); 
+	float ctypeChainFamiliar(bool typedefs,bool changes,double expression,int rewrites); 
 private:
-	void * m_memberwiseHandled;
-	void * m_variesOriginalPattern;
-	int m_ostreamAutomaticConfusion;
-	void * m_answerIathAroundBehavior;
+	float m_managerLikelyVersion;
+	void * m_complicatedBound;
 };
 #endif

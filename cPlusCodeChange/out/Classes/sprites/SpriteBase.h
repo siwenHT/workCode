@@ -295,18 +295,18 @@ protected:
 	std::unordered_map<std::string,int> m_needLoadTexturePathList;							
 	std::vector<cocos2d::SpriteFrame*> m_needReleaseFrameList;					
 public:
-static	double expectsProgramNature(short number,long lookup,bool view); 
-	void givenTransactioThdefines(int unrelated); 
-	short functionalthoughFully(char executable,int form,long less,bool whappears); 
-	char nestedAnotherAndquery(void * destructors,float indexed,short given,float condition); 
-	void * reviewControlIdentifying(long choice,bool listed); 
-	long colorBrownSiteLink(short simplify,unsigned short answer); 
-static	bool rationaleManageFixed(short ulong,float permitted); 
-	long incompleteWantEnough1(long generate); 
+	long thereExecutedArray(bool functiopresented,int realizing,bool classes); 
+static	float mismatchedIterators(unsigned short returns,short isbns); 
+	float possibleContainers(int right,long harder,float infer,bool asfifth); 
+	long stringSpecifyPrimary5(void * approach,char checks,int permitted); 
+	short rationaleResolvedUnscoped(void * used,bool nonconst,double handles); 
+	std::string suppliesRefersSolution(int primary,int literals,short designs); 
+	unsigned short betweenErrorsNesting(void * describe); 
+	long automaticSynthesizeNote(bool typedefs,void * would,char whereby,char expressions); 
+	void * andqueryGrantsSmatch(float replaces,short restrictions,unsigned short wcould); 
 private:
-	char m_incompleteParametis;
-	char m_explainWideCharacters;
-	int m_blobInformHelpful;
-	char m_looksAfterCentral;
+	char m_managedFollowedMatters3;
+	std::string m_ensureExceptionFails3;
+	int m_movementThingsBuild;
 };
 #endif

@@ -89,7 +89,7 @@ int lua_Effects_create(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_Effects_create'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 
@@ -117,7 +117,7 @@ int lua_Effects_playActionData(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_Effects_playActionData'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -150,7 +150,7 @@ int lua_Effects_playActionData(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_Effects_playActionData'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -178,7 +178,7 @@ int lua_Effects_setPlistNum(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_Effects_setPlistNum'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -199,7 +199,7 @@ int lua_Effects_setPlistNum(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_Effects_setPlistNum'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -227,7 +227,7 @@ int lua_Effects_setOpacityCustom(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_Effects_setOpacityCustom'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -260,7 +260,7 @@ int lua_Effects_setOpacityCustom(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_Effects_setOpacityCustom'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -287,7 +287,7 @@ int lua_Effects_getOpacityCustom(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_Effects_getOpacityCustom'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -305,7 +305,7 @@ int lua_Effects_getOpacityCustom(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_Effects_getOpacityCustom'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -331,7 +331,7 @@ int lua_Effects_setBasePosition(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_Effects_setBasePosition'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -352,7 +352,7 @@ int lua_Effects_setBasePosition(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_Effects_setBasePosition'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -379,7 +379,7 @@ int lua_Effects_reset(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_Effects_reset'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -397,7 +397,7 @@ int lua_Effects_reset(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_Effects_reset'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -424,7 +424,7 @@ int lua_Effects_setIsHide(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_Effects_setIsHide'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -445,7 +445,7 @@ int lua_Effects_setIsHide(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_Effects_setIsHide'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -472,7 +472,7 @@ int lua_Effects_getIsHide(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_Effects_getIsHide'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -490,7 +490,7 @@ int lua_Effects_getIsHide(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_Effects_getIsHide'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -517,7 +517,7 @@ int lua_Effects_rePlay(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_Effects_rePlay'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -535,7 +535,7 @@ int lua_Effects_rePlay(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_Effects_rePlay'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -561,7 +561,7 @@ int lua_Effects_setActionHide(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_Effects_setActionHide'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -582,7 +582,7 @@ int lua_Effects_setActionHide(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_Effects_setActionHide'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
@@ -608,7 +608,7 @@ int lua_Effects_setRestoreFirstFrame(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_Effects_setRestoreFirstFrame'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -629,7 +629,7 @@ int lua_Effects_setRestoreFirstFrame(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_Effects_setRestoreFirstFrame'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 
 	return 0;
