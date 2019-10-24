@@ -74,7 +74,7 @@ def changeStrByDic(changeDic, targetStr):
                     if pos1 > -1:
                         if pos - pos1 == len(noChangeKey) - len(changeItem):
                             noChangeFlg = True
-                            print  targetStr[pos1 - 10: pos1 + len(noChangeKey) + 10], " the string no change !!!"
+                            # print  targetStr[pos1 - 10: pos1 + len(noChangeKey)], " the string no change !!!"
                             break
 
         if pos > -1 and noChangeFlg:

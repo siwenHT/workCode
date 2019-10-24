@@ -142,7 +142,7 @@ def generateStrForIos(clsInfo, funcInfo, clsName):
     #1.直接使用
     ret = ''
     cfg = ['done', 'finish', 'ok', 'doing', 'begin', 'end', 'checking', 'calling', 'called']
-    cfg1 = ['Ok', 'Error', 'need Check', 'is woring', 'careful', 'is error?', 'is ok?']
+    cfg1 = ['Ok', 'Error', 'need Check', 'is warning', 'careful', 'is error?', 'is ok?']
 
     num = tool.random.randint(1, 2)
     nameList = funcInfo['userName']
@@ -191,8 +191,8 @@ def generateStrForIos(clsInfo, funcInfo, clsName):
 def getHeadFileStr(funcInfo):
     tmpStr = ''
     if DEF.Static in funcInfo:
-        tmpStr = 'static'
-    tmpStr += '\t' + funcInfo['retType']
+        tmpStr = 'static '
+    tmpStr = '\t' + tmpStr + funcInfo['retType']
 
     if 'createFunc' not in funcInfo:
         tmpStr += ' '

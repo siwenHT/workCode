@@ -246,8 +246,8 @@ def saveToFile(clsList, old, target):
                     if call[DEF.Name] != func[DEF.Name]:
                         if func[DEF.ScopeType] == DEF.SCOPE.Private:                
                             content += '\n[self {0}];'.format(call[DEF.Name] + createFile.getFuncCallLine(call))
-                        else:
-                            content += '\n[{0} {1}];'.format(clsInfo[DEF.Name], call[DEF.Name] + createFile.getFuncCallLine(call))
+                        # else:
+                        #     content += '\n[{0} {1}];'.format(clsInfo[DEF.Name], call[DEF.Name] + createFile.getFuncCallLine(call))
                 
                 if content:
                     content += '\n'

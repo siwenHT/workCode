@@ -86,12 +86,12 @@
     [[GameSoftCaller shared]callCustomer];
 }
 
-/**
-打开facebook
- */
--(void)callFacebookShare{
-    [[GameSoftCaller shared]callFacebookShare];
-}
+// /**
+// 打开facebook
+//  */
+// -(void)callFacebookShare{
+//     [[GameSoftCaller shared]callFacebookShare];
+// }
 
 /**
  角色升级
@@ -164,7 +164,7 @@
 }
 
 -(void)sendToken:(NSString*)platform{
-    [[GameServer shared]setPlatform:platform];
+    // [[GameServer shared]setPlatform:platform];
     [[GameSoftCaller shared]sendToken ];
 }
 

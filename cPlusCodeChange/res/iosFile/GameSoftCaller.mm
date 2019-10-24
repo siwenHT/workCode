@@ -167,7 +167,7 @@ static SDKCallback *callback = nil;
     sdkloginout = loginoutcallback;
     // NSLog(@"开始登陆");
     callLogin = [dic[PathFormat("callback")] intValue];
-    //***********************************************************登录***********************************************************/
+    /***********************************************************登录***********************************************************/
     [[DDFBSDK shareDDFBSDK] DDFBSDK_LoginWithGameID:GameID andTouTiaoAppID:@"168590" andLandscapeMode:TRUE andLoginResult:^(NSString *loginUserID, NSString *loginUserName, NSString *loginSign, NSString *loginTimestamp) {
          NSMutableDictionary * dic = [[NSMutableDictionary alloc] init];
          dic[PathFormat("openid")] = loginUserID;

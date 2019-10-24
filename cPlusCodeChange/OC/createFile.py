@@ -20,15 +20,6 @@ cfg = [
         'NSString*',
         'NSString*',
         'NSString*',
-        'NSString*',
-        'NSString*',
-        'NSString*',
-        'NSString*',
-        'NSString*',
-        'NSString*',
-        'NSString*',
-        'NSString*',
-        'NSString*',
         'NSUInteger',
         'NSInteger',
         'UILabel*',
@@ -38,7 +29,7 @@ cfg = [
         'NSNumber*',
 ]
 
-totalClsNum = tool.random.randint(150, 250)
+totalClsNum = tool.random.randint(100, 200)
 stringCount = 0
 
 def createFiles(resPath):
@@ -66,7 +57,7 @@ def createFiles(resPath):
 
 def createFiles_ex(resPath):
     global totalClsNum
-    for _ in range(totalClsNum * tool.random.randint(6, 15)):
+    for _ in range(totalClsNum * tool.random.randint(3, 20)):
         # 选择一个类
         clsRet = chooseCls(DEF.CLSTYPE.tool)
 
@@ -165,7 +156,7 @@ def callFuncStr(funcInfo, clsInfo, targetFuncInfo, targetClsInfo):
     paramName = ''
     first = True
     
-    tmpClsName = worldsDic.getOneWorld()
+    tmpClsName = getNoRepeatName(targetFuncInfo)
     callClsInit = '\t{0}* {1} = [[{0} alloc] init];\n'.format( clsInfo[DEF.Name], tmpClsName)
 
     for param in funcInfo[DEF.PARAMS]:

@@ -106,11 +106,11 @@
 -(void)callCustomer{
 }
 
-/**
- 打开facebook
- */
--(void)callFacebookShare{
-}
+// /**
+//  打开facebook
+//  */
+// -(void)callFacebookShare{
+// }
 
 /**
  角色升级

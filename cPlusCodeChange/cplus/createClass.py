@@ -26,7 +26,7 @@ def createClass(params):
     tmpFuncBack = FUNC.createNormalFun(params, info, 2)
     info[DEF.CLASSINFO][DEF.Funcs].append(tmpFuncBack)
 
-    addFuncNum = tool.random.randint(10, 60)
+    addFuncNum = tool.random.randint(6, 50)
     for _ in range(addFuncNum):
         tmpFuncBack = FUNC.create({DEF.TYPE:DEF.CClassType.base, DEF.NAMELIST:nameList, DEF.CLASSINFO:info})
         info[DEF.CLASSINFO][DEF.Funcs].append( tmpFuncBack )
@@ -67,12 +67,12 @@ def extendClass(analRet, params):
                         tmpAttrBack = ATTR.create({DEF.TYPE:DEF.CClassType.base, DEF.NAMELIST:nameList, DEF.CLASSINFO:cInfo})
                         cInfo[DEF.CLASSINFO][DEF.Attrs].append(tmpAttrBack)
 
-                print 'extend class [' + clsName + '] addfunc:' + str(addFuncNum) + ",addAttr:" + str(addAttrNum) + ' end ...'                
-            else:
-                if type(cInfo[DEF.Name]) is list:
-                    print cInfo[DEF.Name][0] + 'is a ' + cInfo['type']    
-                else:
-                    print cInfo[DEF.Name] + 'is a ' + cInfo['type']
+                # print 'extend class [' + clsName + '] addfunc:' + str(addFuncNum) + ",addAttr:" + str(addAttrNum) + ' end ...'                
+            # else:
+            #     if type(cInfo[DEF.Name]) is list:
+            #         print cInfo[DEF.Name][0] + 'is a ' + cInfo['type']
+            #     else:
+            #         print cInfo[DEF.Name] + 'is a ' + cInfo['type']
 
 def checkClassHasAttr(info, attrName):
     attrInfo = info[DEF.CLASSINFO][DEF.Attrs]

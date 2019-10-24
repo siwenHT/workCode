@@ -26,7 +26,7 @@ def saveCreateClass(params):
 def createClassFiles(nameList, ansDic, prefixName = '', destPath = ''):
     classInfo = {}
     tool.delFolders( tool.os.path.abspath(destPath + '/'))
-    totalClassNum = tool.random.randint(120, 250)
+    totalClassNum = tool.random.randint(100, 200)
     for _ in range(totalClassNum):
         # print "begin Create class"
         tmpClassName, info = createOneClass({DEF.NAMELIST:nameList, DEF.AnalysisRet:ansDic})
@@ -622,7 +622,7 @@ def main():
     line = tool.strRandomList(cfg)
 
     classPath1 = 'res/Classes'
-    classPath2 = 'out/Classes'
+    classPath2 = 'out/c_cleanClasses'
     classPath3 = 'out/c_changeClass'
     classPath4 = 'out/c_CreateClass'
     classPath5 = 'out/c_dealString'
