@@ -25,16 +25,19 @@ public:
     
     virtual void applicationWillEnterForeground();
 	virtual void applicationOnExit();
-	virtual void applicationOnUpdate(float dt);
-	void ThreadLogFunc();
 	void initFiles();
-	bool					m_fpsLogEnabled;
-	std::mutex				m_FPSlogsLock;
-	std::vector<StFPSlog>	m_vFPSlogs;
-	std::condition_variable m_sleepCondition;
-	bool					m_bLogThreadNeedQuit;
-	std::thread*			m_pLogThread;
-	std::ofstream			m_Log;
 	float					m_accumDt;
+public:
+	char threeStoringPurpose(double such); 
+	std::string conventionsNeedingRemains(char nontemplate,void * ellipsis,bool nature); 
+	char partsOfileThrows(double enumeration,bool files,float correctly,long multidimensional); 
+	void * putsPrvoidNormally(short containing,int both,float wants); 
+	bool aboveFriendshipfifth(std::string argumepassed); 
+	long decrementSaysWhversion(unsigned short fithat,std::string valuelike); 
+	short lettingSuccessfulWhat(float assigned,char whif,long keyword); 
+	void scopeExternfifthDiffers(short differences,unsigned short position,double identify,int throughout); 
+private:
+	bool m_iathControllingDeclare;
+	short m_tookConceptCorrect;
 };
 #endif  

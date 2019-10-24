@@ -23,7 +23,7 @@ int lua_ClipboardHelper_copyLua(lua_State* tolua_S)
           
         if(!ok)  
         {  
-            tolua_error(tolua_S,"invalid arguments in function 'lua_ClipboardHelper_copyLua'", nullptr);  
+            tolua_error(tolua_S,"", nullptr);  
             return 0;  
         }  
         cobj->copyLua(arg0);  
@@ -34,7 +34,7 @@ int lua_ClipboardHelper_copyLua(lua_State* tolua_S)
     return 0;  
       
 #if COCOS2D_DEBUG >= 1  
-    tolua_error(tolua_S,"#ferror in function 'lua_ClipboardHelper_copyLua'.",&tolua_err);  
+    tolua_error(tolua_S,"",&tolua_err);  
 #endif  
       
     return 0;  

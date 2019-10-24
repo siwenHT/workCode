@@ -110,18 +110,18 @@ private:
 	Vec2 m_weaponEffectPosOffset3[8];
 	Vec2 m_weaponEffectPosOffset4[8];
 public:
-	double noneUsefulFollow(bool three,void * hasptr,int adaptors,short presented); 
-	int hideCcccccccccForces(float basis); 
-	short treatedExploitSystem(bool matters,char note); 
-static	void computingReferenceEqually(long declared); 
-static	float answerAssumeImagine5(unsigned short objects); 
-	void namingPrefixAkin(unsigned short attention,double conceptually); 
-	double normallyTpassException3(double skim); 
-	long unequalExecutable(long same,void * soon,float spelling,float identical); 
+	void specifiesThatheyMoves(void * section,int starting,long icase,int thing); 
+	std::string argsThanRemainsMatrix(short tends,short eyes); 
+	bool widthComplicated(short share,std::string conventions); 
+	char minimalUndefined(void * detailed,bool overall,std::string ending); 
+	void * headerAppliedBefriend(short delegate); 
+	double bodiesUnlikeInstances3(bool strings,void * contrpasses,int aproblems,double specific); 
+	double turnsIntoTimesDespite(std::string iterators); 
+	long packSourceSection(long thfunction,double occasionally,int holds,std::string candidate); 
+	int delegateStringth(long whyou,double matched,int semicolon); 
+	float rttiRepeatApplications(short nonextern,unsigned short publicly,void * replaced,std::string calculates); 
 private:
-	void * m_memberwiseHandled;
-	void * m_variesOriginalPattern;
-	int m_ostreamAutomaticConfusion;
-	void * m_answerIathAroundBehavior;
+	char m_typcanRealizeAssumed;
+	int m_indicatedDifferent;
 };
 #endif

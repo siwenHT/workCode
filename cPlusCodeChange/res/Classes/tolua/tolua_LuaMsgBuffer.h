@@ -96,7 +96,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_new00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'new'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -125,7 +125,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_new00_local(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'new'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -155,7 +155,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_delete00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'delete'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -182,14 +182,14 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_pushBool00(lua_State* tolua_S)
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'pushBool'", NULL);
 #endif
   {
-   self->pushBool(flag >= 0?true:false);
+   self->pushBool(flag > 0?true:false);
   }
  }
  lua_settop(tolua_S, 1);
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'pushBool'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -223,7 +223,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_pushInt00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'pushInt'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -257,7 +257,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_pushChar00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'pushChar'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -291,7 +291,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_pushUnChar00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'pushUChar'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -325,7 +325,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_pushShort00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'pushShort'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -359,7 +359,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_pushDouble00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'pushDouble'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -393,7 +393,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_pushChars00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'pushChars'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -427,7 +427,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_pushString00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'pushString'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -463,7 +463,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_pushData00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'pushData'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -495,7 +495,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_popBool00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'popBool'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -527,7 +527,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_popInt00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'popInt'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -559,7 +559,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_popChar00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'popChar'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -590,7 +590,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_popUnChar00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'popUChar'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -621,7 +621,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_popUnShort00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'popUShort'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -653,7 +653,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_popShort00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'popShort'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -685,7 +685,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_popFloat00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'popFloat'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -717,7 +717,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_popDouble00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'popDouble'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -749,7 +749,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_popLongLong00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'popLongLong'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -781,7 +781,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_clear00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'clear'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -813,7 +813,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_popString00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'popString'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -847,7 +847,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_popString00(lua_State* tolua_S)
 // return 1;
 //#ifndef TOLUA_RELEASE
 // tolua_lerror:
-// tolua_error(tolua_S,"#ferror in function 'popData'.",&tolua_err);
+// tolua_error(tolua_S,"",&tolua_err);
 // return 0;
 //#endif
 //}
@@ -881,7 +881,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_popInts00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'popInts'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -913,11 +913,11 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_getProtoBody(lua_State* tolua_S)
 			return 1;
 		}
 	}
-	tolua_error(tolua_S,"#ferror in function 'getProtoBody'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 	return 0;
 #ifndef TOLUA_RELEASE
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'getProtoBody'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 	return 0;
 #endif
 }
@@ -949,7 +949,7 @@ tolua_lerror:
 // return 1;
 //#ifndef TOLUA_RELEASE
 // tolua_lerror:
-// tolua_error(tolua_S,"#ferror in function 'getByteBuffer'.",&tolua_err);
+// tolua_error(tolua_S,"",&tolua_err);
 // return 0;
 //#endif
 //}
@@ -979,7 +979,7 @@ static int tolua_LuaMsgBuffer_LuaEventManager_delete00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'delete'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -1007,7 +1007,7 @@ static int tolua_LuaMsgBuffer_LuaEventManager_instance00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'instance'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -1041,7 +1041,7 @@ static int tolua_LuaMsgBuffer_LuaEventManager_getLuaEvent00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'getLuaEvent'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -1075,7 +1075,7 @@ static int tolua_LuaMsgBuffer_LuaEventManager_getLuaEventEx00(lua_State* tolua_S
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'getLuaEventEx'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -1109,7 +1109,7 @@ static int tolua_LuaMsgBuffer_LuaEventManager_getLuaEventExEx00(lua_State* tolua
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'getLuaEventExEx'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -1143,7 +1143,7 @@ static int tolua_LuaMsgBuffer_LuaEventManager_getLuaEventExEx00(lua_State* tolua
 // return 1;
 //#ifndef TOLUA_RELEASE
 // tolua_lerror:
-// tolua_error(tolua_S,"#ferror in function 'getLuaBuffer'.",&tolua_err);
+// tolua_error(tolua_S,"",&tolua_err);
 // return 0;
 //#endif
 //}
@@ -1175,7 +1175,7 @@ static int tolua_LuaMsgBuffer_LuaEventManager_getLuaEventExEx00(lua_State* tolua
 // return 1;
 //#ifndef TOLUA_RELEASE
 // tolua_lerror:
-// tolua_error(tolua_S,"#ferror in function 'getExchangeLuaBuffer'.",&tolua_err);
+// tolua_error(tolua_S,"",&tolua_err);
 // return 0;
 //#endif
 //}
@@ -1209,7 +1209,7 @@ static int tolua_LuaMsgBuffer_LuaEventManager_getLuaEventExEx00(lua_State* tolua
 // return 1;
 //#ifndef TOLUA_RELEASE
 // tolua_lerror:
-// tolua_error(tolua_S,"#ferror in function 'getLuaEventCREx'.",&tolua_err);
+// tolua_error(tolua_S,"",&tolua_err);
 // return 0;
 //#endif
 //}
@@ -1243,7 +1243,7 @@ static int tolua_LuaMsgBuffer_LuaEventManager_getLuaEventExEx00(lua_State* tolua
 // return 1;
 //#ifndef TOLUA_RELEASE
 // tolua_lerror:
-// tolua_error(tolua_S,"#ferror in function 'getLuaEventRChatEx'.",&tolua_err);
+// tolua_error(tolua_S,"",&tolua_err);
 // return 0;
 //#endif
 //}
@@ -1276,7 +1276,7 @@ static int tolua_LuaMsgBuffer_LuaEventManager_getLuaEventExEx00(lua_State* tolua
 // return 1;
 //#ifndef TOLUA_RELEASE
 // tolua_lerror:
-// tolua_error(tolua_S,"#ferror in function 'registerMethods'.",&tolua_err);
+// tolua_error(tolua_S,"",&tolua_err);
 // return 0;
 //#endif
 //}
@@ -1332,7 +1332,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_readByFmt(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'readByFmt'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -1396,7 +1396,7 @@ static int tolua_LuaMsgBuffer_LuaMsgBuffer_writeByFmt(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'writeByFmt'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }

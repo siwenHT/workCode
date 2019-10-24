@@ -6,9 +6,9 @@ TouchSprite::TouchSprite():
 	m_beginPoint(Vec2::ZERO),
 	m_isClick(true),
 	m_scriptUnselectedHandler(NULL),
-	m_touchType(1),
-	m_swallowTouch(true)
+	m_touchType(1)
 {
+	m_toucheEventLis = NULL;
 	m_select_action = NULL;
 	m_unselect_action = NULL;
 }
@@ -43,15 +43,16 @@ void TouchSprite::setEnable(bool enable)
 }
 void TouchSprite::setSwallowTouch(bool swallow)
 {
-	m_swallowTouch = swallow;
-	setTouchEnable(m_touch_enable);
+	if (m_toucheEventLis)
+	{
+		m_toucheEventLis->setSwallowTouches(swallow);
+	}
 }
 bool TouchSprite::initTouch()
 {
 	auto dispatcher = Director::getInstance()->getEventDispatcher();
-	dispatcher->removeEventListenersForTarget(this);
 	auto myListener = EventListenerTouchOneByOne::create();
-    myListener->setSwallowTouches(m_swallowTouch);
+    myListener->setSwallowTouches(true);
 	myListener->onTouchBegan = [=](Touch* touch,Event* event)
 	{
 		if(!m_touch_enable|| !isVisible())
@@ -101,6 +102,7 @@ bool TouchSprite::initTouch()
 		}
 	};
 	dispatcher->addEventListenerWithSceneGraphPriority(myListener,this);
+	m_toucheEventLis = myListener;
 	return true;
 }
 void TouchSprite::onClick(int state){

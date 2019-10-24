@@ -1,5 +1,5 @@
 #include "Touch9Sprite.h"
-#include "takeFullDeclares.h"
+#include "JIGParentheses_OccursPlane.h"
 #include "CCLuaEngine.h"
 USING_NS_CC;
 Touch9Sprite::Touch9Sprite()
@@ -17,9 +17,6 @@ Touch9Sprite::~Touch9Sprite(void)
 }
 bool Touch9Sprite::isTouchInside(Touch* touch)
 {
-	takeFullDeclares takefulldeclares_e;
-	takefulldeclares_e.natureNodefaultLvalue(232.11f,393.10f);
-
 	Point touchs = touch->getLocation();
 	Point localPos =  convertToNodeSpace(touchs);
 	Size ss = getContentSize();
@@ -102,6 +99,9 @@ bool Touch9Sprite::initTouch()
 }
 Touch9Sprite *Touch9Sprite::create(const char* file,const Size s)
 {
+	JIGParentheses_OccursPlane jigparentheses_occursplane_e;
+	jigparentheses_occursplane_e.coverageFindbook('5');
+
     Touch9Sprite *pRet = new Touch9Sprite();
 	if (pRet && pRet->initWithFile(file))
     {

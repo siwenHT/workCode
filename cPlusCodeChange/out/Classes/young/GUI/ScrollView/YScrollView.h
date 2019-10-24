@@ -1,7 +1,7 @@
 #ifndef __YScrollView_H__
 #define __YScrollView_H__
 #include "common/Ycommon.h"
-#include "imagethCerr.h"
+#include "JIGChoice_ActuasizeModel.h"
 #include "cocos2d.h"
 NS_YOUNG_BEGIN
 class YScrollView;
@@ -16,76 +16,57 @@ public:
     virtual void scrollViewDidZoom(YScrollView *view) = 0;
 	virtual void scrollViewDidStopped(YScrollView *view) = 0;
 public:
-unsigned short interpretedSolutionDefine(int coverage,char call,void * correctness,bool varies)
+static bool collectionRepresentation(bool what,char makes)
 {
-	m_generatesExonlyPattern = 499.18f;
-	return 245;
-}
-unsigned short tpassFlagOverload(short easy,bool matches)
-{
-	m_valuesConnection = 926;
-	return 542;
-}
-static int propertiesLargeGoes(bool vectors,long easy)
-{
-	bool corresponding = vectors;
-	long forces = easy + 605;
-	return 241;
-}
-void worryScopingNone(int added)
-{
-	imagethCerr imagethcerr_e;
-	imagethcerr_e.decrementsIsbns1(316,nullptr,8,586);
+	JIGChoice_ActuasizeModel jigchoice_actuasizemodel_e;
+	jigchoice_actuasizemodel_e.severalExerciseMeans(146,109,841.1f,nullptr);
 
-	int chapters = added + 908;
-	bool overloaded = false;
-	long whereby = 193 - 864;
+	bool defined = what;
+	char avoid = makes;
+	return false;
 }
-static short absoluteOrderRevisited(double exists,short think,void * despite)
+long ensuresFlagSyntax(long added,long text)
 {
-	double simple = exists + 353.6;
-	short elipsis = think / 97;
-	return 27;
+	long followed = added % 634;
+	long debugdelete = text * 490;
+	return 231;
 }
-double specifierTediousFindbook(char initializers)
+long uninitializedManage(long card,int curtok)
 {
-	m_valuesConnection = 644;
-	return 767.11;
+	long bitvec = card + 683;
+	int want = curtok * 134;
+	int specifier = 932 * 673;
+	return 284;
 }
-char instantiatesTrivialTpass4(int initially)
+void plainPreventElement1(std::string typcan,long attempted)
 {
-	int easier = initially / 657;
-	return '3';
+	m_prefixBlockPrevents3 = '4';
 }
-static void * explainInttypesInvolved(unsigned short mube,short share,int parameter,long affects)
+long saveConvertTransactions(std::string literals,int cmatch)
 {
-	unsigned short realize = mube - 559;
-	short word = share * 529;
-	return nullptr;
+	std::string flag = literals;
+	int lookup = cmatch - 979;
+	float ought = 442.8f + 473.7f;
+	return 700;
 }
-int encloseInitializesPack3(long containers,float almost)
+char complexClassclick(long designed,long automatically,float frees,long setting)
 {
-	long classesclick = containers * 913;
-	float except = almost + 157.3f;
-	return 19;
+	long cleans = designed % 608;
+	long incidental = automatically * 566;
+	return 'T';
 }
-unsigned short manipulateDynamically(float reading,short pointerfifth,char closes,unsigned short operand)
+int aboutSeparatelyCovers(short executing)
 {
-	float call = reading - 42.6f;
-	short generates = pointerfifth % 468;
-	char site = closes;
-	return 648;
-}
-void * conventionLock(char devoted,unsigned short best)
-{
-	char attention = devoted;
-	unsigned short curly = best + 292;
-	return nullptr;
+	short separately = executing + 840;
+	void * readers = nullptr;
+	return 876;
 }
 private:
-	unsigned short m_valuesConnection;
-	unsigned short m_strvecInaccessibleYield;
-	float m_generatesExonlyPattern;
+	float m_representedOftenTrans;
+	bool m_dynamicRepresented;
+	bool m_wantsComputeInitializers;
+	char m_omittedAlgorithm;
+	char m_prefixBlockPrevents3;
 };
 class YScrollView : public cocos2d::Layer, public cocos2d::ActionTweenDelegate
 {
@@ -193,19 +174,22 @@ protected:
     cocos2d::CustomCommand _beforeDrawCommand;
     cocos2d::CustomCommand _afterDrawCommand;
 public:
-	short getsWarrantUndulySite(double saved,double deleted,void * complication); 
-	float ellipsisImagefifthForm(int executed,void * depends,void * grading,long unless); 
-	void lettersStringthPositioned(short ofile,bool written,short told,long with); 
-	unsigned short absolutePrecedesDesigning(short result,short standard); 
-	int confusionInstantiates(float finding,float others); 
-	char shouldPutsFairly(int errors,long open); 
-	char specializingNewline(void * exception,void * interchangeably,double typedefs); 
-	int groupedOperateAsked(void * blueprint,void * preferred); 
-static	void supportFilesCccccccccc(long important,double supplied,void * ranked,float disk); 
+static	float updatesAbilityDriven(float nested,bool subsequent,int clear); 
+	short operatesRepresenting(float between,std::string swapped); 
+	double generallyThingsTable(unsigned short here); 
+	void causeArgsClassclick(unsigned short elem,unsigned short variable,std::string chosen); 
+	void changeInterestingHair(bool eamight); 
+	void equivalentNonpublic(short ought); 
+static	short thanReflectRealize(bool disadvantages); 
+	float redeclareCollections(double reduce); 
+	void familyDrivenOperand(long author,long muensure,void * deduction,long similar); 
+	float signatureUnderstand(void * further,double sample); 
+	int predictInttypesReady(void * from,int compilation); 
 private:
-	char m_abstractionOnalthough;
-	bool m_specializePropagates;
-	unsigned short m_labeledAssumesMachine5;
+	char m_buildInfrequentlySuppress;
+	int m_compilersOverride;
+	double m_flagTranslateAccording;
+	void * m_conversionchapterBind;
 };
 NS_YOUNG_END
 #endif 

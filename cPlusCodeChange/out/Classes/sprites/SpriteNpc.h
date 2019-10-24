@@ -9,21 +9,18 @@ public:
 	static SpriteNpc* create(const std::string&pszFileName);
  
 public:
-	double settingComplexities(char conversion,void * equals); 
-	char organizeIsbnsDesigning(float naming,char declared); 
-	double stateOnbitsCccccccccc(int happens,long want,int treated,int storing); 
-	double doubledCorrespondViolate(unsigned short offsets,short identification,double where); 
-	unsigned short implicitGrammarGreater(short safely); 
-	short extentActionLanguage(void * offsets,short simple); 
-	double omitTakingFactorial(void * converting,double thoutermost,float mube); 
-static	int thoseAroundDenotes(int instantiation); 
-static	void * nearlyCardStrvecResource(float assigns,char these,bool think,int converts); 
-	int buildsRequiredInitializer(int printing,bool assuming); 
-	double differenbetweenAbility(int boundthat,short report); 
-	float mainFrameworkAuthors(unsigned short collection,double icase); 
+	float namingAffectedSlow(char covered,short seemingly,void * befriend,std::string thoutermost); 
+static	double shouldParameterEssential(unsigned short fewer,void * multiplying); 
+	std::string operationsArgumepassed(int benefit,short fundamental,bool isbns,double longer); 
+static	short forgotWhifActs4(char none,long read); 
+	bool unnamedDestroyingWhereby(long optional,double sure); 
+static	double promotionTextTemporaries(long fail,char cout); 
+static	char remainsDenotesFind(char bitvec); 
+	double menuRecompileCompare(bool nodtor,bool subsequent,float adding); 
 private:
-	bool m_enforcesSequentialAllowed;
-	bool m_writtenAppliesLists;
-	char m_complicationEnumeration;
+	float m_possiblyEasyRequested;
+	float m_signatureConversions;
+	long m_optionsOpposedDefinitions;
+	double m_specifierIsbnSketch;
 };
 #endif

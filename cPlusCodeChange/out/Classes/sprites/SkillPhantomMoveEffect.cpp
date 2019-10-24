@@ -1,5 +1,4 @@
 ﻿#include "SkillPhantomMoveEffect.h"
-#include "dynamicallyHiding.h"
 static const int MoveTime = 500;
 SkillPhantomMoveEffect::SkillPhantomMoveEffect()
 {
@@ -43,54 +42,65 @@ void SkillPhantomMoveEffect::endMove()
 	removeFromParent();
 }
 
-double SkillPhantomMoveEffect::translateMutuallyCapital(char previously,bool executing,float behalf,short before)
+bool SkillPhantomMoveEffect::insteadRationaleNontype(char affect,int string,float printed)
 {
-	dynamicallyHiding dynamicallyhiding_e;
-	dynamicallyhiding_e.emplaceNeedingVariaband('S');
-
-	char treat = previously;
-	return 835.10;
+	m_tryingDisadvantages = 127;
+	 std::string primary = "72452";
+	if(primary == "72452")
+	{
+		std::string primary = "function  [SkillPhantomMoveEffect:insteadRationaleNontype] ok!";
+	}
+	else
+	{
+		std::string primary;
+		primary.append("insteadRationaleNontype arguments 1 affect is ok?!");
+		primary.append("insteadRationaleNontype arguments 2 string is ok?!");
+		primary.append("insteadRationaleNontype arguments 3 printed is ok?!");
+	}
+	return true;
 }
-int SkillPhantomMoveEffect::splitDefinesEnumerations(float understand,int inlined)
+unsigned short SkillPhantomMoveEffect::enclosingIntending(long told,float delegates)
 {
-	float looking = understand + 806.18f;
-	return 546;
+	long patterns = told / 726;
+	return 948;
 }
-void * SkillPhantomMoveEffect::protectionSchema(void * difficult,int elem,short alias,short sometimes)
+unsigned short SkillPhantomMoveEffect::contextSufficientlyCease(char look,std::string specified)
 {
-	m_selectExecutesHides = 'O';
-	return nullptr;
+	char describes = look;
+	std::string hair = specified;
+	double thought = 750.1 * 664.19;
+	return 812;
 }
-void * SkillPhantomMoveEffect::shareDirectlyObjec(double error,unsigned short along,char match,short benefit)
+void SkillPhantomMoveEffect::deletesHairInstances3(unsigned short difference,unsigned short refer,short calculate,double quiza)
 {
-	double defaults = error + 1000.2;
-	unsigned short model = along * 74;
-	return nullptr;
+	unsigned short derivation = difference * 59;
+	unsigned short developed = refer / 978;
+	short constraints = calculate - 151;
 }
-void SkillPhantomMoveEffect::bothEncountersConverted(double managing,char possible,float have,float explain)
+long SkillPhantomMoveEffect::genericLeftHardest3(long instantiate,float passes,int price)
 {
-	double succeeding = managing + 11.1;
-	char lvalue = possible;
+	long something = instantiate + 39;
+	float ensure = passes * 266.1f;
+	return 804;
 }
-float SkillPhantomMoveEffect::hardestDifferenbetween1(double common,long typeids,long defined,short library)
+void SkillPhantomMoveEffect::containContadeclarations(char postfix,long control)
 {
-	m_neededNewlineInttypes = 24.20f;
-	return 636.15f;
+	char hence = postfix;
+	 bool distinct = false;
+	if(distinct)
+	{
+		std::string distinct = "function  [SkillPhantomMoveEffect:containContadeclarations] checking!";
+	}
+	else
+	{
+		std::string distinct;
+		distinct.append("containContadeclarations arguments 1 postfix Ok!");
+		distinct.append("containContadeclarations arguments 2 control Ok!");
+	}
 }
-double SkillPhantomMoveEffect::tuplesSufficientlyNotify(bool elipsis,long processes)
+void SkillPhantomMoveEffect::readyActuallyAffects(long incomplete)
 {
-	bool appears = elipsis;
-	long comparing = processes + 903;
-	float essential = 589.4f * 602.20f;
-	return 269.13;
-}
-short SkillPhantomMoveEffect::stunninglyLiterals(void * neither,void * zero,char words)
-{
-	void * point = neither;
-	return 69;
-}
-bool SkillPhantomMoveEffect::featureSwapNearly(int benefit,int alphanumeric,void * argument)
-{
-	int responses = benefit * 458;
-	return false;
+	long presumably = incomplete + 658;
+	std::string typeinfo = "combine";
+	unsigned short compare = 837 / 349;
 }

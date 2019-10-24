@@ -24,7 +24,7 @@ def getValueType():
     normalValueType = [
         'int',
         'short',
-        # 'std::string',
+        'std::string',
         'long',
         'bool',
         'float',
@@ -34,9 +34,7 @@ def getValueType():
         'double'
     ]
 
-    totalLen = len(normalValueType)
-    idx = tool.random.randint(0, totalLen - 1)
-    return normalValueType[idx]
+    return tool.random.choice(normalValueType)
 
 def getValTypeRadomValue(valueType):
     if valueType in ['int', 'short', 'long', 'unsigned short']:
@@ -44,10 +42,7 @@ def getValTypeRadomValue(valueType):
     if valueType == 'bool':
         return tool.random.randint(1,2) == 1 and 'true' or 'false'
     if valueType == 'std::string':
-        a,b = 65, 90
-        if tool.random.randint(1, 2) == 1:
-            a, b = 97,122
-        return '\"' + tool.getRandomChar(tool.random.randint(3, 15), a, b) + '\"'
+        return '\"' + worldsDic.getOneWorld() + '\"'
     if valueType in ['double', 'float']:
         val = str(tool.random.randint(5, 1000)) + '.' + str(tool.random.randint(0, 20))
         if valueType == 'float':
@@ -70,7 +65,7 @@ def getRandomValTypeOp(valueType):
     normalValueType = {
         'int':['+', "-", '*', '/', '%'],
         'short':['+', "-", '*', '/', '%'],
-        # 'std::string',
+        'std::string':[],
         'long':['+', "-", '*', '/', '%'],
         'bool':[],
         'float':['+', "-", '*', ],
@@ -93,7 +88,7 @@ def getFuncValTypeTmp(valueType):
     else:
         return preVal
 
-def getValTypeRadomName(valueType):
+def getValTypeRadomName(valueType = None):
     return worldsDic.getOneWorld()
 
 def getAttrName(num1, num2):

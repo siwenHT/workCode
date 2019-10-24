@@ -20,15 +20,18 @@ private:
 	AsyncSpriteState m_state;
 	cocos2d::EventListenerCustom* m_customlistener;
 public:
-	bool stackRelationshipSuppress(float database,short solve,double occur,unsigned short managing); 
-	bool arraytheUnnamedRepeatedly(char change,unsigned short aend); 
-static	float zeroAvailableIndeed(char introduced,char reading,float compile,int along); 
-	long executionAdvantageAssumed4(unsigned short briefly,char position); 
-	double fileSelectedHave(void * wstring,float derived); 
+	char stoppinconditionCreated(short derived,float pairs,std::string finds); 
+	int contentCompilation(short handling); 
+	short muchIndexedCompanion(double numeric); 
+	bool positionedContainerWith(bool convenient,long four,int changes,void * things); 
+	unsigned short possibleAbsoluteHair(short illegal,float bother); 
+	void * guaranteeDeclaration(char item,bool because,int peppers); 
+	long typicallyEmployee3(long control,char oriented,long algorithm); 
+	unsigned short applyTwinThoseLists3(void * look,long errormsg,char place,long topic); 
+	bool limitationReachOkay(double calls); 
+	int encapsulationDestroywhen(unsigned short abstractly); 
 private:
-	char m_holdsActuallyEnough;
-	void * m_persistVariabandCompare;
-	int m_fourFormStoreRanked;
-	char m_intrinsicfifthSynthesizes;
+	long m_flowsThingsOverloading;
+	long m_textReferencesthReverse2;
 };
 #endif

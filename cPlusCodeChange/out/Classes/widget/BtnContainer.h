@@ -31,10 +31,6 @@ private:
 	int m_count;
 public:
 private:
-	double m_compoundCheckStrblob;
-	long m_currentlyHoweveweEnding;
-	short m_fonumberBeforeCount;
-	float m_employeeIntroduceRules;
-	char m_ensureOtherwisePrograms;
+	bool m_variabandCompileAttention2;
 };
 #endif

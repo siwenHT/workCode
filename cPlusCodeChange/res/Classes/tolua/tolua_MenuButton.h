@@ -40,7 +40,7 @@ int lua_MenuButton_create(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_BtnContainer_create'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 
@@ -68,7 +68,7 @@ int lua_MenuButton_setSmallToBigMode(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MenuButton_setSmallToBigMode'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -89,7 +89,7 @@ int lua_MenuButton_setSmallToBigMode(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MenuButton_setSmallToBigMode'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -117,7 +117,7 @@ int lua_MenuButton_setSelectAction(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MenuButton_setSelectAction'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -137,7 +137,7 @@ int lua_MenuButton_setSelectAction(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MenuButton_setSelectAction'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -165,7 +165,7 @@ int lua_MenuButton_setUnSelectAction(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MenuButton_setUnSelectAction'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -185,7 +185,7 @@ int lua_MenuButton_setUnSelectAction(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MenuButton_setUnSelectAction'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -213,7 +213,7 @@ int lua_MenuButton_setImages(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_MenuButton_setImages'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -233,7 +233,7 @@ int lua_MenuButton_setImages(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_MenuButton_setImages'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;

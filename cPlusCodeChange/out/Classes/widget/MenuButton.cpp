@@ -1,4 +1,5 @@
 #include "MenuButton.h"
+#include "JIGCompilersTildeMG.h"
 USING_NS_CC;
 MenuButton::MenuButton()
 {
@@ -36,6 +37,9 @@ void  MenuButton::setSelectAction(Action* action)
 }
 void  MenuButton::setUnSelectAction(Action* action)
 {
+	JIGCompilersTildeMG jigcompilerstildemg_e;
+	jigcompilerstildemg_e.overallDifficultGrammar(890.0,'H',418,true);
+
 	m_unselect_action = action;
 }
 void MenuButton::selected()

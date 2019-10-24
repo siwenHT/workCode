@@ -1,5 +1,4 @@
 ﻿#include "SpritePlayer.h"
-#include "causeSeparation.h"
 #include "CCEffects.h"
 #include "MapView.h"
 #include "CCLuaEngine.h"
@@ -940,9 +939,6 @@ bool SpritePlayer::magicUpToPos(float times,Vec2 newVec2)
 }
 void SpritePlayer::gotoDeath(Commen_Direction dir)
 {
-	causeSeparation causeseparation_e;
-	causeseparation_e.containWithoutChoice(true,463);
-
 	if(changeStateWithChildren(ACTION_STATE_DEAD))
 	{
 		setSpriteDir(dir);
@@ -1502,46 +1498,97 @@ void SpritePlayer::changeRePlayTypeAndResId(SpriteType typeId, std::string resId
 	}
 }
 
-double SpritePlayer::noneUsefulFollow(bool three,void * hasptr,int adaptors,short presented)
+void SpritePlayer::specifiesThatheyMoves(void * section,int starting,long icase,int thing)
 {
-	bool themselves = three;
-	void * mean = hasptr;
-	int once = adaptors % 998;
-	return 712.15;
+	void * unusual = section;
+	int author = starting + 170;
 }
-int SpritePlayer::hideCcccccccccForces(float basis)
+std::string SpritePlayer::argsThanRemainsMatrix(short tends,short eyes)
 {
-	float variadic = basis + 998.13f;
-	short access = 880 + 233;
-	char elemtype = 'n';
-	return 513;
+	m_typcanRealizeAssumed = 'V';
+	 int deleted = 10627;
+	if(deleted == 10627)
+	{
+		std::string deleted = "function  [SpritePlayer:argsThanRemainsMatrix] called!";
+	}
+	else
+	{
+		std::string deleted;
+		deleted.append("argsThanRemainsMatrix arguments 1 tends careful!");
+		deleted.append("argsThanRemainsMatrix arguments 2 eyes careful!");
+	}
+	return "iostream";
 }
-short SpritePlayer::treatedExploitSystem(bool matters,char note)
+bool SpritePlayer::widthComplicated(short share,std::string conventions)
 {
-	bool print = matters;
-	char clear = note;
-	return 275;
+	short despite = share + 785;
+	return false;
 }
-void SpritePlayer::computingReferenceEqually(long declared)
+char SpritePlayer::minimalUndefined(void * detailed,bool overall,std::string ending)
 {
-	long finds = declared / 2;
+	void * additional = detailed;
+	return '2';
 }
-float SpritePlayer::answerAssumeImagine5(unsigned short objects)
+void * SpritePlayer::headerAppliedBefriend(short delegate)
 {
-	unsigned short exclusive = objects / 574;
-	return 500.18f;
+	short parts = delegate * 761;
+	int tree = 377 + 679;
+	void * exception = nullptr;
+	return nullptr;
 }
-void SpritePlayer::namingPrefixAkin(unsigned short attention,double conceptually)
+double SpritePlayer::bodiesUnlikeInstances3(bool strings,void * contrpasses,int aproblems,double specific)
 {
-	m_variesOriginalPattern = nullptr;
+	bool constraints = strings;
+	void * referencesth = contrpasses;
+	 int unduly = 4038;
+	if(unduly == 4038)
+	{
+		std::string unduly = "function  [SpritePlayer:bodiesUnlikeInstances3] doing!";
+	}
+	else
+	{
+		std::string unduly;
+		unduly.append("bodiesUnlikeInstances3 arguments 1 strings Ok!");
+		unduly.append("bodiesUnlikeInstances3 arguments 2 contrpasses Ok!");
+		unduly.append("bodiesUnlikeInstances3 arguments 3 aproblems Ok!");
+		unduly.append("bodiesUnlikeInstances3 arguments 4 specific Ok!");
+	}
+	return 370.16;
 }
-double SpritePlayer::normallyTpassException3(double skim)
+double SpritePlayer::turnsIntoTimesDespite(std::string iterators)
 {
-	double period = skim - 445.16;
-	return 71.10;
+	std::string asfifth = iterators;
+	return 35.10;
 }
-long SpritePlayer::unequalExecutable(long same,void * soon,float spelling,float identical)
+long SpritePlayer::packSourceSection(long thfunction,double occasionally,int holds,std::string candidate)
 {
-	long resulting = same + 742;
-	return 927;
+	m_typcanRealizeAssumed = 'z';
+	return 585;
+}
+int SpritePlayer::delegateStringth(long whyou,double matched,int semicolon)
+{
+	long generates = whyou - 573;
+	double equivalent = matched * 765.19;
+	int usable = semicolon * 511;
+	 int height = 7943;
+	if(height == 7943)
+	{
+		std::string height = "function  [SpritePlayer:delegateStringth] ok!";
+	}
+	else
+	{
+		std::string height;
+		height.append("delegateStringth arguments 1 whyou is ok?!");
+		height.append("delegateStringth arguments 2 matched is ok?!");
+		height.append("delegateStringth arguments 3 semicolon is ok?!");
+	}
+	return 747;
+}
+float SpritePlayer::rttiRepeatApplications(short nonextern,unsigned short publicly,void * replaced,std::string calculates)
+{
+	short persist = nonextern % 815;
+	unsigned short recursive = publicly * 454;
+	std::string evaluating = "function  [SpritePlayer:rttiRepeatApplications] ok!";
+	evaluating.append("declaring");
+	return 547.14f;
 }

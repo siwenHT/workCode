@@ -1,5 +1,5 @@
 ﻿#include "ActorRenderQueueManage.h"
-#include "pointsInitializing.h"
+#include "JIGRelativeLookupIns.h"
 _objRender::_objRender(std::function<void(void)> _callback,ActorRenderType _typeId)
 	:callback(_callback)
 	,typeId(_typeId)
@@ -9,67 +9,86 @@ _objRender::~_objRender()
 {
 }
 
-float _objRender::representationIndexing(double prvoid,double enough,unsigned short saved,int some)
+int _objRender::substringChapterClasses(void * ending,short undefined,void * destroywhen)
 {
-	double cout = prvoid + 938.12;
-	double evaluate = enough + 502.15;
-	unsigned short mube = saved - 646;
-	return 522.2f;
+	void * tuple = ending;
+	short constant = undefined + 211;
+	std::string position = "function  [_objRender:substringChapterClasses] done!";
+	position.append("well5");
+	return 616;
 }
-short _objRender::hairComputingAssociative2(bool available,float assignmenclick,long after,float care)
+void _objRender::additionalFactOverall(std::string especially,std::string sections,short newline,bool guarantee)
 {
-	m_whisWorriesReturning = 50;
-	return 845;
+	std::string rationale = especially;
+	std::string circumstances = sections;
+	short intending = newline * 633;
+	 int exhausted = 35783;
+	if(exhausted == 35783)
+	{
+		std::string exhausted = "function  [_objRender:additionalFactOverall] calling!";
+	}
+	else
+	{
+		std::string exhausted;
+		exhausted.append("additionalFactOverall arguments 1 especially careful!");
+		exhausted.append("additionalFactOverall arguments 2 sections careful!");
+		exhausted.append("additionalFactOverall arguments 3 newline careful!");
+		exhausted.append("additionalFactOverall arguments 4 guarantee careful!");
+	}
 }
-long _objRender::expressionPushGuarantee(long explains)
+void * _objRender::groupedThemselves(int clear,long which,long refers)
 {
-	m_whisWorriesReturning = 238;
-	return 807;
-}
-void _objRender::scopesBothCoveredRefer(short shows,bool relational,bool nonpublic,short full)
-{
-	m_wregexPrivatecopyAttempt = 582;
-}
-void _objRender::headerStillBuild(float relying,long just)
-{
-	float escape = relying + 645.2f;
-	long reject = just + 384;
-	long temporary = 384 % 718;
-}
-void * _objRender::supplyRelevantNeed(double intvalues,double deduce)
-{
-	double theif = intvalues - 636.13;
-	double parametea = deduce + 402.5;
-	bool area = true;
+	int holds = clear % 298;
+	long callpass = which * 346;
+	long versus = refers * 799;
 	return nullptr;
 }
-short _objRender::arrayIndicatedPerform(void * alphabetic)
+long _objRender::offsetsExtentUnnamed(short cerr,unsigned short review)
 {
-	void * placed = alphabetic;
-	return 441;
+	short auxiliary = cerr - 630;
+	 int similarly = 18090;
+	if(similarly == 18090)
+	{
+		std::string similarly = "function  [_objRender:offsetsExtentUnnamed] called!";
+	}
+	else
+	{
+		std::string similarly;
+		similarly.append("offsetsExtentUnnamed arguments 1 cerr is error?!");
+		similarly.append("offsetsExtentUnnamed arguments 2 review is error?!");
+	}
+	return 900;
 }
-void _objRender::conceptuallyEasiest5(int becomes,float four,double accessible,long constitute)
+float _objRender::sequentialNamingBitwise(double details,short behavior,int occurs)
 {
-	int suspended = becomes + 369;
-	float store = four - 582.11f;
-	double nonmember = accessible - 464.2;
+	m_macroPrintsPush = nullptr;
+	std::string asking = "function  [_objRender:sequentialNamingBitwise] done!";
+	asking.append("timalthough");
+	return 258.2f;
 }
-void _objRender::tendBooksPreviously(char gets,float dereferences)
+long _objRender::constituentEquality(void * last,unsigned short make,char independent,float interchangeably)
 {
-	m_whisWorriesReturning = 728;
+	m_charactersProhibit = 702;
+	return 415;
 }
-void _objRender::neededEmptyBuild(unsigned short preferred,long files,unsigned short will,int designing)
+void _objRender::unlessEliminatedReason(short chapters,bool inaccessible,std::string initializer)
 {
-	pointsInitializing pointsinitializing_e;
-	pointsinitializing_e.referenparameter(510.7f,352.20f,714.0,557);
-
-	m_whisWorriesReturning = 24;
+	short care = chapters / 576;
+	bool findbook = inaccessible;
+	std::string selected = "function  [_objRender:unlessEliminatedReason] done!";
+	selected.append("affected");
 }
-void * _objRender::nodefaultHoweveweReturns(short such,short allocation,double continues)
+int _objRender::intvaluesenumExpectations(char owns,double convertible)
 {
-	short generally = such % 408;
-	short simply = allocation - 337;
-	return nullptr;
+	char sometimes = owns;
+	return 380;
+}
+bool _objRender::singleFullEyes(unsigned short deleted,short left,std::string part,unsigned short unchanged)
+{
+	unsigned short unnamed = deleted / 386;
+	std::string submatch = "function  [_objRender:singleFullEyes] done!";
+	submatch.append("viable");
+	return true;
 }
 ActorRenderQueueManage* ActorRenderQueueManage::m_instance = nullptr;
 ActorRenderQueueManage::ActorRenderQueueManage()
@@ -93,6 +112,9 @@ ActorRenderQueueManage::~ActorRenderQueueManage()
 	m_base_cache.clear();
 }
 ActorRenderQueueManage* ActorRenderQueueManage::getInstance(){
+	JIGRelativeLookupIns jigrelativelookupins_e;
+	jigrelativelookupins_e.preventsScopeRestricted(378,964,"designed");
+
 	if(m_instance == nullptr){
 		m_instance = new ActorRenderQueueManage();
 	}
@@ -161,42 +183,62 @@ SpriteBase* ActorRenderQueueManage::createBaseWithCache(std::string key){
 	}
 	return base;
 }
-char ActorRenderQueueManage::mustBegunMattersWhose(void * runtime,unsigned short fetch)
+void * ActorRenderQueueManage::synthesizeTransfers(short whis,void * tree,void * exist,char proper)
 {
-	void * some = runtime;
-	return 'f';
+	m_identifiesOverloading = 860;
+	std::string into = "function  [ActorRenderQueueManage:synthesizeTransfers] begin!";
+	into.append("persist");
+	return nullptr;
 }
-float ActorRenderQueueManage::tokensPutsSpace(int where,long unable,long encapsulates)
+int ActorRenderQueueManage::strategyThatheyOptions(int making,float printed)
 {
-	int immediately = where / 945;
-	long minimal = unable - 688;
-	return 129.14f;
+	m_initializedEncapsulate = 136;
+	 int somewhere = 63043;
+	if(somewhere == 63043)
+	{
+		std::string somewhere = "function  [ActorRenderQueueManage:strategyThatheyOptions] end!";
+	}
+	else
+	{
+		std::string somewhere;
+		somewhere.append("strategyThatheyOptions arguments 1 making Error!");
+		somewhere.append("strategyThatheyOptions arguments 2 printed Error!");
+	}
+	return 133;
 }
-float ActorRenderQueueManage::commonElemeisWord(short programs,unsigned short original,float image)
+char ActorRenderQueueManage::functionalityResources3(long initialized)
 {
-	short algorithms = programs + 143;
-	return 575.1f;
+	long done = initialized + 279;
+	float override = 928.18f - 830.0f;
+	return '9';
 }
-unsigned short ActorRenderQueueManage::purposesExactCombine(double easier)
+bool ActorRenderQueueManage::lessValueduringRight(float specific,double restrictions,char techniques,void * representation)
 {
-	m_violationsFullMoreovesome = 248;
-	return 587;
+	m_initializedEncapsulate = 257;
+	std::string argumentobjects = "function  [ActorRenderQueueManage:lessValueduringRight] ok!";
+	argumentobjects.append("sold");
+	return false;
 }
-char ActorRenderQueueManage::freindLimitationAgree(long facilities,char copied,void * there)
+void ActorRenderQueueManage::occasionallyDeduction(bool might,bool keyword)
 {
-	long designing = facilities + 220;
-	char named = copied;
-	return 'U';
+	m_initializedEncapsulate = 124;
 }
-char ActorRenderQueueManage::objectsthSequencesRise(unsigned short simple,bool book)
+char ActorRenderQueueManage::fairlyViewNesting5(bool worth,double destructor,float applies,short whenever)
 {
-	unsigned short skip = simple / 209;
-	bool above = book;
-	bool violate = true;
-	return 'd';
+	m_identifiesOverloading = 206;
+	std::string complicated = "function  [ActorRenderQueueManage:fairlyViewNesting5] checking!";
+	complicated.append("conversionchapter5");
+	return 'Q';
 }
-bool ActorRenderQueueManage::specifierPreventTotal(int relative,float ofile,unsigned short flows,void * meaning)
+void ActorRenderQueueManage::properlyDealObvious(float developed,long aside,int expects)
 {
-	m_tokensSeenWord = 'k';
-	return true;
+	float listitem = developed + 183.19f;
+	long smaller = aside - 821;
+	int destructor = expects - 149;
+}
+unsigned short ActorRenderQueueManage::promiseSpaceIntegral(std::string parametea,std::string noting,char hair)
+{
+	std::string correctness = parametea;
+	std::string reused = noting;
+	return 123;
 }

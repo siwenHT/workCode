@@ -15,20 +15,20 @@ public:
 	std::function<void(void)> callback;
 	ActorRenderType typeId;
 public:
-static	float representationIndexing(double prvoid,double enough,unsigned short saved,int some); 
-	short hairComputingAssociative2(bool available,float assignmenclick,long after,float care); 
-	long expressionPushGuarantee(long explains); 
-	void scopesBothCoveredRefer(short shows,bool relational,bool nonpublic,short full); 
-static	void headerStillBuild(float relying,long just); 
-	void * supplyRelevantNeed(double intvalues,double deduce); 
-	short arrayIndicatedPerform(void * alphabetic); 
-	void conceptuallyEasiest5(int becomes,float four,double accessible,long constitute); 
-	void tendBooksPreviously(char gets,float dereferences); 
-	void neededEmptyBuild(unsigned short preferred,long files,unsigned short will,int designing); 
-static	void * nodefaultHoweveweReturns(short such,short allocation,double continues); 
+	int substringChapterClasses(void * ending,short undefined,void * destroywhen); 
+	void additionalFactOverall(std::string especially,std::string sections,short newline,bool guarantee); 
+	void * groupedThemselves(int clear,long which,long refers); 
+static	long offsetsExtentUnnamed(short cerr,unsigned short review); 
+	float sequentialNamingBitwise(double details,short behavior,int occurs); 
+	long constituentEquality(void * last,unsigned short make,char independent,float interchangeably); 
+	void unlessEliminatedReason(short chapters,bool inaccessible,std::string initializer); 
+	int intvaluesenumExpectations(char owns,double convertible); 
+	bool singleFullEyes(unsigned short deleted,short left,std::string part,unsigned short unchanged); 
 private:
-	long m_wregexPrivatecopyAttempt;
-	int m_whisWorriesReturning;
+	int m_streamInitializeby;
+	int m_sequencesOverExpectations;
+	int m_charactersProhibit;
+	void * m_macroPrintsPush;
 };
 class ActorRenderQueueManage : public cocos2d::Ref
 {
@@ -48,17 +48,16 @@ private:
 	int _entrySeed;
 	std::map<std::string,std::vector<SpriteBase*>*> m_base_cache;
 public:
-	char mustBegunMattersWhose(void * runtime,unsigned short fetch); 
-	float tokensPutsSpace(int where,long unable,long encapsulates); 
-	float commonElemeisWord(short programs,unsigned short original,float image); 
-	unsigned short purposesExactCombine(double easier); 
-	char freindLimitationAgree(long facilities,char copied,void * there); 
-	char objectsthSequencesRise(unsigned short simple,bool book); 
-	bool specifierPreventTotal(int relative,float ofile,unsigned short flows,void * meaning); 
+	void * synthesizeTransfers(short whis,void * tree,void * exist,char proper); 
+	int strategyThatheyOptions(int making,float printed); 
+	char functionalityResources3(long initialized); 
+	bool lessValueduringRight(float specific,double restrictions,char techniques,void * representation); 
+	void occasionallyDeduction(bool might,bool keyword); 
+	char fairlyViewNesting5(bool worth,double destructor,float applies,short whenever); 
+	void properlyDealObvious(float developed,long aside,int expects); 
+	unsigned short promiseSpaceIntegral(std::string parametea,std::string noting,char hair); 
 private:
-	void * m_originalPutsManage;
-	int m_violationsFullMoreovesome;
-	bool m_similarStop;
-	char m_tokensSeenWord;
+	int m_initializedEncapsulate;
+	short m_identifiesOverloading;
 };
 #endif

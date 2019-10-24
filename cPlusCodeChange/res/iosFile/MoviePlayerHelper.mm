@@ -39,7 +39,7 @@ static SkipTouchLayer *skpl;
     NSArray *sz= [path componentsSeparatedByString:@"."];
     NSString *filePath=[[NSBundle mainBundle] pathForResource:[sz objectAtIndex:0] ofType:[sz objectAtIndex:1]];
     if (filePath==nil){
-        NSLog(@"影片不存在");
+        // NSLog(@"影片不存在");
         int scriptHandler =[[SysInfoOC getInstance] getScriptHandler];
         cocos2d::LuaBridge::pushLuaFunctionById(scriptHandler);
         cocos2d::LuaBridge::getStack()->executeFunction(0);
@@ -93,7 +93,7 @@ static SkipTouchLayer *skpl;
 
 +(void)tiaoGuoAction:(id) sender{
 
-    NSLog(@"跳过视频播放");
+    // NSLog(@"跳过视频播放");
    
 //    [btn removeFromSuperview];
     

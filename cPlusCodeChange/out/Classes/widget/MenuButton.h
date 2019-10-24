@@ -20,9 +20,7 @@ private:
 	float m_scale;
 public:
 private:
-	int m_describePredicted;
-	unsigned short m_availableEmpty;
-	unsigned short m_inefficientValueTranslate;
-	unsigned short m_wcouldMakeMismatched;
+	double m_exclusiveSpecializedEmpty;
+	long m_passAccessibleFive4;
 };
 #endif

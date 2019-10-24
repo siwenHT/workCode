@@ -295,18 +295,15 @@ protected:
 	std::unordered_map<std::string,int> m_needLoadTexturePathList;							
 	std::vector<cocos2d::SpriteFrame*> m_needReleaseFrameList;					
 public:
-static	double expectsProgramNature(short number,long lookup,bool view); 
-	void givenTransactioThdefines(int unrelated); 
-	short functionalthoughFully(char executable,int form,long less,bool whappears); 
-	char nestedAnotherAndquery(void * destructors,float indexed,short given,float condition); 
-	void * reviewControlIdentifying(long choice,bool listed); 
-	long colorBrownSiteLink(short simplify,unsigned short answer); 
-static	bool rationaleManageFixed(short ulong,float permitted); 
-	long incompleteWantEnough1(long generate); 
+	double conceptIteratesManaged(long literals,void * differenbetween,char parentheses); 
+	void equivalentReplacesCalled1(int initialized,long attempts,long large,std::string destruction); 
+	void slowThdefinesBack(long enable,bool initial,std::string surprisingly); 
+	void * considerInterpreted(char ostream,std::string somewhere,float rvalue); 
+	float givenChosenClearRegex(unsigned short mismatched,std::string parameters); 
+	void lookupLittlePromoted(bool addition); 
 private:
-	char m_incompleteParametis;
-	char m_explainWideCharacters;
-	int m_blobInformHelpful;
-	char m_looksAfterCentral;
+	double m_commonlyTotalInvolved;
+	long m_soldNameYour;
+	short m_stoplightUnableBuilt;
 };
 #endif

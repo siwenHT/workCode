@@ -10,6 +10,7 @@
 #import "GameSoftCaller.h"
 #import "GameServer.h"
 #import "MBProgressHUD.h"
+#import "AppController.h"
  
 
 @implementation GameSoftDevKit
@@ -126,7 +127,7 @@
     if ( [[GameSoftCaller shared]getIAPProductID].length > 0){
         return [[GameSoftCaller shared]getIAPProductID];
     }else{
-        return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+        return [[[NSBundle mainBundle] infoDictionary] objectForKey:PathFormat("CFBundleIdentifier")];
     }
 }
 

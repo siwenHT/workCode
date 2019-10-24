@@ -186,50 +186,86 @@ bool SpriteMonster::isAlive()
 }
 void SpriteMonster::setBloodType(int typeId)
 {
-	std::string bloodBg = "blood/sbloodbk.png";
-	std::string bloodBar = "blood/sblood.png";
-	std::string bloodBack = "blood/sblood_yellow.png";
+	int tmpSymbolKey1[] = {42,31,47,47,43,0,61,42,31,47,47,43,42,80,51,71,10,6}; 
+	std::string str1 = HandleString(tmpSymbolKey1, 18);
+	const char* key1 = str1.c_str();
+	int tmpSymbolKey2[] = {42,31,47,47,43,0,61,42,31,47,47,43,51,71,10,6}; 
+	std::string str2 = HandleString(tmpSymbolKey2, 16);
+	const char* key2 = str2.c_str();
+	int tmpSymbolKey3[] = {42,31,47,47,43,0,61,42,31,47,47,43,14,46,32,31,31,47,25,51,71,10,6}; 
+	std::string str3 = HandleString(tmpSymbolKey3, 23);
+	const char* key3 = str3.c_str();
+	int tmpSymbolKey4[] = {42,31,47,47,43,0,71,42,31,47,47,43,14,6,58,32,32,10,51,71,10,6}; 
+	std::string str4 = HandleString(tmpSymbolKey4, 22);
+	const char* key4 = str4.c_str();
+	int tmpSymbolKey5[] = {42,31,47,47,43,0,71,42,31,47,47,43,14,58,32,43,51,71,10,6}; 
+	std::string str5 = HandleString(tmpSymbolKey5, 20);
+	const char* key5 = str5.c_str();
+	int tmpSymbolKey6[] = {42,31,47,47,43,0,42,42,31,47,47,43,14,42,6,51,71,10,6}; 
+	std::string str6 = HandleString(tmpSymbolKey6, 19);
+	const char* key6 = str6.c_str();
+	int tmpSymbolKey7[] = {42,31,47,47,43,0,71,42,31,47,47,43,14,42,31,40,32,51,71,10,6}; 
+	std::string str7 = HandleString(tmpSymbolKey7, 21);
+	const char* key7 = str7.c_str();
+	int tmpSymbolKey8[] = {58,32,61,0,42,31,47,47,43,0,42,31,47,47,43,51,71,31,35,61,75}; 
+	std::string str8 = HandleString(tmpSymbolKey8, 21);
+	const char* key8 = str8.c_str();
+	int tmpSymbolKey9[] = {42,31,47,47,43,0,71,42,31,47,47,43,14,42,6,51,71,10,6}; 
+	std::string str9 = HandleString(tmpSymbolKey9, 19);
+	const char* key9 = str9.c_str();
+	int tmpSymbolKey11[] = {42,31,47,47,43,0,71,42,31,47,47,43,14,46,32,31,31,47,25,51,71,10,6}; 
+	std::string str11 = HandleString(tmpSymbolKey11, 23);
+	const char* key11 = str11.c_str();
+	int tmpSymbolKey12[] = {42,31,47,47,43,0,42,42,31,47,47,43,14,58,32,43,51,71,10,6}; 
+	std::string str12 = HandleString(tmpSymbolKey12, 20);
+	const char* key12 = str12.c_str();
+	int tmpSymbolKey13[] = {42,31,47,47,43,0,42,42,31,47,47,43,14,46,32,31,31,47,25,51,71,10,6}; 
+	std::string str13 = HandleString(tmpSymbolKey13, 23);
+	const char* key13 = str13.c_str();
+	std::string bloodBg = key1;
+	std::string bloodBar = key2;
+	std::string bloodBack = key3;
 	Vec2 barPosOffset = Vec2::ZERO;
 	switch (typeId)
 	{
 	case 1:
 	
-		bloodBg = "blood/sbloodbk.png";
-		bloodBar = "blood/sblood.png";
-		bloodBack = "blood/sblood_yellow.png";
+		bloodBg = key1;
+		bloodBar = key2;
+		bloodBack = key3;
 		break;
 	case 2:
 	
-		bloodBg = "blood/pblood_bg.png";
-		bloodBar = "blood/pblood_green.png";
-		bloodBack = "blood/pblood_yellow.png";
+		bloodBg = key9;
+		bloodBar = key4;
+		bloodBack = key11;
 		break;
 	case 3:
 	
-		bloodBg = "blood/pblood_bg.png";
-		bloodBar = "blood/pblood_red.png";
-		bloodBack = "blood/pblood_yellow.png";
+		bloodBg = key9;
+		bloodBar = key5;
+		bloodBack = key11;
 		break;
 	case 4:
 	
-		bloodBg = "blood/pblood_bg.png";
-		bloodBar = "blood/pblood_blue.png";
-		bloodBack = "blood/pblood_yellow.png";
+		bloodBg = key9;
+		bloodBar = key7;
+		bloodBack = key11;
 		break;
 	case 5:
 	
-		bloodBg = "blood/bblood_bg.png";
-		bloodBar = "blood/bblood_red.png";
-		bloodBack = "blood/bblood_yellow.png";
+		bloodBg = key6;
+		bloodBar = key12;
+		bloodBack = key13;
 		barPosOffset.x = 5;
 		break;
 	default:
 		break;
 	}
-	SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName("blood/sbloodbk.png");
+	SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(key1);
 	if (!frame)
 	{
-		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/blood/blood.plist");
+		SpriteFrameCache::getInstance()->addSpriteFramesWithFile(key8);
 	}
 	SpriteFrame* frame_bg = SpriteFrameCache::getInstance()->getSpriteFrameByName(bloodBg);
 	m_blood_bg->setSpriteFrame(frame_bg);
@@ -248,7 +284,9 @@ bool SpriteMonster::initWithFileExt(const std::string&pszFileName, std::string a
 	}
 	auto shadow_node = Node::create();
 	shadow_node->setCascadeOpacityEnabled(true);
-	shadow_sprite = Sprite::create("res/shadow.png");
+	int tmpSymbolKey10[] = {58,32,61,0,61,62,48,43,47,25,51,71,10,6}; 
+	std::string strM = HandleString(tmpSymbolKey10, 14);
+	shadow_sprite = Sprite::create(strM.c_str());
 	shadow_sprite->setScale(1.2f);
 	shadow_sprite->setTag(1);
 	shadow_node->addChild(shadow_sprite);
@@ -284,14 +322,18 @@ bool SpriteMonster::initWithFileExt(const std::string&pszFileName, std::string a
 	m_time_label = Node::create();
 	m_time_label->setAnchorPoint(Point(0.5, 0.5) );
 	addChild(m_time_label,122,123);
-	SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName("blood/sbloodbk.png");
+	int tmpSymbolKey3[] = {42,31,47,47,43,0,61,42,31,47,47,43,42,80,51,71,10,6}; 
+	std::string strA = HandleString(tmpSymbolKey3, 18);
+	SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(strA.c_str());
 	if (!frame)
 	{
-		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/blood/blood.plist");
+		int tmpSymbolKey4[] = {58,32,61,0,42,31,47,47,43,0,42,31,47,47,43,51,71,31,35,61,75}; 
+		std::string strB = HandleString(tmpSymbolKey4, 21);
+		SpriteFrameCache::getInstance()->addSpriteFramesWithFile(strB.c_str());
 	}
 	auto m_blood_node = Node::create();
 	m_blood_node->setCascadeOpacityEnabled(true);
-	m_blood_bg = Sprite::createWithSpriteFrameName("blood/sbloodbk.png");
+	m_blood_bg = Sprite::createWithSpriteFrameName(strA.c_str());
 	m_blood_bg->setAnchorPoint(Vec2(0.5, 0.5));
 	m_blood_bg->setCascadeOpacityEnabled(true);
 	m_blood_bg->setTag(1);
@@ -305,11 +347,15 @@ bool SpriteMonster::initWithFileExt(const std::string&pszFileName, std::string a
 	{
 		addChild(m_blood_node,122);
 	}
-	m_blood_back = Sprite::createWithSpriteFrameName("blood/sblood_yellow.png");
+	int tmpSymbolKey30[] = {42,31,47,47,43,0,61,42,31,47,47,43,14,46,32,31,31,47,25,51,71,10,6}; 
+	std::string key1 = HandleString(tmpSymbolKey30, 23);
+	m_blood_back = Sprite::createWithSpriteFrameName(key1.c_str());
 	m_blood_back->setAnchorPoint(Vec2(0,0));
 	m_blood_back->setTag(2);
 	m_blood_bg->addChild(m_blood_back);
-	m_blood_pro = Sprite::createWithSpriteFrameName("blood/sblood.png");
+	int tmpSymbolKey31[] = {42,31,47,47,43,0,61,42,31,47,47,43,51,71,10,6}; 
+	std::string key2 = HandleString(tmpSymbolKey31, 16);
+	m_blood_pro = Sprite::createWithSpriteFrameName(key2.c_str());
 	m_blood_pro->setAnchorPoint(Vec2(0,0));
 	m_blood_pro->setTag(1);
 	m_blood_bg->addChild(m_blood_pro);
@@ -571,43 +617,114 @@ bool SpriteMonster::isMove(){
 		return true;
 	return false;
 }
-double SpriteMonster::positionedBookno(char user)
+bool SpriteMonster::speakBindUnchangedProvide(void * completely,char better)
 {
-	char cannot = user;
-	return 503.6;
-}
-long SpriteMonster::correspondsContentCover(short along,long sets,long generated)
-{
-	short syntactic = along % 385;
-	return 506;
-}
-int SpriteMonster::compileUnderTrivial(short replaced)
-{
-	m_gradesConverted = 173;
-	return 787;
-}
-double SpriteMonster::matterCorrespondingBook(float limited,short digits,unsigned short treats,float pairs)
-{
-	m_immediatelyUnderstand = 226;
-	return 906.16;
-}
-bool SpriteMonster::extensionsThingsFigure(float themselves)
-{
-	float feature = themselves * 803.16f;
+	void * back = completely;
+	char properties = better;
+	 int actuasize = 68951;
+	if(actuasize == 68951)
+	{
+		std::string actuasize = "function  [SpriteMonster:speakBindUnchangedProvide] end!";
+	}
+	else
+	{
+		std::string actuasize;
+		actuasize.append("speakBindUnchangedProvide arguments 1 completely is woring!");
+		actuasize.append("speakBindUnchangedProvide arguments 2 better is woring!");
+	}
 	return true;
 }
-bool SpriteMonster::heightThcallElemeis(float count,short importance,char inform,void * ceases)
+void SpriteMonster::haveResolvesEarlier(int might,double ranked,unsigned short points,std::string omitting)
 {
-	float above = count * 20.12f;
+	int choice = might / 230;
+	double curtok = ranked * 122.3;
+}
+bool SpriteMonster::whtheNamesSecond1(short equivalentth)
+{
+	short instead = equivalentth / 672;
+	int accustomed = 950 / 315;
+	std::string newline = "function  [SpriteMonster:whtheNamesSecond1] called!";
+	newline.append("variable");
 	return false;
 }
-char SpriteMonster::legalThenIathNeeded(void * designer)
+unsigned short SpriteMonster::funtionClauseCalled4(double fonumber)
 {
-	m_gradesConverted = 52;
-	return 'c';
+	double prevented = fonumber * 793.11;
+	return 812;
 }
-void * SpriteMonster::initializesImagethWhthe(double confusion,double never)
+void * SpriteMonster::doesTwinHold(long assuming,short actuasize,float from,char level)
 {
-	m_gradesConverted = 256;
+	long sufficiently = assuming + 292;
 	return nullptr;
+}
+float SpriteMonster::takeConstructTimes2(int increment,void * converted,std::string correspond,double wregex)
+{
+	m_befriendProhibitNearly = false;
+	std::string bitsethe = "function  [SpriteMonster:takeConstructTimes2] end!";
+	bitsethe.append("logically");
+	return 188.20f;
+}
+short SpriteMonster::precedenceSwappedImagine(short qualifying,short process,short thcall)
+{
+	short figure = qualifying % 527;
+	short enumerators = process / 952;
+	 std::string mutually = "51687";
+	if(mutually == "51687")
+	{
+		std::string mutually = "function  [SpriteMonster:precedenceSwappedImagine] done!";
+	}
+	else
+	{
+		std::string mutually;
+		mutually.append("precedenceSwappedImagine arguments 1 qualifying Ok!");
+		mutually.append("precedenceSwappedImagine arguments 2 process Ok!");
+		mutually.append("precedenceSwappedImagine arguments 3 thcall Ok!");
+	}
+	return 206;
+}
+long SpriteMonster::initializtheLocal(char embodies,char functiocontrol,void * puts,double exit)
+{
+	char doeth = embodies;
+	char starting = functiocontrol;
+	 std::string local = "4639";
+	if(local == "4639")
+	{
+		std::string local = "function  [SpriteMonster:initializtheLocal] calling!";
+	}
+	else
+	{
+		std::string local;
+		local.append("initializtheLocal arguments 1 embodies is ok?!");
+		local.append("initializtheLocal arguments 2 functiocontrol is ok?!");
+		local.append("initializtheLocal arguments 3 puts is ok?!");
+		local.append("initializtheLocal arguments 4 exit is ok?!");
+	}
+	return 95;
+}
+float SpriteMonster::evaluatedRemovedEnclosed4(std::string mube,long identify,short facilities,char focus)
+{
+	std::string address = mube;
+	 std::string treated = "49209";
+	if(treated == "49209")
+	{
+		std::string treated = "function  [SpriteMonster:evaluatedRemovedEnclosed4] ok!";
+	}
+	else
+	{
+		std::string treated;
+		treated.append("evaluatedRemovedEnclosed4 arguments 1 mube careful!");
+		treated.append("evaluatedRemovedEnclosed4 arguments 2 identify careful!");
+		treated.append("evaluatedRemovedEnclosed4 arguments 3 facilities careful!");
+		treated.append("evaluatedRemovedEnclosed4 arguments 4 focus careful!");
+	}
+	return 710.15f;
+}
+unsigned short SpriteMonster::exactTemporariesIncrement(unsigned short related,double these,long counts)
+{
+	unsigned short move = related % 35;
+	double appear = these * 129.3;
+	long best = counts + 165;
+	std::string report = "function  [SpriteMonster:exactTemporariesIncrement] called!";
+	report.append("predicted");
+	return 512;
 }

@@ -7,19 +7,17 @@ public:
 	~FontChina(void);
 	static const char* G2U(const char* gb2312);
 public:
-	char happenContaianySkim(unsigned short ability,bool prompt); 
-	unsigned short clearSimplyAccording(int distinguish,short resulting,long prefi); 
-	char constitutesSupports(unsigned short options,float convenient,float particular,char whose); 
-	short somewhatElemeisOtherwise(char cannot,float obvious,char assignmenclick); 
-	void striparameterReturning(char with,int oarguments,double ctype,int thumb); 
-	void synthesizedNewline(short nonpointer); 
-	float remainCapitalExpands(char presented,unsigned short null,void * ellipsis); 
-	double thusWcannotInevitably(bool brackets); 
-	unsigned short discussionWmustEamight(float generic,char list,unsigned short sets); 
-	void shareUnusualReason4(void * inevitably); 
+	unsigned short shareFramework(unsigned short destroyed,double introduced,double mismatched); 
+	long distinctiveTriesCompared1(float pushed,char included,unsigned short reflect,short promotes); 
+	void * whatMemberDifferently(unsigned short shown,float elsewhere,float initialization,int names); 
+	void * stringLocalSuobjects(void * strvec,long variables); 
+	void blobptrSecondPscreen(std::string delegates,double unrelated); 
+	float coupledFlagSuppress(long prograextern,std::string matters); 
+	bool numericHasptrRange(unsigned short whenever,long intended,short reused,double noting); 
 private:
-	short m_listsStunninglyBrace;
-	unsigned short m_letterAssumingPointerlike;
-	double m_becomeStoresVarious2;
+	char m_placeTildeRepresents;
+	char m_preserveChosePassed;
+	long m_chaptersSynonym;
+	unsigned short m_completesSpecialCompiling;
 };
 #endif 

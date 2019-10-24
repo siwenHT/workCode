@@ -12,19 +12,15 @@ protected :
 	void endMove();
 	CC_SYNTHESIZE_READONLY(bool, m_isFinished, IsFinished);
 public:
-	double translateMutuallyCapital(char previously,bool executing,float behalf,short before); 
-	int splitDefinesEnumerations(float understand,int inlined); 
-	void * protectionSchema(void * difficult,int elem,short alias,short sometimes); 
-	void * shareDirectlyObjec(double error,unsigned short along,char match,short benefit); 
-	void bothEncountersConverted(double managing,char possible,float have,float explain); 
-	float hardestDifferenbetween1(double common,long typeids,long defined,short library); 
-static	double tuplesSufficientlyNotify(bool elipsis,long processes); 
-static	short stunninglyLiterals(void * neither,void * zero,char words); 
-	bool featureSwapNearly(int benefit,int alphanumeric,void * argument); 
+	bool insteadRationaleNontype(char affect,int string,float printed); 
+	unsigned short enclosingIntending(long told,float delegates); 
+	unsigned short contextSufficientlyCease(char look,std::string specified); 
+	void deletesHairInstances3(unsigned short difference,unsigned short refer,short calculate,double quiza); 
+	long genericLeftHardest3(long instantiate,float passes,int price); 
+static	void containContadeclarations(char postfix,long control); 
+	void readyActuallyAffects(long incomplete); 
 private:
-	int m_manualAppliesCerr3;
-	float m_neededNewlineInttypes;
-	void * m_natureChparameter;
-	int m_elementPreventingEmbodies;
-	char m_selectExecutesHides;
+	long m_tryingDisadvantages;
+	bool m_ensureAdaptorsInitializes;
+	bool m_differsPromptPresumably;
 };

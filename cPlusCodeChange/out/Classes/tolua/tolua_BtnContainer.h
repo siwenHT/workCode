@@ -57,7 +57,7 @@ int lua_BtnContainer_create(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_BtnContainer_create'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -115,7 +115,7 @@ int lua_BtnContainer_createTopContainer(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_BtnContainer_createTopContainer'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -134,7 +134,7 @@ int lua_BtnContainer_addItem(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_BtnContainer_addItem'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -150,7 +150,7 @@ int lua_BtnContainer_addItem(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_BtnContainer_addItem'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }

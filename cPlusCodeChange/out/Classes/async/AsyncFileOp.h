@@ -21,20 +21,23 @@ public:
 protected:
 	static AsyncFileOp* m_instance;
 public:
-	int heldFunctiopresented(unsigned short behalf,long isbn,short hierarchy,unsigned short wish); 
-	void loopsPushedBrown(double immediately,char bits); 
-	char conversionchapterEquals(double seemingly,long ordinary); 
-static	void * recognizingSectionsSimply(unsigned short reject,char matter,bool seen,float determine); 
-	bool closesManualHowevewe(char defines,char queryresult,bool instantiations); 
-	int inttypSiteLibrary(void * constitute,unsigned short finds,bool affects,unsigned short grades); 
-	int reachNothingOver(float compilers,short color); 
-static	bool pairwiseLessDone(bool often,float begins,void * extensioindicating,int exclusive); 
-	float attemptedDeduction(bool convention,unsigned short abstractly,int framework,int abstraction); 
+	long definitionDebugging(short total); 
+	long actualTransactio(int defaults,long variables,float detailed,unsigned short stunningly); 
+	void specializationHave(int computational,float argumepassed); 
+	unsigned short normallyArrarecallPerson3(int brackets,float transformation,bool similarly); 
+	unsigned short minimalFirstThoughStored(void * bind,short name,double introduce,unsigned short browsers); 
+	long throughoutEasiestFifth(char types,void * more); 
+	int expansionFuntionBecause(bool nodtor); 
+	void incrementally(float whole,float completes,double includes,short person); 
+	void membersCmatchKnow5(long prints,short ensure); 
+	int wereListitemAverage(std::string accustomed,char evaluated,char caller,int having); 
+static	void attentionConsisHard(int naming,short predicted); 
 private:
-	short m_circumstancesPrevent2;
-	long m_containerSpecifedHidden;
-	long m_thpositionSurelyThere;
-	int m_deducesValuelikeThus;
+	bool m_unableAbstractionTempting;
+	double m_onlyRecompilingBased;
+	short m_indicatedEnoughAverage;
+	float m_limitsElemtypeLook;
+	float m_normalDynamicBasic;
 };
 NS_CC_END
 #endif 

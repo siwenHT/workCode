@@ -27,10 +27,10 @@ public:
 	unsigned long m_data[4];
 public:
 private:
-	void * m_begunPointerwhenRequested2;
-	double m_untilPredictedSequential;
-	short m_appliedTakesInvolved;
-	char m_sensibleConfusion;
-	bool m_indicatingReferencesth;
+	double m_syntacticImagine;
+	bool m_supplyYour;
+	unsigned short m_fullDescribedNumber;
+	std::string m_iandSimilarlyUsesIncluded;
+	char m_putsShowsAdvantages;
 };
 #endif 

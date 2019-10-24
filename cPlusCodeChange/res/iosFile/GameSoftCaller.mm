@@ -1,18 +1,16 @@
 #import "GameSoftCaller.h"
 #import "GameServer.h"
 #import "JSON.h"
-
+#import "AppController.h"
 #import "XGPush.h"
-#import "ShatterSubmesh_Cyclerefraction.h"
+#import "DDFBSDK.h"
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 #import <UserNotifications/UserNotifications.h>
 #endif
 
-static NSString * GameID = @"1125";
-static NSString * packetid = @"1001125001";
-static BOOL isSDKTest = NO;
-static NSString * iapProductId = @"polka.candle.money";
+static NSString * GameID = @"1185";
+static NSString * iapProductId = @"an.ywl.";
 
 static int callLogin = 0;
 static NSString* serverId = nil;
@@ -45,15 +43,15 @@ static SDKCallback *callback = nil;
 @implementation GameSoftCaller
 #pragma mark - XGPushDelegate
 - (void)xgPushDidFinishStart:(BOOL)isSuccess error:(NSError *)error {
-    NSLog(@"%s, result %@, error %@", __FUNCTION__, isSuccess?@"OK":@"NO", error);
+    NSLog(PathFormat("%s, result %@, error %@"), __FUNCTION__, isSuccess?PathFormat("OK"):PathFormat("NO"), error);
 }
 
 - (void)xgPushDidFinishStop:(BOOL)isSuccess error:(NSError *)error {
-    NSLog(@"%s, result %@, error %@", __FUNCTION__, isSuccess?@"OK":@"NO", error);
+    NSLog(PathFormat("%s, result %@, error %@"), __FUNCTION__, isSuccess?PathFormat("OK"):PathFormat("NO"), error);
 }
 
 - (void)xgPushDidRegisteredDeviceToken:(NSString *)deviceToken error:(NSError *)error {
-    NSLog(@"%s, result %@, error %@", __FUNCTION__, error?@"NO":@"OK", error);
+    NSLog(PathFormat("%s, result %@, error %@"), __FUNCTION__, error?PathFormat("NO"):PathFormat("OK"), error);
 }
 
 // iOS 10 新增 API
@@ -64,11 +62,11 @@ static SDKCallback *callback = nil;
 // App 用户在通知中心清除消息
 // 无论本地推送还是远程推送都会走这个回调
 - (void)xgPushUserNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
-    NSLog(@"[XGDemo] click notification");
-    if ([response.actionIdentifier isEqualToString:@"xgaction001"]) {
-        NSLog(@"click from Action1");
-    } else if ([response.actionIdentifier isEqualToString:@"xgaction002"]) {
-        NSLog(@"click from Action2");
+    // NSLog(@"[XGDemo] click notification");
+    if ([response.actionIdentifier isEqualToString:PathFormat("xgaction001")]) {
+        NSLog(PathFormat("click from Action1"));
+    } else if ([response.actionIdentifier isEqualToString:PathFormat("xgaction002")]) {
+        NSLog(PathFormat("click from Action2"));
     }
     
     [[XGPush defaultManager] reportXGNotificationResponse:response];
@@ -99,7 +97,7 @@ static SDKCallback *callback = nil;
 }
 
 - (void)xgPushDidSetBadge:(BOOL)isSuccess error:(NSError *)error {
-    NSLog(@"%s, result %@, error %@", __FUNCTION__, error?@"NO":@"OK", error);
+    NSLog(PathFormat("%s, result %@, error %@"), __FUNCTION__, error?PathFormat("NO"):PathFormat("OK"), error);
 }
 
 /**
@@ -109,31 +107,29 @@ static SDKCallback *callback = nil;
     if (callback==nil) {
         callback = [[SDKCallback alloc]init];
     }
-    [[XGPush defaultManager] setEnableDebug:YES];
-    [[XGPush defaultManager] startXGWithAppID:2200331971 appKey:@"I88SI4M7L2RU" delegate:self];
+    [[XGPush defaultManager] setEnableDebug:NO];
+    [[XGPush defaultManager] startXGWithAppID:2200346193 appKey:@"IAH29ZS2Y81R" delegate:self];
     // 清除角标
     if ([XGPush defaultManager].xgApplicationBadgeNumber > 0) {
         [[XGPush defaultManager] setXgApplicationBadgeNumber:0];
     }
-    [[XGPush defaultManager] reportXGNotificationInfo:dic[@"launchOptions"]];
+    [[XGPush defaultManager] reportXGNotificationInfo:dic[PathFormat("launchOptions")]];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerDeviceFailed) name:@"registerDeviceFailed" object:nil];
-    [[ShatterSubmesh_Cyclerefraction shareShatterSubmesh_Cyclerefraction] ShatterSubmesh_Cyclerefraction_IAPRestore:^(NSString *buDanJieGuo, NSString *buDanDingDanID, int buDanDingDanJinE) {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerDeviceFailed) name:PathFormat("registerDeviceFailed") object:nil];
+    [[DDFBSDK shareDDFBSDK]DDFBSDK_IAPRestore:^(NSString *IAPPaymentResult, NSString *IAPOrderID, int IAPOrderAmount) {
         
-        NSLog(@"\n补单交易支付结果=%@\n拇指订单号=%@\n支付金额=%d", buDanJieGuo, buDanDingDanID, buDanDingDanJinE);
     }];
-    NSLog(@"初始化调用");
 }
 
 -(void)showSplash: (void(^)(NSDictionary*))completion{
-    [[GameSoftCaller shared] showSplashImg:@"showImg.png" completion:^(NSDictionary*){
-        [[GameSoftCaller shared] showSplashImg:(NSString *)@"splash.jpg" completion:completion];
+    [[GameSoftCaller shared] showSplashImg:PathFormat("showImg.png") completion:^(NSDictionary*){ 
+        [[GameSoftCaller shared] showSplashImg:(NSString *)PathFormat("splash.jpg") completion:completion]; 
         
     } ];
 }
 
 - (void)registerDeviceFailed {
-    NSLog(@"registerDeviceFailed.....");
+    NSLog(PathFormat("registerDeviceFailed....."));
 }
 
 -(void)showSplashImg:(NSString*)imgstr completion:(void(^)(NSDictionary*))completion{
@@ -169,30 +165,25 @@ static SDKCallback *callback = nil;
 -(void)loginWithParams:(NSDictionary*)dic completion: (void(^)(NSDictionary*))completion Andloginoutcallback: (void(^)(NSDictionary*))loginoutcallback{
     sdklogin = completion;
     sdkloginout = loginoutcallback;
-    NSLog(@"开始登陆");
-    callLogin = [dic[@"callback"] intValue];
+    // NSLog(@"开始登陆");
+    callLogin = [dic[PathFormat("callback")] intValue];
     //***********************************************************登录***********************************************************/
-    [[ShatterSubmesh_Cyclerefraction shareShatterSubmesh_Cyclerefraction] ShatterSubmesh_Cyclerefraction_LoginWithGameID:GameID andTouTiaoAppID:@"162088" andLandscapeMode:TRUE andLoginResult:^(NSString *loginUserID, NSString *loginUserName, NSString *loginSign, NSString *loginTimestamp) {
+    [[DDFBSDK shareDDFBSDK] DDFBSDK_LoginWithGameID:GameID andTouTiaoAppID:@"168590" andLandscapeMode:TRUE andLoginResult:^(NSString *loginUserID, NSString *loginUserName, NSString *loginSign, NSString *loginTimestamp) {
+         NSMutableDictionary * dic = [[NSMutableDictionary alloc] init];
+         dic[PathFormat("openid")] = loginUserID;
+         dic[PathFormat("state")] = @"1";
+         dic[PathFormat("callLogin")] = [NSString stringWithFormat:@"%d", callLogin];
         
-        if (callLogin > 0)
-        {
-            NSMutableDictionary * dic = [[NSMutableDictionary alloc] init];
-            dic[@"openid"] = loginUserID;
-            dic[@"state"] = @"1";
-            dic[@"callLogin"] = [NSString stringWithFormat:@"%d", callLogin];
-        
-            [[XGPushTokenManager defaultTokenManager] bindWithIdentifier:loginUserID type:XGPushTokenBindTypeAccount];
-            if (sdklogin)
-            {
-                sdklogin(dic);
-            }
-            NSLog(@"\n用户ID=%@\n用户名=%@\n签名=%@\n时间戳=%@", loginUserID, loginUserName, loginSign, loginTimestamp);
-        }
-        
-        callLogin = 0;
+         [[XGPushTokenManager defaultTokenManager] bindWithIdentifier:loginUserID type:XGPushTokenBindTypeAccount];
+         if (sdklogin)
+         {
+             sdklogin(dic);
+         }
+     
+         callLogin = 0;
     }];
     
-    NSLog(@"结束登陆");
+    // NSLog(@"结束登陆");
 }
 
 -(NSString*)getPid{
@@ -217,20 +208,20 @@ static SDKCallback *callback = nil;
     if(roleName)
         roleName = nil;
     
-    userId     = [dic[@"roleId"] copy] ;
-    roleName   = [dic[@"roleName"]copy] ;
-    roleLv     = [dic[@"lv"]copy] ;
-    vipLevel   = [dic[@"vipLevel"]copy] ;
-    serverId   = [dic[@"serverId"]copy] ;
-    serverName = [dic[@"serverName"]copy] ;
+    userId     = [dic[PathFormat("roleId")] copy] ; 
+    roleName   = [dic[PathFormat("roleName")]copy] ; 
+    roleLv     = [dic[PathFormat("lv")]copy] ;
+    vipLevel   = [dic[PathFormat("vipLevel")]copy] ; 
+    serverId   = [dic[PathFormat("serverId")]copy] ; 
+    serverName = [dic[PathFormat("serverName")]copy] ; 
     //[[GameServer shared]updateRoleInfo:dic];
-    partyName = [dic[@"factionName"] copy];
+    partyName = [dic[PathFormat("factionName")] copy]; 
     //***********************************************************进入游戏***********************************************************//
-    [[ShatterSubmesh_Cyclerefraction shareShatterSubmesh_Cyclerefraction] ShatterSubmesh_Cyclerefraction_RoleInfoSynchronizeWithRoleId:userId andRoleName:roleName andRoleLevel:roleLv andRoleVipLevel:vipLevel andServerId:serverId andServerName:serverName andAESKEY:@"VpMz6IeA2olb2DvV" andAESAPIKEY:@"VpMz6IeA2olb2DvV" roleSynchronizeResult:^(NSString *roleSynchronizeResult, NSString *roleSynchronizeMessage) {
-        MLog(@"同步结果=%@,信息=%@", roleSynchronizeResult, roleSynchronizeMessage);
+    [[DDFBSDK shareDDFBSDK]DDFBSDK_RoleInfoSynchronizeWithRoleId:userId andRoleName:roleName andRoleLevel:roleLv andRoleVipLevel:vipLevel andServerId:serverId andServerName:serverName andAESKEY:@"MAI7ryVqNHlO90ri" andAESAPIKEY:@"MAI7ryVqNHlO90ri" roleSynchronizeResult:^(NSString *roleSynchronizeResult, NSString *roleSynchronizeMessage) {
+        
     }];
 
-    NSLog(@"上报角色完成");
+    // NSLog(@"上报角色完成");
  
 
       //***********************************************************进入游戏***********************************************************//
@@ -258,49 +249,47 @@ static SDKCallback *callback = nil;
  */
 -(void)qqqWithParams:(NSDictionary*)ret  completion: (void(^)(NSDictionary*))completion{
  
-    if (ret[@"orderID"]==nil) {
-        MLog(@"orderID 不存在!!");
+    if (ret[PathFormat("orderID")]==nil) {
+        // MLog(@"orderID error!!");
         return;
     }
     
-    if (ret[@"serverID"]==nil) {
-        MLog(@"serverID 不存在!!");
+    if (ret[PathFormat("serverID")]==nil) {
+        // MLog(@"serverID error!!");
         return;
     }
     
-    if (ret[@"roleLev"]==nil) {
-        MLog(@"roleLev 不存在!!");
+    if (ret[PathFormat("roleLev")]==nil) {
+        // MLog(@"roleLev error!");
         return;
     }
     
-    if (ret[@"roleId"]==nil) {
-        MLog(@"roleId 不存在!!");
+    if (ret[PathFormat("roleId")]==nil) {
+        // MLog(@"roleId error!!");
         return;
     }
     
-    if (ret[@"money"]==nil) {
-        MLog(@"money 不存在!!");
+    if (ret[PathFormat("money")]==nil) {
+        // MLog(@"money error!!");
         return;
     }
 
-    NSString *productId = [NSString stringWithFormat:@"%@%d", iapProductId, [ret[@"money"] intValue]];
-    NSString* orderID = [NSString stringWithFormat:@"%@", ret[@"orderID"]];
-    NSString* roleId = [NSString stringWithFormat:@"%@", ret[@"roleId"]];
-    int serverID =  [ret[@"serverID"] intValue];
-    int roleLev = [ret[@"roleLev"] intValue];
-    NSLog(@"获取订单ID %@",orderID);
+    NSString *productId = [NSString stringWithFormat:PathFormat("%@%d"), iapProductId, [ret[PathFormat("money")] intValue]];
+    NSString* orderID = [NSString stringWithFormat:PathFormat("%@"), ret[PathFormat("orderID")]];
+    NSString* roleId = [NSString stringWithFormat:PathFormat("%@"), ret[PathFormat("roleId")]];
+    int serverID =  [ret[PathFormat("serverID")] intValue];
+    int roleLev = [ret[PathFormat("roleLev")] intValue];
+    // NSLog(@"获取订单ID %@",orderID);
 
     
-    //money = 0.1f;
     //***********************************************************支付***********************************************************//
-    [[ShatterSubmesh_Cyclerefraction shareShatterSubmesh_Cyclerefraction] ShatterSubmesh_Cyclerefraction_IAPWithProductID:productId andCPOrderID:orderID andCPServerID:serverID andCPRoleID:roleId andCPRoleLevel:roleLev andCPTokenURL:nil andAppleIAPResult:^(NSString *IAPPaymentResult, NSString *IAPOrderID, int IAPOrderAmount) {
-            MLog(@"\n交易支付结果=%@\n订单号=%@\n金额=%d", IAPPaymentResult, IAPOrderID, IAPOrderAmount);
+    [[DDFBSDK shareDDFBSDK] DDFBSDK_IAPWithProductID:productId andCPOrderID:orderID andCPServerID:serverID andCPRoleID:roleId andCPRoleLevel:roleLev andCPTokenURL:nil andAppleIAPResult:^(NSString *IAPPaymentResult, NSString *IAPOrderID, int IAPOrderAmount) {
     }];
     //***********************************************************支付***********************************************************//
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"registerDeviceFailed" object:nil];}
+    [[NSNotificationCenter defaultCenter] postNotificationName:PathFormat("registerDeviceFailed") object:nil];}
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     [[XGPush defaultManager] reportXGNotificationInfo:userInfo];

@@ -1,4 +1,5 @@
 ﻿#include "CCEffects.h"
+#include "JIGMovingAliasTool.h"
 #include "AsyncDownloadManager.h"
 #include "AsyncLoadPlist.h"
 #include "vsdef.h"
@@ -34,7 +35,8 @@ Effects::Effects()
 	m_baseOffset = Vec2::ZERO;
 	updateShowState();
 	m_boSkillEffect = false;
-	m_sDirectoryName = "effectsplist";
+	int tmpSymbolKey[] = {32,13,13,32,50,75,61,71,31,35,61,75}; 
+	m_sDirectoryName = HandleString(tmpSymbolKey, 12);
 }
 Effects::~Effects(void){
 	for(std::map<std::string,cocos2d::EventListenerCustom*>::iterator iter = m_downloadListenerList.begin();iter != m_downloadListenerList.end();iter++){
@@ -49,6 +51,9 @@ void Effects::cleanup(){
 	cleanAsync();
 }
 void Effects::reset(){
+	JIGMovingAliasTool jigmovingaliastool_e;
+	jigmovingaliastool_e.arraytheStartSome(161,385.10f,42.1);
+
 	m_isLoadTexturing = false;
 	m_isLoadTexture = false;
 	m_isLoadPlist = false;
@@ -59,20 +64,22 @@ void Effects::reset(){
 void Effects::cleanAsync(){
 	if(m_loadTextureEntryId != 0 && !m_show_texture_path.empty()){
 		bool isFind = Director::getInstance()->getTextureCache()->unbindImageAsyncCustom(m_show_texture_path,m_loadTextureEntryId);
-		CCASSERT(isFind == true, "Effects m_loadTextureEntryId remove Fail");
+	
 		m_loadTextureEntryId = 0;
 	}
 	m_needLoadTextureList.clear();
 	if(m_loadPlistEntryId != 0 && !m_show_plist_path.empty()){
 		bool isFind = AsyncLoadPlist::getInstance()->unbindPlistAsyncWithEntryId(m_show_plist_path,m_loadPlistEntryId);
-		CCASSERT(isFind == true, "Effects m_show_plist_path remove Fail");
+	
 		m_loadPlistEntryId = 0;
 	}
 }
 Effects *Effects::create(bool auto_clean,bool onloadPlay, bool boSkillEffect)
 {
     Effects *pRet = new Effects();
-    if (pRet && pRet->initWithFile("res/empty_frame.png") && pRet->init(auto_clean,onloadPlay, boSkillEffect))
+    int tmpSymbolKey[] = {58,32,61,0,32,18,71,75,46,14,13,58,48,18,32,51,71,10,6}; 
+	std::string keyA = HandleString(tmpSymbolKey, 19);
+    if (pRet && pRet->initWithFile(keyA.c_str()) && pRet->init(auto_clean,onloadPlay, boSkillEffect))
     {
         pRet->autorelease();
         return pRet;
@@ -272,7 +279,7 @@ void Effects::loadPlist()
 			}
 			else
 			{
-				CPLUSLog("[Effects::createEffect] ... Plist Not Find: %s", plistUrl.c_str());
+			
 			}
 		}
 	}
@@ -549,7 +556,7 @@ void Effects::addSpriteFrameListCallBack(cocos2d::Texture2D* a,std::string strur
 	m_loadTextureEntryId = 0;
 	m_isLoadTexturing = false;
 	if(a == nullptr){
-		CCLOG("Effects_load file fail:%s",strurl.c_str());
+	
 		return;
 	}
 	m_showState = 2;
@@ -588,11 +595,15 @@ std::string Effects::calculateAssetPath(int typeId, int plistNum, bool isOld){
 		if(std::string::npos != k)
 		{
 			auto sub_str = m_pszFileName.substr(0, k);
-			sprintf(url,"res/%s/s_%s@%d%s", m_sDirectoryName.c_str(), sub_str.c_str(), plistNum - 1, suffix.c_str());
+			int tmpSymbolKey[] = {58,32,61,0,64,61,0,61,14,64,61,38,64,43,64,61}; 
+			std::string key1 = HandleString(tmpSymbolKey, 16);
+			sprintf(url, key1.c_str(), m_sDirectoryName.c_str(), sub_str.c_str(), plistNum - 1, suffix.c_str());
 		}
 		else
 		{
-			sprintf(url,"res/%s/%s@%d%s", m_sDirectoryName.c_str(), m_pszFileName.c_str(), plistNum - 1, suffix.c_str());
+			int tmpSymbolKey[] = {58,32,61,0,64,61,0,64,61,38,64,43,64,61}; 
+			std::string keyA = HandleString(tmpSymbolKey, 14);
+			sprintf(url, keyA.c_str(), m_sDirectoryName.c_str(), m_pszFileName.c_str(), plistNum - 1, suffix.c_str());
 		}
 	}
 	else
@@ -600,11 +611,15 @@ std::string Effects::calculateAssetPath(int typeId, int plistNum, bool isOld){
 		if(std::string::npos != k)
 		{
 			auto sub_str = m_pszFileName.substr(0, k);
-			sprintf(url,"res/%s/s_%s%s", m_sDirectoryName.c_str(), sub_str.c_str(), suffix.c_str());
+			int tmpSymbolKey[] = {58,32,61,0,64,61,0,61,14,64,61,64,61}; 
+			std::string keyA = HandleString(tmpSymbolKey, 13);
+			sprintf(url,keyA.c_str(), m_sDirectoryName.c_str(), sub_str.c_str(), suffix.c_str());
 		}
 		else
 		{
-			sprintf(url,"res/%s/%s%s", m_sDirectoryName.c_str(), m_pszFileName.c_str(), suffix.c_str());
+			int tmpSymbolKey[] = {58,32,61,0,64,61,0,64,61,64,61}; 
+			std::string keyA = HandleString(tmpSymbolKey, 11);
+			sprintf(url, keyA.c_str(), m_sDirectoryName.c_str(), m_pszFileName.c_str(), suffix.c_str());
 		}
 	}
 	return url;
@@ -616,7 +631,8 @@ bool Effects::init(bool auto_clean,bool onloadPlay, bool boSkillEffect)
 	m_boSkillEffect = boSkillEffect;
 	if (m_boSkillEffect)
 	{
-		m_sDirectoryName = "skilleffcets";
+	    int tmpSymbolKey[] = {61,80,35,31,31,32,13,13,50,32,75,61}; 
+		m_sDirectoryName = HandleString(tmpSymbolKey, 12);
 	}
 	return true;
 }
@@ -649,65 +665,94 @@ void Effects::setBasePosition(cocos2d::Vec2 pos){
 	m_baseOffset = pos;
 }
 
-float Effects::precedeNumberCoverage(float cause,void * turn,double advantage)
+char Effects::sizeQuiteInherit(unsigned short abstract,void * occasionally,double flag,short iobj)
 {
-	m_whatHandleIndicates = 222;
-	return 385.7f;
+	m_forgotMatrixOutput = 625.3f;
+	return 'V';
 }
-void Effects::algorithmWhatForm(short reflect,unsigned short benefit)
+float Effects::advantagesCompletesError(float imagine)
 {
-	short multiple = reflect % 476;
+	float cursor = imagine + 887.2f;
+	bool wrote = false;
+	unsigned short whappears = 24 / 403;
+	 bool largely = false;
+	if(largely)
+	{
+		std::string largely = "function  [Effects:advantagesCompletesError] begin!";
+	}
+	else
+	{
+		std::string largely;
+		largely.append("advantagesCompletesError arguments 1 imagine Ok!");
+	}
+	return 890.0f;
 }
-bool Effects::whetherSuppliedRepresents(short should)
+unsigned short Effects::coverCorresponding(unsigned short thfunction)
 {
-	short ordinary = should % 393;
-	unsigned short scope = 96 + 21;
+	unsigned short advantages = thfunction * 305;
+	float permitted = 427.17f + 450.14f;
+	unsigned short computational = 28 / 266;
+	 std::string whether = "11818";
+	if(whether == "11818")
+	{
+		std::string whether = "function  [Effects:coverCorresponding] end!";
+	}
+	else
+	{
+		std::string whether;
+		whether.append("coverCorresponding arguments 1 thfunction need Check!");
+	}
+	return 603;
+}
+short Effects::muensureFeatures(int itas,double seen,float eliminated,bool helpful)
+{
+	int original = itas % 718;
+	double bracket = seen - 868.3;
+	float initializes = eliminated * 955.4f;
+	std::string tpass = "function  [Effects:muensureFeatures] end!";
+	tpass.append("contained");
+	return 408;
+}
+char Effects::hasptrCallingDealing5(short entire,long differing,int involved,unsigned short unique)
+{
+	short tools = entire % 890;
+	long initialized = differing - 688;
+	std::string construct = "function  [Effects:hasptrCallingDealing5] calling!";
+	construct.append("look");
+	return 'a';
+}
+bool Effects::reimplementCloseTranslate(char valuelike,short rely)
+{
+	char them = valuelike;
+	short wish = rely * 479;
 	return false;
 }
-int Effects::hidesProblemsGive2(void * thcall,float nocopy,bool container,double recognizing)
+char Effects::istreamRevisited(float release,std::string allowed)
 {
-	void * operators = thcall;
-	return 922;
+	float owns = release + 122.13f;
+	std::string programs = allowed;
+	double destroywhen = 411.5 + 622.19;
+	std::string sample = "function  [Effects:istreamRevisited] calling!";
+	sample.append("nontype");
+	return 'i';
 }
-unsigned short Effects::decideObjectErrormsg(double functiocontrol,double dealing)
+std::string Effects::ownsMoreLoopControls(void * inherit,double operations,int sale,void * inheritance)
 {
-	double intend = functiocontrol - 738.1;
-	double circumstances = dealing - 623.17;
-	short wilrefer = 741 + 490;
-	return 493;
+	m_forgotMatrixOutput = 64.1f;
+	return "designers";
 }
-char Effects::beginsProvidesIsbns(bool repeatedly,short selects,long generic)
+void Effects::wouldStateScopeConcludes(std::string been,void * differences)
 {
-	bool deleted = repeatedly;
-	return '5';
+	std::string outside = been;
+	std::string scoped = "function  [Effects:wouldStateScopeConcludes] finish!";
+	scoped.append("thgenerates");
 }
-void * Effects::basisReturningMatterCalls(float correspond,float blobptr,float represent)
+float Effects::purposesBoundBits(float normal,int apply,double fact,float variable)
 {
-	float three = correspond + 776.3f;
-	float variables = blobptr * 177.20f;
-	return nullptr;
-}
-void Effects::wideBasisUnlikely(void * none,char meaning,long nonreference,unsigned short adds)
-{
-	m_stunninglyQuiteThdefines = 139;
-}
-void * Effects::convertPurposeParts4(void * allocate,int expression,short multidimensional)
-{
-	void * stay = allocate;
-	return nullptr;
-}
-long Effects::enforcesIostream(void * converts,short requirements,unsigned short letters)
-{
-	void * behave = converts;
-	return 742;
-}
-unsigned short Effects::wellAlgorithmsStore(bool components,void * record,int give,short nontemplate)
-{
-	bool flips = components;
-	return 926;
-}
-void Effects::brieflyTheareExactly(bool efficient)
-{
-	bool simply = efficient;
-	void * names = nullptr;
+	float numeric = normal + 401.2f;
+	int postfix = apply * 476;
+	double semicolon = fact * 770.5;
+	std::string information = "function  [Effects:purposesBoundBits] calling!";
+	information.append("equivalentth");
+	return 92.13f;
 }

@@ -1,6 +1,6 @@
 ﻿
 #include "FontChina.h"
-#include "selectDeterminesSomewhere.h"
+#include "JIGGrantsConsisLabel.h"
 #include "cocos2d.h"
 USING_NS_CC;
 FontChina::FontChina(void)
@@ -8,6 +8,9 @@ FontChina::FontChina(void)
 }
 FontChina::~FontChina(void)
 {
+	JIGGrantsConsisLabel jiggrantsconsislabel_e;
+	jiggrantsconsislabel_e.oftenIndicatesConswhat(396,'U');
+
 }
 const char* FontChina::G2U(const char* gb2312)    
 {    
@@ -27,65 +30,51 @@ const char* FontChina::G2U(const char* gb2312)
 	return gb2312; 
 	#endif
 } 
-char FontChina::happenContaianySkim(unsigned short ability,bool prompt)
+unsigned short FontChina::shareFramework(unsigned short destroyed,double introduced,double mismatched)
 {
-	m_listsStunninglyBrace = 464;
-	return 'u';
+	unsigned short functional = destroyed % 877;
+	return 932;
 }
-unsigned short FontChina::clearSimplyAccording(int distinguish,short resulting,long prefi)
+long FontChina::distinctiveTriesCompared1(float pushed,char included,unsigned short reflect,short promotes)
 {
-	int room = distinguish / 645;
-	short destroy = resulting * 248;
-	long revise = prefi * 880;
-	return 745;
+	float friendship = pushed * 758.1f;
+	return 822;
 }
-char FontChina::constitutesSupports(unsigned short options,float convenient,float particular,char whose)
+void * FontChina::whatMemberDifferently(unsigned short shown,float elsewhere,float initialization,int names)
 {
-	unsigned short simpler = options / 109;
-	return 'g';
+	m_completesSpecialCompiling = 948;
+	std::string assignmenclick = "function  [FontChina:whatMemberDifferently] begin!";
+	assignmenclick.append("techniques2");
+	return nullptr;
 }
-short FontChina::somewhatElemeisOtherwise(char cannot,float obvious,char assignmenclick)
+void * FontChina::stringLocalSuobjects(void * strvec,long variables)
 {
-	m_letterAssumingPointerlike = 234;
-	return 585;
+	void * frees = strvec;
+	long friendshipfifth = variables + 733;
+	double numeric = 13.20 - 490.8;
+	std::string corresponds = "function  [FontChina:stringLocalSuobjects] done!";
+	corresponds.append("builds4");
+	return nullptr;
 }
-void FontChina::striparameterReturning(char with,int oarguments,double ctype,int thumb)
+void FontChina::blobptrSecondPscreen(std::string delegates,double unrelated)
 {
-	char among = with;
-	int contaiany = oarguments * 782;
+	std::string signature = delegates;
+	std::string relational = "function  [FontChina:blobptrSecondPscreen] ok!";
+	relational.append("purpose");
 }
-void FontChina::synthesizedNewline(short nonpointer)
+float FontChina::coupledFlagSuppress(long prograextern,std::string matters)
 {
-	selectDeterminesSomewhere selectdeterminessomewhere_e;
-	selectdeterminessomewhere_e.labelsGrammarThfunction(290,409.8f,796,446);
-
-	short elemeis = nonpointer - 715;
-	bool stringsthe = false;
+	m_preserveChosePassed = 'y';
+	std::string imagefifth = "function  [FontChina:coupledFlagSuppress] done!";
+	imagefifth.append("okay");
+	return 404.20f;
 }
-float FontChina::remainCapitalExpands(char presented,unsigned short null,void * ellipsis)
+bool FontChina::numericHasptrRange(unsigned short whenever,long intended,short reused,double noting)
 {
-	char executed = presented;
-	unsigned short chparameter = null % 602;
-	void * patterns = ellipsis;
-	return 972.9f;
-}
-double FontChina::thusWcannotInevitably(bool brackets)
-{
-	bool attention = brackets;
-	short expand = 194 - 885;
-	bool arraythe = false;
-	return 403.14;
-}
-unsigned short FontChina::discussionWmustEamight(float generic,char list,unsigned short sets)
-{
-	float single = generic * 612.1f;
-	char abstraction = list;
-	return 601;
-}
-void FontChina::shareUnusualReason4(void * inevitably)
-{
-	void * read = inevitably;
-	short separator = 528 + 924;
-	float preprocessor = 66.3f - 166.12f;
+	unsigned short some = whenever % 880;
+	long reach = intended * 105;
+	std::string look = "function  [FontChina:numericHasptrRange] finish!";
+	look.append("completely");
+	return false;
 }
  

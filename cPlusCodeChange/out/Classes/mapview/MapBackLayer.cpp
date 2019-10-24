@@ -1,4 +1,5 @@
 #include "MapBackLayer.h"
+#include "JIGPromotedPropagatesMG.h"
 USING_NS_CC;
 MapBackLayer* MapBackLayer::DefaultMapBackLayer = nullptr;
 MapBackLayer::MapBackLayer()  
@@ -44,58 +45,56 @@ void MapBackLayer::updatePosition(const cocos2d::Vec2& position)
 {
 	m_back->setPosition(Vec2(position.x*m_speedRate, position.y*m_speedRate));
 }
-void * MapBackLayer::functionalthoughMarkSplit(float select)
+std::string MapBackLayer::includeNextOptionsUseful(void * reduce)
 {
-	float violate = select + 252.2f;
-	unsigned short object = 193 * 960;
-	return nullptr;
+	void * identify = reduce;
+	unsigned short calculates = 866 + 538;
+	return "content";
 }
-char MapBackLayer::distinctiveAheadAccording(unsigned short file,long results)
+float MapBackLayer::convenientInitialization5(char relational)
 {
-	unsigned short synthesized = file * 632;
-	long overloading = results % 860;
-	double updates = 54.11 * 580.7;
-	return '9';
+	JIGPromotedPropagatesMG jigpromotedpropagatesmg_e;
+	jigpromotedpropagatesmg_e.tyhaveActuasizeWhole('P',808);
+
+	char reading = relational;
+	char importance = '3';
+	unsigned short operands = 74 * 860;
+	return 85.5f;
 }
-bool MapBackLayer::datsuchLiteralsHence(short propagates)
+void MapBackLayer::independentlyInevitably(bool pointer,int avoid,double behalf,std::string detail)
 {
-	short patterns = propagates + 961;
-	short check = 591 * 116;
-	return true;
+	bool calculated = pointer;
 }
-bool MapBackLayer::asfifthSimpleOkayVerify(char mube,float assignmenclick,long evaluated,char vice)
+long MapBackLayer::indexIntegralAdvantages(unsigned short implementing,short loop)
 {
-	m_checkEvaluatedDetailSees = true;
-	return false;
+	unsigned short prior = implementing - 155;
+	std::string structure = "function  [MapBackLayer:indexIntegralAdvantages] called!";
+	structure.append("labels");
+	return 227;
 }
-double MapBackLayer::listthExhaustedVersus(char initialization,void * care)
+long MapBackLayer::gavePrintsFlagEquals(short limited,float pairwise,int care)
 {
-	char illustrate = initialization;
-	void * bits = care;
-	char specifying = 'R';
-	return 662.16;
+	short ordinary = limited % 632;
+	float argumentobjects = pairwise - 11.2f;
+	int second = care - 549;
+	 bool tree = false;
+	if(tree)
+	{
+		std::string tree = "function  [MapBackLayer:gavePrintsFlagEquals] done!";
+	}
+	else
+	{
+		std::string tree;
+		tree.append("gavePrintsFlagEquals arguments 1 limited is woring!");
+		tree.append("gavePrintsFlagEquals arguments 2 pairwise is woring!");
+		tree.append("gavePrintsFlagEquals arguments 3 care is woring!");
+	}
+	return 593;
 }
-bool MapBackLayer::unchangedExpandingMacro(int detail,float trans,int adaptors)
+float MapBackLayer::basicsAllocatesIsbns(bool preventing)
 {
-	m_checkEvaluatedDetailSees = false;
-	return true;
-}
-void MapBackLayer::simplerSectionsCopying(float parameteth)
-{
-	float programmers = parameteth + 497.2f;
-}
-long MapBackLayer::actuasizeExpressionas(void * ways,long modern)
-{
-	void * nonstatic = ways;
-	long applied = modern * 947;
-	return 1000;
-}
-void MapBackLayer::interpretedPreventedWhose(unsigned short updates,short subset)
-{
-	m_checkEvaluatedDetailSees = true;
-}
-long MapBackLayer::informationLength(char deal,unsigned short begin,unsigned short overloaded,long substring)
-{
-	m_checkEvaluatedDetailSees = true;
-	return 175;
+	bool revisited = preventing;
+	void * unrelated = nullptr;
+	float listed = 268.18f * 891.4f;
+	return 281.3f;
 }

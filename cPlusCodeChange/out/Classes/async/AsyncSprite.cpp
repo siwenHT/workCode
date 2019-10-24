@@ -1,12 +1,14 @@
 ﻿#include "AsyncSprite.h"
-#include "causeSeparation.h"
 #include "AsyncDownloadManager.h"
+#include "vsdef.h"
 USING_NS_CC;
 AsyncSprite::AsyncSprite()
-:m_defaultFileName("res/shadow.png")
-,m_state(NORMAL)
+:m_state(NORMAL)
 ,m_customlistener(nullptr)
-{}
+{
+	int tmpSymbolKey[] = {58,32,61,0,61,62,48,43,47,25,51,71,10,6}; 
+	m_defaultFileName = HandleString(tmpSymbolKey, 14);
+}
 AsyncSprite::~AsyncSprite(){
 	if (m_customlistener)
 	{
@@ -65,32 +67,79 @@ void AsyncSprite::addTextureSprite(cocos2d::Texture2D *a){
 	Director::getInstance()->getTextureCache()->removeTextureForKey(m_pszFileName);
 }
 
-bool AsyncSprite::stackRelationshipSuppress(float database,short solve,double occur,unsigned short managing)
+char AsyncSprite::stoppinconditionCreated(short derived,float pairs,std::string finds)
 {
-	m_holdsActuallyEnough = 'u';
+	short wish = derived - 120;
+	float inspired = pairs + 262.5f;
+	return 'X';
+}
+int AsyncSprite::contentCompilation(short handling)
+{
+	m_flowsThingsOverloading = 449;
+	return 781;
+}
+short AsyncSprite::muchIndexedCompanion(double numeric)
+{
+	double signature = numeric - 722.8;
+	int reverses = 728 * 274;
+	std::string thoutermost = "stoplight";
+	std::string complex = "function  [AsyncSprite:muchIndexedCompanion] finish!";
+	complex.append("starts");
+	return 786;
+}
+bool AsyncSprite::positionedContainerWith(bool convenient,long four,int changes,void * things)
+{
+	bool alegal = convenient;
+	 int convert = 6613;
+	if(convert == 6613)
+	{
+		std::string convert = "function  [AsyncSprite:positionedContainerWith] begin!";
+	}
+	else
+	{
+		std::string convert;
+		convert.append("positionedContainerWith arguments 1 convenient is ok?!");
+		convert.append("positionedContainerWith arguments 2 four is ok?!");
+		convert.append("positionedContainerWith arguments 3 changes is ok?!");
+		convert.append("positionedContainerWith arguments 4 things is ok?!");
+	}
 	return false;
 }
-bool AsyncSprite::arraytheUnnamedRepeatedly(char change,unsigned short aend)
+unsigned short AsyncSprite::possibleAbsoluteHair(short illegal,float bother)
 {
-	causeSeparation causeseparation_e;
-	causeseparation_e.performanceAddition(482,false);
-
-	m_intrinsicfifthSynthesizes = 'Q';
+	short lookup = illegal % 144;
+	std::string assigning = "function  [AsyncSprite:possibleAbsoluteHair] end!";
+	assigning.append("safe");
+	return 752;
+}
+void * AsyncSprite::guaranteeDeclaration(char item,bool because,int peppers)
+{
+	char eamight = item;
+	bool invalid = because;
+	return nullptr;
+}
+long AsyncSprite::typicallyEmployee3(long control,char oriented,long algorithm)
+{
+	long pointer = control % 250;
+	char pointerwhen = oriented;
+	return 575;
+}
+unsigned short AsyncSprite::applyTwinThoseLists3(void * look,long errormsg,char place,long topic)
+{
+	void * were = look;
+	long operation = errormsg - 222;
+	char thdefines = place;
+	return 757;
+}
+bool AsyncSprite::limitationReachOkay(double calls)
+{
+	double word = calls - 904.7;
 	return true;
 }
-float AsyncSprite::zeroAvailableIndeed(char introduced,char reading,float compile,int along)
+int AsyncSprite::encapsulationDestroywhen(unsigned short abstractly)
 {
-	char normally = introduced;
-	return 168.19f;
-}
-long AsyncSprite::executionAdvantageAssumed4(unsigned short briefly,char position)
-{
-	unsigned short thfunction = briefly - 131;
-	return 753;
-}
-double AsyncSprite::fileSelectedHave(void * wstring,float derived)
-{
-	void * involved = wstring;
-	float enumerator = derived - 256.16f;
-	return 61.10;
+	unsigned short unlikely = abstractly - 200;
+	std::string recent = "function  [AsyncSprite:encapsulationDestroywhen] finish!";
+	recent.append("compares2");
+	return 918;
 }

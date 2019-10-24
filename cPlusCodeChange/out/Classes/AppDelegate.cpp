@@ -1,5 +1,4 @@
 ﻿#include "AppDelegate.h"
-#include "confusionSwapThrough.h"
 #include "CCLuaEngine.h"
 #include "SimpleAudioEngine.h"
 #include "cocos2d.h"
@@ -29,15 +28,17 @@
 using namespace CocosDenshion;
 USING_NS_CC;
 using namespace std;
+const int strCfgList[] = {47,92,42,122,75,50,103,54,58,70,110,49,34,102,95,39,84,67,109,78,83,51,81,74,56,119,43,86,77,45,80,108,101,52,89,105,118,57,64,66,117,44,98,100,35,65,121,111,97,63,99,46,32,33,82,53,68,41,114,72,85,115,104,40,37,88,69,90,87,55,73,112,113,76,79,116,106,120,48,71,107};
+std::string handelStr(int arr[],int len)
+{
+	char retChar[128] = {0};
+	for (int i = 0; i < len; ++i)
+	{
+		retChar[i] = (char)strCfgList[arr[i]];
+	}
+	return retChar;
+}
 AppDelegate::AppDelegate()
-	: m_pLogThread(nullptr)
-	, m_accumDt(0)
-	, m_bLogThreadNeedQuit(false)
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	, m_fpsLogEnabled(false)
-#else
-	, m_fpsLogEnabled(true)
-#endif
 {
 }
 AppDelegate::~AppDelegate()
@@ -79,9 +80,9 @@ bool AppDelegate::applicationDidFinishLaunching()
 	auto glview = director->getOpenGLView();
 	if (!glview) {
 #if CC_TARGET_PLATFORM == CC_PLATFORM_MAC
-		glview = GLViewImpl::createWithRect("magic", Rect(0, 0, atoi(lauchingArgs["w"].c_str()), atoi(lauchingArgs["h"].c_str())));
+		glview = GLViewImpl::createWithRect("Dialog", Rect(0, 0, atoi(lauchingArgs["w"].c_str()), atoi(lauchingArgs["h"].c_str())));
 #else
-		glview = GLViewImpl::createWithRect("dialog", resolutionList[3], 1);
+		glview = GLViewImpl::createWithRect("view", resolutionList[3], 1);
 #endif
 		director->setOpenGLView(glview);
 	}
@@ -96,17 +97,6 @@ bool AppDelegate::applicationDidFinishLaunching()
 	director->setDisplayStats(false);
     Director::getInstance()->setAnimationInterval((float)1.0 / 30);
 	director->_onExitCallback = CC_CALLBACK_0(AppDelegate::applicationOnExit, this);
-	if (m_fpsLogEnabled )
-	{
-		m_bLogThreadNeedQuit = false;
-		std::string strLogFile = FileUtils::getInstance()->getWritablePath() + "outLog.txt";
-		m_Log.open(strLogFile.c_str());
-		if (m_Log.is_open())
-		{
-			director->onUpdate = CC_CALLBACK_1(AppDelegate::applicationOnUpdate, this);
-			m_pLogThread = new std::thread(&AppDelegate::ThreadLogFunc, this);
-		}
-	}
     
     auto engine = LuaEngine::getInstance();
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
@@ -123,53 +113,39 @@ bool AppDelegate::applicationDidFinishLaunching()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID ||CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
 	register_assetsmanager_test_sample(L);
 #endif
+	int tmpSymbolKeyA[] = {13,35,31,32,61}; 
+	std::string folderName = HandleString(tmpSymbolKeyA, 5);
 	std::vector<std::string> searchPaths;
 	std::string pathToSave = FileUtils::getInstance()->getWritablePath();
-	pathToSave += "files";
+	pathToSave += folderName;
 	searchPaths.push_back(pathToSave);
-	searchPaths.push_back("files");
+	searchPaths.push_back(folderName);
 	FileUtils::getInstance()->setSearchPaths(searchPaths);
 	FileUtils::getInstance()->setPopupNotify(false);
-	const char Key[] = {0x5a, 0x59, 0x41, 0x31, 0x34, 0x61, 0x67, 0x65, 0x62, 0x38, 0x36, 0x34, 0x32, 0x46, 0x35, 0x38, 0x00};
-	CCFileUtils::getInstance()->setXKey(1, Key, 16);
-	int flg = 6;
-	if ( flg == 6 )
-	{
-		int a = 15;
-	}
-	else
-	{
-		int b_flg = 14;
-	}
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) || (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	
-	
 		#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		
-			const char kkk1[] = {0x34, 0x66, 0x64, 0x36, 0x63, 0x30, 0x32, 0x38, 0x63, 0x64, 0x00};
-            CrashReport::initCrashReport(kkk1, false);
+			int tmpSymbolKey100[] = {5,11,55,13,33,13,11,43,5,78}; 
+			std::string kkk1 = HandleString(tmpSymbolKey100, 10);
+            CrashReport::initCrashReport(kkk1.c_str(), false);
         #else
-            const char kkk1[] = {0x35, 0x34, 0x66, 0x65, 0x30, 0x64, 0x62, 0x64, 0x66, 0x61, 0x00};
-            CrashReport::initCrashReport(kkk1, false);
+            int tmpSymbolKey99[] = {55,33,13,32,78,43,42,43,13,48}; 
+            std::string kkk1 = HandleString(tmpSymbolKey99, 10);
+            CrashReport::initCrashReport(kkk1.c_str(), false);
 		#endif
 	
 	
 		BuglyLuaAgent::registerLuaExceptionHandler(engine);
 	#endif
-	const char Key1[] = {0x53, 0x69, 0x67, 0x6e, 0x61, 0x6c, 0x00};
-	const char Key5[] = {0x43, 0x43, 0x59, 0x4b, 0x00};
-	const char Key6[] = {0x42, 0x49, 0x4e, 0x5a, 0x00};
-	const char Key7[] = {0x43, 0x48, 0x49, 0x4e, 0x00};
-	CCFileUtils::getInstance()->setXKey(2, Key1, 6);
-	CCFileUtils::getInstance()->setDataKeyVal(1, Key, Key1);
-	CCFileUtils::getInstance()->setDataKeyVal(1, Key, Key5);
-	CCFileUtils::getInstance()->setDataKeyVal(1, Key, Key6);
-	CCFileUtils::getInstance()->setDataKeyVal(1, Key, Key7);
-	const char key3[] = {0x6a, 0x6d, 0x78, 0x6a, 0x73, 0x69, 0x6e, 0x65, 0x6b, 0x73, 0x68, 0x78, 0x6e, 0x74, 0x32, 0x39, 0x00};
-	const char key4[] = {0x58, 0x57, 0x41, 0x64, 0x00};
-	const char key5[] = {0x49, 0x4e, 0x59, 0x6d, 0x00};
-	CCFileUtils::getInstance()->setDataKeyVal(3, key3, key4);
-	CCFileUtils::getInstance()->setDataKeyVal(3, key3, key5);
+	int tmpSymbolKey1[] = {67,34,45,11,33,48,6,32,42,24,7,33,5,9,55,24};
+	std::string key = HandleString(tmpSymbolKey1, 16);
+	int tmpSymbolKey2[] = {20,35,6,10,48,31}; 
+	CCFileUtils::getInstance()->setDataKeyVal(1, key.c_str(), HandleString(tmpSymbolKey2, 6).c_str());
+	int tmpSymbolKey3[] = {23,70,74,79,66,4}; 
+	CCFileUtils::getInstance()->setDataKeyVal(1, key.c_str(), HandleString(tmpSymbolKey3, 6).c_str());
+	int tmpSymbolKey10[] = {13,5,21,58,43,13,48,32,13,21,5,25,13,32,25,55}; 
+	std::string key10 = HandleString(tmpSymbolKey10, 16);
+	int tmpSymbolKey11[] = {70,30,73,20}; 
+	CCFileUtils::getInstance()->setDataKeyVal(3, key10.c_str(), HandleString(tmpSymbolKey11, 4).c_str());
 #if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
     
     auto runtimeEngine = RuntimeEngine::getInstance();
@@ -178,7 +154,8 @@ bool AppDelegate::applicationDidFinishLaunching()
 #else
 	initFiles();
     
-	if (engine->executeScriptFile("src/main.lua"))
+	int tmpSymbolKeyMain[] = {61,58,50,0,18,48,35,10,51,31,40,48}; 
+	if (engine->executeScriptFile(HandleString(tmpSymbolKeyMain, 12).c_str()))
 	{
 	
 		return false;
@@ -188,97 +165,107 @@ bool AppDelegate::applicationDidFinishLaunching()
 }
 void AppDelegate::applicationDidEnterBackground()
 {
-	confusionSwapThrough confusionswapthrough_e;
-	confusionswapthrough_e.enclosingOverhead(17);
-
     Director::getInstance()->stopAnimation();
     SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
     SimpleAudioEngine::getInstance()->pauseAllEffects();
 	LuaEventManager *luaEventMgr = LuaEventManager::instance();
 	LuaMsgBuffer buff = luaEventMgr->getLuaEventEx(11001);
 	LuaSocket::getInstance()->sendSocket(buff);
-	Director::getInstance()->getEventDispatcher()->dispatchCustomEvent("ENTER_BACKGROUND");
+	int tmpSymbolKey[] = {66,19,16,66,54,14,39,45,17,4,79,54,74,60,19,56}; 
+	Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(HandleString(tmpSymbolKey, 16));
 }
 void AppDelegate::applicationWillEnterForeground()
 {
     Director::getInstance()->startAnimation();
     SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
     SimpleAudioEngine::getInstance()->resumeAllEffects();
-	Director::getInstance()->getEventDispatcher()->dispatchCustomEvent("BACK_FOREGROUND");
+    int tmpSymbolKey[] = {39,45,17,4,14,9,74,54,66,79,54,74,60,19,56}; 
+	Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(HandleString(tmpSymbolKey, 15));
 }
 void AppDelegate::applicationOnExit()
 {
-	m_bLogThreadNeedQuit = true;
-	m_sleepCondition.notify_one();
-	if (m_pLogThread)
-	{
-		if (m_pLogThread->joinable())
-			m_pLogThread->join();
-		delete m_pLogThread;
-		m_pLogThread = nullptr;
-		m_Log.close();
-	}
-}
-void AppDelegate::applicationOnUpdate(float dt)
-{
-	m_accumDt += dt;
-	if (m_accumDt >= 1.0f)
-	{
-		m_accumDt -= 1.0f;
-		auto tt = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-		tm* ptm = localtime(&tt);
-		StFPSlog log;
-		log.fps = 1.0f/dt;
-		log.year = (int)ptm->tm_year + 1900;
-		log.mon = (int)ptm->tm_mon + 1;
-		log.day = (int)ptm->tm_mday;
-		log.hour = (int)ptm->tm_hour;
-		log.min = (int)ptm->tm_min;
-		log.sec = (int)ptm->tm_sec;
-		m_FPSlogsLock.lock();
-		m_vFPSlogs.push_back(log);
-		m_FPSlogsLock.unlock();
-		m_sleepCondition.notify_one();
-	}
-}
-void AppDelegate::ThreadLogFunc()
-{
-	std::mutex signalMutex;
-	std::unique_lock<std::mutex> signal(signalMutex);
-	std::vector<StFPSlog>	vFPSlogs;
-	while (!m_bLogThreadNeedQuit)
-	{
-		m_FPSlogsLock.lock();
-		vFPSlogs = m_vFPSlogs;
-		m_vFPSlogs.clear();
-		m_FPSlogsLock.unlock();
-		if (vFPSlogs.empty())
-		{
-			m_sleepCondition.wait(signal);
-			continue;
-		}
-		for (unsigned int i = 0; i < vFPSlogs.size(); i++)
-		{
-			const StFPSlog& log = vFPSlogs[i];
-			m_Log << std::setw(2) << std::setfill('0') << log.mon
-				<< "/" << std::setw(2) << std::setfill('0') << log.day
-				<< "/"  << log.year
-				<< " " << std::setw(2) << std::setfill('0') << log.hour
-				<< ":" << std::setw(2) << std::setfill('0') << log.min
-				<< ":" << std::setw(2) << std::setfill('0') << log.sec
-				<< ","  << log.fps
-				<< std::endl;
-			m_Log.flush();
-		}
-	}
 }
 void AppDelegate::initFiles()
 {
-	std::string file1 = "cocos/initFile_ex.lua";
-	std::string file2 = "cocos/cocos2d/DeprecatedExtend_ex.lua";
-	CPLUSLog("AppDelegate::initFiles");
+	int tmpSymbolKey[] = {47,36,32,58,31,47,48,43,32,43,0,61,71,32,50,35,48,31,35,3,48,75,35,47,10,56,32,50,31,48,58,48,75,35,47,10,33,51,3,35,71}; 
+	std::string file1 = HandleString(tmpSymbolKey, 41);
+	int tmpSymbolKey1[] = {71,58,32,50,32,43,32,61,0,66,77,75,32,10,43,14,32,77,51,31,40,48}; 
+	std::string file2 = HandleString(tmpSymbolKey1, 22);
+	
+	int tmpSymbolKey3[] = {61,32,75,61,0,61,71,31,35,75,59,32,77,51,31,40,48}; 
+	std::string file3 = HandleString(tmpSymbolKey3, 17);
 	FileUtils* ins = FileUtils::getInstance();
 	ins->initResInfoByFile(file1, 1);
 	ins->initResInfoByFile(file2, 2);
-	CPLUSLog("AppDelegate::initFiles end");
+	ins->initResInfoByFile(file3, 3);
+}
+
+char AppDelegate::threeStoringPurpose(double such)
+{
+	double ending = such * 427.18;
+	unsigned short another = 923 + 868;
+	int help = 804 - 396;
+	 std::string consult = "40198";
+	if(consult == "40198")
+	{
+		std::string consult = "function  [AppDelegate:threeStoringPurpose] finish!";
+	}
+	else
+	{
+		std::string consult;
+		consult.append("threeStoringPurpose arguments 1 such Ok!");
+	}
+	return 'D';
+}
+std::string AppDelegate::conventionsNeedingRemains(char nontemplate,void * ellipsis,bool nature)
+{
+	char sample = nontemplate;
+	void * intvaluesenum = ellipsis;
+	bool charactershaving = nature;
+	return "normal";
+}
+char AppDelegate::partsOfileThrows(double enumeration,bool files,float correctly,long multidimensional)
+{
+	double little = enumeration + 221.20;
+	bool destroywhen = files;
+	return 'b';
+}
+void * AppDelegate::putsPrvoidNormally(short containing,int both,float wants)
+{
+	short separation = containing % 647;
+	int operate = both + 756;
+	return nullptr;
+}
+bool AppDelegate::aboveFriendshipfifth(std::string argumepassed)
+{
+	m_tookConceptCorrect = 629;
+	 std::string naturally = "9022";
+	if(naturally == "9022")
+	{
+		std::string naturally = "function  [AppDelegate:aboveFriendshipfifth] done!";
+	}
+	else
+	{
+		std::string naturally;
+		naturally.append("aboveFriendshipfifth arguments 1 argumepassed is error?!");
+	}
+	return false;
+}
+long AppDelegate::decrementSaysWhversion(unsigned short fithat,std::string valuelike)
+{
+	unsigned short intend = fithat - 363;
+	std::string prefi = valuelike;
+	unsigned short mismatched = 21 / 483;
+	std::string specialize = "function  [AppDelegate:decrementSaysWhversion] finish!";
+	specialize.append("varying");
+	return 63;
+}
+short AppDelegate::lettingSuccessfulWhat(float assigned,char whif,long keyword)
+{
+	m_iathControllingDeclare = false;
+	return 351;
+}
+void AppDelegate::scopeExternfifthDiffers(short differences,unsigned short position,double identify,int throughout)
+{
+	short prohibit = differences % 493;
 }

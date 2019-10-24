@@ -26,7 +26,7 @@ def saveCreateClass(params):
 def createClassFiles(nameList, ansDic, prefixName = '', destPath = ''):
     classInfo = {}
     tool.delFolders( tool.os.path.abspath(destPath + '/'))
-    totalClassNum = tool.random.randint(20, 50)
+    totalClassNum = tool.random.randint(120, 250)
     for _ in range(totalClassNum):
         # print "begin Create class"
         tmpClassName, info = createOneClass({DEF.NAMELIST:nameList, DEF.AnalysisRet:ansDic})
@@ -34,25 +34,10 @@ def createClassFiles(nameList, ansDic, prefixName = '', destPath = ''):
         # print "className:" , tmpClassName
         info[DEF.FULLFILEPATH] = tool.os.path.abspath(destPath + '/' + tmpClassName + '.h')
         saveCreateClass({DEF.CLASS: info})
-        print "create class OK!:" , tmpClassName
-    return classInfo
+        # print "create class OK!:" , tmpClassName
 
-#删除所有注释
-def clearnFiles(lanType, srcPath, dstPath):
-    if lanType == "cplus":
-        srcPath = tool.os.path.abspath(srcPath) 
-        dstPath = tool.os.path.abspath(dstPath)
-        for file in tool.os.listdir(srcPath):
-            srcFile = tool.os.path.join(srcPath, file)
-            dstFile = tool.os.path.join(dstPath, file)
-            if tool.os.path.isfile(srcFile):
-                f_content = tool.ReadFile(srcFile)
-                tool.createDir(dstFile)
-                # print "clearnFiles start:" + srcFile
-                f_content = tool.delCplusNotes(f_content)
-                tool.WriteFile(dstFile, f_content)
-            elif tool.os.path.isdir(srcFile):
-                clearnFiles(lanType, srcFile, dstFile)
+    print 'total class num:' + str(totalClassNum)
+    return classInfo
 
 #检查一个类的内容.
 def checkClassContent(clsCont, clsInfo, fileName):
@@ -460,133 +445,6 @@ def analysisFiles(path, lanType):
 
     return analyRet
 
-def changeStrByDic(changeDic, targetStr):
-    pFind = 0
-    while True:
-        pInclude = targetStr.find("#include" , pFind)
-        if pInclude > -1:
-            pEnd = targetStr.find('\n', pInclude)
-            includeLineInfo = targetStr[pInclude:pEnd]
-            if ('GUI/' in includeLineInfo or '/common/' in includeLineInfo or 'mapview/' in includeLineInfo 
-            or 'widget/' in includeLineInfo or 'common/Ycommon' in includeLineInfo or 'tolua++/Young_binding' in includeLineInfo):
-                pos = includeLineInfo.find('\"')
-                if pos == -1:
-                    pos = includeLineInfo.find('<')
-                pos1 = tool.findLastStr(includeLineInfo, '/')
-                if pos1 > -1:
-                    strA = includeLineInfo[0:pos+1]
-                    strB = includeLineInfo[pos1 + 1:]
-                    newLineInfo = strA + strB
-                    # print includeLineInfo + " ===== " + newLineInfo
-                    targetStr = targetStr.replace(includeLineInfo, newLineInfo)
-                    pFind = pFind + len(newLineInfo) + 1
-                else:
-                    pFind = pEnd + 1
-            else:
-                pFind = pEnd + 1
-        else:
-            break
-    # if targetStr.find("#include") > -1 and ('GUI/' in targetStr or '/common/' in targetStr or 'mapview/' in targetStr or 'widget/' in targetStr ):
-    #     pos = targetStr.find('\"')
-    #     if pos == -1:
-    #         pos = targetStr.find('<')
-    #     tmpStr = targetStr[0:targetStr.find('\n')]
-    #     pos1 = tool.findLastStr(tmpStr, '/')
-    #     if pos1 > -1:
-    #         strA = targetStr[0:pos+1]
-    #         strB = targetStr[pos1 + 1:]
-    #         print targetStr + " ===== " + strA + strB
-
-    #         targetStr = strA + strB
-
-    pFind = 0
-    totlaItems = changeDic.items()
-    while True:
-        pos = -1
-        changeItem = ''
-        
-        #找到最前、最长的匹配内容
-        for key, val in totlaItems:
-            tmpPos = targetStr.find(key, pFind)
-            if tmpPos > -1:
-                if pos == -1:
-                    pos = tmpPos
-                    changeItem = key
-                elif tmpPos < pos or (tmpPos == pos and len(changeItem) < len(key)):
-                    pos = tmpPos
-                    changeItem = key
-
-        if pos > -1:
-            conA = targetStr[0:pos]
-            conB = targetStr[pos+len(changeItem):]
-            targetStr = conA + changeDic[changeItem] + conB
-            pFind = pos + len(changeDic[changeItem])
-        else:
-            break
-    return targetStr
-
-def changeTextFiles(changeDic, path, destPath, changeDir):
-    path = tool.os.path.abspath(path)
-    destPath = tool.os.path.abspath(destPath)
-    tool.delFolders(destPath)
-    for root,dirs,files in tool.os.walk(path):
-        for everyFile in files:
-            srcFile = tool.os.path.join(path, root + "/" + everyFile)
-            tmpPath = root.replace(path, '') + "/" + everyFile
-            tmpPath = tmpPath[1:]
-            destFile = tool.os.path.join(destPath, tmpPath)
-            f_content = tool.ReadFile(srcFile)
-            if srcFile.find('Md5.cpp') > -1:
-                a = 1
-            if (srcFile.find('.cpp') > -1 or srcFile.find('.h') > -1 or srcFile.find('.m') > -1 or srcFile.find('.pch') > -1):
-                if ('\\pbc' not in root) and root.find('\\YunVaSDK') == -1 and root.find('\\ide-support') == -1 and root.find('\\lua-cjson') == -1:
-                    # contentList = f_content.split('\n')
-                    
-                    conLineNum = len(f_content)
-                    if changeDir:
-                        destFile = tool.os.path.join(destPath, 'files/' + everyFile)
-
-                    if conLineNum > 1500:
-                        fSeek = 0
-                        contentList = []
-                        while True:
-                            pPos = f_content.find('\n', fSeek + 1500)
-                            if pPos > -1:
-                                con = f_content[fSeek:pPos]
-                                contentList.append(changeStrByDic(changeDic, con))
-                                fSeek = pPos
-                            else:
-                                con = f_content[fSeek:]
-                                contentList.append(changeStrByDic(changeDic, con))
-                                break
-                            
-                            if fSeek + 1500 > conLineNum:
-                                con = f_content[fSeek:]
-                                contentList.append(changeStrByDic(changeDic, con))
-                                break
-
-                        f_content = ''
-                        for con in contentList:
-                            f_content += con #+ '\n'
-                            
-                        # if newContent != f_content:
-                        #     a = 1
-                    # for i in range(conLineNum):
-                    #     print tool.showTime() + str(i)
-                    #     con = contentList[i]
-                    #     contentList[i] = changeStrByDic(changeDic, con)
-
-                    # f_content = ''
-                    else:
-                        f_content = changeStrByDic(changeDic, f_content)
-                #改变文件名
-                newFileName = changeStrByDic(changeDic, everyFile)
-                destFile = destFile.replace(everyFile, newFileName)
-            # print tool.showTime() + srcFile + " --- " + destFile            
-            dirN = tool.os.path.dirname(destFile)
-            tool.createDir(dirN + '\\')
-            tool.WriteFile(destFile, f_content)
-
 def changeLogToLuaFile(changeLog, destFile):
     wContent = 'local function initFile()\n'
     wContent1 = 'local classCfg = {\n'        
@@ -607,6 +465,83 @@ def changeLogToLuaFile(changeLog, destFile):
     wContent1 += 'end'
     wContent += wContent1
     tool.WriteFile(destFile, wContent)
+
+def encryptionStringCpluse(oldPath, newPath):
+    oldPath = tool.os.path.abspath(oldPath)
+    newPath = tool.os.path.abspath(newPath)
+
+    #找到对应的文件
+    keyFileName = 'AppDelegate.cpp'
+    filePath = tool.os.path.join(oldPath, keyFileName)
+    newFilePath = tool.os.path.join(newPath, keyFileName)
+    if not tool.os.path.exists(filePath):
+        print keyFileName + ' not find !!!!'
+        return
+
+    key = 'strCfgList'
+    fContent = tool.ReadFile(filePath)
+    pos = fContent.find(key)
+    tmpCfg = None
+    newContent = ''
+    if pos > -1:
+        tmpCfg = tool.randomStrCfg()
+        line = tool.strRandomList(tmpCfg)
+
+        posRight, posLeft = tool.matchSymbol(fContent, '{', '}', pos)
+        con1 = fContent[:posLeft]
+        con2 = fContent[posRight:]
+        newContent = con1 + line + con2
+
+        tool.createDir(newFilePath)
+        tool.WriteFile(newFilePath, newContent)
+
+    if not tmpCfg:
+        print "no  new strCfgList !!!"
+        return
+
+    for root,_,files in tool.os.walk(oldPath):
+        for everyFile in files:
+            fileName = root + '\\' + everyFile
+            fileName = fileName.replace(oldPath + '\\', '')
+            oldFilePath = tool.os.path.join(oldPath, fileName)
+            newFilePath = tool.os.path.join(newPath, fileName)
+            if oldFilePath.find(keyFileName) == -1:
+                fContent = tool.ReadFile(oldFilePath)
+            else:
+                fContent = newContent
+
+            pos = 0
+            while True:
+                pos = fContent.find("int tmpSymbolKey", pos)
+                if pos == -1:
+                    pos = fContent.find("int  tmpSymbolKey", pos)
+
+                if pos > -1:
+                    posRight, posLeft = tool.matchSymbol(fContent, '{',  '}', pos)
+                    posSymRight, posSymLeft = tool.matchSymbol(fContent, '\"',  '\"', pos)
+                    if posLeft > -1 and posRight > -1 and posSymRight > -1 and posSymLeft > -1:
+                        strContent = fContent[posSymLeft: posSymRight]
+                        newContent = tool.strRandomList(tool.getStrEnc(strContent, tmpCfg))
+
+                        con1 = fContent[:posLeft]
+                        con2 = fContent[posRight:]
+
+                        fContent = con1 + newContent + con2
+                        pos = posLeft + len(newContent)
+                        oldPos = pos
+
+                        key = "STRNUMSIG"
+                        pos = fContent.find(key, pos)
+                        con1 = fContent[:pos]
+                        con2 = fContent[pos + len(key):]
+                        fContent = con1 + str(len(strContent)) + con2
+
+                        pos = oldPos
+                else:
+                    break
+            
+            tool.createDir(newFilePath)
+            tool.WriteFile(newFilePath, fContent)
 
 def changeDicToText(changeDic, destFile):
     outStr = ''
@@ -637,9 +572,33 @@ def main():
     print tool.showTime() + u"准备混淆c++代码"
     worldsDic.initWorldArray('res/worldDic.txt')
 
+    # files = 'D:/tools/workCode/cPlusCodeChange/out/oc_targetIosFile/LXrConvertedClassesHelper.mm'
+    # mFileContent = tool.ReadFile(files)
+    # # filterStr = r'[-+]+\(.*\)[\t\f]*'+ 'didRotateFromInterfaceOrientation' + ':*\\n+'
+    # filterStr = r'[\n][-+]+[^\n]*' + 'didRotateFromInterfaceOrientation' + '[^\n]*[\n]'
+    # ret = re.search(filterStr, mFileContent)
+    # if ret:
+    #     print ret.span()[1]
+    # return
+    retList = []
+
+    CplusList = ['overloaded/specializationDeclaration4.zip', 'sets/splitHex.lua', 'precedes/Extend_ex.lua']
+    CplusCfg = [69,56,87,77,88,48,92,34,53,63,109,113,81,65,74,42,114,32,78,55,39,115,118,80,72,45,52,66,104,99,41,106,120,100,82,70,103,101,44,73,49,83,79,121,108,57,43,84,98,107,117,54,35,50,33,97,86,116,47,90,95,75,85,40,122,89,111,76,110,71,37,58,67,112,64,105,102,68,119,51,46]
+    for val in CplusList:
+        newContent = tool.strRandomList(tool.getStrEnc1(val, CplusCfg))
+        retList.append([val, newContent])
+
+    OCList = ['an.ywl.']
+    OCCfg = [95,40,79,107,49,35,44,89,113,106,67,42,56,116,119,112,104,75,88,63,54,101,117,99,90,118,109,37,92,102,105,115,48,45,66,52,64,68,50,46,76,122,103,78,43,87,108,81,121,65,98,33,86,58,32,85,57,72,74,83,97,34,53,100,55,82,39,111,41,47,110,114,84,73,51,69,77,71,70,120,80]
+    for val in OCList:
+        newContent = tool.strRandomList(tool.getStrEnc1(val, OCCfg))
+        retList.append([val, newContent])
+
+    # worldsDic.setClsHead(tool.getRandomChar(1, 65, 90).upper() + tool.getRandomChar(1, 65, 90).upper()+ tool.getRandomChar(1, 65, 90).upper())
+    worldsDic.setClsHead("JIG")
     if True:
         osMain.myMain()
-        return
+        # return
 
     # 确认需要创建多少类
     # 创建类
@@ -658,40 +617,15 @@ def main():
     
     # 分析oc文件语法
     # oc 暂时不分析语法了. 直接来
-    # changeDic = {}
-    # changeDic = {'sendLogin':1, 
-    #              'sendAppstore':1, 
-    #              'getAdchannel':1,
-    #              'initWithParams':1, 
-    #              'loginWithParams':1,
-    #              'showRealNameBindingWithParams':1,
-    #              'loginoutWithParams':1,
-    #              'getIAPProductID':1,
-    #              'SYLOG':'MLog',
-    #              'SysInfoOC':1,
-    #              'GameSoftCaller':1,
-    #             #  'GameSoftCaller_IAP':1,
-    #              'GameCaller':1,
-    #              'GameServer':1,
-    #              'GameSoftDevKit':1,
-    #              'channel_ios':1,
-    #              'qqqWithParams':1}
-    # funcName = worldsDic.randomWorldS(50, 'cplusFunc')
-    # for key, val in changeDic.items():
-    #     if val == 1:
-    #         changeDic[key] = funcName.pop()
-
-    # tool.delFolders('E:/magicRpg/magic_ios/frameworks/runtime-src/proj.ios_mac/file')
-    # tool.delFolders('E:/magicRpg/magic_ios/frameworks/runtime-src/proj.ios_mac/fileChange')
-    # clearnFiles('cplus', 'E:/magicRpg/magic_ios/frameworks/runtime-src/proj.ios_mac/files', 'E:/magicRpg/magic_ios/frameworks/runtime-src/proj.ios_mac/file')
-    # changeTextFiles(changeDic, 'E:/magicRpg/magic_ios/frameworks/runtime-src/proj.ios_mac/file', 'E:/magicRpg/magic_ios/frameworks/runtime-src/proj.ios_mac/fileChange', False)
-    # print changeDic
-    # return
+    
+    cfg = tool.randomStrCfg()
+    line = tool.strRandomList(cfg)
 
     classPath1 = 'res/Classes'
     classPath2 = 'out/Classes'
-    classPath3 = 'out/changeClass'
-    classPath4 = 'out/CreateClass'
+    classPath3 = 'out/c_changeClass'
+    classPath4 = 'out/c_CreateClass'
+    classPath5 = 'out/c_dealString'
     
     # classPath1 = 'F:/magicRpg/magic_ios/frameworks/runtime-src/Classes/'
     # classPath2 = 'F:/magicRpg/magic_ios/frameworks/runtime-src/Classes_ex/'
@@ -700,8 +634,11 @@ def main():
     tool.delFolders(classPath2)
     tool.delFolders(classPath3)
     tool.delFolders(classPath4)
+    tool.delFolders(classPath5)
+    tool.createDir(tool.os.path.abspath(classPath5) + '/')
 
-    clearnFiles('cplus', classPath1, classPath2)
+    encryptionStringCpluse(classPath1, classPath5)
+    worldsDic.clearnFiles('cplus', classPath5, classPath2)
     # print '!!clearnFiles over!!'
 
     ansDic = analysisFiles(classPath2, 'cplus')
@@ -709,9 +646,9 @@ def main():
     changeDic = initChangeDic('out/changeText.txt')
     changeLog = {}
 
-    className = worldsDic.randomWorldS(900, 'cplusClass')
-    classFunc = worldsDic.randomWorldS(2500, 'cplusFunc')
-    classAttr = worldsDic.randomWorldS(2000, 'cplusAttr')
+    className = worldsDic.randomWorldS(13000, 'cplusClass')
+    classFunc = worldsDic.randomWorldS(19000, 'cplusFunc')
+    classAttr = worldsDic.randomWorldS(19000, 'cplusAttr')
     exFuncName = ['setPosition', 'getPosition', 'getPositionX', 'setPositionX', 'getPositionY','getPositionY', 'setLocalZOrder', 'setOpacity', 'setVisible', 'init', 'setEnable'
     ,'initWithFile', 'getOpacity', 'getLocalZOrder','cleanup', 'setColor', 'create', 'onTouchDown', 'setSwallowTouch', 'SwallowTouch', 'GUID', 'setDimensions', 'setSystemFontSize'
     ,'initWithTexture', 'setAdditionalKerning', 'setHorizontalAlignment', 'setVerticalAlignment', 'setLineBreakWithoutSpace', 'setColor', 'getColor', 'getString', 'setString', 'runAction'
@@ -840,7 +777,7 @@ def main():
                             tmpCallOther.append(tmpLine)
                             callOtherClass = classInfo
 
-                            print "file add call", filePath, classInfo[DEF.Name], tmpClsHead
+                            # print "file add call", filePath, classInfo[DEF.Name], tmpClsHead
 
                         cplusTool.addExternFuncInfo(filePath , classInfo)
                     else:
@@ -851,11 +788,11 @@ def main():
 
     changeLogToLuaFile(changeLog, 'out/roleTargetChenged.lua')
     changeDicToText(changeDic, 'out/changeText.txt')
-    changeTextFiles(changeDic, classPath2, classPath3, True)
-    print '==========------------------------------------------------=============='
+    osMain.changeTextFiles(changeDic, classPath2, classPath3, True)
+    print '==========------------------------------------------------============== allNewFuncNum' + str(DEF.TCplusNum)
     print "change OK"
 
-    staticFunCallStr = changeStrByDic(changeDic, staticFunCallStr)
+    staticFunCallStr = osMain.changeStrByDic(changeDic, staticFunCallStr)
     # print('staticFunCallStr:', staticFunCallStr)
     tool.WriteFile("out/StaticCallText.txt", staticFunCallStr)
     tool.os.system("pause")

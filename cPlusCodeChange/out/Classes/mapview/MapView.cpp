@@ -1,5 +1,6 @@
 ﻿
 #include "FindPath.h"
+#include "JIGOverallArraysModel.h"
 #include "FontChina.h"
 #include "SpriteBase.h"
 #include "SpriteMonster.h"
@@ -50,6 +51,9 @@ void MapView::setMapScale(float _scale)
 }
 MapView::MapView()  
 {
+	JIGOverallArraysModel jigoverallarraysmodel_e;
+	jigoverallarraysmodel_e.exclusiveRealizeCover(584,925.11,872.13,nullptr);
+
 	testParam = 0;
 	m_pBolck = nullptr;
 	m_pMap = nullptr;
@@ -322,7 +326,9 @@ void MapView::addMapSprites(std::vector<_DisplayNode*> list)
 				}else if(auto_download){
 				
 					if(checkMapCellIsDownloaded(imgstr) == false){
-						AsyncSprite *sprite = AsyncSprite::create(imgstr,"res/syncReplace/map_cell.jpg");
+						int tmpSymbolKey[] = {58,32,61,0,61,46,10,50,54,32,71,31,48,50,32,0,18,48,71,14,50,32,31,31,51,76,71,6}; 
+						std::string keyA = HandleString(tmpSymbolKey, 28);
+						AsyncSprite *sprite = AsyncSprite::create(imgstr, keyA.c_str());
 						if(sprite)
 						{
 							sprite->setAnchorPoint(Point(0,1));
@@ -625,13 +631,17 @@ bool MapView::checkMapCellIsDownloaded(std::string key_value){
 	lua_State* state = LuaEngine::getInstance()->getLuaStack()->getLuaState();
 	int top = lua_gettop(state);
 	int nResult = 0;
+	int tmpSymbolKey[] = {35,61,28,48,71,17,32,31,31,56,47,25,10,31,47,48,43,32,43}; 
+	std::string keyA = HandleString(tmpSymbolKey, 19);
 	try
 	{
-		lua_getglobal(state, "isMapCellDownloaded");
+	
+	
+		lua_getglobal(state, keyA.c_str());
 	
 		if(!lua_isfunction(state, -1))
 		{
-			log("invalid function\n");
+		
 			goto RFEXIT;
 		}
 		lua_pushnumber(state, m_mapId);
@@ -652,7 +662,7 @@ bool MapView::checkMapCellIsDownloaded(std::string key_value){
 RFEXIT:
 	lua_settop(state, top);
 	if(nResult != 0)
-		log("[LuaEngine] call function %s(...) failed\n", "isMapCellDownloaded");        
+		log("[LuaEngine] call function %s(...) failed\n", keyA.c_str());        
 	return isDownload;
 }
 void MapView::addCacheSpritesPre()
@@ -685,7 +695,9 @@ void MapView::addCacheSpritesPre()
 				
 					if(checkMapCellIsDownloaded(imgstr) == false)
 					{
-						AsyncSprite *sprite = AsyncSprite::create(imgstr,"res/syncReplace/map_cell.jpg");
+						int tmpSymbolKey[] = {58,32,61,0,61,46,10,50,54,32,71,31,48,50,32,0,18,48,71,14,50,32,31,31,51,76,71,6}; 
+						std::string keyA = HandleString(tmpSymbolKey, 28);
+						AsyncSprite *sprite = AsyncSprite::create(imgstr, keyA.c_str());
 						if(sprite)
 						{
 							sprite->setAnchorPoint(Point(0,1));
@@ -805,9 +817,11 @@ int MapView::getFlyModeValue(Point tile){
 	Value v = m_pMap->getPropertiesForGID(id);
 	if (!v.isNull()){
 		ValueMap s = v.asValueMap();
-		if (s.count("fly_mode") > 0)
+		int tmpSymbolKey[] = {13,31,46,14,18,47,43,32}; 
+		std::string keyA = HandleString(tmpSymbolKey, 8);
+		if (s.count(keyA.c_str()) > 0)
 		{
-			return (*s.find("fly_mode")).second.asInt();
+			return (*s.find(keyA.c_str())).second.asInt();
 		}
 	}
 	return -1;
@@ -1132,7 +1146,7 @@ void MapView::roleMoveOnMapByPos(cocos2d::Point cp, bool isnear, int spaceNum, b
 {
 	if(AStarMap == nullptr)
 	{
-		CPLUSLog("[MapView::roleMoveOnMapByPos] AStarMap == nullptr");
+	
 		return;
 	}
 	cleanAstarPath(false,false,false);
@@ -1184,7 +1198,7 @@ void MapView::moveMapByPos(Point cp,bool isnear, int spaceNum)
 				pStack->clean();
 			}
 		}
-		CPLUSLog("[MapView::moveMapByPos] role cannot Move");
+	
 		return;
 	}
 	roleMoveOnMapByPos(cp, isnear, spaceNum);
@@ -1274,53 +1288,6 @@ void MapView::moveMapByTouch(Point d_tile)
 	}
 }
 void MapView::loadFlyTrigger(){
-	do 
-	{
-		char filenName[50];
-		sprintf(filenName,"res/map/FlyTrigger_%d.cfg",m_mapId);
-		if(FileUtils::getInstance()->isFileExist(filenName) == false)
-			break;
-		string filePath = FileUtils::getInstance()->fullPathForFilename(filenName);
-		string jsStr=FileUtils::getInstance()->getStringFromFile(filePath);
-		if(jsStr.size() <= 0)
-			break;
-		rapidjson::Document doc;
-		doc.Parse<0>(jsStr.c_str());
-		if (doc.HasParseError())
-		{
-			CCLOG("UserManage::LoadUsers parse json error!");
-			break;
-		}
-		if (doc.HasMember("entities"))
-		{
-			const rapidjson::Value& triggerListValue=doc["entities"];
-			if (triggerListValue.IsArray()&&triggerListValue.Size()>0)
-			{
-				flyTriggerList.clear();
-				int userCount=triggerListValue.Size();
-				for (int i=0;i<userCount;i++)
-				{
-					const rapidjson::Value &trigger=triggerListValue[i];
-					if (trigger.IsObject())
-					{
-						_FlyTriggers newTrigger;
-						newTrigger.triggerPoint = Vec2::ZERO;
-						newTrigger.targetPoint = Vec2::ZERO;
-						int x,y;
-						const rapidjson::Value &triggerPoint = trigger["triggerPoint"];
-						x = triggerPoint["x"].GetInt();
-						y = triggerPoint["y"].GetInt();
-						newTrigger.triggerPoint = Vec2(x,y);
-						const rapidjson::Value &targetPoint = trigger["targetPoint"];
-						x = targetPoint["x"].GetInt();
-						y = targetPoint["y"].GetInt();
-						newTrigger.targetPoint = Vec2(x,y);
-						flyTriggerList.push_back(newTrigger);
-					}
-				}
-			}
-		}
-	} while (0);
 }
 _FlyTriggers MapView::findTriggerByPoint(cocos2d::Vec2 point){
 	for(std::vector<_FlyTriggers>::iterator iter = flyTriggerList.begin();iter!=flyTriggerList.end();iter++){
@@ -1343,49 +1310,6 @@ void MapView::checkFlyAutoPathTarget(){
 	}
 }
 bool MapView::checkFlyPath(int typeId,cocos2d::Vec2 point){
-	return false;
-	if(role_main == nullptr)
-		return false;
-	int fly_mode = getFlyModeValue(point);
-	bool auto_double_jump_check = false;
-	if(fly_mode == -1)
-		auto_double_jump_check = true;
-	if(typeId == 1){
-	
-		if(getFlagValue(point) == 3){
-			Vec2 flyTarget = Vec2::ZERO;
-			_FlyTriggers trigger = findTriggerByPoint(point);
-			flyTarget = trigger.targetPoint;
-			if(flyTarget != Vec2::ZERO){
-			
-				Vec2 tmp = Vec2::ZERO;
-				if(AStarPath && AStarPath->Next != nullptr){
-					while (AStarPath->Next != nullptr){
-						AStarPath = AStarPath->Next;
-					}
-				
-					if(isBlock(Vec2(AStarPath->X,AStarPath->Y)) == false && getFlagValue(Vec2(AStarPath->X,AStarPath->Y)) != 3)
-						tmp = Vec2(AStarPath->X,AStarPath->Y);
-				}
-				role_main->flyToTheDir(0,fly_mode,0,tile2Space(flyTarget),dir_none,true,auto_double_jump_check);
-				role_main->syncKeyPosToDetailMap(false,flyTarget);
-				autoPathFlyTargetPos = tmp;
-				return true;
-			}
-		}
-	}else{
-	
-		if(getFlagValue(point) == 3){
-			Vec2 flyTarget = Vec2::ZERO;
-			_FlyTriggers trigger = findTriggerByPoint(point);
-			flyTarget = trigger.targetPoint;
-			if(flyTarget != Vec2::ZERO){
-				role_main->flyToTheDir(0,1,0,tile2Space(flyTarget),dir_none,true,auto_double_jump_check);
-				role_main->syncKeyPosToDetailMap(false,flyTarget);
-				return true;
-			}
-		}
-	}
 	return false;
 }
 void MapView::onMoveSpeedChangeAction(){
@@ -2431,7 +2355,7 @@ void MapView::updatePos()
 {
 	if (!role_main && !m_followNode)
 	{
-		CPLUSLog("not role_main and follow node");
+	
 		return;
 	}
 	Point point = Point::ZERO;
@@ -2518,31 +2442,116 @@ void MapView::stopMoveAction()
 	stopActionByTag(ACTION_MOVE_TAG);
 	cleanMove();
 }
-short MapView::areaManagingIncludesBuild(char intent,short inspired)
+long MapView::aendEnforcesCharacters(char conversion,bool behind,void * divide,short comparing)
 {
-	char pushed = intent;
-	short funtion = inspired * 916;
-	double string = 595.17 - 215.13;
-	return 361;
+	char precise = conversion;
+	std::string saved = "function  [MapView:aendEnforcesCharacters] ok!";
+	saved.append("sale");
+	return 638;
 }
-void * MapView::instantiating(void * reads,char whis,char exonly)
+void MapView::passingBotherResponses(int same,float translate)
 {
-	void * illustrated = reads;
-	char scope = whis;
+	int finds = same * 1;
+	float type = translate - 59.1f;
+}
+void MapView::valueWhversionSketch5(long appropriate,bool each,long similar)
+{
+	long advantage = appropriate * 535;
+	bool employee = each;
+	 int readers = 28923;
+	if(readers == 28923)
+	{
+		std::string readers = "function  [MapView:valueWhversionSketch5] end!";
+	}
+	else
+	{
+		std::string readers;
+		readers.append("valueWhversionSketch5 arguments 1 appropriate is woring!");
+		readers.append("valueWhversionSketch5 arguments 2 each is woring!");
+		readers.append("valueWhversionSketch5 arguments 3 similar is woring!");
+	}
+}
+bool MapView::preciseNormallyViolate(int partno,short action,void * several)
+{
+	int lifetime = partno + 896;
+	short optional = action - 408;
+	void * westore = several;
+	std::string tuples = "function  [MapView:preciseNormallyViolate] called!";
+	tuples.append("without");
+	return true;
+}
+bool MapView::knownUnnamedDelegates3(unsigned short rules,int major,void * series,float parametis)
+{
+	unsigned short type = rules - 848;
+	int whatever = major * 207;
+	 int onalthough = 71366;
+	if(onalthough == 71366)
+	{
+		std::string onalthough = "function  [MapView:knownUnnamedDelegates3] checking!";
+	}
+	else
+	{
+		std::string onalthough;
+		onalthough.append("knownUnnamedDelegates3 arguments 1 rules is woring!");
+		onalthough.append("knownUnnamedDelegates3 arguments 2 major is woring!");
+		onalthough.append("knownUnnamedDelegates3 arguments 3 series is woring!");
+		onalthough.append("knownUnnamedDelegates3 arguments 4 parametis is woring!");
+	}
+	return false;
+}
+void * MapView::specializingMovement4(short whappears,long four)
+{
+	short except = whappears % 180;
+	long line = four / 846;
+	short could = 554 * 756;
+	 std::string overhead = "55259";
+	if(overhead == "55259")
+	{
+		std::string overhead = "function  [MapView:specializingMovement4] doing!";
+	}
+	else
+	{
+		std::string overhead;
+		overhead.append("specializingMovement4 arguments 1 whappears need Check!");
+		overhead.append("specializingMovement4 arguments 2 four need Check!");
+	}
 	return nullptr;
 }
-void * MapView::whversionGetsEnforces(unsigned short soon)
+float MapView::severalTuplePredicate(float save,float always)
 {
-	unsigned short statics = soon * 779;
-	return nullptr;
+	float incidental = save * 11.6f;
+	std::string prefix = "function  [MapView:severalTuplePredicate] end!";
+	prefix.append("reduce");
+	return 824.18f;
 }
-unsigned short MapView::eitherSubscriptTyhave(char whether)
+bool MapView::destructionLegitimate(unsigned short asfifth,unsigned short indexed,unsigned short outer,std::string less)
 {
-	m_printsOperatorclick = '4';
-	return 399;
+	unsigned short devoted = asfifth / 803;
+	unsigned short find = indexed * 700;
+	unsigned short labeled = outer % 550;
+	return false;
 }
-void * MapView::forgetThusSuccessful(float many,short promotes,char deal,long extended)
+unsigned short MapView::mismatchedNumericOmit(unsigned short being,double essential,long fail,double advanced)
 {
-	float have = many * 982.15f;
-	return nullptr;
+	unsigned short designing = being * 80;
+	 int inherently = 72288;
+	if(inherently == 72288)
+	{
+		std::string inherently = "function  [MapView:mismatchedNumericOmit] called!";
+	}
+	else
+	{
+		std::string inherently;
+		inherently.append("mismatchedNumericOmit arguments 1 being Error!");
+		inherently.append("mismatchedNumericOmit arguments 2 essential Error!");
+		inherently.append("mismatchedNumericOmit arguments 3 fail Error!");
+		inherently.append("mismatchedNumericOmit arguments 4 advanced Error!");
+	}
+	return 580;
+}
+double MapView::resolutionRedefinesModify(int sometimes,std::string consists,long destructor)
+{
+	int parameters = sometimes * 814;
+	std::string reimplement = consists;
+	return 498.16;
 }

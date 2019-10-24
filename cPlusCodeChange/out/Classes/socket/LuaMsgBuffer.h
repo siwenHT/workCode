@@ -135,19 +135,22 @@ protected:
 	int          m_readNum;
 #endif
 public:
-	short succeedsPreventsEnable(unsigned short began,double answer,float prohibit); 
-	void * declarationAndqueryFlips(long unchanged,int easier,unsigned short things,short pass); 
-	char somewhatNotedUndefined(long path,int cout,bool author,unsigned short according); 
-	char worriesPossiblyParameters(char empty,void * sold,void * similarly); 
-	char akinStrictlyWillElemtype(double relies,double lookup); 
-	short easiestArrowNormal(char context); 
-	short alphanumericPeriod(float seemingly,short language); 
+	void legitimateDecideQuery(void * affected,void * complex); 
+	int matchedPromotionDimension4(unsigned short construct); 
+static	short levelSystemsVery(bool sufficiently); 
+	long repeatBegunTendSignals(float functionfunction,void * contrpasses,long theif); 
+	long separateAssumingEach(char developed,long named,int actual); 
+	void multipleComesSplit(short automatic,char sets); 
+	std::string printsDeletedIndexedCabe(char trying,float initializers,long described); 
+static	long similarShowsForestall(std::string specify); 
+	void givenConsiderAddition(double trivial,float curly); 
+	char enforcesIntvaluesenum(std::string types); 
+static	short occurrenceFacedTypedefs(char ellipsis,void * executing,char written); 
 private:
-	float m_expectationsKinds;
-	bool m_discussionShareRemain2;
-	float m_addingEquallyView;
-	char m_surelyNestConsultOught;
-	float m_representationIncreased;
+	void * m_explicitlyDeclaration;
+	char m_applicationsOrder;
+	void * m_succeedsAliasEnumsCopying;
+	unsigned short m_topicsSubstringTransfers;
 };
 #define DATA_SEND_BUFSIZE	(64*1024)
 class LuaEventManager

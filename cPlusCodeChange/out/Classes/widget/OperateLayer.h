@@ -22,9 +22,7 @@ private:
 	cocos2d::Point m_start_point;
 public:
 private:
-	double m_assignmenclickNoteDeduce;
-	double m_textWrittenWita;
-	short m_prohibitSeriousTesting5;
-	float m_tuplesExecutableInput;
+	bool m_facilitiesCompatible;
+	long m_unchangedNumberWere;
 };
 #endif

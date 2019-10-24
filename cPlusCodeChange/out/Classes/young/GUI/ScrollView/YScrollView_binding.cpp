@@ -54,7 +54,7 @@ static int YScrollView_create(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YScrollView_create'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -73,7 +73,7 @@ int YScrollView_setDirection(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YScrollView_setDirection'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -91,7 +91,7 @@ int YScrollView_setDirection(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YScrollView_setDirection'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -110,7 +110,7 @@ int YScrollView_getDirection(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YScrollView_getDirection'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -127,7 +127,7 @@ int YScrollView_getDirection(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YScrollView_getDirection'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -146,7 +146,7 @@ int YScrollView_setViewSize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YScrollView_setViewSize'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -164,7 +164,7 @@ int YScrollView_setViewSize(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YScrollView_setViewSize'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -183,7 +183,7 @@ int YScrollView_getViewSize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YScrollView_getViewSize'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -200,7 +200,7 @@ int YScrollView_getViewSize(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YScrollView_getViewSize'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -219,7 +219,7 @@ int YScrollView_getContainer(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YScrollView_getContainer'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -236,7 +236,7 @@ int YScrollView_getContainer(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YScrollView_getContainer'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -255,7 +255,7 @@ int YScrollView_stoppedAnimatedScroll(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'YScrollView_stoppedAnimatedScroll'", nullptr);
+		tolua_error(tolua_S,"", nullptr);
 		return 0;
 	}
 #endif
@@ -263,7 +263,7 @@ int YScrollView_stoppedAnimatedScroll(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'YScrollView_stoppedAnimatedScroll'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -282,7 +282,7 @@ int YScrollView_setContentOffset(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YScrollView_setContentOffset'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -311,7 +311,7 @@ int YScrollView_setContentOffset(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YScrollView_setContentOffset'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -330,7 +330,7 @@ int YScrollView_getContentOffset(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YScrollView_getContentOffset'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -347,7 +347,7 @@ int YScrollView_getContentOffset(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YScrollView_getContentOffset'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -366,7 +366,7 @@ int YScrollView_setContentOffsetInDuration(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YScrollView_setContentOffsetInDuration'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -386,7 +386,7 @@ int YScrollView_setContentOffsetInDuration(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YScrollView_setContentOffsetInDuration'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -405,7 +405,7 @@ int YScrollView_setTouchEnabled(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YScrollView_setTouchEnabled'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -423,7 +423,7 @@ int YScrollView_setTouchEnabled(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YScrollView_setTouchEnabled'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -442,7 +442,7 @@ int YScrollView_isTouchEnabled(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YScrollView_isTouchEnabled'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -459,7 +459,7 @@ int YScrollView_isTouchEnabled(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YScrollView_isTouchEnabled'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -478,7 +478,7 @@ int YScrollView_updateTweenAction(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YScrollView_updateTweenAction'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -498,7 +498,7 @@ int YScrollView_updateTweenAction(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YScrollView_updateTweenAction'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }

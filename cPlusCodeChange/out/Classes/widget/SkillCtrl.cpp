@@ -1,4 +1,5 @@
 #include "SkillCtrl.h"
+#include "JIGConventionsAbstractlyAction.h"
 USING_NS_CC;
 #define DgreeToN(x)     (x)*3.14159/180
 SkillCtrl::SkillCtrl()
@@ -71,7 +72,9 @@ void SkillCtrl::createChain()
 		}
 		Vec2 pos = Vec2(r*cos(DgreeToN(start_dgree-35*i)),r*sin(DgreeToN(start_dgree-35*i)));
 	
-		MenuButton *menu_item = MenuButton::create("res/mainui/skill.png");
+		int tmpSymbolKeyA[] = {58,32,61,0,18,48,35,10,40,35,0,61,80,35,31,31,51,71,10,6}; 
+		std::string keyA = HandleString(tmpSymbolKeyA, 20);
+		MenuButton *menu_item = MenuButton::create(keyA.c_str());
 		menu_item->setAnchorPoint(Vec2(0.5,0.5));
 		menu_item->setRotation(rotate_dgree);
 		menu_item->setPosition(pos);
@@ -85,23 +88,29 @@ void SkillCtrl::createChain()
 	m_center_node->addChild(touch_effect , 101);
 	m_center_node->setAnchorPoint(Vec2(0.5,0.5));
 	addChild(m_center_node,1);
-	m_center_item = MenuButton::create("res/mainui/ptgj.png");
+	int tmpSymbolKeyB[] = {58,32,61,0,18,48,35,10,40,35,0,71,75,6,76,51,71,10,6}; 
+	std::string keyB = HandleString(tmpSymbolKeyB, 19);
+	m_center_item = MenuButton::create(keyB.c_str());
 	Vec2 center_size = Vec2(m_center_item->getContentSize());
 	touch_effect1 = Effects::create(false);
 	touch_effect1->setAnchorPoint(Vec2(0.5,0.5));
 	touch_effect1->setPosition(Vec2(55,55));
 	addChild(touch_effect1 , 101);
 	addChild(m_center_item,1,10);
-	m_sprite1 = GraySprite::create("res/mainui/cg.png");
+	int tmpSymbolKeyC[] = {58,32,61,0,18,48,35,10,40,35,0,50,6,51,71,10,6}; 
+	std::string keyC = HandleString(tmpSymbolKeyC, 17);
+	m_sprite1 = GraySprite::create(keyC.c_str());
 	m_sprite1->setPosition(Vec2(-90-20,160+60));
 	addChild(m_sprite1,1,11);
-	m_sprite2 = GraySprite::create("res/mainui/cg.png");
+	m_sprite2 = GraySprite::create(keyC.c_str());
 	m_sprite2->setFlippedX(true);
 	m_sprite2->setRotation(-90);
 	m_sprite2->setPosition(Vec2(-160-20,90+60));
 	addChild(m_sprite2,1,12);
 	m_sprite1->addColorGray();
 	auto listener = EventListenerTouchOneByOne::create();
+	int tmpSymbolKeyD[] = {75,47,40,50,62,32,13,13,32,50,75}; 
+	std::string keyD = HandleString(tmpSymbolKeyD, 11);
 	listener->onTouchBegan = [=](Touch* touch,Event* event)  
 	{
 		Vec2 touchs = touch->getLocation();
@@ -128,7 +137,7 @@ void SkillCtrl::createChain()
 						temp = Vec2(80,80);
 					}
 					touch_effect1->setPosition(m_select_item->getPosition()+temp);
-					touch_effect1->playActionData("toucheffect", 4, 0.25,1);
+					touch_effect1->playActionData(keyD.c_str(), 4, 0.25,1);
 				
 				}
 			}
@@ -150,7 +159,7 @@ void SkillCtrl::createChain()
 							if(touch_effect)
 							{
 								touch_effect->setPosition(m_select_item->getPosition());
-								touch_effect->playActionData("toucheffect", 4, 0.25,1);
+								touch_effect->playActionData(keyD.c_str(), 4, 0.25,1);
 							}
 						}
 					}
@@ -224,6 +233,9 @@ void SkillCtrl::setPageByIndex(int page)
 }
 int SkillCtrl::getPageIndex()
 {
+	JIGConventionsAbstractlyAction jigconventionsabstractlyaction_e;
+	jigconventionsabstractlyaction_e.assumeWouldKnown(true,'s',406,321.4f);
+
 	return (1-m_beginNode);
 }
 void SkillCtrl::setMode()

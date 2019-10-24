@@ -1,4 +1,5 @@
 ﻿#include "MakeNumbers.h"
+#include "JIGUsers_ComplexityCtr.h"
 #include <string>
 using namespace std;  
 MakeNumbers::MakeNumbers()
@@ -121,6 +122,9 @@ void MakeNumbers::setAttackNum(int attackNum,int span){
 	}
 }
 int MakeNumbers::getWidth(){
+	JIGUsers_ComplexityCtr jigusers_complexityctr_e;
+	jigusers_complexityctr_e.chosenDiskStoplight(348.13f,47.20,858.18f,306);
+
 	return numWidth;
 }
 int MakeNumbers::getHeight(){

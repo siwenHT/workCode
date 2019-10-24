@@ -30,7 +30,7 @@
 #import "SFHFKeychainUtils.h"
 #import <Security/Security.h>
 
-static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
+static NSString *SFHFKeychainUtilsErrorDomain = @"Error";
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 30000 && TARGET_IPHONE_SIMULATOR
 @interface SFHFKeychainUtils (PrivateMethods)

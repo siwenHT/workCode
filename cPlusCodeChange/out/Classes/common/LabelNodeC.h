@@ -26,18 +26,20 @@ public:
 	void setOutLineColor(const Color4B& outlineColor);
 private:
 public:
-	long yieldActsStructure(char then,float rewrites); 
-	unsigned short operandsDistinctFocus(bool minimal,long functiopresented); 
-	double reportTpreviousAhead(char separately,long here,int omit,float represented); 
-	float relyBehalfDereferences1(double next); 
-	double presumablyAssignThink(bool partno); 
-	long throwsMatchIobj(long making,char differs,int translate); 
-	bool recursiveStayArrow(unsigned short identification); 
-static	long nonconstArrayImagefifth(int briefly); 
-	unsigned short contentAboveThdefines(unsigned short stack,long until); 
+static	float ellipsisSubstringWere(float iostream); 
+	long functionalInsertConstruct(char next); 
+	int emptyOperationWritten(float original,float programmer,double ignored); 
+	float generatedRandomGrammar(char opposed,short differences,void * making,long intvaluesenum); 
+	void * divideNotingVariable(long remaining,void * regular,void * tokens); 
+	void treturnLargerThem(short allocates,short including); 
+static	short avoidRemovedRead(void * find,unsigned short better,long entry,bool constituent); 
+static	void * objectsUnderstandUnequal(unsigned short intvalues,char completes,int easier,bool assignmenclick); 
+	short fixedPositionsPrefix(bool hold,void * generates); 
+	std::string letterNextAcross(void * usable,bool brace,void * compareisbn); 
+	long nonmemberAlthoughDerived(double previous,bool mismatched,std::string occurs,float uses); 
+	void appliesEncapsulateElement(unsigned short perform,int redefines,std::string grades,long supplying); 
 private:
-	long m_stayAsfifthHairChoice;
-	short m_calledThenComplexity;
-	void * m_heldExtensioindicating;
+	short m_specializationConsisSame;
+	short m_executesGradesLanguage;
 };
 #endif

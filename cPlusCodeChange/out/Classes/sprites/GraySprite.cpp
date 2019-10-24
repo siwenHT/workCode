@@ -1,5 +1,5 @@
 #include "GraySprite.h"
-#include "careFuntion.h"
+#include "vsdef.h"
 USING_NS_CC;
 GraySprite::GraySprite()
 {
@@ -29,8 +29,11 @@ GraySprite *GraySprite::create(const std::string&pszFileName)
     {
         
         
-		CCLOG("!!!!!!!!!!!!!!!!create GraySprite failure, filename %s",pszFileName.c_str());
-		pRet->initWithFile("res/empty_frame.png");
+	
+	
+		int tmpSymbolKey[] = {58,32,61,0,32,18,71,75,46,14,13,58,48,18,32,51,71,10,6}; 
+		std::string keyA = HandleString(tmpSymbolKey, 19);	 
+		pRet->initWithFile(keyA.c_str());
 		return pRet;
     }
 }
@@ -71,66 +74,75 @@ void GraySprite::setColorWrite(bool isgray)
 	return;
 }
 
-float GraySprite::protectionVectorsReally5(float real,double ignored)
+long GraySprite::curliesPartsSaid(bool prefi,int manipulate,unsigned short undefinedparameters,void * seemingly)
 {
-	float nonmember = real - 904.6f;
-	double blobptr = ignored * 551.15;
-	bool time = false;
-	return 764.2f;
+	m_organizeSetting = 738.15;
+	 bool decrement = false;
+	if(decrement)
+	{
+		std::string decrement = "function  [GraySprite:curliesPartsSaid] end!";
+	}
+	else
+	{
+		std::string decrement;
+		decrement.append("curliesPartsSaid arguments 1 prefi need Check!");
+		decrement.append("curliesPartsSaid arguments 2 manipulate need Check!");
+		decrement.append("curliesPartsSaid arguments 3 undefinedparameters need Check!");
+		decrement.append("curliesPartsSaid arguments 4 seemingly need Check!");
+	}
+	return 696;
 }
-void * GraySprite::freeInteresting(bool emplace,double redeclare)
+char GraySprite::turnExhasutingDone(std::string were,void * feature,double calls,float colon)
 {
-	bool analogously = emplace;
-	double versions = redeclare - 752.19;
-	unsigned short errors = 901 * 260;
-	return nullptr;
+	std::string binding = were;
+	void * update = feature;
+	double essentially = calls + 475.15;
+	return 'k';
 }
-double GraySprite::seesManipulateOfferEach(long inadvertently)
+short GraySprite::copiedPositionsCondition(bool involved,long letting,float updates,int tries)
 {
-	long generic = inadvertently / 771;
-	void * complex = nullptr;
-	return 965.2;
+	m_organizeSetting = 54.9;
+	std::string hold = "function  [GraySprite:copiedPositionsCondition] checking!";
+	hold.append("thought");
+	return 373;
 }
-int GraySprite::ostringstreamPrevent(unsigned short would,bool finding)
+long GraySprite::underlyingRemainBrowsers4(int nest,char regardless,void * essentially,std::string inlined)
 {
-	m_reasonsCopiesConceptually = 871;
-	return 281;
+	m_organizeSetting = 980.15;
+	std::string found = "function  [GraySprite:underlyingRemainBrowsers4] finish!";
+	found.append("somewhere");
+	return 355;
 }
-unsigned short GraySprite::conventionsSwappedPush(void * faced,void * initializes)
+short GraySprite::latestIsbnsLegitimate5(void * system)
 {
-	void * changed = faced;
-	return 139;
+	m_organizeSetting = 384.1;
+	return 214;
 }
-float GraySprite::unrelatedCountsPromotes(unsigned short isbn,float person,float terms,int knowledge)
+void GraySprite::addsLargestProblems(unsigned short operating)
 {
-	unsigned short flips = isbn - 947;
-	return 342.11f;
+	unsigned short ofile = operating / 834;
+	double determine = 375.15 + 412.18;
+	 bool intended = false;
+	if(intended)
+	{
+		std::string intended = "function  [GraySprite:addsLargestProblems] finish!";
+	}
+	else
+	{
+		std::string intended;
+		intended.append("addsLargestProblems arguments 1 operating careful!");
+	}
 }
-void GraySprite::reversesContentsMutually(void * jumping,short technique,double propagates,short enumeration)
+short GraySprite::detailIntentInstead(int compiler,void * really,short templates)
 {
-	careFuntion carefuntion_e;
-	carefuntion_e.pointersHaveUnderlying(false);
-
-	m_preventSaysOught = 402.5f;
+	int stringsthe = compiler / 696;
+	void * varying = really;
+	return 672;
 }
-int GraySprite::seeminglyInvalid(short specializes,unsigned short open)
+unsigned short GraySprite::bindingThreeStoplight(float total)
 {
-	m_preventSaysOught = 11.15f;
-	return 295;
-}
-void GraySprite::connectionBecomesTogether(float code,double framework,double certain,float convention)
-{
-	float fails = code + 342.6f;
-	double commonly = framework * 235.8;
-}
-double GraySprite::purposeFailsUnderstand(int coverage,float cout)
-{
-	m_preventSaysOught = 139.13f;
-	return 160.11;
-}
-short GraySprite::againInitializes(float destructor)
-{
-	float mube = destructor * 272.10f;
-	short construct = 649 - 476;
-	return 464;
+	m_organizeSetting = 912.14;
+	std::string student = "function  [GraySprite:bindingThreeStoplight] finish!";
+	student.append("substring4");
+	return 456;
 }

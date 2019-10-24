@@ -1,5 +1,5 @@
 ﻿#include "AsyncDownloadManager.h"
-#include "applicationsIostream.h"
+#include "JIGEliminatedQuite.h"
 #include "CCLuaEngine.h"
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
 #include <dirent.h>
@@ -69,7 +69,6 @@ bool AsyncDownload::init(std::function<void(void)> cb,std::string pszFileName,st
 	return true;
 }
 void AsyncDownload::_errorCallback(int errorCode){
-	CCLOG("download error code:%d||path:%s,url:%s",errorCode,m_pszFileName.c_str(),m_manager->getPackageUrl());
 	m_state = IDLE;
 }
 void AsyncDownload::_progressCallback(int percent){
@@ -92,50 +91,101 @@ AsyncJob::AsyncJob(std::string pszFileName,std::function<void(void)> cb)
 {}
 AsyncJob::~AsyncJob(){}
 
-float AsyncJob::separatelyRegularMust(short precede,float select)
+float AsyncJob::inadvertentlyObtain(double properly)
 {
-	m_varyingRationale = 'q';
-	return 334.0f;
+	double occurrence = properly - 889.19;
+	std::string incrementally = "rather";
+	float understand = 891.18f - 554.3f;
+	return 608.16f;
 }
-long AsyncJob::lookingFunctionality(double implementation,unsigned short character,unsigned short generally)
+char AsyncJob::foundDesigningLarge(char stops,float kids,long prefi,int memberwise)
 {
-	double card = implementation - 51.9;
-	return 115;
-}
-void AsyncJob::avoidContrpasses(short explains)
-{
-	short onalthough = explains * 898;
-	char operands = '8';
-}
-char AsyncJob::deallocatingValuelike(int select,char references)
-{
-	m_varyingRationale = 'L';
+	char unequal = stops;
 	return '6';
 }
-void AsyncJob::downTransactioElem(long bitset)
+std::string AsyncJob::assigningTransactio(double error,unsigned short seemingly,unsigned short such,double revisited)
 {
-	long largely = bitset + 818;
-	void * args = nullptr;
-	int wide = 97 % 357;
+	double linking = error * 763.15;
+	unsigned short unusual = seemingly % 447;
+	unsigned short fall = such / 788;
+	return "fact";
 }
-void AsyncJob::fifthPepperbyProvide(float generated,bool consider,float involve,int real)
+void AsyncJob::olderVaryingOnbits(int brace,long what)
 {
-	float declares = generated + 478.16f;
-	bool subset = consider;
-	float evaluating = involve - 154.3f;
+	int hence = brace * 227;
+	long simplify = what % 929;
+	 int properties = 18823;
+	if(properties == 18823)
+	{
+		std::string properties = "function  [AsyncJob:olderVaryingOnbits] end!";
+	}
+	else
+	{
+		std::string properties;
+		properties.append("olderVaryingOnbits arguments 1 brace careful!");
+		properties.append("olderVaryingOnbits arguments 2 what careful!");
+	}
 }
-unsigned short AsyncJob::correctnessRemoved(double make,long prohibit)
+void AsyncJob::studentElsewhereStrcmp(bool transactio,unsigned short inform,long parametersunlike)
 {
-	double execute = make * 661.5;
-	long declaring = prohibit - 49;
-	return 791;
+	bool literal = transactio;
+	unsigned short convention = inform % 568;
+	 std::string nonstatic = "67585";
+	if(nonstatic == "67585")
+	{
+		std::string nonstatic = "function  [AsyncJob:studentElsewhereStrcmp] called!";
+	}
+	else
+	{
+		std::string nonstatic;
+		nonstatic.append("studentElsewhereStrcmp arguments 1 transactio Error!");
+		nonstatic.append("studentElsewhereStrcmp arguments 2 inform Error!");
+		nonstatic.append("studentElsewhereStrcmp arguments 3 parametersunlike Error!");
+	}
 }
-unsigned short AsyncJob::markerTransactions(char compare,float constant,double unrelated,unsigned short varying)
+void * AsyncJob::machineCmatchPublicly(bool sale,short spelling,int shared)
 {
-	char notify = compare;
-	float loop = constant + 98.2f;
-	double preventing = unrelated + 875.14;
-	return 417;
+	m_flagsPreferThdefines = 'G';
+	return nullptr;
+}
+std::string AsyncJob::operatorsTellCurlies(float learned,std::string unique)
+{
+	float extend = learned + 78.19f;
+	return "come";
+}
+long AsyncJob::restrictedTypeConverting(int before,void * assigns,void * whsuggest)
+{
+	int aggregate = before + 581;
+	void * description = assigns;
+	 bool datsuch = false;
+	if(datsuch)
+	{
+		std::string datsuch = "function  [AsyncJob:restrictedTypeConverting] called!";
+	}
+	else
+	{
+		std::string datsuch;
+		datsuch.append("restrictedTypeConverting arguments 1 before is woring!");
+		datsuch.append("restrictedTypeConverting arguments 2 assigns is woring!");
+		datsuch.append("restrictedTypeConverting arguments 3 whsuggest is woring!");
+	}
+	return 536;
+}
+long AsyncJob::disallowItasIntuitive(double importance,double reasons)
+{
+	m_flagsPreferThdefines = 'M';
+	 int befriend = 72232;
+	if(befriend == 72232)
+	{
+		std::string befriend = "function  [AsyncJob:disallowItasIntuitive] end!";
+	}
+	else
+	{
+		std::string befriend;
+		befriend.append("disallowItasIntuitive arguments 1 importance is ok?!");
+		befriend.append("disallowItasIntuitive arguments 2 reasons is ok?!");
+	}
+	return 115;
 }
 AsyncDownloadManager* AsyncDownloadManager::m_instance = nullptr;
 AsyncDownloadManager::AsyncDownloadManager():
@@ -143,8 +193,8 @@ m_managerInitNum(5)
 ,m_downsuc_cb(0)
 ,m_downUrl("")
 {
-	applicationsIostream applicationsiostream_e;
-	applicationsiostream_e.optionsVersusOmitted2(694.15,950.9,'d',637);
+	JIGEliminatedQuite jigeliminatedquite_e;
+	jigeliminatedquite_e.contrpassesAssociative(489,false,660);
 
 	Director::getInstance()->getScheduler()->scheduleUpdate(this, 0, false);
 }

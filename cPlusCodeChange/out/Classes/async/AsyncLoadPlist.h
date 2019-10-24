@@ -23,17 +23,22 @@ public:
 	std::map<int,std::function<void(bool)>> list;
 	std::string textureKey;
 public:
-	void destructorsLettingRight(bool central,unsigned short entire); 
-	void againPointerfifthSmatch(char less); 
-	void multidimensional(long synthesizes,short convertible,bool conflict); 
-	void * timeNonreferenceWcould(double remainder,short builds,short lifetime,char compiled); 
-	long repeatedlyValueDebugging(double specializes,bool behind); 
-	long styleGiveBitsethe(char containers); 
+	int insertDefinitionPasses(short link,long inheritance,std::string instantion,bool eliminated); 
+	double notingStringstheAllocates(bool designing,short consider); 
+	void valueCompilersAllocated(char fact,bool acts,void * forget,void * interesting); 
+	void * specifierCorrespondCast(void * predicted,unsigned short care); 
+	void managedOperationsPrograms(short hasptr,float storing,long suobjects,unsigned short pointerlike); 
+	int introduceWithfifth3(void * array,float moves,unsigned short equivalentth); 
+	bool leavingNotifyConsts(float involved); 
+	short runningPastRelying3(std::string whichever,unsigned short candidate); 
+	float generatedDefined(int variables,void * immediately,float assume); 
+	int tookDeleterUnformatted(short queryresult,void * occur,void * provides); 
 private:
-	short m_learnedEvaluating;
-	int m_eliminated2;
-	int m_automaticSignatureAcross;
-	float m_elsewhereFithatBuilt;
+	int m_inefficientDecideSimplify;
+	double m_featureTransformation;
+	int m_applyDesignerOperands;
+	void * m_systemsIandRespective;
+	double m_unscopedDrivenUnnamed;
 };
 class AsyncLoadPlist : public Ref
 {
