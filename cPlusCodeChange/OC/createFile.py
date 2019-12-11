@@ -13,13 +13,6 @@ createClsList = []
 cfg = [
         'BOOL',
         'NSString*',
-        'NSString*',
-        'NSString*',
-        'NSString*',
-        'NSString*',
-        'NSString*',
-        'NSString*',
-        'NSString*',
         'NSUInteger',
         'NSInteger',
         'UILabel*',
@@ -29,7 +22,7 @@ cfg = [
         'NSNumber*',
 ]
 
-totalClsNum = tool.random.randint(100, 200)
+totalClsNum = tool.random.randint(250, 350)
 stringCount = 0
 
 def createFiles(resPath):
@@ -57,9 +50,13 @@ def createFiles(resPath):
 
 def createFiles_ex(resPath):
     global totalClsNum
-    for _ in range(totalClsNum * tool.random.randint(3, 20)):
+    for _ in range(totalClsNum * 10):
         # 选择一个类
-        clsRet = chooseCls(DEF.CLSTYPE.tool)
+        clsRet = None
+        while True:
+            clsRet = chooseCls(DEF.CLSTYPE.tool)
+            if len(clsRet[DEF.Funcs]) < 25:
+                break
 
         #创建一个函数
         funcInfo = newFunc(clsRet)
@@ -134,7 +131,7 @@ def newFunc(clsRet, defRetType = None):
     else:
         funcInfo[DEF.FUNCRET] = getType()
 
-    flg = tool.random.randint(0, 4)
+    flg = tool.random.randint(0, 6)
     for i in range(flg):
         paramType = getType()
         paramName = getNoRepeatName(funcInfo)
@@ -239,7 +236,7 @@ def getContentByParamType(retType, funcInfo, clsInfo, targetFuncInfo = None, tar
                 ty = DEF.CLSTYPE.params
             tmpClsInfo = chooseCls(ty, targetClsInfo)
             #添加一个返回这个类型的函数
-            if tool.random.randint(1, 2) == 1:
+            if tool.random.randint(1, 3) == 1:
                 # print 'line 111  1'
                 tmpfuncInfo = newFunc(tmpClsInfo, retType)
                 fillFunc(tmpfuncInfo, tmpClsInfo)
@@ -394,6 +391,17 @@ def saveClsFile(clsInfo, resPath):
     clsInfo[DEF.IMPROTCLS] = []
 
     fHeadContent += tool.random.randint(1, 2) * '\n' + '@interface ' + clsInfo[DEF.Name] + " : NSObject\n" + tool.random.randint(1, 2) * '\n'
+
+    #如果类完全没有属性, 给它添加几个属性
+    if len(clsInfo[DEF.PROP]) == 0:
+        tmpNum = tool.random.randint(1,5)
+        for i in range(tmpNum):
+            tmpProp = {}
+            tmpProp[DEF.Name] = G.getAttrName()
+            tmpProp[DEF.TYPE] = randomOcType()
+            tmpProp[DEF.FROM] = DEF.FROMTYPE.add
+            clsInfo[DEF.PROP].append(tmpProp)
+
     # 属性
     for prop in clsInfo[DEF.PROP]:
         if '*' in prop[DEF.TYPE]:
@@ -493,7 +501,7 @@ def getOcTypeLine(ty, targetFuncInfo):
         if flg == 1:
             val1 = worldsDic.randomWorldS(1, 'ocString')[0]
             val2 = worldsDic.randomWorldS(1, 'ocString')[0]
-            num = tool.random.randint(2, 5)
+            num = tool.random.randint(2, 7)
 
             con1 = ''
             con2 = ''
@@ -502,6 +510,7 @@ def getOcTypeLine(ty, targetFuncInfo):
                 tmp = tool.random.choice(cfg)
                 con1 += tmp
                 if tmp == '%@':
+                    stringCount = stringCount + 1
                     con2 += ', @\"{0}\"'.format(worldsDic.randomWorldS(1, 'ocString')[0])
                 elif tmp == '%d':
                     con2 += ', {0}'.format(str(tool.random.randint(1, 80000))) 
@@ -515,6 +524,7 @@ def getOcTypeLine(ty, targetFuncInfo):
             val = '[{0} stringByAppendingString:@\"{1}\"]'.format(name2, val2)
             con = '\tNSString* {0} = @"{1}";\n'.format(name2, val1)
             con += '\t{0} {1} = {2};\n'.format(ty, name, val)
+            stringCount = stringCount + 1
         elif flg == 3:
             con = ''
             name = 'nil'

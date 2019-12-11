@@ -87,6 +87,7 @@ def externNewClass(oldclsList, newClsList):
 
 def saveToFile(clsList, old, target):
     oldPath = ''
+    totalFunc = 0
     for clsInfo in clsList:
         hFilePath = old + '/' + clsInfo[DEF.FILEPATH]
         if oldPath == hFilePath:
@@ -115,6 +116,7 @@ def saveToFile(clsList, old, target):
                     propContent += "@property(nonatomic, assign) " + prop[DEF.TYPE] + " " + prop[DEF.Name] + ";\n"
 
         funContent = ''
+        totalFunc += len(clsInfo[DEF.Funcs])
         for fun in clsInfo[DEF.Funcs]:
             if fun[DEF.FROM] == DEF.FROMTYPE.add:
                 first = True
@@ -269,8 +271,11 @@ def saveToFile(clsList, old, target):
                                     
 
                     if not isOk:
-                        print 'file {0} find func {1} error!'.format(tmFilePath, func[DEF.Name])
+                        a = 1
+                        # print 'file {0} find func {1} error!'.format(tmFilePath, func[DEF.Name])
 
         tool.WriteFile(tmFilePath, mFileContent)
+
+    print("ios class", len(clsList), "func", totalFunc,)
 
         # print thFilePath, tmFilePath

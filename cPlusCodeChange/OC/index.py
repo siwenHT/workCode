@@ -174,13 +174,13 @@ def changeText(resPath, cleanPath, chanegPath):
                  'loginoutWithParams':1,
                  'getIAPProductID':1,
                 #  'MLog':worldsDic.clsHead() + 'Log',
-                 'SysInfoOC':'JIGAffectsTurnsList',
+                 'SysInfoOC':'XKJSales_SignificantNotify',##
                  'GameSoftCaller':1,
                 #  'GameSoftCaller_IAP':1,
                  'GameCaller':1,
                  'GameServer':1,
                  'GameSoftDevKit':1,
-                 'channel_ios':"JIGImplicitlySeeminglyRes",
+                 'channel_ios':'XKJOverlookIntegratedInner',##
                  'SFHFKeychainUtils':1,
                  'RootViewController':1,
                  'qqqWithParams':1,
