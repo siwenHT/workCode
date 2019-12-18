@@ -36,6 +36,7 @@ PARAMS = 'params'
 CONTENT = "Content"
 CALLFUNCLIST = "CallFuncList"
 NameList = "nameList"
+ISINCLUDE = "isIncluded"
 
 EXTERN = "extern"
 
@@ -43,9 +44,15 @@ SCOPE = Enum('SCOPE', ('Public', 'Private'))
 ScopeType = 'ScopeType'
 
 CLSTYPE = Enum('clsType', ('tool', 'params', 'manage'))
+FUNTYPE = Enum('funcType', ('inner', 'outer'))
 
 TCplusNum = 0
+TCplusStrNum = 0
 
 def totoalCPlusFuncNum():
     global TCplusNum
     TCplusNum += 1
+
+def totoalCPlusStrNum():
+    global TCplusStrNum
+    TCplusStrNum += 1

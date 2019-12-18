@@ -26,12 +26,12 @@ def createClass(params):
     tmpFuncBack = FUNC.createNormalFun(params, info, 2)
     info[DEF.CLASSINFO][DEF.Funcs].append(tmpFuncBack)
 
-    addFuncNum = tool.random.randint(6, 50)
+    addFuncNum = tool.random.randint(5, 18)
     for _ in range(addFuncNum):
         tmpFuncBack = FUNC.create({DEF.TYPE:DEF.CClassType.base, DEF.NAMELIST:nameList, DEF.CLASSINFO:info})
         info[DEF.CLASSINFO][DEF.Funcs].append( tmpFuncBack )
     
-    addAttrNum = tool.random.randint(3, 10)
+    addAttrNum = tool.random.randint(3, 8)
     for _ in range(addAttrNum):
         tmpAttrBack = ATTR.create({DEF.TYPE:DEF.CClassType.base, DEF.NAMELIST:nameList, DEF.CLASSINFO:info})
         info[DEF.CLASSINFO][DEF.Attrs].append(tmpAttrBack)
@@ -39,6 +39,7 @@ def createClass(params):
     return clsName, info
 
 def extendClass(analRet, params):
+    retAddFunc = 0
     nameList = params[DEF.NAMELIST]
 
     for _, info in analRet.items():
@@ -51,9 +52,10 @@ def extendClass(analRet, params):
                 hasFuncNum = len(cInfo[DEF.CLASSINFO][DEF.Funcs])
                 # print 'extend class [' + clsName + '] begin ...'
                 addFuncNum = 0
-                if hasFuncNum < 10 or hasFuncNum > 20:
+                if hasFuncNum < 8 or hasFuncNum > 20:
                     # 如果类的函数少于10个
-                    addFuncNum = tool.random.randint(5, 12)
+                    addFuncNum = tool.random.randint(3, 8)
+                    retAddFunc += addFuncNum
                     for _ in range(addFuncNum):
                         tmpFuncBack = FUNC.create({DEF.TYPE:DEF.CClassType.base, DEF.NAMELIST:nameList, DEF.CLASSINFO:cInfo})
                         cInfo[DEF.CLASSINFO][DEF.Funcs].append( tmpFuncBack )
@@ -73,6 +75,8 @@ def extendClass(analRet, params):
             #         print cInfo[DEF.Name][0] + 'is a ' + cInfo['type']
             #     else:
             #         print cInfo[DEF.Name] + 'is a ' + cInfo['type']
+    
+    return retAddFunc
 
 def checkClassHasAttr(info, attrName):
     attrInfo = info[DEF.CLASSINFO][DEF.Attrs]
@@ -176,7 +180,8 @@ def addExternInfo(filePath ,clsInfo):
             addCppFileCon(clsInfo, cppFilePath)
 
     else:
-        print tool.showTime() + filePath + " not find ... " 
+        a = 1
+        # print tool.showTime() + filePath + " not find ... " 
 
 #在文件中添加随机调用类的内容
 def addCallClassContent(filePath, clsInfo, callInfo):

@@ -130,19 +130,21 @@ def randomFuncContent(clsInfo, funcInfo, clsName):
             nameList.append(tmpName)
 
     #在添加的函数中添加无用注释
-    if tool.random.randint(1, 2) == 2:
+    if tool.random.randint(1, 2) == 1:
         retStr += generateStrForIos(clsInfo, funcInfo, clsName)
+        if tool.random.randint(1, 3) > 1:
+            retStr += generateStrForIos(clsInfo, funcInfo, clsName, True)
     
     if funcInfo['retType'] != 'void' and funcInfo['retType'] != '':
         retStr += '\treturn ' + funcInfo['ret'] + ';\n'
     return retStr
 
 #在函数中添加字符串,混淆字符比较的比例
-def generateStrForIos(clsInfo, funcInfo, clsName):
+def generateStrForIos(clsInfo, funcInfo, clsName, justString = None):
     #1.直接使用
-    ret = ''
-    cfg = ['done', 'finish', 'ok', 'doing', 'begin', 'end', 'checking', 'calling', 'called']
-    cfg1 = ['Ok', 'Error', 'need Check', 'is warning', 'careful', 'is error?', 'is ok?']
+    ret  = ''
+    cfg  = ['done', 'finish', 'ok', 'doing', 'begin', 'end', 'checking', 'calling', 'called']
+    cfg1 = ['Ok', 'Error', 'need Check', 'is warning', 'careful', 'is error', 'is ok']
 
     num = tool.random.randint(1, 2)
     nameList = funcInfo['userName']
@@ -151,40 +153,73 @@ def generateStrForIos(clsInfo, funcInfo, clsName):
         if tmpName in nameList:
             tmpName = ATTR.getValTypeRadomName()
         else:
+            nameList.append(tmpName)
             break
-
-    if num == 1:
-        ret += '\tstd::string {3} = \"{0} [{1}:{2}] {4}!\";\n'.format('function ', clsName, funcInfo[DEF.Name], tmpName, tool.random.choice(cfg))
-        ret += '\t{0}.append(\"{1}\");\n'.format(tmpName, worldsDic.getTmpName(1))
+    
+    if justString:
+        tmpCfg = [worldsDic.getTmpName(1), tool.getRandomUpDown(tool.random.randint(6, 15))]        
+        ret += '\tstd::string {0} = \"{1}\";\n'.format(tmpName, tool.random.choice(tmpCfg))
+        
+        tmpNum = tool.random.randint(4, 15)
+        for i in range(tmpNum):
+            tmpCfg = [worldsDic.getTmpName(1), tool.getRandomUpDown(tool.random.randint(6, 15))]
+            ret += '\t{0}.append(\"{1}\");\n'.format(tmpName, tool.random.choice(tmpCfg))
+            DEF.totoalCPlusStrNum()
+        
+        DEF.totoalCPlusStrNum()
+    elif num == 1:
+        tmpCfg = [worldsDic.getTmpName(1), tool.getRandomUpDown(tool.random.randint(6, 15))]
+        ret += '\tstd::string {3} = \"{0} [{1}:{2}] {4}!\";\n'.format('func ', clsName, funcInfo[DEF.Name], tmpName, tool.random.choice(cfg))
+        ret += '\t{0}.append(\"{1}\");\n'.format(tmpName, tool.random.choice(tmpCfg))
+        DEF.totoalCPlusStrNum()
+        DEF.totoalCPlusStrNum()
     elif num == 2:
-        num1 = tool.random.randint(1, 3)
+        num1 = tool.random.randint(1, 4)
         if num1 == 1:
-            ret += '\t bool {0} = false;\n'.format(tmpName)
+            ret += '\tbool {0} = false;\n'.format(tmpName)
             ret += '\tif({0})\n'.format(tmpName)
         elif num1 == 2:
             tmpNum = tool.random.randint(1, 80000)
-            ret += '\t int {0} = {1};\n'.format(tmpName, str(tmpNum))
-            ret += '\tif({0} == {1})\n'.format(tmpName, str(tmpNum))
+            tmpNum1 = tool.random.randint(1, 80000)
+            ret += '\tint {0} = {1};\n'.format(tmpName, str(tmpNum))
+            ret += '\tif({0} == {1})\n'.format(tmpName, str(tmpNum1))
         elif num1 == 3:
             tmpNum = tool.random.randint(1, 80000)
-            ret += '\t std::string {0} = \"{1}\";\n'.format(tmpName, str(tmpNum))
-            ret += '\tif({0} == \"{1}\")\n'.format(tmpName, str(tmpNum))
+            ret += '\tstd::string {0} = \"{1}\";\n'.format(tmpName, str(tmpNum))
+            newTmpName = tmpName + "_" + str(tool.random.randint(1, 5))
+            nameList.append(newTmpName)
+            ret += '\tstd::string {0} = \"{1}\";\n'.format(newTmpName, str(tool.random.randint(1, 80000)))
+            ret += '\tif({0} == {1})\n'.format(tmpName, newTmpName)
+            DEF.totoalCPlusStrNum()
+            DEF.totoalCPlusStrNum()            
+        elif num1 == 4:
+            tmpStr = tool.getRandomUpDown(tool.random.randint(6, 15))
+            ret += '\tstd::string {0} = \"{1}\";\n'.format(tmpName, tmpStr)
+            newTmpName = tmpName + "_" + str(tool.random.randint(6, 10))
+            nameList.append(newTmpName)
+            ret += '\tstd::string {0} = \"{1}\";\n'.format(newTmpName, tool.getRandomUpDown(tool.random.randint(6, 15)))
+            ret += '\tif({0} == {1})\n'.format(newTmpName, tmpName)
+            DEF.totoalCPlusStrNum()
+            DEF.totoalCPlusStrNum()
 
-        ret += '\t{\n'
-        ret += '\t\tstd::string {3} = \"{0} [{1}:{2}] {4}!\";\n'.format('function ', clsName, funcInfo[DEF.Name], tmpName, tool.random.choice(cfg))
-        ret += '\t}\n'
+        if not justString:
+            DEF.totoalCPlusStrNum()
+            ret += '\t{\n'
+            ret += '\t\tstd::string {3} = \"{0} [{1}:{2}] {4}!\";\n'.format('func ', clsName, funcInfo[DEF.Name], tmpName, tool.random.choice(cfg))
+            ret += '\t}\n'
 
-        ret += '\telse\n'
-        ret += '\t{\n'
-        params = funcInfo['params']
-        ret += '\t\tstd::string {0};\n'.format(tmpName)
+            ret += '\telse\n'
+            ret += '\t{\n'
+            params = funcInfo['params']
+            ret += '\t\tstd::string {0};\n'.format(tmpName)
 
-        key = tool.random.choice(cfg1)
-        i = 0
-        for info in params:
-            i += 1
-            ret += '\t\t{0}.append(\"{4} arguments {1} {2} {3}!\");\n'.format(tmpName, str(i), info[DEF.Name], key, funcInfo[DEF.Name])
-        ret += '\t}\n'
+            key = tool.random.choice(cfg1)
+            i = 0
+            for info in params:
+                i += 1
+                ret += '\t\t{0}.append(\"{4} arguments {1} {2} {3}!\");\n'.format(tmpName, str(i), info[DEF.Name], key, funcInfo[DEF.Name])
+                DEF.totoalCPlusStrNum()
+            ret += '\t}\n'
 
     return ret
 

@@ -25,6 +25,20 @@ def getValueType():
         'int',
         'short',
         'std::string',
+        'std::string',
+        'std::string',
+        'std::string',
+        'std::string',
+        'std::string',
+        'std::string',
+        'std::string',
+        'std::string',
+        'std::string',
+        'std::string',
+        'std::string',
+        'std::string',
+        'std::string',
+        'std::string',
         'long',
         'bool',
         'float',
@@ -42,7 +56,11 @@ def getValTypeRadomValue(valueType):
     if valueType == 'bool':
         return tool.random.randint(1,2) == 1 and 'true' or 'false'
     if valueType == 'std::string':
-        return '\"' + worldsDic.getOneWorld() + '\"'
+        DEF.totoalCPlusStrNum()
+        if tool.random.randint(1, 5) > 1:
+            return '\"' + worldsDic.getOneWorld() + '\"'
+        else:
+            return '\"' + tool.getRandomUpDown(tool.random.randint(4, 12)) + '\"'
     if valueType in ['double', 'float']:
         val = str(tool.random.randint(5, 1000)) + '.' + str(tool.random.randint(0, 20))
         if valueType == 'float':
