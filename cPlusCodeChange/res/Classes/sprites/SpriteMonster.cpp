@@ -664,7 +664,7 @@ void SpriteMonster::removeFootprintsCb(){
 }
 
 bool SpriteMonster::canMove(){
-	if(getCurrActionState() >= ACTION_STATE_DEAD || getCurrActionState() == ACTION_STATE_ATTACK || getCurrActionState() == ACTION_STATE_FLY || getCurrActionState() == ACTION_STATE_SUDDEN)
+	if(getCurrActionState() >= ACTION_STATE_DEAD || getCurrActionState() == ACTION_STATE_FLY || getCurrActionState() == ACTION_STATE_SUDDEN)//|| getCurrActionState() == ACTION_STATE_ATTACK
 		return false;
 	return true;
 }

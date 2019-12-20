@@ -505,10 +505,10 @@ void SpriteBase::initDependTexturePathList(){
 void SpriteBase::setBaseUrl(const std::string&pszFileName)
 {
 	//攻击状态下不重置精灵显示
-	if(getCurrActionState() == ACTION_STATE_ATTACK){
-		base_url_backUp = pszFileName;
-		return;
-	}
+	//if(getCurrActionState() == ACTION_STATE_ATTACK){
+	//	base_url_backUp = pszFileName;
+	//	return;
+	//}
 	if(m_roledata.spiritUrl.compare(pszFileName) != 0){
 		cleanAsync();
 		//m_isLoadTexture = false;

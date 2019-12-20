@@ -313,3 +313,4 @@ def myMain():
     tool.delFolders(changePath)
     tool.delFolders(cleanPath)
     tool.delFolders(createPath)
+    tool.delFolders(strPath)

@@ -1561,6 +1561,11 @@ void SpritePlayer::updateMove(float delaTime)
 			m_curTargetPos = role_move_pc_end;
 			m_curTargetPos_tile = pos;
 			stopActionByTag(ACTION_MOVE_TAG);
+			stopActionByTag(ACTION_ATTACK_TAG);
+			if (getChildByTag(8800))
+			{
+				removeChildByTag(8800);
+			}
 			//CPLUSLog("[SpritePlayer::updateMove] getpos =( %f, %f), %s", pos.x, pos.y, this->getActorId().c_str());
 
 			if(m_justDelayCheck == false)

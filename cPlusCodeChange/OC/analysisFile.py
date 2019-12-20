@@ -26,6 +26,7 @@ def analysis(filePath):
         clsInfo[DEF.FROM] = DEF.FROMTYPE.old
         clsInfo[DEF.ADDHEAD] = []
         clsInfo[DEF.IMPROTCLS] = []
+        clsInfo[DEF.CRTTYPE] = DEF.CLSTYPE.level3
 
         G.appendClsList(clsInfo)
         pos = content.find('@interface', endPos + len("@end"))
