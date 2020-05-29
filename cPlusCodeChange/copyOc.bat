@@ -15,9 +15,9 @@ set destFodler=!destPath!\file_!flgName!
 
 echo destFodler=!destFodler!
 rmdir /s /q !destFodler!\
-md !destFodler!\
+mkdir !destFodler!\
 
 xcopy /s /r /y /q res\os_ex\*.* !destFodler!\
 xcopy /s /r /y /q out\oc_targetIosFile\*.* !destFodler!\
 
-pause
+exit

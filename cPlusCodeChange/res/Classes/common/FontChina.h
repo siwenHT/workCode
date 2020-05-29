@@ -1,7 +1,6 @@
 ﻿#ifndef __FONT_CHINA__
 #define __FONT_CHINA__
-
-
+#include <iostream>
 class FontChina
 {
 public:

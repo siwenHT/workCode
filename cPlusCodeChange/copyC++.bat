@@ -15,12 +15,13 @@ set destFodler=!destPath!\classes_!flgName!
 
 echo destFodler=!destFodler!
 rmdir /s /q !destFodler!\
-md !destFodler!\
+mkdir !destFodler!\
 
 
 rmDir /s /q out\c_changeClass\young\
 rmDir /s /q out\c_changeClass\YunVaSDK\
 
 xcopy /s /r /y /q out\c_changeClass\*.* !destFodler!\
-xcopy /s /r /y /q out\c_CreateClass\*.* !destFodler!\
-pause
+xcopy /s /r /y /q out\c_CreateClass\*.* !destFodler!\files\
+
+exit

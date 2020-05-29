@@ -22,7 +22,7 @@ struct StFPSlog
 	int sec;
 };
 
-class  AppDelegate : private cocos2d::Application
+class AppDelegate : private cocos2d::Application
 {
 public:
     AppDelegate();

@@ -48,7 +48,7 @@ def createFiles(resPath):
     global totalClsNum
     global createClsList
 
-    num = round(totalClsNum / 4 * 3)
+    num = round(totalClsNum / 5 * 4)
     num = num > 0 and num or 1
     num2 = totalClsNum - num
 
@@ -83,14 +83,14 @@ def createClassFile(resPath):
             clsRet[DEF.PROP].append(tmpProp)
 
         #函数
+        outFuncNum = tool.random.randint(1, 3)
         tmpFuncNum = tool.random.randint(5, 12)
         for i in range(tmpFuncNum):
 
             # 留2个外部调用函数
             # 1级类只处理内部函数跟属性. 不调用外部类
             # 2级类可以调用外部类的外部函数.
-            
-            createType = DEF.FUNTYPE.outer if (tmpFuncNum - i < 3) else DEF.FUNTYPE.inner
+            createType = DEF.FUNTYPE.outer if (tmpFuncNum - i <= outFuncNum) else DEF.FUNTYPE.inner
             funcInfo = newFunc(clsRet, createType)
             fillFunc(funcInfo, clsRet)
 
@@ -133,6 +133,7 @@ def newFunc(clsRet, createType):
     funcInfo[DEF.CALLFUNCLIST] = []
     funcInfo[DEF.FROM] = DEF.FROMTYPE.add
     funcInfo[DEF.NameList] = []
+    funcInfo[DEF.ISINCLUDE] = 0
     funcInfo[DEF.CRTTYPE] = createType
     # print "new func:", clsRet[DEF.Name] + ":" + funcInfo[DEF.Name]
 
@@ -203,10 +204,13 @@ def chooseOne(items, key, value, randomChoose = True):
 
     return ret
 
-def chooseList(items, key, value):
+def chooseList(items, key, value, itemKey = None):
     canChoose = []
     for item in items:
-        if item.get(key) == value:
+        if itemKey:
+            if item[itemKey].get(key) == value:
+                canChoose.append(item)
+        elif item.get(key) == value:
             canChoose.append(item)
 
     return canChoose
@@ -245,34 +249,57 @@ def fillFunc_ex(funcInfo, clsInfo):
 
     funContent = ''
     callNum = tool.random.randint(1, 3)
-    for _ in range(callNum):
+    for i in range(callNum):
         callClsInfo = None
         
         level2List = chooseList(createClsList, DEF.CRTTYPE, DEF.CLSTYPE.level2)        
         if level2List:
-            for param in funcInfo[DEF.PARAMS]:
+            if funcInfo[DEF.PARAMS] and i < len(funcInfo[DEF.PARAMS]):
+                param = funcInfo[DEF.PARAMS][i]
                 ifStr = ''
                 if param[DEF.TYPE].find('*') > -1:
-                    ifStr += '\t if ( {0} ) {1}\n'.format(param[DEF.Name], "{")
+                    ifStr += '\tif( {0} ) {1}\n'.format(param[DEF.Name1], "{")
                 elif param[DEF.TYPE] == "BOOL":
-                    ifStr += '\t if ( {0} ) {1}\n'.format(param[DEF.Name], "{")
+                    ifStr += '\tif( {0} ) {1}\n'.format(param[DEF.Name1], "{")
                 elif param[DEF.TYPE] == "NSInteger" or param[DEF.TYPE] == "NSUInteger":
-                    ifStr += '\t if ( {0} == {1} ) {2}\n'.format(param[DEF.Name], '-' + str(tool.random.randint(1, 8)), "{")
+                    ifStr += '\tif( {0} == {1} ) {2}\n'.format(param[DEF.Name1], '-' + str(tool.random.randint(1, 8)), "{")
 
                 callClsInfo = chooseOne(level2List, DEF.ISINCLUDE, 0)
                 if callClsInfo:
                     fun = chooseOne(callClsInfo[DEF.Funcs], DEF.CRTTYPE, DEF.FUNTYPE.outer, False)
                     if fun:
                         con, retName= callFuncStr_ex(fun, callClsInfo, funcInfo, clsInfo)
+                        funContent += ifStr
+                        con = con.replace('\t', '\t\t')
                         funContent += con
-                        funContent += '\t'
-                        funContent += '\tif ( {0} ) {1}\n'.format(retName, "{")
-                        funContent += '\tMLog(@"{0} {2} {1}");\n{3}\n'.format(fun[DEF.Name], retName, worldsDic.getOneWorld(), '\t}')
+                        funContent += '\t\tif ( {0} ) {1}\n'.format(retName, "{")
+                        funContent += '\t\t\tMLog(@"{0} {2} {1}");\n{3}\n'.format(fun[DEF.Name], retName, worldsDic.getOneWorld(), '\t\t}')
+
+                        funContent += '\t}\n'
+
                         callFlg = getCallFuncFlg(callClsInfo, fun)
                         callClsInfo[DEF.ISINCLUDE] = 1
                         clsInfo[DEF.ADDHEAD].append(callClsInfo[DEF.FILEPATH])
                         funcInfo[DEF.CALLFUNCLIST].append(callFlg)
-                        break
+                    else:
+                        print (callClsInfo[DEF.Name] , ' no out Func')
+            else:
+                callClsInfo = chooseOne(level2List, DEF.ISINCLUDE, 0)
+                if callClsInfo:
+                    fun = chooseOne(callClsInfo[DEF.Funcs], DEF.CRTTYPE, DEF.FUNTYPE.outer, False)
+                    if fun:
+                        con, retName= callFuncStr_ex(fun, callClsInfo, funcInfo, clsInfo)
+                        funContent += con
+                        funContent += '\tif({0}){1}\n'.format(retName, "{")
+                        funContent += '\t\tMLog(@"{0} {2} {1}");\n{3}\n'.format(fun[DEF.Name], retName, worldsDic.getOneWorld(), '\t}')
+                        callFlg = getCallFuncFlg(callClsInfo, fun)
+                        callClsInfo[DEF.ISINCLUDE] = 1
+                        clsInfo[DEF.ADDHEAD].append(callClsInfo[DEF.FILEPATH])
+                        funcInfo[DEF.CALLFUNCLIST].append(callFlg)
+                    else:
+                        print (callClsInfo[DEF.Name] , ' no out Func')
+        else:
+            print( 'no level2 ')
 
     retType = funcInfo[DEF.FUNCRET]
     con, retName = getOcTypeLine(retType, funcInfo)
@@ -398,22 +425,26 @@ def getFunContent(funcInfo, clsInfo):
     #调用第三方类
     flg = tool.random.randint(1, 2)
     if flg == 2 and clsInfo[DEF.CRTTYPE] == DEF.CLSTYPE.level2:
-        level1List = chooseList(createClsList, DEF.CRTTYPE, DEF.CLSTYPE.level1)
-        callClsInfo = chooseOne(level1List, DEF.ISINCLUDE, 0)
+        flg1 = tool.random.randint(1, 3)
+        for _ in range(flg1):
+            level1List = chooseList(createClsList, DEF.CRTTYPE, DEF.CLSTYPE.level1)
+            callClsInfo = chooseOne(level1List, DEF.ISINCLUDE, 0)
 
-        fun = chooseOne(callClsInfo[DEF.Funcs], DEF.CRTTYPE, DEF.FUNTYPE.outer, False)
-        if fun:
-            callClsFuncStr,retName = callFuncStr_ex(fun, callClsInfo, funcInfo, clsInfo)
-            funcContent += callClsFuncStr
-            if fun[DEF.FUNCRET] == propInfo[DEF.TYPE]:
-                funcContent += '\t' + combineParam(propInfo[DEF.TYPE], propInfo[DEF.Name], retName)
-            funcContent += '\tif ( {0} ) {1}\n'.format(retName, "{")
-            funcContent += '\t\tMLog(@"{0} is back {1}");\n{2}\n'.format(fun[DEF.Name], retName, '\t}')
+            fun = chooseOne(callClsInfo[DEF.Funcs], DEF.CRTTYPE, DEF.FUNTYPE.outer, False)
+            if fun:
+                callClsFuncStr,retName = callFuncStr_ex(fun, callClsInfo, funcInfo, clsInfo)
+                funcContent += callClsFuncStr
+                if fun[DEF.FUNCRET] == propInfo[DEF.TYPE]:
+                    funcContent += '\t' + combineParam(propInfo[DEF.TYPE], propInfo[DEF.Name], retName)
+                funcContent += '\tif ( {0} ) {1}\n'.format(retName, "{")
+                funcContent += '\t\tMLog(@"{0} is back {1}");\n{2}\n'.format(fun[DEF.Name], retName, '\t}')
 
-            callFlg = getCallFuncFlg(callClsInfo, fun)
-            callClsInfo[DEF.ISINCLUDE] = 1
-            clsInfo[DEF.ADDHEAD].append(callClsInfo[DEF.FILEPATH])
-            funcInfo[DEF.CALLFUNCLIST].append(callFlg)
+                callFlg = getCallFuncFlg(callClsInfo, fun)
+                callClsInfo[DEF.ISINCLUDE] = 1
+                clsInfo[DEF.ADDHEAD].append(callClsInfo[DEF.FILEPATH])
+                funcInfo[DEF.CALLFUNCLIST].append(callFlg)
+            else:
+                print (callClsInfo[DEF.Name] , ' no out Func')
 
     #对属性进行log
     flg = tool.random.randint(1, 2)
@@ -449,15 +480,17 @@ def getInnerFunc(funcInfo, clsInfo):
 
     funList = chooseList(clsInfo[DEF.Funcs], DEF.CRTTYPE, DEF.FUNTYPE.inner)
     if funList:
-        if funcInfo[DEF.PARAMS]:
-            for param in funcInfo[DEF.PARAMS]:
+        rand = tool.random.randint(2, 4)
+        for i in range(rand):
+            if funcInfo[DEF.PARAMS] and i < len(funcInfo[DEF.PARAMS]):
+                param = funcInfo[DEF.PARAMS][i]
                 ifStr = ''
                 if param[DEF.TYPE].find('*') > -1:
-                    ifStr += '\tif ( {0} ) {1}\n'.format(param[DEF.Name1], "{")
+                    ifStr += '\tif( {0} ) {1}\n'.format(param[DEF.Name1], "{")
                 elif param[DEF.TYPE] == "BOOL":
-                    ifStr += '\tif ( {0} ) {1}\n'.format(param[DEF.Name1], "{")
+                    ifStr += '\tif( {0} ) {1}\n'.format(param[DEF.Name1], "{")
                 elif param[DEF.TYPE] == "NSInteger" or param[DEF.TYPE] == "NSUInteger":
-                    ifStr += '\tif ( {0} == {1} ) {2}\n'.format(param[DEF.Name1], '-' + str(tool.random.randint(1, 8)), "{")
+                    ifStr += '\tif( {0} == {1} ) {2}\n'.format(param[DEF.Name1], '-' + str(tool.random.randint(1, 8)), "{")
 
                 func = chooseOne(funList, DEF.ISINCLUDE, 0)
                 if func:
@@ -465,16 +498,15 @@ def getInnerFunc(funcInfo, clsInfo):
                     if func[DEF.FUNCRET] != 'void':
                         tmpRetName = getNoRepeatName(funcInfo)
                         retCon += '\t\t{1} {2} = [self {0}];\n'.format(func[DEF.Name] + getFuncCallLine(func, funcInfo), func[DEF.FUNCRET], tmpRetName)
-                        retCon += '\t\tif ( {0} ) {1}\n'.format(tmpRetName, "{")
+                        retCon += '\t\tif( {0} ) {1}\n'.format(tmpRetName, "{")
                         retCon += '\t\t\tMLog(@"{0} {2} {1}");\n{3}\n'.format(func[DEF.Name], retName, worldsDic.getOneWorld(), '\t\t}')
                     else:
                         retCon += '\t\t[self {0}];\n'.format(func[DEF.Name] + getFuncCallLine(func, funcInfo))
                         retCon += '\t\tMLog(@"{0} {1}");\n'.format(func[DEF.Name], worldsDic.getOneWorld())
                     addStrCount()
+                    func[DEF.ISINCLUDE] = 1
                 retCon += '\t}\n'
-        else:
-            rand = tool.random.randint(1, 4)
-            for _ in range(rand):
+            else:
                 func = chooseOne(funList, DEF.ISINCLUDE, 0)
                 if func:
                     if func[DEF.FUNCRET] != 'void':
@@ -486,27 +518,36 @@ def getInnerFunc(funcInfo, clsInfo):
                         retCon += '\t[self {0}];\n'.format(func[DEF.Name] + getFuncCallLine(func, funcInfo))
                         retCon += '\tMLog(@"{0} {1}");\n'.format(func[DEF.Name], worldsDic.getOneWorld())
 
-                    addStrCount()                       
+                    func[DEF.ISINCLUDE] = 1
+                    addStrCount()  
+                else:
+                    print (clsInfo[DEF.Name] , ' no out Func')
+    else:
+        print (clsInfo[DEF.Name] , ' no inner Func')
 
-    if tool.random.randint(1, 2) == 1 and clsInfo[DEF.CRTTYPE] == DEF.CLSTYPE.level2:
-        level1List = chooseList(createClsList, DEF.CRTTYPE, DEF.CLSTYPE.level1)
-        callClsInfo = chooseOne(level1List, DEF.ISINCLUDE, 0)
+    if clsInfo[DEF.CRTTYPE] == DEF.CLSTYPE.level2:#tool.random.randint(1, 2) == 1 and 
+        flg1 = tool.random.randint(1, 3)
+        for _ in range(flg1):
+            level1List = chooseList(createClsList, DEF.CRTTYPE, DEF.CLSTYPE.level1)
+            callClsInfo = chooseOne(level1List, DEF.ISINCLUDE, 0)
 
-        fun = chooseOne(callClsInfo[DEF.Funcs], DEF.CRTTYPE, DEF.FUNTYPE.outer, False)
-        if fun:
-            callClsFuncStr, retName = callFuncStr_ex(fun, callClsInfo, funcInfo, clsInfo)
-            retCon += callClsFuncStr
-            propInfo = chooseOne(clsInfo[DEF.PROP], DEF.TYPE, fun[DEF.FUNCRET], False)
-            if propInfo:
-                retCon += '\t' + combineParam(propInfo[DEF.TYPE], propInfo[DEF.Name], retName)
-            retCon += '\tif ( {0} ) {1}\n'.format(retName, "{")
-            retCon += '\t\tMLog(@"{0} {2} {1}");\n{3}\n'.format(fun[DEF.Name], retName, worldsDic.getOneWorld(), '\t}')
-            addStrCount()
+            fun = chooseOne(callClsInfo[DEF.Funcs], DEF.CRTTYPE, DEF.FUNTYPE.outer, False)
+            if fun:
+                callClsFuncStr, retName = callFuncStr_ex(fun, callClsInfo, funcInfo, clsInfo)
+                retCon += callClsFuncStr
+                propInfo = chooseOne(clsInfo[DEF.PROP], DEF.TYPE, fun[DEF.FUNCRET], False)
+                if propInfo:
+                    retCon += '\t' + combineParam(propInfo[DEF.TYPE], propInfo[DEF.Name], retName)
+                retCon += '\tif ( {0} ) {1}\n'.format(retName, "{")
+                retCon += '\t\tMLog(@"{0} {2} {1}");\n{3}\n'.format(fun[DEF.Name], retName, worldsDic.getOneWorld(), '\t}')
+                addStrCount()
 
-            callFlg = getCallFuncFlg(callClsInfo, fun)
-            callClsInfo[DEF.ISINCLUDE] = 1
-            clsInfo[DEF.ADDHEAD].append(callClsInfo[DEF.FILEPATH])
-            funcInfo[DEF.CALLFUNCLIST].append(callFlg)
+                callFlg = getCallFuncFlg(callClsInfo, fun)
+                callClsInfo[DEF.ISINCLUDE] = 1
+                clsInfo[DEF.ADDHEAD].append(callClsInfo[DEF.FILEPATH])
+                funcInfo[DEF.CALLFUNCLIST].append(callFlg)
+            else:
+                print (clsInfo[DEF.Name] , ' no out Func')
 
     retName = ''
     retType = funcInfo[DEF.FUNCRET]

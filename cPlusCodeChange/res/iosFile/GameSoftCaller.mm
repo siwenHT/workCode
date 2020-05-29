@@ -3,14 +3,14 @@
 #import "JSON.h"
 #import "AppController.h"
 #import "XGPush.h"
-#import "DDFBSDK.h"
+#import "DesignTeach_TotalInitialtelevision.h"
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 #import <UserNotifications/UserNotifications.h>
 #endif
 
-static NSString * GameID = @"1185";
-static NSString * iapProductId = @"an.ywl.";
+static NSString * GameID = @"116";
+static NSString * iapProductId = @"1000";
 
 static int callLogin = 0;
 static NSString* serverId = nil;
@@ -108,17 +108,16 @@ static SDKCallback *callback = nil;
         callback = [[SDKCallback alloc]init];
     }
     [[XGPush defaultManager] setEnableDebug:NO];
-    [[XGPush defaultManager] startXGWithAppID:2200346193 appKey:@"IAH29ZS2Y81R" delegate:self];
+    [[XGPush defaultManager] startXGWithAppID:2200349160 appKey:@"IJYP85G3D93N" delegate:self];
     // 清除角标
     if ([XGPush defaultManager].xgApplicationBadgeNumber > 0) {
         [[XGPush defaultManager] setXgApplicationBadgeNumber:0];
     }
     [[XGPush defaultManager] reportXGNotificationInfo:dic[PathFormat("launchOptions")]];
-    
+    [[DesignTeach_TotalInitialtelevision shareDesignTeach_TotalInitialtelevision]DesignTeach_TotalInitialtelevision_IAPRestore:^(NSString *IAPPaymentResult, NSString *IAPOrderID, int IAPOrderAmount) {
+
+    }];    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerDeviceFailed) name:PathFormat("registerDeviceFailed") object:nil];
-    [[DDFBSDK shareDDFBSDK]DDFBSDK_IAPRestore:^(NSString *IAPPaymentResult, NSString *IAPOrderID, int IAPOrderAmount) {
-        
-    }];
 }
 
 -(void)showSplash: (void(^)(NSDictionary*))completion{
@@ -168,13 +167,14 @@ static SDKCallback *callback = nil;
     // NSLog(@"开始登陆");
     callLogin = [dic[PathFormat("callback")] intValue];
     /***********************************************************登录***********************************************************/
-    [[DDFBSDK shareDDFBSDK] DDFBSDK_LoginWithGameID:GameID andTouTiaoAppID:@"168590" andLandscapeMode:TRUE andLoginResult:^(NSString *loginUserID, NSString *loginUserName, NSString *loginSign, NSString *loginTimestamp) {
+    [[DesignTeach_TotalInitialtelevision shareDesignTeach_TotalInitialtelevision] DesignTeach_TotalInitialtelevision_LoginWithGameID:GameID andTouTiaoAppID:@"173767" andLandscapeMode:TRUE andLoginResult:^(NSString *loginUserID, NSString *loginUserName, NSString *loginSign, NSString *loginTimestamp) {
          NSMutableDictionary * dic = [[NSMutableDictionary alloc] init];
          dic[PathFormat("openid")] = loginUserID;
          dic[PathFormat("state")] = @"1";
          dic[PathFormat("callLogin")] = [NSString stringWithFormat:@"%d", callLogin];
         
          [[XGPushTokenManager defaultTokenManager] bindWithIdentifier:loginUserID type:XGPushTokenBindTypeAccount];
+
          if (sdklogin)
          {
              sdklogin(dic);
@@ -217,7 +217,7 @@ static SDKCallback *callback = nil;
     //[[GameServer shared]updateRoleInfo:dic];
     partyName = [dic[PathFormat("factionName")] copy]; 
     //***********************************************************进入游戏***********************************************************//
-    [[DDFBSDK shareDDFBSDK]DDFBSDK_RoleInfoSynchronizeWithRoleId:userId andRoleName:roleName andRoleLevel:roleLv andRoleVipLevel:vipLevel andServerId:serverId andServerName:serverName andAESKEY:@"MAI7ryVqNHlO90ri" andAESAPIKEY:@"MAI7ryVqNHlO90ri" roleSynchronizeResult:^(NSString *roleSynchronizeResult, NSString *roleSynchronizeMessage) {
+    [[DesignTeach_TotalInitialtelevision shareDesignTeach_TotalInitialtelevision]DesignTeach_TotalInitialtelevision_RoleInfoSynchronizeWithRoleId:userId andRoleName:roleName andRoleLevel:roleLv andRoleVipLevel:vipLevel andServerId:serverId andServerName:serverName andAESKEY:@"dW3xuY8ilkt0XagW" andAESAPIKEY:@"dW3xuY8ilkt0XagW" roleSynchronizeResult:^(NSString *roleSynchronizeResult, NSString *roleSynchronizeMessage) {
         
     }];
 
@@ -274,7 +274,7 @@ static SDKCallback *callback = nil;
         return;
     }
 
-    NSString *productId = [NSString stringWithFormat:PathFormat("%@%d"), iapProductId, [ret[PathFormat("money")] intValue]];
+    NSString *productId = [NSString stringWithFormat:PathFormat("%@%d"), iapProductId, [ret[PathFormat("productID")] intValue] - 1];
     NSString* orderID = [NSString stringWithFormat:PathFormat("%@"), ret[PathFormat("orderID")]];
     NSString* roleId = [NSString stringWithFormat:PathFormat("%@"), ret[PathFormat("roleId")]];
     int serverID =  [ret[PathFormat("serverID")] intValue];
@@ -283,7 +283,7 @@ static SDKCallback *callback = nil;
 
     
     //***********************************************************支付***********************************************************//
-    [[DDFBSDK shareDDFBSDK] DDFBSDK_IAPWithProductID:productId andCPOrderID:orderID andCPServerID:serverID andCPRoleID:roleId andCPRoleLevel:roleLev andCPTokenURL:nil andAppleIAPResult:^(NSString *IAPPaymentResult, NSString *IAPOrderID, int IAPOrderAmount) {
+    [[DesignTeach_TotalInitialtelevision shareDesignTeach_TotalInitialtelevision] DesignTeach_TotalInitialtelevision_IAPWithProductID:productId andCPOrderID:orderID andCPServerID:serverID andCPRoleID:roleId andCPRoleLevel:roleLev andCPTokenURL:nil andAppleIAPResult:^(NSString *IAPPaymentResult, NSString *IAPOrderID, int IAPOrderAmount) {
     }];
     //***********************************************************支付***********************************************************//
 }

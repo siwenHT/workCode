@@ -78,7 +78,7 @@ def changeStrByDic(changeDic, targetStr):
                             break
 
         if pos > -1 and noChangeFlg:
-            pFind = pos + len(changeDic[changeItem])
+            pFind = pos + len(changeItem)
             continue
         elif pos > -1:
             conA = targetStr[0:pos]
@@ -174,13 +174,11 @@ def changeText(resPath, cleanPath, chanegPath):
                  'loginoutWithParams':1,
                  'getIAPProductID':1,
                 #  'MLog':worldsDic.clsHead() + 'Log',
-                 'SysInfoOC':'XKJSales_SignificantNotify',##
                  'GameSoftCaller':1,
                 #  'GameSoftCaller_IAP':1,
                  'GameCaller':1,
                  'GameServer':1,
                  'GameSoftDevKit':1,
-                 'channel_ios':'XKJOverlookIntegratedInner',##
                  'SFHFKeychainUtils':1,
                  'RootViewController':1,
                  'qqqWithParams':1,
@@ -189,7 +187,10 @@ def changeText(resPath, cleanPath, chanegPath):
                  'SFHFKeychainUtilsErrorDomain':1,
                  'ARRYSTRFORMAT':(worldsDic.getOneWorld() + worldsDic.getOneWorld()).upper(),
                  'PathFormat':(worldsDic.getOneWorld() + worldsDic.getOneWorld()).upper(),
-                 'MoviePlayerHelper':1,}
+                 'MoviePlayerHelper':1,
+                 'channel_ios':'MRKValueunsignedParsedExtension',##
+                 'SysInfoOC':'MRKParenthesisLinkinganotherExtension',##
+                 }
     funcName = worldsDic.randomWorldS(50, 'ocClass')
     for key, val in changeDic.items():
         if val == 1:
@@ -311,6 +312,6 @@ def myMain():
     RELACLS.relationCls(G.clsList, createList, changePath, createPath, targetPath)
 
     tool.delFolders(changePath)
-    tool.delFolders(cleanPath)
+    # tool.delFolders(cleanPath)
     tool.delFolders(createPath)
     tool.delFolders(strPath)

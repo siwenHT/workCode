@@ -19,13 +19,6 @@ recodeNewKeyToVal = []
 excludeFile = []
 excludeFodler = []
 
-def initExcludeFile():
-    global excludeFile
-    excludeFile = ['configOp/StringCfg_old.lua', 'configOp/StringCfg.lua', 'protobuf.lua']
-
-    global excludeFodler
-    excludeFodler = ['config/']
-
 # 检查一下文件是否需要提取中文
 def isExclude(filePath):
     filePath = filePath.replace('\\', '/')
@@ -170,7 +163,7 @@ def ansiOneFile(srcFile):
                     con2 = fileContent[sympos + 1:]
                     keyStr = 'game.getStrByKey(\"{0}\")'.format(key)
                     fileContent = con1 + keyStr + con2
-                    
+
                     totalLen = len(fileContent)
                     pSeek = pos3 + len(keyStr)
                 else:
@@ -233,7 +226,7 @@ def saveFile(srcFile):
     con = ''
     for key in recodeNewKeyToVal:
         if key != "ZZZ":
-            con += "    "+ key + ' = ' + '\"{0}\",\n'.format(recodeKeyToVal[key])
+            con += "\t"+ key + ' = ' + '\"{0}\",\n'.format(recodeKeyToVal[key])
         else:
             con += '\n'
 
@@ -249,6 +242,13 @@ def saveFile(srcFile):
 
     print "recodeNewKeyToVal len:", len(recodeNewKeyToVal)
 
+def initExcludeFile():
+    global excludeFile
+    excludeFile = ['configOp/StringCfg_old.lua', 'configOp/StringCfg.lua', 'protobuf.lua', 'configOp/StringCfg_HK.lua']
+
+    global excludeFodler
+    excludeFodler = ['config/']
+
 def main():
     # 查找整个文件夹
     global targetPath
@@ -261,6 +261,7 @@ def main():
     targetPath1 = tool.os.path.abspath(targetPath1)
     targetPath1 = targetPath1.replace('\\', '/')
 
+    tool.delFolders(targetPath1)
     initExcludeFile()
     ansiStringCfgFile(tool.os.path.join(targetPath, 'configOp/StringCfg.lua'))
 

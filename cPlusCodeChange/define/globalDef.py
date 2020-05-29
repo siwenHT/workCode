@@ -7,7 +7,9 @@ ClassName = 'ClassName'
 Name = 'name'
 Name1 = 'name1'
 Funcs= 'funcs'
+NewFunc = 'newFuncs'
 Attrs = 'attrs'
+NewAttrs = 'newAttrs'
 CLASSINFO = 'classInfo'
 NAMELIST = 'nameList'
 TYPE = 'type'
@@ -37,13 +39,16 @@ CONTENT = "Content"
 CALLFUNCLIST = "CallFuncList"
 NameList = "nameList"
 ISINCLUDE = "isIncluded"
+HASUSE = 'HasUsed'
+RELATION = "relationProp"
 
 EXTERN = "extern"
 
 SCOPE = Enum('SCOPE', ('Public', 'Private'))
 ScopeType = 'ScopeType'
 
-CLSTYPE = Enum('clsType', ('tool', 'params', 'manage'))
+#1级类为最基础类, 被2级类引用调用.
+CLSTYPE = Enum('clsType', ('tool', 'params', 'manage', 'level1', 'level2', "level3"))
 FUNTYPE = Enum('funcType', ('inner', 'outer'))
 
 TCplusNum = 0

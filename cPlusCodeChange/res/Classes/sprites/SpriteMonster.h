@@ -20,10 +20,10 @@ public:
 	void syncNameAndBloodShow(int name_show,int blood_show);
 	void setBloodType(int typeId);				//设置血条类型 默认及1表示怪物血条  2表示玩家绿色血条  3表示玩家红色血条
 	void setBloodVisible(bool isVisible);
-	void subBlood(int blood);
+	void subBlood(int64 blood);
 	bool isAlive();
-	void setHP(uint64);
-	uint64 getHP() {return m_hp;};
+	void setHP(int64);
+	int64 getHP() {return m_hp;};
 	//CC_SYNTHESIZE(int, m_hp, HP);
 	CC_SYNTHESIZE(unsigned int, m_monster_id, MonsterId);
 	uint64 getMaxHP(){ return m_maxhp; };
@@ -95,7 +95,7 @@ protected:
 private:
 	//角色基本数据
 	std::string m_name;
-	uint64 m_hp;
+	int64 m_hp;
 	//bool isactor_flag;
 	cocos2d::Sprite* shadow_sprite;
 	cocos2d::Sprite* m_blood_bg;//血条

@@ -21,12 +21,17 @@ def relationCls(oldclsList, newClsList, oldFilesPath, createFilesPath, targetFil
     saveToFile(newClsList, createFilesPath, targetFilesPath)
 
     notIncludeCls = 0
+    noLevel1 = 0
+    noLevel2 = 0
     for clsInfo in newClsList:
         if not clsInfo.get(DEF.ISINCLUDE):
             notIncludeCls += 1
+            if clsInfo[DEF.CRTTYPE] == DEF.CLSTYPE.level1:
+                noLevel1 += 1
+            if clsInfo[DEF.CRTTYPE] == DEF.CLSTYPE.level2:
+                noLevel2 += 1
     
-    print ("num of Not Used:", notIncludeCls)
-
+    print ("num of Not Used:", notIncludeCls, noLevel1, noLevel2)
 
 def externOldClass(oldclsList, newClsList):
     #添加属性
@@ -47,18 +52,11 @@ def externOldClass(oldclsList, newClsList):
             prop[DEF.TYPE] = createFile.randomOcType()
 
             clsInfo[DEF.PROP].append(prop)
-                    
 
     #添加方法
     createFile.createClsList = newClsList
     for clsInfo in oldclsList:
-        num = len(clsInfo[DEF.PROP])
-        num1 = round(num / 3)
-        num2 = round(num * 2.5)
-
-        num1 = num1 < 1 and 1 or num1
-        num2 = num2 < 1 and 2 or num2
-        num = tool.random.randint(1, 3)
+        num = tool.random.randint(1, 4)
 
         for i in range(num):
             funcInfo = createFile.newFunc(clsInfo, DEF.FUNTYPE.inner)
@@ -84,10 +82,11 @@ def externOldClass(oldclsList, newClsList):
         if oldList:
             oldListLen = len(oldList)
             for func in oldList:
-                if tool.random.randint(1, 4) == 2:
-                    calledFunc = tool.random.choice(newList)
+                if tool.random.randint(1, 3) == 2:
+                    calledFunc = createFile.chooseOne(newList, DEF.ISINCLUDE, 0)
                     if func[DEF.ScopeType] == calledFunc[DEF.ScopeType]:
                         func[DEF.EXTERN].append(calledFunc)
+                        calledFunc[DEF.ISINCLUDE] = 1
                         break
 
 def externNewClass(oldclsList, newClsList):
