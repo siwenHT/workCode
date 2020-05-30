@@ -1,0 +1,396 @@
+{
+    "game1":{
+        "clientPath":"G:/magicRpg/program/client",
+        "sourceResPath":"sg_waiwang",
+        "androidHotFilePath":"1_mzy_android_version",
+        "iosHotFilePath":"1_mzy_lmjy_version",
+        "andoridSubFilePath":"1_mzy_android_version/2.0.0",
+        "iosSubFilePath":"1_mzy_ios2_version",
+        "iosGameFlg":"lmjy",
+        "desc":"",
+        "Ftpcfg":{
+            "user":"root",
+            "ips":"134.175.21.98",
+            "password":"Fh29Vweof",
+            "port":22,
+            "hostUrl":"http://ahbl.51muzhi.com",
+            "serverRoot":"/data/client/"
+        },
+        "cdnCfg":{
+            "SecretId":"AKIDpV7rUEyaPWRA8AtcoyCNuGoBYHoasoNr",
+            "SecretKey":"66iDCHTGRUpDBZoJtQ3T8uIaC2hBUcdZ"
+        },
+        "pushFolder":[
+            {
+                "platform": "android",
+                "folder": "update/1_mzy_android_version",
+                "name": 1,
+                "folder1": "subcontracting/1_mzy_android_version",
+                "name1": "2.0.0"
+            },
+            {
+                "platform": "ios",
+                "folder": "update/1_mzy_lmjy_version",
+                "name": 1,
+                "folder1": "subcontracting",
+                "name1": "1_mzy_ios2_version"
+            }, 
+            {
+                "platform": "android",
+                "folder1": "subcontracting/1_mzy_android_version",
+                "name1": "2.0.0",
+                "serFolder1":"subcontracting/2_fqquick_android_version",
+                "serName1":"2.0.0"
+            }
+        ],
+        "version":[
+            {
+            "platform": "android",
+            "folder":"update/1_mzy_android_version", 
+            "urls":[
+                    "http://ahbl.51muzhi.com/update/1_mzy_android_version/version_2.0.0.cfg", 
+                    "http://ahbl.51muzhi.com/update/1_mzy_android_version/version_2.0.1.cfg",
+                    "http://ahbl.51muzhi.com/update/1_mzy_android_version/version_2.0.2.cfg",
+                    "http://ahbl.51muzhi.com/update/1_mzy_android_version/version_2.0.3.cfg",
+                    "http://ahbl.51muzhi.com/update/1_mzy_android_version/version_2.0.4.cfg",
+                    "http://ahbl.51muzhi.com/update/1_mzy_android_version/version_2.0.5.cfg",
+                    "http://ahbl.51muzhi.com/update/1_mzy_android_version/version_2.0.6.cfg",
+                    "http://ahbl.51muzhi.com/update/2_fqquick_android_version/version_2.0.0.cfg"
+                  ]
+           },
+           {
+            "platform": "ios",
+            "folder":"update/1_mzy_lmjy_version",
+            "urls":[
+                    "http://ahbl.51muzhi.com/update/1_mzy_ios_version/version_1.1.0.cfg", 
+                    "http://ahbl.51muzhi.com/update/1_mzy_lmjy_version/version_1.0.0.cfg",
+                    "http://ahbl.51muzhi.com/update/1_haywlVersion/version_1.0.0.cfg"
+                   ]
+           }
+        ],
+        "notice":[
+            {
+                "platform":"android",
+                "urls":[
+
+                ]
+            },
+            {
+                "platform":"ios",
+                "urls":[
+                    
+                ]
+            }
+        ]
+    },
+    "game2":{
+        "clientPath":"G:/magicRpg/program/client_haiwai",
+        "sourceResPath":"sg_waiwang",
+        "androidHotFilePath":"3_mzy_gat_android_version",
+        "iosHotFilePath":"3_mzy_gat_ios_version",
+        "andoridSubFilePath":"3_mzy_gat_android_version/2.0.0",
+        "iosSubFilePath":"3_mzy_gat_ios_version",
+        "updateAllFile":1,
+        "iosGameFlg":"ios",
+        "desc":"",
+        "Ftpcfg":{
+            "user":"root",
+            "ips":"134.175.21.98",
+            "password":"Fh29Vweof",
+            "port":22,
+            "hostUrl":"http://ahbl.51muzhi.com",
+            "serverRoot":"/data/client/"
+        },
+        "cdnCfg":{
+            "SecretId":"AKIDpV7rUEyaPWRA8AtcoyCNuGoBYHoasoNr",
+            "SecretKey":"66iDCHTGRUpDBZoJtQ3T8uIaC2hBUcdZ"
+        },
+        "pushFolder":[
+            {
+                "platform": "android",
+                "folder": "update/3_mzy_gat_android_version",
+                "name": 1,
+                "folder1": "subcontracting/3_mzy_gat_android_version",
+                "name1": "2.0.0"
+            },
+            {
+                "platform": "ios",
+                "folder": "update/3_mzy_gat_ios_version",
+                "name": 0,
+                "folder1": "subcontracting",
+                "name1": "3_mzy_gat_ios_version"
+            }
+        ],
+        "version":[
+            {
+            "platform":"android",
+            "folder":"update/3_mzy_gat_android_version", 
+            "urls":["http://ahbl.51muzhi.com/update/3_mzy_gat_android_version/version_2.0.0.cfg"
+                  ]
+           },
+           {
+		   "platform":"ios",
+            "folder":"update/3_mzy_gat_ios_version",
+            "urls":["http://ahbl.51muzhi.com/update/3_mzy_gat_ios_version/version_2.0.0.cfg"
+                ]
+           }
+        ]
+    },
+    "game3":{
+        "clientPath":"G:/magicRpg/program/client",
+        "sourceResPath":"sg",
+        "androidHotFilePath":"1_mzy_android_version1",
+        "iosHotFilePath":"1_mzy_ios_version1",
+        "andoridSubFilePath":"1_mzy_android_version1/2.0.0",
+        "iosSubFilePath":"1_mzy_ios_version1",
+		"isSubRes":1,
+        "iosGameFlg":"ios",
+        "desc":"",
+        "Ftpcfg":{
+            "user":"root",
+            "ips":"134.175.21.98",
+            "password":"Fh29Vweof",
+            "port":22,
+            "hostUrl":"http://ahbl.51muzhi.com",
+            "serverRoot":"/data/client/"
+        },
+        "cdnCfg":{
+            "SecretId":"AKIDpV7rUEyaPWRA8AtcoyCNuGoBYHoasoNr",
+            "SecretKey":"66iDCHTGRUpDBZoJtQ3T8uIaC2hBUcdZ"
+        },
+        "pushFolder":[
+            {
+                "platform": "android",
+                "folder": "update/1_mzy_android_version1",
+                "name": 1,
+                "folder1": "subcontracting/1_mzy_android_version1",
+                "name1": "2.0.0"
+            },
+            {
+                "platform": "ios",
+                "folder": "update/1_mzy_ios_version1",
+                "name": 0,
+                "folder1": "subcontracting",
+                "name1": "1_mzy_ios_version1"
+            }
+        ],
+        "version":[
+            {
+            "platform":"android",
+            "folder":"update/1_mzy_android_version1", 
+            "urls":["http://ahbl.51muzhi.com/update/1_mzy_android_version1/version_2.10.0.cfg"
+                  ]
+           },
+           {
+		   "platform":"ios",
+            "folder":"update/3_mzy_gat_ios_version",
+            "urls":["http://ahbl.51muzhi.com/update/3_mzy_gat_ios_version/version_2.0.0.cfg"
+                ]
+           }
+        ]
+    },
+	"game4":{
+        "clientPath":"G:/magicRpg/program/client",
+        "sourceResPath":"sgPlaneB",
+        "androidHotFilePath":"4_ahbl_hundun",
+        "iosHotFilePath":"4_ahbl_hundun_ios",
+        "andoridSubFilePath":"4_ahbl_hundun/2.0.0",
+        "iosSubFilePath":"4_ahbl_hundun_ios/2.0.0",
+        "iosGameFlg":"ios",
+        "updateAllFile":1,
+        "desc":"",
+        "Ftpcfg":{
+            "user":"root",
+            "ips":"134.175.21.98",
+            "password":"Fh29Vweof",
+            "port":22,
+            "hostUrl":"http://ahbl.51muzhi.com",
+            "serverRoot":"/data/client/"
+        },
+        "cdnCfg":{
+            "SecretId":"AKIDpV7rUEyaPWRA8AtcoyCNuGoBYHoasoNr",
+            "SecretKey":"66iDCHTGRUpDBZoJtQ3T8uIaC2hBUcdZ"
+        },
+        "pushFolder":[
+            {
+                "platform": "android",
+                "folder": "update/4_ahbl_hundun",
+                "name": 1,
+                "folder1": "subcontracting/4_ahbl_hundun",
+                "name1": "2.0.0"
+            },
+            {
+                "platform": "ios",
+                "folder": "update/4_ahbl_hundun_ios",
+                "name": 1,
+                "folder1": "subcontracting/4_ahbl_hundun_ios",
+                "name1": "2.0.0"
+            }
+        ],
+        "version":[
+            {
+            "platform": "android",
+            "folder":"update/4_ahbl_hundun", 
+            "urls":[
+                    "http://ahbl.51muzhi.com/update/4_ahbl_hundun/version_2.0.0.cfg",
+                    "http://ahbl.51muzhi.com/update/4_ahbl_hundun/version_2.1.0.cfg"
+                  ]
+           },
+           {
+            "platform": "ios",
+            "folder":"update/4_ahbl_hundun_ios",
+            "urls":[
+                    "http://ahbl.51muzhi.com/update/4_ahbl_hundun_ios/version_2.0.0.cfg"
+                   ]
+           }
+        ],
+        "notice":[
+            {
+                "platform":"android",
+                "urls":[
+                ]
+            },
+            {
+                "platform":"ios",
+                "urls":[
+                ]
+            }
+        ]
+    },
+	"game5":{
+        "clientPath":"G:/magicRpg/program/client_zy",
+        "sourceResPath":"sg_waiwang",
+        "androidHotFilePath":"1_mlqy_android_version",
+        "iosHotFilePath":"1_mlqy_ios_version",
+        "andoridSubFilePath":"1_mlqy_android_version/2.0.0",
+        "iosSubFilePath":"1_mlqy_ios_version",
+        "iosGameFlg":"ios",
+        "ignore":1,
+        "updateAllFile":1,
+        "desc":"",
+        "Ftpcfg":{
+            "user":"root",
+            "ips":"134.175.21.98",
+            "password":"Fh29Vweof",
+            "port":22,
+            "hostUrl":"http://ahbl.51muzhi.com",
+            "serverRoot":"/data/client/"
+        },
+        "cdnCfg":{
+            "SecretId":"AKIDpV7rUEyaPWRA8AtcoyCNuGoBYHoasoNr",
+            "SecretKey":"66iDCHTGRUpDBZoJtQ3T8uIaC2hBUcdZ"
+        },
+        "pushFolder":[
+            {
+                "platform": "android",
+                "folder": "update/1_mlqy_android_version",
+                "name": 1,
+                "folder1": "subcontracting/1_mlqy_android_version",
+                "name1": "2.0.0"
+            },
+            {
+                "platform": "ios",
+                "folder": "update/1_mlqy_ios_version",
+                "name": 1,
+                "folder1": "subcontracting/1_mlqy_ios_version",
+                "name1": "2.0.0"
+            }
+        ],
+        "version":[
+            {
+            "platform": "android",
+            "folder":"update/1_mlqy_android_version", 
+            "urls":[
+                    "http://ahbl.51muzhi.com/update/1_mlqy_android_version/version_2.3.0.cfg"
+                  ]
+           },
+           {
+            "platform": "ios",
+            "folder":"update/1_mlqy_ios_version",
+            "urls":[
+                    "http://ahbl.51muzhi.com/update/1_mlqy_ios_version/version_2.3.0.cfg"
+                   ]
+           }
+        ],
+        "notice":[
+            {
+                "platform":"android",
+                "urls":[
+                ]
+            },
+            {
+                "platform":"ios",
+                "urls":[
+                ]
+            }
+        ]
+    },
+    "game6":{
+        "clientPath":"G:/magicRpg/program/client",
+        "sourceResPath":"sg",
+        "androidHotFilePath":"1_ahbl_test_0527",
+        "iosHotFilePath":"4_ahbl_hundun_ios",
+        "andoridSubFilePath":"1_ahbl_test_0527/2.0.0",
+        "iosSubFilePath":"4_ahbl_hundun_ios",
+        "iosGameFlg":"ios",
+        "updateAllFile":1,
+        "ignore":1,
+        "desc":"",
+        "Ftpcfg":{
+            "user":"root",
+            "ips":"134.175.21.98",
+            "password":"Fh29Vweof",
+            "port":22,
+            "hostUrl":"http://ahbl.51muzhi.com",
+            "serverRoot":"/data/client/"
+        },
+        "cdnCfg":{
+            "SecretId":"AKIDpV7rUEyaPWRA8AtcoyCNuGoBYHoasoNr",
+            "SecretKey":"66iDCHTGRUpDBZoJtQ3T8uIaC2hBUcdZ"
+        },
+        "pushFolder":[
+            {
+                "platform": "android",
+                "folder": "update/1_ahbl_test_0527",
+                "name": 1,
+                "folder1": "subcontracting/1_ahbl_test_0527",
+                "name1": "2.0.0"
+            },
+            {
+                "platform": "ios",
+                "folder": "update/4_ahbl_hundun_ios",
+                "name": 1,
+                "folder1": "subcontracting/4_ahbl_hundun_ios",
+                "name1": "2.0.0"
+            }
+        ],
+        "version":[
+            {
+            "platform": "android",
+            "folder":"update/1_ahbl_test_0527", 
+            "urls":[
+                    "http://ahbl.51muzhi.com/update/1_ahbl_test_0527/version_2.0.0.cfg"
+                  ]
+           },
+           {
+            "platform": "ios",
+            "folder":"update/4_ahbl_hundun_ios",
+            "urls":[
+                    "http://ahbl.51muzhi.com/update/4_ahbl_hundun_ios/version_2.0.0.cfg"
+                   ]
+           }
+        ],
+        "notice":[
+            {
+                "platform":"android",
+                "urls":[
+                ]
+            },
+            {
+                "platform":"ios",
+                "urls":[
+                ]
+            }
+        ]
+    }
+}

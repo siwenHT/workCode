@@ -3,31 +3,32 @@
 setlocal enabledelayedexpansion
 cd /d %~dp0
 set sourcePath=sg_waiwang
-set input=%1%
-set input2=%2%
-echo 打包源文件夹: 1.sg, 2:sg_waiwang
-if defined input (
-set inputFloder=!input!
-) else (
-set /p inputFloder=
-)
+REM set input=%1%
+REM set input2=%2%
+REM echo 打包源文件夹: 1.sg, 2:sg_waiwang
+REM if defined input (
+REM set inputFloder=!input!
+REM ) else (
+REM set /p inputFloder=
+REM )
 
-if !inputFloder!==1 (
-set sourcePath=sg
-)
+REM if !inputFloder!==1 (
+REM set sourcePath=sg
+REM )
 
-if !inputFloder!==2 (
-set sourcePath=sg_waiwang
-)
+REM if !inputFloder!==2 (
+REM set sourcePath=sg_waiwang
+REM )
 	
 echo 打包源文件夹:!sourcePath!
-echo 1：整包资源，2：分包资源
-if defined input2 (
-set packageType=!input2!
-) else (
-set /p packageType=
-)
-echo 资源包类型:!packageType!
+REM echo 1：整包资源，2：分包资源
+REM if defined input2 (
+REM set packageType=!input2!
+REM ) else (
+REM set /p packageType=
+REM )
+set packageType=2
+echo 资源包类型:分包资源
 
 echo.
 echo 开始时间:
@@ -66,12 +67,12 @@ echo %date%%time%
 
 REM ============================================================================================
 REM 资源压缩
-echo 资源压缩到Android平台模式
-cd ..\Arts\texturepacker_Tool\MaliTextureCompressionTool_v4.3.0\bin\
-python ..\..\pkmConvertor.py !sourcePath!
-python ..\..\plistConvertor.py !sourcePath!
-cd /d %~dp0
-echo 资源压缩完成
+REM echo 资源压缩到Android平台模式
+REM cd ..\Arts\texturepacker_Tool\MaliTextureCompressionTool_v4.3.0\bin\
+REM python ..\..\pkmConvertor.py !sourcePath!
+REM python ..\..\plistConvertor.py !sourcePath!
+REM cd /d %~dp0
+REM echo 资源压缩完成
 
 REM echo %date%%time%
 REM echo 安卓资源拷贝中..
@@ -99,12 +100,12 @@ echo %date%%time%
 
 REM ============================================================================================
 REM 加密
-set srcPath=!sourcePath!/src
-set spaceNum=0
-echo 源码加密中..
-xxteaEncry.py %srcPath% %spaceNum%
-echo 源码加密完成...
-echo %date%%time%
+REM set srcPath=!sourcePath!/src
+REM set spaceNum=0
+REM echo 源码加密中..
+REM xxteaEncry.py %srcPath% %spaceNum%
+REM echo 源码加密完成...
+REM echo %date%%time%
 
 REM ============================================================================================
 REM 分包
@@ -136,30 +137,31 @@ echo.
 if !packageType!==2 (
 python afterSubcontractingSg1.py
 )
+
 echo %date%%time%
-echo 生成热更资源
-cd android-kuniu
+REM echo 生成热更资源
+REM cd android-kuniu
 
-rd /q /s assets
-rd /q /s temp
-md "assets\"
-md "temp\"
+REM rd /q /s assets
+REM rd /q /s temp
+REM md "assets\"
+REM md "temp\"
 
-echo sg1 md5Val list....
-python md5_sg1.py
+REM echo sg1 md5Val list....
+REM python md5_sg1.py
 
-echo update files......
-python hotUpdateCheck.py
+REM echo update files......
+REM python hotUpdateCheck.py
 
-echo update files md5Val list...
-python md5_asset.py
+REM echo update files md5Val list...
+REM python md5_asset.py
 
-echo.
-echo copy updateFile md5File to assets
-copy /y temp\filelist.txt assets\sg\filelist.txt
+REM echo.
+REM echo copy updateFile md5File to assets
+REM copy /y temp\filelist.txt assets\sg\filelist.txt
 
-echo copy currentFiles md5File to sg1
-copy /y MD5_current\filelist.txt ..\..\sg1\filelist.txt
+REM echo copy currentFiles md5File to sg1
+REM copy /y MD5_current\filelist.txt ..\..\sg1\filelist.txt
 
 cd /d %~dp0
 

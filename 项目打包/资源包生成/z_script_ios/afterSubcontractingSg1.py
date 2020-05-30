@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
+import sys
 import os
 import hashlib
 import shutil
@@ -104,9 +105,12 @@ def main():
     sourcePath = "../sg1/"
     packagedFileList = "packagedFileList.txt"
     md5FileNew = "subContent/filelist_sub.txt"
-    md5FileOld = "subContentOld/filelist_sub.txt"
+    md5FileOld = "subContentOld/filelist_sub.txt"            
     srcPath = "subContent"
     destPath = "subContentAssert"
+    if len(sys.argv) >= 2:
+        md5FileOld = "subContentOld/" + sys.argv[1]
+        
     if not os.path.exists(md5FileNew):
         print("新的 filelist_sub 不存在,无法生成分包更新文件")
         return

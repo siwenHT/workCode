@@ -1,0 +1,7 @@
+热更生成脚本：
+luaecode\set_notEncryptPNG.bat 生成sg1
+tools\hotUpdate\android-kuniu\md5_sg1.py   生成sg1的md5列表  保存到MD5_current
+tools\hotUpdate\android-kuniu\hotUpdate.bat  比较MD5_current和MD5_package(首包)的Md5值，校验生成要热更的文件
+tools\hotUpdate\android-kuniu\md5_asset.py   生成assets目录的Md5值，保证到temp
+temp/filelist.txt 放入 assets\sg
+assets打包成assets.zip

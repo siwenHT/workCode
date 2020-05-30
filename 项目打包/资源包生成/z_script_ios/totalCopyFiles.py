@@ -9,10 +9,9 @@ import binascii
 import struct
 import toolsFunc as tool
 import chardet
+import subIosRes
 import time
 import thread
-import logging
-from multiprocessing import Process
 
 #各分包文件个数
 floorNumDic = {}
@@ -120,29 +119,29 @@ def processWriteFile(idx):
                     floor = info[2]
 
                     content = tool.ReadFile(srcFilePath)
-                    size = len(content) #os.path.getsize(srcFilePath)
+                    size = len(content)
                     tool.createDir(filePath)
+                    content = subIosRes.randomBit(content, filePath)
                     if floor > 1:
                         otherFload = info[3]
                         srcFile = info[4]
                         fmd5 = (hashlib.md5(content).hexdigest()).strip()
+                        # tool.WriteFile(newFilePath, content)
                         md5_str = "sg{0}|{1}|{2}".format(otherFload + "/" + srcFile, fmd5, size)
                         newMd5List.append(md5_str + os.linesep)
-                    
-                    setFloorLine(floor, size)
+
+                    setFloorLine(floor, size)                    
                     # print tool.showTime() + " " + filePath
                     tool.WriteFile(filePath, content)
                     writeFileRecode[filePath] = 1
                 else:
-                    print(idx + " sleep 1 min")
-                    time.sleep(1)
+                    time.sleep(2)
             else:
                 print tool.showTime() + "thread end  ... " + str(idx)
                 break
-        except BaseException as e:
-            # logging.exception(e)
+        except:
             writeList.append(info)
-            # time.sleep(0.5)
+
 
 #从源文件夹想目标文件夹拷贝文件
 def copyFiles(oldSrcPath, subPackageDic, oldMainPackageDir, oldSubPackageDir):
@@ -181,10 +180,10 @@ def copyFiles(oldSrcPath, subPackageDic, oldMainPackageDir, oldSubPackageDir):
 
                         # content = tool.ReadFile(allSrcPath)
                         # size = os.path.getsize(allSrcPath)
-                        # fmd5 = (hashlib.md5(content).hexdigest()).strip()
                         # tool.createDir(newFilePath)
-                        # tool.WriteFile(newFilePath, content)
-
+                        # content = subIosRes.randomBit(content, newFilePath)
+                        # fmd5 = (hashlib.md5(content).hexdigest()).strip()
+                        # # tool.WriteFile(newFilePath, content)
                         # md5_str = "sg{0}|{1}|{2}".format(otherFload + "/" + srcFile, fmd5, size)
                         # newMd5List.append(md5_str + os.linesep)
                         # setFloorLine(floor, size)
@@ -197,33 +196,46 @@ def copyFiles(oldSrcPath, subPackageDic, oldMainPackageDir, oldSubPackageDir):
                 #文件在主包
                 newFilePath = mainPackageDir + '/' + srcFile
                 if not newFilePath in writeFileRecode: #tool.os.path.exists(newFilePath):
+
                     # content = tool.ReadFile(allSrcPath)
                     # size = os.path.getsize(allSrcPath)
                     # tool.createDir(newFilePath)
-                    # tool.WriteFile(newFilePath, content)
+                    # content = subIosRes.randomBit(content, newFilePath)
+                    # # tool.WriteFile(newFilePath, content)
                     # setFloorLine(1, size)
 
                     writeFileRecode[newFilePath] = 0
-                    # writeList.append([newFilePath, content])
                     writeList.append([newFilePath, allSrcPath, 1])
                 # else:
                     # print 'main file is exist:', newFilePath
         
 def main():
     #向一个文件夹下拷贝文件, 如果目标文件夹下文件存在, 则不再拷贝
+    
+    soucePath = 'sg_waiwang'
+    srcPath = ['../sgCommon', '../sgIos', '../' + soucePath ]
 
-    srcPath = ['../sgCommon', '../sgAndroid', '../sg_waiwang']
+    subIosRes.spaceNum = 4
+    subIosRes.specSpace = '1111'
 
-    # argvLen = len(sys.argv)
+    argvLen = len(sys.argv)
     tool.showParams()
     print tool.showTime() + " start ...."
 
+    if argvLen >= 2:
+        srcPath[1] = sys.argv[1]
+        
+    if argvLen >= 3:
+        soucePath = sys.argv[2]
+        srcPath[2] = '../' + soucePath
+
+    print srcPath
     shutil.rmtree("subContent",True)
     subDic = initSubDicWithFile('packagedFileList2.txt')
     for path in srcPath:
         copyFiles(path, subDic, '../sg1', 'subContent/sg')
 
-    print "............................"
+    print tool.showTime() + "....."
 
     thread.start_new_thread(processWriteFile, ("Thread-1",))
     thread.start_new_thread(processWriteFile, ("Thread-2",))
@@ -241,16 +253,13 @@ def main():
     thread.start_new_thread(processWriteFile, ("Thread-14",))
     thread.start_new_thread(processWriteFile, ("Thread-15",))
 
-        
     count = 0
     while True:
         find = False
-        listFile = []
-        for key,val in writeFileRecode.items():
+        for _,val in writeFileRecode.items():
             if val == 0:
                 find = True
-                listFile.append(key)
-                # break
+                break
 
         if not find:
             break
