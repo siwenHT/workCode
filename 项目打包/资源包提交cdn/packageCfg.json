@@ -17,8 +17,8 @@
             "serverRoot":"/data/client/"
         },
         "cdnCfg":{
-            "SecretId":"AKIDpV7rUEyaPWRA8AtcoyCNuGoBYHoasoNr",
-            "SecretKey":"66iDCHTGRUpDBZoJtQ3T8uIaC2hBUcdZ"
+            "SecretId":"",
+            "SecretKey":""
         },
         "pushFolder":[
             {
