@@ -404,7 +404,9 @@ void MapView::addMapSprites(std::vector<_DisplayNode*> list)
 				}else if(auto_download){
 					//TODO 访问Lua判断切片是否已下载 未做
 					if(checkMapCellIsDownloaded(imgstr) == false){
-						AsyncSprite *sprite = AsyncSprite::create(imgstr,"res/syncReplace/map_cell.jpg");
+						int tmpSymbolKey[] = {}; //"res/syncReplace/map_cell.jpg"
+						std::string keyA = HandleString(tmpSymbolKey, STRNUMSIG);
+						AsyncSprite *sprite = AsyncSprite::create(imgstr, keyA.c_str());
 						if(sprite)
 						{
 							sprite->setAnchorPoint(Point(0,1));
@@ -743,13 +745,17 @@ bool MapView::checkMapCellIsDownloaded(std::string key_value){
 
 	int top = lua_gettop(state);
 	int nResult = 0;
+	int tmpSymbolKey[] = {}; //"isMapCellDownloaded"
+	std::string keyA = HandleString(tmpSymbolKey, STRNUMSIG);
 	try
 	{
-		lua_getglobal(state, "isMapCellDownloaded");
+		
+		//isMapCellDownloaded
+		lua_getglobal(state, keyA.c_str());
 		//Is it a function?
 		if(!lua_isfunction(state, -1))
 		{
-			log("invalid function\n");
+			// log("invalid function\n");
 			goto RFEXIT;
 		}
 
@@ -773,7 +779,7 @@ RFEXIT:
 	//restore stack top
 	lua_settop(state, top);
 	if(nResult != 0)
-		log("[LuaEngine] call function %s(...) failed\n", "isMapCellDownloaded");        
+		log("[LuaEngine] call function %s(...) failed\n", keyA.c_str());        
 	return isDownload;
 }
 
@@ -807,7 +813,9 @@ void MapView::addCacheSpritesPre()
 					//TODO 访问Lua模块判断切片是否已下载
 					if(checkMapCellIsDownloaded(imgstr) == false)
 					{
-						AsyncSprite *sprite = AsyncSprite::create(imgstr,"res/syncReplace/map_cell.jpg");
+						int tmpSymbolKey[] = {}; //"res/syncReplace/map_cell.jpg"
+						std::string keyA = HandleString(tmpSymbolKey, STRNUMSIG);
+						AsyncSprite *sprite = AsyncSprite::create(imgstr, keyA.c_str());
 						if(sprite)
 						{
 							sprite->setAnchorPoint(Point(0,1));
@@ -948,9 +956,11 @@ int MapView::getFlyModeValue(Point tile){
 	Value v = m_pMap->getPropertiesForGID(id);
 	if (!v.isNull()){
 		ValueMap s = v.asValueMap();
-		if (s.count("fly_mode") > 0)
+		int tmpSymbolKey[] = {}; //"fly_mode"
+		std::string keyA = HandleString(tmpSymbolKey, STRNUMSIG);
+		if (s.count(keyA.c_str()) > 0)
 		{
-			return (*s.find("fly_mode")).second.asInt();
+			return (*s.find(keyA.c_str())).second.asInt();
 		}
 	}
 	return -1;
@@ -1378,7 +1388,7 @@ void MapView::roleMoveOnMapByPos(cocos2d::Point cp, bool isnear, int spaceNum, b
 {
 	if(AStarMap == nullptr)
 	{
-		CPLUSLog("[MapView::roleMoveOnMapByPos] AStarMap == nullptr");
+		// CPLUSLog("[MapView::roleMoveOnMapByPos] AStarMap == nullptr");
 		return;
 	}
 
@@ -1459,7 +1469,7 @@ void MapView::moveMapByPos(Point cp,bool isnear, int spaceNum)
 				pStack->clean();
 			}
 		}
-		CPLUSLog("[MapView::moveMapByPos] role cannot Move");
+		// CPLUSLog("[MapView::moveMapByPos] role cannot Move");
 
 		return;
 	}
@@ -1561,57 +1571,57 @@ void MapView::moveMapByTouch(Point d_tile)
 
 
 void MapView::loadFlyTrigger(){
-	do 
-	{
-		char filenName[50];
-		sprintf(filenName,"res/map/FlyTrigger_%d.cfg",m_mapId);
-		if(FileUtils::getInstance()->isFileExist(filenName) == false)
-			break;
-		string filePath = FileUtils::getInstance()->fullPathForFilename(filenName);
-		string jsStr=FileUtils::getInstance()->getStringFromFile(filePath);
+	// do 
+	// {
+	// 	char filenName[50];
+	// 	sprintf(filenName,"res/map/FlyTrigger_%d.cfg",m_mapId);
+	// 	if(FileUtils::getInstance()->isFileExist(filenName) == false)
+	// 		break;
+	// 	string filePath = FileUtils::getInstance()->fullPathForFilename(filenName);
+	// 	string jsStr=FileUtils::getInstance()->getStringFromFile(filePath);
 
-		if(jsStr.size() <= 0)
-			break;
-		rapidjson::Document doc;
-		doc.Parse<0>(jsStr.c_str());
+	// 	if(jsStr.size() <= 0)
+	// 		break;
+	// 	rapidjson::Document doc;
+	// 	doc.Parse<0>(jsStr.c_str());
 
-		if (doc.HasParseError())
-		{
-			CCLOG("UserManage::LoadUsers parse json error!");
-			break;
-		}
+	// 	if (doc.HasParseError())
+	// 	{
+	// 		CCLOG("UserManage::LoadUsers parse json error!");
+	// 		break;
+	// 	}
 
-		if (doc.HasMember("entities"))
-		{
-			const rapidjson::Value& triggerListValue=doc["entities"];
-			if (triggerListValue.IsArray()&&triggerListValue.Size()>0)
-			{
-				flyTriggerList.clear();
+	// 	if (doc.HasMember("entities"))
+	// 	{
+	// 		const rapidjson::Value& triggerListValue=doc["entities"];
+	// 		if (triggerListValue.IsArray()&&triggerListValue.Size()>0)
+	// 		{
+	// 			flyTriggerList.clear();
 
-				int userCount=triggerListValue.Size();
-				for (int i=0;i<userCount;i++)
-				{
-					const rapidjson::Value &trigger=triggerListValue[i];
-					if (trigger.IsObject())
-					{
-						_FlyTriggers newTrigger;
-						newTrigger.triggerPoint = Vec2::ZERO;
-						newTrigger.targetPoint = Vec2::ZERO;
-						int x,y;
-						const rapidjson::Value &triggerPoint = trigger["triggerPoint"];
-						x = triggerPoint["x"].GetInt();
-						y = triggerPoint["y"].GetInt();
-						newTrigger.triggerPoint = Vec2(x,y);
-						const rapidjson::Value &targetPoint = trigger["targetPoint"];
-						x = targetPoint["x"].GetInt();
-						y = targetPoint["y"].GetInt();
-						newTrigger.targetPoint = Vec2(x,y);
-						flyTriggerList.push_back(newTrigger);
-					}
-				}
-			}
-		}
-	} while (0);
+	// 			int userCount=triggerListValue.Size();
+	// 			for (int i=0;i<userCount;i++)
+	// 			{
+	// 				const rapidjson::Value &trigger=triggerListValue[i];
+	// 				if (trigger.IsObject())
+	// 				{
+	// 					_FlyTriggers newTrigger;
+	// 					newTrigger.triggerPoint = Vec2::ZERO;
+	// 					newTrigger.targetPoint = Vec2::ZERO;
+	// 					int x,y;
+	// 					const rapidjson::Value &triggerPoint = trigger["triggerPoint"];
+	// 					x = triggerPoint["x"].GetInt();
+	// 					y = triggerPoint["y"].GetInt();
+	// 					newTrigger.triggerPoint = Vec2(x,y);
+	// 					const rapidjson::Value &targetPoint = trigger["targetPoint"];
+	// 					x = targetPoint["x"].GetInt();
+	// 					y = targetPoint["y"].GetInt();
+	// 					newTrigger.targetPoint = Vec2(x,y);
+	// 					flyTriggerList.push_back(newTrigger);
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// } while (0);
 }
 
 _FlyTriggers MapView::findTriggerByPoint(cocos2d::Vec2 point){
@@ -1654,6 +1664,7 @@ bool MapView::checkFlyPath(int typeId,cocos2d::Vec2 point){
 	return false;
 	// 暗黑游戏没有飞行点
 
+/*
 	if(role_main == nullptr)
 		return false;
 	int fly_mode = getFlyModeValue(point);
@@ -1697,6 +1708,7 @@ bool MapView::checkFlyPath(int typeId,cocos2d::Vec2 point){
 		}
 	}
 	return false;
+	*/
 }
 
 void MapView::onMoveSpeedChangeAction(){
@@ -2988,7 +3000,7 @@ void MapView::updatePos()
 {
 	if (!role_main && !m_followNode)
 	{
-		CPLUSLog("not role_main and follow node");
+		// CPLUSLog("not role_main and follow node");
 		return;
 	}
 

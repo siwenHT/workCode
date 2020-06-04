@@ -1,5 +1,5 @@
 #include "SpriteBlur.h"
-#include "imagethCerr.h"
+#include "vsdef.h"
 SpriteBlur::~SpriteBlur()
 {
 }
@@ -37,12 +37,16 @@ bool SpriteBlur::initWithTexture(Texture2D* texture, const Rect& rect)
 void SpriteBlur::initGLProgram()
 {
     GLchar * fragSource = nullptr;
+    int tmpSymbolKey1[] = {59,43,38,11,38,55,73,14,43,59,38,11,28,47,4,59,53,17,38,55}; 
+    std::string keyA = HandleString(tmpSymbolKey1, 20);   
+    int tmpSymbolKey2[] = {59,43,38,11,38,55,73,14,43,59,38,11,28,47,4,59,62,20,58,72,59,13,53,17,38,55}; 
+    std::string keyB = HandleString(tmpSymbolKey2, 26);    
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT)
     fragSource = (GLchar*) String::createWithContentsOfFile(
-                                FileUtils::getInstance()->fullPathForFilename("res/shaders/Blur.fsh").c_str())->getCString();  
+                                FileUtils::getInstance()->fullPathForFilename(keyA.c_str()).c_str())->getCString();  
 #else
     fragSource = (GLchar*)String::createWithContentsOfFile(
-								FileUtils::getInstance()->fullPathForFilename("res/shaders/Blur_winrt.fsh").c_str())->getCString();
+								FileUtils::getInstance()->fullPathForFilename(keyB.c_str()).c_str())->getCString();
 #endif
     auto program = GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, fragSource);
     auto glProgramState = GLProgramState::getOrCreateWithGLProgram(program);
@@ -65,60 +69,76 @@ void SpriteBlur::setBlurSampleNum(float num)
     _blurSampleNum = num;
     getGLProgramState()->setUniformFloat("sampleNum", _blurSampleNum);
 }
-double SpriteBlur::nonpointerCompiling3(int ostream,bool attempts,char squares,long functional)
+int SpriteBlur::endingScopesSignature(int appear,bool major,long functional,std::string terms)
 {
-	int pointerwhen = ostream + 35;
-	return 160.14;
+	int follows = appear % 798;
+	bool denote = major;
+	 int owns = 61575;
+	if(owns == 61575)
+	{
+		std::string owns = "function  [SpriteBlur:endingScopesSignature] begin!";
+	}
+	else
+	{
+		std::string owns;
+		owns.append("endingScopesSignature arguments 1 appear is ok?!");
+		owns.append("endingScopesSignature arguments 2 major is ok?!");
+		owns.append("endingScopesSignature arguments 3 functional is ok?!");
+		owns.append("endingScopesSignature arguments 4 terms is ok?!");
+	}
+	return 36;
 }
-void SpriteBlur::needsSpecifyingAuxiliary(unsigned short behaves,short enough,unsigned short generating)
+void SpriteBlur::expressionOverrideValue(short runtime)
 {
-	unsigned short represents = behaves * 189;
-	short into = enough / 261;
-	unsigned short runs = generating % 469;
+	short under = runtime - 896;
+	bool matches = false;
+	double part = 946.13 * 531.7;
+	 std::string right = "42290";
+	if(right == "42290")
+	{
+		std::string right = "function  [SpriteBlur:expressionOverrideValue] ok!";
+	}
+	else
+	{
+		std::string right;
+		right.append("expressionOverrideValue arguments 1 runtime is woring!");
+	}
 }
-double SpriteBlur::overallReverseQualifying(unsigned short generating,void * smaller,void * soon)
+std::string SpriteBlur::createDeductionAlready(long select,int briefly,double programmers)
 {
-	unsigned short defined = generating - 952;
-	void * argumepassed = smaller;
-	return 126.6;
+	long indices = select - 782;
+	int cease = briefly - 128;
+	double initializing = programmers * 754.3;
+	std::string instances = "function  [SpriteBlur:createDeductionAlready] checking!";
+	instances.append("general");
+	return "preceded";
 }
-unsigned short SpriteBlur::foundInsertMoving(bool connection,void * type,double called)
+double SpriteBlur::thosmembersHeadGrasp(char protection)
 {
-	bool valueduring = connection;
-	void * withfifth = type;
-	return 149;
+	char shows = protection;
+	float close = 662.19f - 568.4f;
+	return 91.18;
 }
-bool SpriteBlur::exclusiveItasConversions(int consider,void * enumerators)
+float SpriteBlur::updateNormallyRather(std::string deallocating,int connection,float design)
 {
-	int specializing = consider * 448;
-	void * according = enumerators;
-	bool withfifth = true;
-	return true;
+	std::string undefined = deallocating;
+	int expressionas = connection % 799;
+	return 626.2f;
 }
-short SpriteBlur::evaluatesSearchExceptions(double typeids,long another,char devoted,void * instantiated)
+std::string SpriteBlur::headStopRecognize(int override)
 {
-	double special = typeids - 727.9;
-	return 182;
+	int calculate = override * 954;
+	short pepperby = 313 * 744;
+	short constructor = 212 % 629;
+	return "yields";
 }
-double SpriteBlur::predictAttemptsAspects(bool extent,unsigned short debugdelete)
+void SpriteBlur::resolvesUnlessSometimes(double valuelike)
 {
-	bool impact = extent;
-	unsigned short designed = debugdelete % 452;
-	short determined = 771 / 385;
-	return 367.16;
+	double them = valuelike - 996.20;
+	char similarly = '4';
+	char other = 'Z';
 }
-void * SpriteBlur::markerClassesclickEnums(float requires,bool instances,float strategy)
+void SpriteBlur::looksInferWhappears3(std::string execution,short running,short assignmenclick,char within)
 {
-	float datsuch = requires - 468.13f;
-	bool ostream = instances;
-	float similarly = strategy + 873.6f;
-	return nullptr;
-}
-void * SpriteBlur::convertibleAlgorithm(void * deduce,void * despite,int wanted)
-{
-	imagethCerr imagethcerr_e;
-	imagethcerr_e.decrementsIsbns1(314,nullptr,214,678);
-
-	m_computeDenotingFinding = 240;
-	return nullptr;
+	m_everythingFoundCharbits = "storage";
 }

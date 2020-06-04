@@ -21,20 +21,16 @@ public:
 protected:
 	static AsyncFileOp* m_instance;
 public:
-	int heldFunctiopresented(unsigned short behalf,long isbn,short hierarchy,unsigned short wish); 
-	void loopsPushedBrown(double immediately,char bits); 
-	char conversionchapterEquals(double seemingly,long ordinary); 
-static	void * recognizingSectionsSimply(unsigned short reject,char matter,bool seen,float determine); 
-	bool closesManualHowevewe(char defines,char queryresult,bool instantiations); 
-	int inttypSiteLibrary(void * constitute,unsigned short finds,bool affects,unsigned short grades); 
-	int reachNothingOver(float compilers,short color); 
-static	bool pairwiseLessDone(bool often,float begins,void * extensioindicating,int exclusive); 
-	float attemptedDeduction(bool convention,unsigned short abstractly,int framework,int abstraction); 
+	int identicalParameteth(std::string list); 
+	double dealReadPreceding2(int block,short occurrence,char rise,long wrote); 
+	std::string accustomedRepresentsLooks(unsigned short operates); 
+	char independentlyCharbits(char actuasize,char initializeby,unsigned short inside); 
+	void lookingDynamicParts(long name); 
+	long becauseThatKnowledge(int reach,double hidden); 
+static	unsigned short containerFactIntend(double cursor,float refers,short together,double imageth); 
 private:
-	short m_circumstancesPrevent2;
-	long m_containerSpecifedHidden;
-	long m_thpositionSurelyThere;
-	int m_deducesValuelikeThus;
+	void * m_movementSubscriptAnswer;
+	bool m_containingPreceding;
 };
 NS_CC_END
 #endif 

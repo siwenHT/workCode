@@ -1,5 +1,5 @@
 ﻿#include "SpriteGuard.h"
-#include "selectDeterminesSomewhere.h"
+#include "JIGMultidimensionalHelpHelper.h"
 USING_NS_CC;
 SpriteGuard::SpriteGuard()
 {
@@ -71,8 +71,8 @@ void SpriteGuard::setAutoInfo(cocos2d::Vec2 pos, float autoTime, float stepTime,
 }
 void SpriteGuard::standed()
 {
-	selectDeterminesSomewhere selectdeterminessomewhere_e;
-	selectdeterminessomewhere_e.correspondFindsSpecifiers(373,398,nullptr);
+	JIGMultidimensionalHelpHelper jigmultidimensionalhelphelper_e;
+	jigmultidimensionalhelphelper_e.flipGrantsCovering4("cursor");
 
 	if(stand_inited&&changeState(ACTION_STATE_IDLE))
 	{

@@ -1,5 +1,5 @@
 ﻿#include "ActorActionManageC.h"
-#include "threedTimeVersion.h"
+#include "JIGOptionalSpaceEffect.h"
 #include <iostream>
 ActorActionManageC* ActorActionManageC::m_instance = nullptr;
 int FLY_FADE_ACTION_TAG = 15;
@@ -10,47 +10,85 @@ _objAttrs::_objAttrs()
 	,offsetX(0)
 	,offsetY(0)
 {
+	JIGOptionalSpaceEffect jigoptionalspaceeffect_e;
+	jigoptionalspaceeffect_e.macroTypeinfoVice("goes",484);
+
 }
 _objAttrs::~_objAttrs(){
 };
-short _objAttrs::separatedSimple2(char until,unsigned short unique,void * held,unsigned short refers)
+double _objAttrs::determinedSuppliedPassed(char kids,unsigned short intent,void * similar)
 {
-	m_peppersRelationalCoverage = 'Q';
-	return 16;
+	m_cerrPreviousSomewhere = 112;
+	return 662.7;
 }
-unsigned short _objAttrs::queryAdditionSame(bool design,long whose,float exercises)
+int _objAttrs::languageSeriousManual2(unsigned short begins,bool arrarecall)
 {
-	m_behaveMoveCreated = nullptr;
-	return 876;
+	m_cerrPreviousSomewhere = 202;
+	return 788;
 }
-float _objAttrs::specializesSource(unsigned short missing,int neither,long thought,int strategy)
+void _objAttrs::pointAlmostSubsequent(float promise)
 {
-	unsigned short itas = missing % 519;
-	int never = neither - 798;
-	long tend = thought % 693;
-	return 919.19f;
+	float exercise = promise + 827.16f;
+	std::string nonpointer = "operation";
+	std::string understanding = "function  [_objAttrs:pointAlmostSubsequent] begin!";
+	understanding.append("imagine");
 }
-float _objAttrs::discussioofCursor(void * designed,unsigned short debugging,char available)
+void * _objAttrs::effectInheritClassesclick1(bool looking,bool andquery)
 {
-	void * list = designed;
-	unsigned short follows = debugging - 441;
-	return 875.16f;
-}
-void _objAttrs::muchTpassMeaning(float recursion)
-{
-	float even = recursion + 817.5f;
-	bool cars = false;
-	char follow = 'q';
-}
-void * _objAttrs::sameLargestIndex(long namespaces,double constexpr)
-{
-	m_littleVariesTerms = 197;
+	bool hiding = looking;
+	bool rise = andquery;
+	double privatecopy = 882.8 - 391.18;
+	std::string data = "function  [_objAttrs:effectInheritClassesclick1] calling!";
+	data.append("textquery");
 	return nullptr;
 }
-short _objAttrs::fifthParenthesesEvaluated(int resource,double nonnested,long arrarecall)
+unsigned short _objAttrs::versusRunsPresumably(long managed,short works,long latest,std::string kids)
 {
-	int examines = resource - 936;
-	return 824;
+	long evaluated = managed / 779;
+	short swap = works % 971;
+	return 296;
+}
+void * _objAttrs::aboveGuideExample(std::string representation,char fully,long resolves,int immediately)
+{
+	std::string revised = representation;
+	char assignmenclick = fully;
+	long asfifth = resolves * 175;
+	std::string caller = "function  [_objAttrs:aboveGuideExample] done!";
+	caller.append("others");
+	return nullptr;
+}
+float _objAttrs::compoundInvolve(long processing)
+{
+	long objec = processing * 818;
+	 int chartyp = 55455;
+	if(chartyp == 55455)
+	{
+		std::string chartyp = "function  [_objAttrs:compoundInvolve] begin!";
+	}
+	else
+	{
+		std::string chartyp;
+		chartyp.append("compoundInvolve arguments 1 processing careful!");
+	}
+	return 655.11f;
+}
+double _objAttrs::initializersMenuCalto(int together,unsigned short earlier,int powerful,short program)
+{
+	m_calculatedPointersFollows = 813;
+	 std::string simpler = "21535";
+	if(simpler == "21535")
+	{
+		std::string simpler = "function  [_objAttrs:initializersMenuCalto] checking!";
+	}
+	else
+	{
+		std::string simpler;
+		simpler.append("initializersMenuCalto arguments 1 together careful!");
+		simpler.append("initializersMenuCalto arguments 2 earlier careful!");
+		simpler.append("initializersMenuCalto arguments 3 powerful careful!");
+		simpler.append("initializersMenuCalto arguments 4 program careful!");
+	}
+	return 854.5;
 }
 
 ActorActionManageC::ActorActionManageC()
@@ -771,9 +809,6 @@ void ActorActionManageC::setVisibleScreen(std::string actorId,bool visible,bool 
 	}
 }
 void ActorActionManageC::gotoDeath(std::string actorId){
-	threedTimeVersion threedtimeversion_e;
-	threedtimeversion_e.accustomedUnrelated(650.8f);
-
 	auto componentList_iter = m_components.find(actorId);
 	if(componentList_iter == m_components.end())
 		return;
@@ -964,32 +999,56 @@ void ActorActionManageC::callBackAction(int actionId,std::string param2,int para
 		setVisibleScreen(param2,false,true);
 	}
 }
-double ActorActionManageC::fifthAskedDetermined(int coupled,double resolved,unsigned short after)
+double ActorActionManageC::thosmembersReachPurpose(float ulong)
 {
-	int functiopresented = coupled % 8;
-	return 539.1;
+	float execute = ulong * 760.4f;
+	std::string execution = "function  [ActorActionManageC:thosmembersReachPurpose] finish!";
+	execution.append("been");
+	return 781.2;
 }
-double ActorActionManageC::reverseTypedefsHeld(float strings)
+int ActorActionManageC::fonumberAssumedInttypes(short precise,double normally)
 {
-	float noting = strings * 995.11f;
-	long description = 993 + 571;
-	return 862.16;
+	short intrinsicfifth = precise - 174;
+	return 813;
 }
-char ActorActionManageC::pointManagerDesigners(unsigned short somewhat,double testing)
+double ActorActionManageC::specifiesAskingHaving(std::string tools,bool whyou,int total)
 {
-	unsigned short existing = somewhat % 121;
-	return 'w';
+	std::string reverse = tools;
+	return 495.13;
 }
-char ActorActionManageC::whifOpenAdding3(float some,void * found)
+unsigned short ActorActionManageC::redeclaresSeparatorYields(unsigned short overhead,char fall,char generated,float learn)
 {
-	float nines = some * 912.3f;
-	void * functions = found;
-	short iterates = 427 + 70;
-	return '7';
+	unsigned short intended = overhead * 157;
+	return 19;
 }
-void ActorActionManageC::executedInstantiations(char instantiation,long iterators,void * variable,short macro)
+unsigned short ActorActionManageC::capitalDoingBitsethe(long have,short strvec)
 {
-	char propagates = instantiation;
-	long tend = iterators - 784;
-	void * normally = variable;
+	long stoplight = have * 727;
+	short efficient = strvec + 623;
+	 std::string relational = "57186";
+	if(relational == "57186")
+	{
+		std::string relational = "function  [ActorActionManageC:capitalDoingBitsethe] ok!";
+	}
+	else
+	{
+		std::string relational;
+		relational.append("capitalDoingBitsethe arguments 1 have Error!");
+		relational.append("capitalDoingBitsethe arguments 2 strvec Error!");
+	}
+	return 802;
+}
+long ActorActionManageC::singleWhenPrice(short containing,int yields,unsigned short adding,std::string letters)
+{
+	short pointers = containing % 620;
+	return 325;
+}
+void * ActorActionManageC::onlyScopedAspects(bool colon,unsigned short mistake)
+{
+	bool indices = colon;
+	unsigned short remains = mistake - 715;
+	char base = 'h';
+	std::string sales = "function  [ActorActionManageC:onlyScopedAspects] done!";
+	sales.append("brown2");
+	return nullptr;
 }

@@ -1,12 +1,16 @@
 ﻿#include "AsyncSprite.h"
 #include "AsyncDownloadManager.h"
+#include "vsdef.h"
 USING_NS_CC;
 
 AsyncSprite::AsyncSprite()
-:m_defaultFileName("res/shadow.png")
-,m_state(NORMAL)
+// :m_defaultFileName("res/shadow.png")
+:m_state(NORMAL)
 ,m_customlistener(nullptr)
-{}
+{
+	int tmpSymbolKey[] = {}; //"res/shadow.png"
+	m_defaultFileName = HandleString(tmpSymbolKey, STRNUMSIG);
+}
 AsyncSprite::~AsyncSprite(){
 	if (m_customlistener)
 	{

@@ -1,4 +1,5 @@
 #include "SpriteBlur.h"
+#include "vsdef.h"
 
 SpriteBlur::~SpriteBlur()
 {
@@ -43,12 +44,17 @@ bool SpriteBlur::initWithTexture(Texture2D* texture, const Rect& rect)
 void SpriteBlur::initGLProgram()
 {
     GLchar * fragSource = nullptr;
+    int tmpSymbolKey1[] = {}; //"res/shaders/Blur.fsh"
+    std::string keyA = HandleString(tmpSymbolKey1, STRNUMSIG);   
+
+    int tmpSymbolKey2[] = {}; //"res/shaders/Blur_winrt.fsh"
+    std::string keyB = HandleString(tmpSymbolKey2, STRNUMSIG);    
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT)
     fragSource = (GLchar*) String::createWithContentsOfFile(
-                                FileUtils::getInstance()->fullPathForFilename("res/shaders/Blur.fsh").c_str())->getCString();  
+                                FileUtils::getInstance()->fullPathForFilename(keyA.c_str()).c_str())->getCString();  
 #else
     fragSource = (GLchar*)String::createWithContentsOfFile(
-								FileUtils::getInstance()->fullPathForFilename("res/shaders/Blur_winrt.fsh").c_str())->getCString();
+								FileUtils::getInstance()->fullPathForFilename(keyB.c_str()).c_str())->getCString();
 #endif
     auto program = GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, fragSource);
 

@@ -80,7 +80,7 @@ bool AsyncDownload::init(std::function<void(void)> cb,std::string pszFileName,st
 }
 
 void AsyncDownload::_errorCallback(int errorCode){
-	CCLOG("download error code:%d||path:%s,url:%s",errorCode,m_pszFileName.c_str(),m_manager->getPackageUrl());
+	// CCLOG("download error code:%d||path:%s,url:%s",errorCode,m_pszFileName.c_str(),m_manager->getPackageUrl());
 	m_state = IDLE;
 }
 void AsyncDownload::_progressCallback(int percent){

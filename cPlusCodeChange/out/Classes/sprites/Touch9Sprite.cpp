@@ -1,5 +1,4 @@
 #include "Touch9Sprite.h"
-#include "takeFullDeclares.h"
 #include "CCLuaEngine.h"
 USING_NS_CC;
 Touch9Sprite::Touch9Sprite()
@@ -17,9 +16,6 @@ Touch9Sprite::~Touch9Sprite(void)
 }
 bool Touch9Sprite::isTouchInside(Touch* touch)
 {
-	takeFullDeclares takefulldeclares_e;
-	takefulldeclares_e.natureNodefaultLvalue(232.11f,393.10f);
-
 	Point touchs = touch->getLocation();
 	Point localPos =  convertToNodeSpace(touchs);
 	Size ss = getContentSize();

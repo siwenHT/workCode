@@ -9,21 +9,18 @@ public:
 	static SpriteNpc* create(const std::string&pszFileName);
  
 public:
-	double settingComplexities(char conversion,void * equals); 
-	char organizeIsbnsDesigning(float naming,char declared); 
-	double stateOnbitsCccccccccc(int happens,long want,int treated,int storing); 
-	double doubledCorrespondViolate(unsigned short offsets,short identification,double where); 
-	unsigned short implicitGrammarGreater(short safely); 
-	short extentActionLanguage(void * offsets,short simple); 
-	double omitTakingFactorial(void * converting,double thoutermost,float mube); 
-static	int thoseAroundDenotes(int instantiation); 
-static	void * nearlyCardStrvecResource(float assigns,char these,bool think,int converts); 
-	int buildsRequiredInitializer(int printing,bool assuming); 
-	double differenbetweenAbility(int boundthat,short report); 
-	float mainFrameworkAuthors(unsigned short collection,double icase); 
+	int varyingEncloseCount(char ctype,std::string somewhere,long examines,std::string reach); 
+	char studyCompoundFoundScopes(bool allowed,long whenever); 
+	void noneBrowsersCloseBegan(int compares,int transformation); 
+static	void argumepassedTuplesNote(int connection,void * statics,bool logical); 
+	int chosenEvaluatedSuppress(char random); 
+	float brieflyReadingProvide(short compute,double memberwise); 
+static	void connectionLoopBriefly(long such,long beyond,char smart); 
+	int argsPatternsHaveSyntactic(void * thposition); 
 private:
-	bool m_enforcesSequentialAllowed;
-	bool m_writtenAppliesLists;
-	char m_complicationEnumeration;
+	void * m_namingInfrequently;
+	short m_promptRedefinitionCompare;
+	short m_writeThanUndefined4;
+	char m_blueprintUnlikely;
 };
 #endif

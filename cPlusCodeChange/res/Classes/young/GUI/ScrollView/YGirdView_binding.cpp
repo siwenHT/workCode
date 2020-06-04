@@ -74,7 +74,7 @@ static int YGirdView_setDelegate(lua_State* L)
     
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-    tolua_error(L,"#ferror in function 'YGirdView_setDelegate'.",&tolua_err);
+    tolua_error(L,"",&tolua_err);
     return 0;
 #endif
 }
@@ -135,7 +135,7 @@ static int YGirdView_setDataSource(lua_State* L)
     
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-    tolua_error(L,"#ferror in function 'YGirdView_setDataSource'.",&tolua_err);
+    tolua_error(L,"",&tolua_err);
     return 0;
 #endif
 }
@@ -187,7 +187,7 @@ static int YGirdView_create(lua_State* L)
     
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-    tolua_error(L,"#ferror in function 'create'.",&tolua_err);
+    tolua_error(L,"",&tolua_err);
     return 0;
 #endif
 }
@@ -236,7 +236,7 @@ static int YGirdView_registerEventHandler(lua_State* L)
     
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-    tolua_error(L,"#ferror in function 'YGirdView_registerEventHandler'.",&tolua_err);
+    tolua_error(L,"",&tolua_err);
     return 0;
 #endif
 }
@@ -281,7 +281,7 @@ static int YGirdView_unregisterEventHandler(lua_State* L)
     
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-    tolua_error(L,"#ferror in function 'YGirdView_unregisterEventHandler'.",&tolua_err);
+    tolua_error(L,"",&tolua_err);
     return 0;
 #endif
 }
@@ -334,7 +334,7 @@ int YGirdView_getPositionFromIndex(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YGirdView_getPositionFromIndex'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -357,7 +357,7 @@ int YGirdView_getPositionFromIndex(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YGirdView_getPositionFromIndex'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -383,7 +383,7 @@ int YGirdView_getIndexFromPoint(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YGirdView_getIndexFromPoint'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -405,7 +405,7 @@ int YGirdView_getIndexFromPoint(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YGirdView_getIndexFromPoint'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -431,7 +431,7 @@ int YGirdView_updateCellAtIndex(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YGirdView_updateCellAtIndex'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -452,7 +452,7 @@ int YGirdView_updateCellAtIndex(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YGirdView_updateCellAtIndex'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -479,7 +479,7 @@ int YGirdView_scrollViewDidZoom(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YGirdView_scrollViewDidZoom'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -500,7 +500,7 @@ int YGirdView_scrollViewDidZoom(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YGirdView_scrollViewDidZoom'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -528,7 +528,7 @@ int YGirdView_removeCellAtIndex(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YGirdView_removeCellAtIndex'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -549,7 +549,7 @@ int YGirdView_removeCellAtIndex(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YGirdView_removeCellAtIndex'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -576,7 +576,7 @@ int YGirdView_scrollViewDidScroll(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YGirdView_scrollViewDidScroll'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -597,7 +597,7 @@ int YGirdView_scrollViewDidScroll(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YGirdView_scrollViewDidScroll'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -623,7 +623,7 @@ int YGirdView_reloadData(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YGirdView_reloadData'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -641,7 +641,7 @@ int YGirdView_reloadData(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YGirdView_reloadData'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -667,7 +667,7 @@ int YGirdView_insertCellAtIndex(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YGirdView_insertCellAtIndex'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -689,7 +689,7 @@ int YGirdView_insertCellAtIndex(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YGirdView_insertCellAtIndex'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -715,7 +715,7 @@ int YGirdView_cellAtIndex(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YGirdView_cellAtIndex'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -737,7 +737,7 @@ int YGirdView_cellAtIndex(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YGirdView_cellAtIndex'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -763,7 +763,7 @@ int YGirdView_dequeueCell(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YGirdView_dequeueCell'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -782,7 +782,7 @@ int YGirdView_dequeueCell(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YGirdView_dequeueCell'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -808,7 +808,7 @@ int YGirdView_viewSizeSelfAdaption(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YGirdView_viewSizeSelfAdaption'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -825,7 +825,7 @@ int YGirdView_viewSizeSelfAdaption(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YGirdView_viewSizeSelfAdaption'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;
@@ -851,7 +851,7 @@ int YGirdView_getGroupAndInGroupFromIndex(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'YGirdView_getGroupAndInGroupFromIndex'", nullptr);
+        tolua_error(tolua_S,"", nullptr);
         return 0;
     }
 #endif
@@ -877,7 +877,7 @@ int YGirdView_getGroupAndInGroupFromIndex(lua_State* tolua_S)
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'YGirdView_getGroupAndInGroupFromIndex'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
 
     return 0;

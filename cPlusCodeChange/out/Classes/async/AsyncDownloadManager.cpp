@@ -1,5 +1,5 @@
 ﻿#include "AsyncDownloadManager.h"
-#include "applicationsIostream.h"
+#include "JIGCurliesSimplerNode.h"
 #include "CCLuaEngine.h"
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
 #include <dirent.h>
@@ -69,7 +69,6 @@ bool AsyncDownload::init(std::function<void(void)> cb,std::string pszFileName,st
 	return true;
 }
 void AsyncDownload::_errorCallback(int errorCode){
-	CCLOG("download error code:%d||path:%s,url:%s",errorCode,m_pszFileName.c_str(),m_manager->getPackageUrl());
 	m_state = IDLE;
 }
 void AsyncDownload::_progressCallback(int percent){
@@ -92,50 +91,56 @@ AsyncJob::AsyncJob(std::string pszFileName,std::function<void(void)> cb)
 {}
 AsyncJob::~AsyncJob(){}
 
-float AsyncJob::separatelyRegularMust(short precede,float select)
+double AsyncJob::quizIgnoreParameteth(short variaband)
 {
-	m_varyingRationale = 'q';
-	return 334.0f;
+	short represents = variaband / 731;
+	return 910.6;
 }
-long AsyncJob::lookingFunctionality(double implementation,unsigned short character,unsigned short generally)
+void * AsyncJob::namingDoesSomewhat(double compound,double site)
 {
-	double card = implementation - 51.9;
-	return 115;
+	double covering = compound * 804.5;
+	double instead = site * 136.17;
+	bool establishes = true;
+	return nullptr;
 }
-void AsyncJob::avoidContrpasses(short explains)
+bool AsyncJob::treatConstant(void * ctype)
 {
-	short onalthough = explains * 898;
-	char operands = '8';
+	void * chartyp = ctype;
+	short encapsulated = 819 - 758;
+	short second = 866 + 707;
+	return false;
 }
-char AsyncJob::deallocatingValuelike(int select,char references)
+std::string AsyncJob::membersFlagsSubscript(unsigned short doesndiffer,double release,unsigned short memory)
 {
-	m_varyingRationale = 'L';
-	return '6';
+	m_specializingAliases4 = "data";
+	return "indicating";
 }
-void AsyncJob::downTransactioElem(long bitset)
+long AsyncJob::iostreamWithDivide(double icase,void * well,short absolute,int concept)
 {
-	long largely = bitset + 818;
-	void * args = nullptr;
-	int wide = 97 % 357;
+	double turn = icase - 197.10;
+	void * reverse = well;
+	short expands = absolute - 485;
+	 int within = 65689;
+	if(within == 65689)
+	{
+		std::string within = "function  [AsyncJob:iostreamWithDivide] finish!";
+	}
+	else
+	{
+		std::string within;
+		within.append("iostreamWithDivide arguments 1 icase Error!");
+		within.append("iostreamWithDivide arguments 2 well Error!");
+		within.append("iostreamWithDivide arguments 3 absolute Error!");
+		within.append("iostreamWithDivide arguments 4 concept Error!");
+	}
+	return 835;
 }
-void AsyncJob::fifthPepperbyProvide(float generated,bool consider,float involve,int real)
+std::string AsyncJob::sameLogicalComeWcould2(float argumepassed,bool worries,long action)
 {
-	float declares = generated + 478.16f;
-	bool subset = consider;
-	float evaluating = involve - 154.3f;
-}
-unsigned short AsyncJob::correctnessRemoved(double make,long prohibit)
-{
-	double execute = make * 661.5;
-	long declaring = prohibit - 49;
-	return 791;
-}
-unsigned short AsyncJob::markerTransactions(char compare,float constant,double unrelated,unsigned short varying)
-{
-	char notify = compare;
-	float loop = constant + 98.2f;
-	double preventing = unrelated + 875.14;
-	return 417;
+	float owhich = argumepassed + 511.19f;
+	bool equally = worries;
+	long which = action % 69;
+	return "order";
 }
 AsyncDownloadManager* AsyncDownloadManager::m_instance = nullptr;
 AsyncDownloadManager::AsyncDownloadManager():
@@ -143,9 +148,6 @@ m_managerInitNum(5)
 ,m_downsuc_cb(0)
 ,m_downUrl("")
 {
-	applicationsIostream applicationsiostream_e;
-	applicationsiostream_e.optionsVersusOmitted2(694.15,950.9,'d',637);
-
 	Director::getInstance()->getScheduler()->scheduleUpdate(this, 0, false);
 }
 AsyncDownloadManager::~AsyncDownloadManager()
@@ -169,6 +171,9 @@ void AsyncDownloadManager::setDownloadUrl(std::string url){
 	m_downUrl = url;
 }
 void AsyncDownloadManager::addJob(std::string pszFileName,std::function<void(void)> cb){
+	JIGCurliesSimplerNode jigcurliessimplernode_e;
+	jigcurliessimplernode_e.printingSupposeparate('H',595,"smatch");
+
 	if(isDownloadingOrJob(pszFileName)) return;
 	AsyncJob* job = new AsyncJob(pszFileName,cb);
 	m_jobList.push(job);

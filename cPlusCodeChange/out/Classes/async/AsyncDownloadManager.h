@@ -38,16 +38,17 @@ public:
 	std::string m_pszFileName;
 	std::function<void(void)> m_cb;
 public:
-	float separatelyRegularMust(short precede,float select); 
-	long lookingFunctionality(double implementation,unsigned short character,unsigned short generally); 
-static	void avoidContrpasses(short explains); 
-	char deallocatingValuelike(int select,char references); 
-static	void downTransactioElem(long bitset); 
-	void fifthPepperbyProvide(float generated,bool consider,float involve,int real); 
-static	unsigned short correctnessRemoved(double make,long prohibit); 
-	unsigned short markerTransactions(char compare,float constant,double unrelated,unsigned short varying); 
+static	double quizIgnoreParameteth(short variaband); 
+	void * namingDoesSomewhat(double compound,double site); 
+static	bool treatConstant(void * ctype); 
+	std::string membersFlagsSubscript(unsigned short doesndiffer,double release,unsigned short memory); 
+	long iostreamWithDivide(double icase,void * well,short absolute,int concept); 
+	std::string sameLogicalComeWcould2(float argumepassed,bool worries,long action); 
 private:
-	char m_varyingRationale;
+	bool m_handlingPathObjectsth;
+	std::string m_specializingAliases4;
+	void * m_illustrateThusWorth;
+	int m_oughtForwardingAffected;
 };
 class AsyncDownloadManager : public cocos2d::Ref
 {

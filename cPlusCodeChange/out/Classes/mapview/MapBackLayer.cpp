@@ -44,58 +44,89 @@ void MapBackLayer::updatePosition(const cocos2d::Vec2& position)
 {
 	m_back->setPosition(Vec2(position.x*m_speedRate, position.y*m_speedRate));
 }
-void * MapBackLayer::functionalthoughMarkSplit(float select)
+void * MapBackLayer::strcmpIntroductoryItas(int inlined)
 {
-	float violate = select + 252.2f;
-	unsigned short object = 193 * 960;
+	int file = inlined % 354;
+	float often = 579.17f * 673.8f;
+	bool programmer = true;
+	std::string number = "function  [MapBackLayer:strcmpIntroductoryItas] finish!";
+	number.append("nocopy");
 	return nullptr;
 }
-char MapBackLayer::distinctiveAheadAccording(unsigned short file,long results)
+int MapBackLayer::specializationAlgorithms(unsigned short nonpointer,short doing)
 {
-	unsigned short synthesized = file * 632;
-	long overloading = results % 860;
-	double updates = 54.11 * 580.7;
-	return '9';
+	unsigned short omitting = nonpointer + 709;
+	return 925;
 }
-bool MapBackLayer::datsuchLiteralsHence(short propagates)
+char MapBackLayer::definitionThemExit5(unsigned short manager,void * limit)
 {
-	short patterns = propagates + 961;
-	short check = 591 * 116;
-	return true;
+	unsigned short returns = manager % 297;
+	return 'C';
 }
-bool MapBackLayer::asfifthSimpleOkayVerify(char mube,float assignmenclick,long evaluated,char vice)
+char MapBackLayer::knownMenuApplicable(unsigned short should)
 {
-	m_checkEvaluatedDetailSees = true;
+	m_wordsRefersPointed = 404;
+	 int evaluating = 77647;
+	if(evaluating == 77647)
+	{
+		std::string evaluating = "function  [MapBackLayer:knownMenuApplicable] begin!";
+	}
+	else
+	{
+		std::string evaluating;
+		evaluating.append("knownMenuApplicable arguments 1 should need Check!");
+	}
+	return 'W';
+}
+bool MapBackLayer::definitionsPresented(std::string aside)
+{
+	std::string given = aside;
+	short constitutes = 828 + 839;
+	 bool state = false;
+	if(state)
+	{
+		std::string state = "function  [MapBackLayer:definitionsPresented] calling!";
+	}
+	else
+	{
+		std::string state;
+		state.append("definitionsPresented arguments 1 aside Ok!");
+	}
 	return false;
 }
-double MapBackLayer::listthExhaustedVersus(char initialization,void * care)
+int MapBackLayer::fallModifyList(long owhich,unsigned short initially,long type,short enumerations)
 {
-	char illustrate = initialization;
-	void * bits = care;
-	char specifying = 'R';
-	return 662.16;
+	long definition = owhich + 836;
+	unsigned short consts = initially / 618;
+	std::string reside = "function  [MapBackLayer:fallModifyList] ok!";
+	reside.append("dereferences1");
+	return 955;
 }
-bool MapBackLayer::unchangedExpandingMacro(int detail,float trans,int adaptors)
+float MapBackLayer::convertedSwappedTaking(unsigned short want)
 {
-	m_checkEvaluatedDetailSees = false;
-	return true;
+	unsigned short access = want + 723;
+	double idea = 807.14 * 643.1;
+	std::string passed = "function  [MapBackLayer:convertedSwappedTaking] end!";
+	passed.append("rewrites");
+	return 463.8f;
 }
-void MapBackLayer::simplerSectionsCopying(float parameteth)
+int MapBackLayer::personExhasuting(std::string stringth,char find,double full,char exhasuting)
 {
-	float programmers = parameteth + 497.2f;
-}
-long MapBackLayer::actuasizeExpressionas(void * ways,long modern)
-{
-	void * nonstatic = ways;
-	long applied = modern * 947;
-	return 1000;
-}
-void MapBackLayer::interpretedPreventedWhose(unsigned short updates,short subset)
-{
-	m_checkEvaluatedDetailSees = true;
-}
-long MapBackLayer::informationLength(char deal,unsigned short begin,unsigned short overloaded,long substring)
-{
-	m_checkEvaluatedDetailSees = true;
-	return 175;
+	std::string nontype = stringth;
+	char control = find;
+	double sure = full * 852.2;
+	 int assumed = 46129;
+	if(assumed == 46129)
+	{
+		std::string assumed = "function  [MapBackLayer:personExhasuting] ok!";
+	}
+	else
+	{
+		std::string assumed;
+		assumed.append("personExhasuting arguments 1 stringth is woring!");
+		assumed.append("personExhasuting arguments 2 find is woring!");
+		assumed.append("personExhasuting arguments 3 full is woring!");
+		assumed.append("personExhasuting arguments 4 exhasuting is woring!");
+	}
+	return 852;
 }

@@ -33,7 +33,7 @@ int lua_TextureManager_getInstance(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_TextureManager_getInstance'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -52,7 +52,7 @@ int lua_TextureManager_doTextureGC(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_TextureManager_doTextureGC'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -66,7 +66,7 @@ int lua_TextureManager_doTextureGC(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_TextureManager_doTextureGC'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -85,7 +85,7 @@ int lua_TextureManager_doGC(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_TextureManager_doGC'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -107,7 +107,7 @@ int lua_TextureManager_doGC(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_TextureManager_doGC'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -126,7 +126,7 @@ int lua_TextureManager_setIDleTime(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_TextureManager_setIDleTime'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -143,7 +143,7 @@ int lua_TextureManager_setIDleTime(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_TextureManager_setIDleTime'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -162,7 +162,7 @@ int lua_TextureManager_setMachineMemoryTYPE(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_TextureManager_setMachineMemoryTYPE'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -179,7 +179,7 @@ int lua_TextureManager_setMachineMemoryTYPE(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_TextureManager_setMachineMemoryTYPE'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -198,7 +198,7 @@ int lua_TextureManager_registerNotGCPath(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_TextureManager_registerNotGCPath'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -215,7 +215,7 @@ int lua_TextureManager_registerNotGCPath(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_TextureManager_registerNotGCPath'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -234,7 +234,7 @@ int lua_TextureManager_registerNotGC(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_TextureManager_registerNotGC'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -251,7 +251,7 @@ int lua_TextureManager_registerNotGC(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_TextureManager_registerNotGC'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -270,7 +270,7 @@ int lua_TextureManager_resetTextureActive(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_TextureManager_resetTextureActive'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -287,7 +287,7 @@ int lua_TextureManager_resetTextureActive(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_TextureManager_resetTextureActive'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -306,7 +306,7 @@ int lua_TextureManager_removeNotGC(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_TextureManager_removeNotGC'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -323,7 +323,7 @@ int lua_TextureManager_removeNotGC(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_TextureManager_removeNotGC'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -342,7 +342,7 @@ int lua_TextureManager_clearNotGC(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_TextureManager_clearNotGC'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -356,7 +356,7 @@ int lua_TextureManager_clearNotGC(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_TextureManager_clearNotGC'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -375,7 +375,7 @@ int lua_TextureManager_setAllPngRGBA4444(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_TextureManager_setAllPngRGBA4444'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -392,7 +392,7 @@ int lua_TextureManager_setAllPngRGBA4444(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_TextureManager_setAllPngRGBA4444'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -411,7 +411,7 @@ int lua_TextureManager_getTotalByte(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_TextureManager_getTotalByte'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -426,7 +426,7 @@ int lua_TextureManager_getTotalByte(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_TextureManager_getTotalByte'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }

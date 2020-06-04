@@ -12,19 +12,18 @@ protected :
 	void endMove();
 	CC_SYNTHESIZE_READONLY(bool, m_isFinished, IsFinished);
 public:
-	double translateMutuallyCapital(char previously,bool executing,float behalf,short before); 
-	int splitDefinesEnumerations(float understand,int inlined); 
-	void * protectionSchema(void * difficult,int elem,short alias,short sometimes); 
-	void * shareDirectlyObjec(double error,unsigned short along,char match,short benefit); 
-	void bothEncountersConverted(double managing,char possible,float have,float explain); 
-	float hardestDifferenbetween1(double common,long typeids,long defined,short library); 
-static	double tuplesSufficientlyNotify(bool elipsis,long processes); 
-static	short stunninglyLiterals(void * neither,void * zero,char words); 
-	bool featureSwapNearly(int benefit,int alphanumeric,void * argument); 
+	void inputInvalidAssignment(float loops,void * externfifth,long represent); 
+	double operatingEnumerations(bool promotion,unsigned short unnamed,bool circumstances); 
+static	long separationCastPresented(char prevent); 
+	unsigned short referenceTextqueryPrints(long calc,float restrictions,int compiled,long what); 
+static	void otherDeletedPreserve(unsigned short stop,int usually,unsigned short iterates,bool stringsthe); 
+	void * componentsPromiseStay(short throws); 
+	unsigned short bodyProperlyDifficult(short bypass,short sequences,void * instances,bool strblob); 
+	long promotionBodies(void * menu,long stunningly,std::string constitutes,std::string stops); 
+	short performNotifySurprising(double consistent,char indicates); 
 private:
-	int m_manualAppliesCerr3;
-	float m_neededNewlineInttypes;
-	void * m_natureChparameter;
-	int m_elementPreventingEmbodies;
-	char m_selectExecutesHides;
+	long m_writeElsewhereChanging;
+	double m_decrementTransactions;
+	void * m_designerNoneAppliesDenote;
+	double m_bookIndexingNonpublic;
 };

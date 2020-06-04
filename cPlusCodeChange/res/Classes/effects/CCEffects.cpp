@@ -45,7 +45,8 @@ Effects::Effects()
 	updateShowState();
 
 	m_boSkillEffect = false;
-	m_sDirectoryName = "effectsplist";
+	int tmpSymbolKey[] = {}; //"effectsplist"
+	m_sDirectoryName = HandleString(tmpSymbolKey, STRNUMSIG);
 }
 
 Effects::~Effects(void){
@@ -74,14 +75,14 @@ void Effects::reset(){
 void Effects::cleanAsync(){
 	if(m_loadTextureEntryId != 0 && !m_show_texture_path.empty()){
 		bool isFind = Director::getInstance()->getTextureCache()->unbindImageAsyncCustom(m_show_texture_path,m_loadTextureEntryId);
-		CCASSERT(isFind == true, "Effects m_loadTextureEntryId remove Fail");
+		// CCASSERT(isFind == true, "Effects m_loadTextureEntryId remove Fail");
 		m_loadTextureEntryId = 0;
 	}
 	m_needLoadTextureList.clear();
 
 	if(m_loadPlistEntryId != 0 && !m_show_plist_path.empty()){
 		bool isFind = AsyncLoadPlist::getInstance()->unbindPlistAsyncWithEntryId(m_show_plist_path,m_loadPlistEntryId);
-		CCASSERT(isFind == true, "Effects m_show_plist_path remove Fail");
+		// CCASSERT(isFind == true, "Effects m_show_plist_path remove Fail");
 		m_loadPlistEntryId = 0;
 	}
 }
@@ -89,7 +90,9 @@ void Effects::cleanAsync(){
 Effects *Effects::create(bool auto_clean,bool onloadPlay, bool boSkillEffect)
 {
     Effects *pRet = new Effects();
-    if (pRet && pRet->initWithFile("res/empty_frame.png") && pRet->init(auto_clean,onloadPlay, boSkillEffect))
+    int tmpSymbolKey[] = {}; //"res/empty_frame.png"
+	std::string keyA = HandleString(tmpSymbolKey, STRNUMSIG);
+    if (pRet && pRet->initWithFile(keyA.c_str()) && pRet->init(auto_clean,onloadPlay, boSkillEffect))
     {
         pRet->autorelease();
         return pRet;
@@ -302,7 +305,7 @@ void Effects::loadPlist()
 			}
 			else
 			{
-				CPLUSLog("[Effects::createEffect] ... Plist Not Find: %s", plistUrl.c_str());
+				// CPLUSLog("[Effects::createEffect] ... Plist Not Find: %s", plistUrl.c_str());
 			}
 		}
 	}
@@ -598,7 +601,7 @@ void Effects::addSpriteFrameListCallBack(cocos2d::Texture2D* a,std::string strur
 	m_loadTextureEntryId = 0;
 	m_isLoadTexturing = false;
 	if(a == nullptr){
-		CCLOG("Effects_load file fail:%s",strurl.c_str());
+		// CCLOG("Effects_load file fail:%s",strurl.c_str());
 		return;
 	}
 	m_showState = 2;
@@ -642,11 +645,15 @@ std::string Effects::calculateAssetPath(int typeId, int plistNum, bool isOld){
 		if(std::string::npos != k)
 		{
 			auto sub_str = m_pszFileName.substr(0, k);
-			sprintf(url,"res/%s/s_%s@%d%s", m_sDirectoryName.c_str(), sub_str.c_str(), plistNum - 1, suffix.c_str());
+			int tmpSymbolKey[] = {}; //"res/%s/s_%s@%d%s"
+			std::string key1 = HandleString(tmpSymbolKey, STRNUMSIG);
+			sprintf(url, key1.c_str(), m_sDirectoryName.c_str(), sub_str.c_str(), plistNum - 1, suffix.c_str());
 		}
 		else
 		{
-			sprintf(url,"res/%s/%s@%d%s", m_sDirectoryName.c_str(), m_pszFileName.c_str(), plistNum - 1, suffix.c_str());
+			int tmpSymbolKey[] = {}; //"res/%s/%s@%d%s"
+			std::string keyA = HandleString(tmpSymbolKey, STRNUMSIG);
+			sprintf(url, keyA.c_str(), m_sDirectoryName.c_str(), m_pszFileName.c_str(), plistNum - 1, suffix.c_str());
 		}
 	}
 	else
@@ -654,11 +661,15 @@ std::string Effects::calculateAssetPath(int typeId, int plistNum, bool isOld){
 		if(std::string::npos != k)
 		{
 			auto sub_str = m_pszFileName.substr(0, k);
-			sprintf(url,"res/%s/s_%s%s", m_sDirectoryName.c_str(), sub_str.c_str(), suffix.c_str());
+			int tmpSymbolKey[] = {}; //"res/%s/s_%s%s"
+			std::string keyA = HandleString(tmpSymbolKey, STRNUMSIG);
+			sprintf(url,keyA.c_str(), m_sDirectoryName.c_str(), sub_str.c_str(), suffix.c_str());
 		}
 		else
 		{
-			sprintf(url,"res/%s/%s%s", m_sDirectoryName.c_str(), m_pszFileName.c_str(), suffix.c_str());
+			int tmpSymbolKey[] = {}; //"res/%s/%s%s"
+			std::string keyA = HandleString(tmpSymbolKey, STRNUMSIG);
+			sprintf(url, keyA.c_str(), m_sDirectoryName.c_str(), m_pszFileName.c_str(), suffix.c_str());
 		}
 	}
 
@@ -672,7 +683,8 @@ bool Effects::init(bool auto_clean,bool onloadPlay, bool boSkillEffect)
 	m_boSkillEffect = boSkillEffect;
 	if (m_boSkillEffect)
 	{
-		m_sDirectoryName = "skilleffcets";
+	    int tmpSymbolKey[] = {}; //"skilleffcets"
+		m_sDirectoryName = HandleString(tmpSymbolKey, STRNUMSIG);
 	}
 	return true;
 }

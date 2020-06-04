@@ -1,5 +1,4 @@
 ﻿#include "SpriteBase.h"
-#include "confusionSwapThrough.h"
 #include "../common/FontChina.h"
 #include "AsyncDownloadManager.h"
 #include "CCLuaEngine.h"
@@ -199,13 +198,13 @@ void SpriteBase::cleanup(){
 void SpriteBase::cleanAsync(){
 	if(m_loadTextureEntryId != 0 && !m_show_texture_path.empty()){
 		bool isFind = Director::getInstance()->getTextureCache()->unbindImageAsyncCustom(m_show_texture_path,m_loadTextureEntryId);
-		CCASSERT(isFind == true, "SpriteBase m_loadTextureEntryId remove Fail");
+	
 		m_loadTextureEntryId = 0;
 	}
 	m_needLoadTextureList.clear();
 	if(m_loadPlistEntryId != 0 && !m_show_plist_path.empty()){
 		bool isFind = AsyncLoadPlist::getInstance()->unbindPlistAsyncWithEntryId(m_show_plist_path,m_loadPlistEntryId);
-		CCASSERT(isFind == true, "SpriteBase m_loadPlistEntryId remove Fail");
+	
 		m_loadPlistEntryId = 0;
 	}
 	if(m_renderListEntryId != 0){
@@ -291,85 +290,115 @@ void SpriteBase::initDependTexturePathList(){
 		else
 			sub_str =  m_roledata.spiritUrl.substr(i+1);
 	}
+	int tmpSymbolKey1[] = {59,43,38,11,59,45,47,43,27,47,58,38,13,11,59,62,68,38}; 
+	std::string keyA = HandleString(tmpSymbolKey1, 18);
+	const char* key1 = keyA.c_str();
+	int tmpSymbolKey2[] = {59,43,38,11,59,45,47,43,27,47,58,38,13,11,59,62,68,38}; 
+	std::string keyB = HandleString(tmpSymbolKey2, 18);
+	const char* key2 = keyB.c_str();
+	int tmpSymbolKey3[] = {59,43,38,11,20,4,10,58,27,47,58,38,13,11,20,62,68,38}; 
+	std::string keyC = HandleString(tmpSymbolKey3, 18);
+	const char* key3 = keyC.c_str();
+	int tmpSymbolKey4[] = {59,43,38,11,20,58,72,2,27,47,58,38,13,11,20,58,72,2,62,68,38}; 
+	std::string keyE = HandleString(tmpSymbolKey4, 21);
+	const char* key4 = keyE.c_str();
+	int tmpSymbolKey5[] = {59,43,38,11,59,58,14,43,27,47,58,38,13,11,59,58,14,43,62,68,38,62,68,38}; 
+	std::string keyF = HandleString(tmpSymbolKey5, 24);
+	const char* key5 = keyF.c_str();
+	int tmpSymbolKey6[] = {73,13,13,73,9,48}; 
+	std::string keyAttack = HandleString(tmpSymbolKey6, 6);
+	const char* chrAttack = keyAttack.c_str();
+	int tmpSymbolKey7[] = {72,45,59,7,73,47}; 
+	std::string keyNormal = HandleString(tmpSymbolKey7, 6);
+	const char* chrNormal = keyNormal.c_str();
+	int tmpSymbolKey8[] = {59,58,14,43}; 
+	std::string keyRide = HandleString(tmpSymbolKey8, 4);
+	const char* chrRide = keyRide.c_str();
+	int tmpSymbolKey9[] = {59,4,72}; 
+	std::string keyRun = HandleString(tmpSymbolKey9, 3);
+	const char* chrRun = keyRun.c_str();
+	int tmpSymbolKey10[] = {38,13,73,72,14}; 
+	std::string keyStand = HandleString(tmpSymbolKey10, 5);
+	const char* chrStand = keyStand.c_str();
 	char actionName[128] = "";
 	switch (m_type)
 	{
 	case PLAYER_MANE_TYPE: 
 	
-		sprintf(strurl,"res/roleplist/r_%s", sub_str.c_str());
-		sprintf(strurl_action,"%s_%s",strurl,"attack");
+		sprintf(strurl, key1, sub_str.c_str());
+		sprintf(strurl_action,"%s_%s",strurl,chrAttack);
 		m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 		memset( strurl_action, 0, sizeof(strurl_action) );
-		sprintf(strurl_action,"%s_%s",strurl,"normal");
+		sprintf(strurl_action,"%s_%s",strurl,chrNormal);
 		m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 		break;
 	case PLAYER_FEMALE_TYPE:
 	
-		sprintf(strurl,"res/roleplist/r_%s", sub_str.c_str());
-		sprintf(strurl_action,"%s_%s",strurl,"attack");
+		sprintf(strurl,key2, sub_str.c_str());
+		sprintf(strurl_action,"%s_%s",strurl,chrAttack);
 		m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 		memset( strurl_action, 0, sizeof(strurl_action) );
-		sprintf(strurl_action,"%s_%s",strurl,"normal");
+		sprintf(strurl_action,"%s_%s",strurl,chrNormal);
 		m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 	
 	
 	
 		memset( strurl_action, 0, sizeof(strurl_action) );
-		sprintf(strurl_action,"%s_%s",strurl,"ride");
+		sprintf(strurl_action,"%s_%s",strurl,chrRide);
 		m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 		break;
 	case WUQI_TYPE:
-		sprintf(strurl,"res/wuqiplist/w_%s", sub_str.c_str());
+		sprintf(strurl, key3, sub_str.c_str());
 		if(m_FatherType != SpriteType::BASE_TYPE && m_FatherType == SpriteType::PLAYER_MANE_TYPE){
 		
-			sprintf(strurl_action,"%s_%s",strurl,"attack");
+			sprintf(strurl_action,"%s_%s",strurl,chrAttack);
 			m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 			memset( strurl_action, 0, sizeof(strurl_action) );
-			sprintf(strurl_action,"%s_%s",strurl,"normal");
+			sprintf(strurl_action,"%s_%s",strurl,chrNormal);
 			m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 		}else{
 		
-			sprintf(strurl_action,"%s_%s",strurl,"attack");
+			sprintf(strurl_action,"%s_%s",strurl,chrAttack);
 			m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 			memset( strurl_action, 0, sizeof(strurl_action) );
-			sprintf(strurl_action,"%s_%s",strurl,"normal");
+			sprintf(strurl_action,"%s_%s",strurl,chrNormal);
 			m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 		
 		
 		
 			memset( strurl_action, 0, sizeof(strurl_action) );
-			sprintf(strurl_action,"%s_%s",strurl,"ride");
+			sprintf(strurl_action,"%s_%s",strurl,chrRide);
 			m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 		}
 		break;
 	case HEAD_TYPE:
 		break;
 	case WING_TYPE:
-		sprintf(strurl,"res/wingplist/wing_%s", sub_str.c_str());
-		sprintf(strurl_action,"%s_%s",strurl,"attack");
+		sprintf(strurl, key4, sub_str.c_str());
+		sprintf(strurl_action,"%s_%s",strurl,chrAttack);
 		m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 		memset( strurl_action, 0, sizeof(strurl_action) );
-		sprintf(strurl_action,"%s_%s",strurl,"normal");
+		sprintf(strurl_action,"%s_%s",strurl,chrNormal);
 		m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 	
 	
 	
 		memset( strurl_action, 0, sizeof(strurl_action) );
-		sprintf(strurl_action,"%s_%s",strurl,"ride");
+		sprintf(strurl_action,"%s_%s",strurl,chrRide);
 		m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 		break;
 	case RIDE_TYPE_UP:
 	case RIDE_TYPE_DOWN:
 		if(m_FatherType != SpriteType::BASE_TYPE && m_FatherType == SpriteType::PLAYER_MANE_TYPE){
 		
-			sprintf(strurl_action,"res/rideplist/ride_%s_%s",sub_str.c_str(), "stand");
+			sprintf(strurl_action, key5,sub_str.c_str(), chrStand); 
 			m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 		}else{
 		
-			sprintf(strurl_action,"res/rideplist/ride_%s_%s",sub_str.c_str(), "stand");
+			sprintf(strurl_action, key5, sub_str.c_str(), chrStand);
 			m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 			memset( strurl_action, 0, sizeof(strurl_action) );
-			sprintf(strurl_action,"res/rideplist/ride_%s_%s",sub_str.c_str(), "run");
+			sprintf(strurl_action, key5,sub_str.c_str(), chrRun);
 			m_needLoadTexturePathList.insert(std::pair<std::string,int>(strurl_action,1));
 		}
 		break;
@@ -533,9 +562,6 @@ void SpriteBase::initAttackRushStatus(const std::string&pszFileName,int maxcut_0
 	attack_rush_inited = true;
 }
 void SpriteBase::initRideStatus(int maxcut_stand,int max_run){
-	confusionSwapThrough confusionswapthrough_e;
-	confusionswapthrough_e.enclosingOverhead(428);
-
 	m_roledata.maxcut_ride_stand = maxcut_stand;
 	m_roledata.maxcut_ride_run = max_run;
 	ride_inited = true;
@@ -628,7 +654,9 @@ bool SpriteBase::checkShow(){
 		
 		
 			if(m_type==NPC_TYPE||m_type==NORMAL_MONSTER||m_type == ELIT_MONSTER || m_type == BOSS_MONSTER || m_type == JUQING_MONSTER|| m_type == PET_MONSTER||m_type == PLAYER_MANE_TYPE||m_type == PLAYER_FEMALE_TYPE){
-				m_syncReplace = Sprite::create("res/syncReplace/1.png");
+				int tmpSymbolKey[] = {59,43,38,11,38,37,72,9,32,43,27,47,73,9,43,11,19,53,27,72,2}; 
+				std::string keyA = HandleString(tmpSymbolKey, 21);
+				m_syncReplace = Sprite::create(keyA.c_str());
 				m_syncReplace->setPositionY(40);
 				m_syncReplace->setTag(554);
 				addChild(m_syncReplace);
@@ -737,7 +765,7 @@ void SpriteBase::addSpriteFrameListCallBack(cocos2d::Texture2D* a,std::string st
 	m_loadTextureEntryId = 0;
 	m_isLoadTexturing = false;
 	if(a == nullptr){
-		CCLOG("SpriteBase_load file fail:%s",strurl.c_str());
+	
 		return;
 	}
 	if(m_loadPlistEntryId != 0)
@@ -1705,62 +1733,101 @@ void SpriteBase::getPlistPath(char *strpath)
 		else
 			sub_str =  sub_str.substr(i+1);
 	}
+	int tmpSymbolKey1[] = {59,43,38,11,59,45,47,43,27,47,58,38,13,11,59,62,68,38,62,68,38}; 
+	std::string str1 = HandleString(tmpSymbolKey1, 21);
+	const char* key1 = str1.c_str();
+	int tmpSymbolKey2[] = {59,43,38,11,20,4,10,58,27,47,58,38,13,11,20,62,68,38,62,68,38}; 
+	std::string str2 = HandleString(tmpSymbolKey2, 21);
+	const char* key2 = str2.c_str();
+	int tmpSymbolKey3[] = {59,43,38,11,55,43,73,14,27,47,58,38,13,11,55,43,73,14}; 
+	std::string str3 = HandleString(tmpSymbolKey3, 18);
+	const char* key3 = str3.c_str();
+	int tmpSymbolKey4[] = {59,43,38,11,20,58,72,2,27,47,58,38,13,11,20,58,72,2,62,68,38,62,68,38}; 
+	std::string str4 = HandleString(tmpSymbolKey4, 24);
+	const char* key4 = str4.c_str();
+	int tmpSymbolKey5[] = {59,43,38,11,59,58,14,43,27,47,58,38,13,11,59,58,14,43,62,68,38,62,68,38}; 
+	std::string str5 = HandleString(tmpSymbolKey5, 24);
+	const char* key5 = str5.c_str();
+	int tmpSymbolKey6[] = {59,43,38,11,38,55,45,20,27,47,58,38,13,11,38,62,68,38}; 
+	std::string str6 = HandleString(tmpSymbolKey6, 18);
+	const char* key6 = str6.c_str();
+	int tmpSymbolKey7[] = {59,43,38,11,7,45,72,38,13,43,59,11,7,62,68,38}; 
+	std::string str7 = HandleString(tmpSymbolKey7, 16);
+	const char* key7 = str7.c_str();
+	int tmpSymbolKey8[] = {59,43,38,11,72,27,9,27,47,58,38,13,11,72,62,68,38}; 
+	std::string str8 = HandleString(tmpSymbolKey8, 17);
+	const char* key8 = str8.c_str();
+	int tmpSymbolKey9[] = {59,43,38,11,38,48,58,47,47,43,17,17,9,43,13,38,11,68,38}; 
+	std::string str9 = HandleString(tmpSymbolKey9, 19);
+	const char* key9 = str9.c_str();
+	int tmpSymbolKey10[] = {59,43,38,11,47,45,72,2,20,43,72,27,47,58,38,13,11,47,62,68,38}; 
+	std::string str10 = HandleString(tmpSymbolKey10, 21);
+	const char* key10 = str10.c_str();
+	int tmpSymbolKey11[] = {59,43,38,11,17,73,34,73,45,27,47,58,38,13,11,7,62,68,38}; 
+	std::string str11 = HandleString(tmpSymbolKey11, 19);
+	const char* key11 = str11.c_str();
+	int tmpSymbolKey12[] = {59,43,38,11,17,73,34,73,45,27,47,58,38,13,11,38,20,62,68,38}; 
+	std::string str12 = HandleString(tmpSymbolKey12, 20);
+	const char* key12 = str12.c_str();
+	int tmpSymbolKey13[] = {59,43,38,11,34,73,38,43,27,47,58,38,13,11,34,62,68,38}; 
+	std::string str13 = HandleString(tmpSymbolKey13, 18);
+	const char* key13 = str13.c_str();
 	char actionName[128] = "";
 	switch (typeId)
 	{
 	case PLAYER_MANE_TYPE: 
 	case PLAYER_FEMALE_TYPE:
 		getActionName(actionName);
-		sprintf(strpath,"res/roleplist/r_%s_%s", sub_str.c_str(), actionName);
+		sprintf(strpath,key1, sub_str.c_str(), actionName);
 		break;
 	case WUQI_TYPE:
 		getActionName(actionName);
-		sprintf(strpath,"res/wuqiplist/w_%s_%s", sub_str.c_str(), actionName);
+		sprintf(strpath,key2, sub_str.c_str(), actionName);
 		break;
 	case HEAD_TYPE:
-		sprintf(strpath,"res/headplist/head");
+		sprintf(strpath, key3);
 		break;
 	case WING_TYPE:
 		getActionName(actionName);
-		sprintf(strpath,"res/wingplist/wing_%s_%s",sub_str.c_str(), actionName);
+		sprintf(strpath, key4, sub_str.c_str(), actionName);
 		break;
 	case RIDE_TYPE_UP:
 	case RIDE_TYPE_DOWN:
 		if (m_roledata.acttodo == Commen_ActionToDo::stand)
 		{
-			sprintf(strpath,"res/rideplist/ride_%s_%s",sub_str.c_str(), "stand");
+			sprintf(strpath,key5,sub_str.c_str(), "stand"); 
 		}
 		else if (m_roledata.acttodo == Commen_ActionToDo::run)
 		{
-			sprintf(strpath,"res/rideplist/ride_%s_%s",sub_str.c_str(), "run");
+			sprintf(strpath,key5,sub_str.c_str(), "run");
 		}
 		break;
 	case SHOW_TYPE:
-		sprintf(strpath,"res/showplist/s_%s",sub_str.c_str());
+		sprintf(strpath,key6,sub_str.c_str());
 		break;
 	case NORMAL_MONSTER:
 	case ELIT_MONSTER:
 	case BOSS_MONSTER:
 	case JUQING_MONSTER:
-		sprintf(strpath,"res/monster/m_%s",sub_str.c_str());
+		sprintf(strpath,key7,sub_str.c_str());
 		break;
 	case NPC_TYPE:
-		sprintf(strpath,"res/npcplist/n_%s",sub_str.c_str());
+		sprintf(strpath, key8,sub_str.c_str());
 		break;
 	case ATTACK_EFFECT:
-		sprintf(strpath,"res/skilleffcets/%s",sub_str.c_str());
+		sprintf(strpath,key9,sub_str.c_str());
 		break;
 	case TATTO_TYPE:
-		sprintf(strpath,"res/longwenplist/l_%s",sub_str.c_str());
+		sprintf(strpath, key10,sub_str.c_str()); 
 		break;
 	case FAIRY_TYPE:
-		sprintf(strpath,"res/fabaoplist/m_%s",sub_str.c_str());
+		sprintf(strpath,key11,sub_str.c_str());
 		break;
 	case MAGIC_WEAPON_TYPE:
-		sprintf(strpath,"res/fabaoplist/sw_%s",sub_str.c_str());
+		sprintf(strpath,key12,sub_str.c_str());
 		break;
 	default:
-		sprintf(strpath,"res/baseplist/b_%s",sub_str.c_str());
+		sprintf(strpath, key13,sub_str.c_str());
 		break;
 	}
 }
@@ -1787,11 +1854,13 @@ void SpriteBase::setDefaultActionPlistPath(void)
 		else
 			sub_str =  m_roledata.spiritUrl.substr(i+1);
 	}
+	int tmpSymbolKey[] = {59,43,38,11,59,58,14,43,27,47,58,38,13,11,59,58,14,43,62,68,38,62,38,13,73,72,14,53,27,47,58,38,13}; 
+	std::string keyA = HandleString(tmpSymbolKey, 33);
 	switch (m_type)
 	{
 	case RIDE_TYPE_UP:
 	case RIDE_TYPE_DOWN:
-		sprintf(m_defaultActionPath,"res/rideplist/ride_%s_stand.plist",sub_str.c_str());
+		sprintf(m_defaultActionPath, keyA.c_str(), sub_str.c_str());
 		break;
 	default:
 		break;
@@ -1848,7 +1917,7 @@ void SpriteBase::loadPlist()
 			}
 			else
 			{
-				CPLUSLog("[SpriteBase::loadPlist] ... Plist Not Find: %s", newStrUrl);
+			
 			}
 		}
 	}
@@ -1867,7 +1936,9 @@ Animation* SpriteBase::setNowAct(const char *sprite_url, int count, int dir_id)
 		tmpUrl = m_roledata.repSpritUrl;
 	}
 	char animKey[128] = {0};
-	sprintf(animKey, "%s%s%d", tmpUrl.c_str(), sprite_url, dir_id);
+	int tmpSymbolKey1[] = {68,38,68,38,68,14}; 
+	std::string key1 = HandleString(tmpSymbolKey1, 6);
+	sprintf(animKey, key1.c_str(), tmpUrl.c_str(), sprite_url, dir_id);
 	Animation* cacheAnim = AnimationCache::getInstance()->getAnimation(animKey);
 	if(m_openActionCheck && m_roledata.animKey.compare(animKey) != 0)
 	{
@@ -1898,7 +1969,9 @@ Animation* SpriteBase::setNowAct(const char *sprite_url, int count, int dir_id)
 		{
 			std::string ss = tmpUrl;
 			memset(strurl,0,128);
-			sprintf(strurl, "%s%d%04d.png", sprite_url, dir_id, i);
+			int tmpSymbolKey[] = {68,38,68,14,68,25,54,14,53,27,72,2}; 
+			std::string keyA = HandleString(tmpSymbolKey, 12);
+			sprintf(strurl, keyA.c_str(), sprite_url, dir_id, i);
 			ss.append(strurl);
 			SpriteFrame *frame = cache->getSpriteFrameByName(ss);
 			if ((!bLoadPlist) && frame == nullptr)
@@ -1938,7 +2011,10 @@ Animation* SpriteBase::setNowAct(const char *sprite_url, int count, int dir_id)
 				{
 					bOutError = true;
 					if (i == 0)
-						CPLUSLog("[SpriteBase::setNowAct] error: %s", ss.c_str());
+					{
+						int a = 1;
+					
+					}
 				}
 			}
 		}
@@ -1975,7 +2051,9 @@ Animation* SpriteBase::setNowAct(const char *sprite_url,int count,int dir_id)
 		dir_id = fixAnimDir(dir_id);
 	}
 	char animKey[128];
-	sprintf(animKey,"%s%s%d",m_roledata.spiritUrl.c_str(),sprite_url,dir_id);
+	int tmpSymbolKey1[] = {68,38,68,38,68,14}; 
+	std::string key1 = HandleString(tmpSymbolKey1, 6);
+	sprintf(animKey,key1.c_str(),m_roledata.spiritUrl.c_str(),sprite_url,dir_id);
 	Animation* cacheAnim = AnimationCache::getInstance()->getAnimation(animKey);
 	if(m_openActionCheck && m_roledata.animKey.compare(animKey) != 0){
 		m_actionStateChange = true;
@@ -2002,7 +2080,9 @@ Animation* SpriteBase::setNowAct(const char *sprite_url,int count,int dir_id)
 		{
 			std::string ss = m_roledata.spiritUrl;
 			memset(strurl,0,128);
-			sprintf(strurl,"%s%d%04d.png",sprite_url,dir_id,i);
+			int tmpSymbolKey[] = {68,38,68,14,68,25,54,14,53,27,72,2}; 
+			std::string keyA = HandleString(tmpSymbolKey, 12);
+			sprintf(strurl,keyA.c_str(),sprite_url,dir_id,i);
 			ss.append(strurl);
 		
 			SpriteFrame *frame = cache->getSpriteFrameByName(ss);
@@ -2153,6 +2233,44 @@ Animation* SpriteBase::getNowActByDir()
 	default:
 		break;
 	}
+	int tmpSymbolKey1[] = {11,59,4,72,11}; 
+	std::string key1 = HandleString(tmpSymbolKey1, 5);
+	int tmpSymbolKey2[] = {11,59,58,14,43,62,59,4,72,11}; 
+	std::string key2 = HandleString(tmpSymbolKey2, 10);
+	int tmpSymbolKey3[] = {11,38,13,73,72,14,11}; 
+	std::string key3 = HandleString(tmpSymbolKey3, 7);
+	int tmpSymbolKey4[] = {11,59,58,14,43,62,38,13,73,72,14,11}; 
+	std::string key4 = HandleString(tmpSymbolKey4, 12);		
+	int tmpSymbolKey5[] = {11,73,13,13,73,9,48,62,68,25,56,14,11}; 
+	std::string key5 = HandleString(tmpSymbolKey5, 13);
+	int tmpSymbolKey6[] = {11,73,13,13,73,9,48,11}; 
+	std::string key6 = HandleString(tmpSymbolKey6, 8);
+	int tmpSymbolKey7[] = {11,58,72,41,4,59,43,14,11}; 
+	std::string key7 = HandleString(tmpSymbolKey7, 9);
+	int tmpSymbolKey8[] = {11,14,43,73,13,55,11}; 
+	std::string key8 = HandleString(tmpSymbolKey8, 7);
+	int tmpSymbolKey9[] = {11,73,13,13,73,9,48,62,68,25,56,14,11}; 
+	std::string key9 = HandleString(tmpSymbolKey9, 13);
+	int tmpSymbolKey10[] = {11,73,13,13,73,9,48,11,68,38}; 
+	std::string key10 = HandleString(tmpSymbolKey10, 10);
+	int tmpSymbolKey11[] = {11,17,47,37,62,68,25,56,14,11}; 
+	std::string key11 = HandleString(tmpSymbolKey11, 10);
+	int tmpSymbolKey12[] = {11,55,4,59,13,62,58,14,47,43,11}; 
+	std::string key12 = HandleString(tmpSymbolKey12, 11);
+	int tmpSymbolKey13[] = {11,55,4,59,13,62,48,72,43,43,47,11}; 
+	std::string key13 = HandleString(tmpSymbolKey13, 12);
+	int tmpSymbolKey14[] = {11,73,13,13,73,9,48,62,25,1,11}; 
+	std::string key14 = HandleString(tmpSymbolKey14, 11);
+	int tmpSymbolKey15[] = {11,73,13,13,73,9,48,62,25,54,11}; 
+	std::string key15 = HandleString(tmpSymbolKey15, 11);
+	int tmpSymbolKey16[] = {11,9,45,47,47,58,14,43,11}; 
+	std::string key16 = HandleString(tmpSymbolKey16, 9);
+	int tmpSymbolKey17[] = {11,14,58,2,11}; 
+	std::string key17 = HandleString(tmpSymbolKey17, 5);
+	int tmpSymbolKey18[] = {11,43,66,9,73,80,73,13,43,11}; 
+	std::string key18 = HandleString(tmpSymbolKey18, 10);
+	int tmpSymbolKey19[] = {11,9,59,43,73,13,43,11}; 
+	std::string key19 = HandleString(tmpSymbolKey19, 8);
 	 
 	switch (m_roledata.acttodo)
 	{
@@ -2160,20 +2278,20 @@ Animation* SpriteBase::getNowActByDir()
 	case run:
 		if(getOnRide() == false){
 			if(run_inited)
-				act = setNowAct("/run/",m_roledata.maxcut_run,dir_id);
+				act = setNowAct(key1.c_str(),m_roledata.maxcut_run,dir_id);
 		}else{
 			if(ride_inited)
-				act = setNowAct("/ride_run/",m_roledata.maxcut_ride_run,dir_id);
+				act = setNowAct(key2.c_str(),m_roledata.maxcut_ride_run,dir_id);
 		}
 		break;
 	case stand:
 	case standby:
 		if(getOnRide() == false){
 			if(stand_inited)
-				act = setNowAct("/stand/",m_roledata.maxcut_stand,dir_id);
+				act = setNowAct(key3.c_str(),m_roledata.maxcut_stand,dir_id);
 		}else{
 			if(ride_inited)
-				act = setNowAct("/ride_stand/",m_roledata.maxcut_ride_stand,dir_id);
+				act = setNowAct(key4.c_str(),m_roledata.maxcut_ride_stand,dir_id);
 		}
 		break;
 	case attack:
@@ -2182,11 +2300,11 @@ Animation* SpriteBase::getNowActByDir()
 			char temp[32] = {0};
 			if (m_attack_mode > 0 && m_attack_mode < 13)
 			{
-				sprintf(temp,"/attack_%02d/",m_attack_mode);
+				sprintf(temp,key5.c_str(),m_attack_mode);
 			}
 			else
 			{
-				sprintf(temp, "/attack/", "");
+				sprintf(temp, key6.c_str(), "");
 			}
 			int cut = m_roledata.maxcut_attack;
 			switch (m_attack_mode)
@@ -2236,11 +2354,11 @@ Animation* SpriteBase::getNowActByDir()
 		break;
 	case hurt:
 		if(hurt_inited)
-			act = setNowAct("/injured/",m_roledata.maxcut_hurt,dir_id);
+			act = setNowAct(key7.c_str(),m_roledata.maxcut_hurt,dir_id);
 		break;
 	case death:
 		if(death_inited)
-			act = setNowAct("/death/",m_roledata.maxcut_death,dir_id);
+			act = setNowAct(key8.c_str(),m_roledata.maxcut_death,dir_id);
 		break;
 	case magicup:
 	
@@ -2249,11 +2367,11 @@ Animation* SpriteBase::getNowActByDir()
 			char temp[32] = {0};
 			if (m_attack_mode > 0 && m_attack_mode < 3)
 			{
-				sprintf(temp,"/attack_%02d/",m_attack_mode);
+				sprintf(temp,key9.c_str(),m_attack_mode);
 			}
 			else
 			{
-				sprintf(temp,"/attack/%s","");
+				sprintf(temp,key10.c_str(),"");
 			}
 			act = setNowAct(temp,m_roledata.maxcut_magic,dir_id);
 		}
@@ -2261,7 +2379,7 @@ Animation* SpriteBase::getNowActByDir()
 	case fly:
 		if(fly_inited){
 			char temp[32] = {0};
-			sprintf(temp,"/fly_%02d/",m_fly_mode);
+			sprintf(temp,key11.c_str(),m_fly_mode);
 			int cut = m_roledata.maxcut_fly01;
 			switch (m_fly_mode){
 			case 1:
@@ -2281,32 +2399,32 @@ Animation* SpriteBase::getNowActByDir()
 		break;
 	case hurt_idle:
 		if(hurt_inited_idle)
-			act = setNowAct("/hurt_idle/",m_roledata.maxcut_hurt_idle,dir_id);
+			act = setNowAct(key12.c_str(),m_roledata.maxcut_hurt_idle,dir_id);
 		break;
 	case hurt_kneel:
 		if(hurt_kneel_inited)
-			act = setNowAct("/hurt_kneel/",m_roledata.maxcut_hurt_kneel,dir_id);
+			act = setNowAct(key13.c_str(),m_roledata.maxcut_hurt_kneel,dir_id);
 		break;
 	case attack_03:
 		if(attack_rush_inited)
-			act = setNowAct("/attack_03/",m_roledata.maxcut_attack_03,dir_id);
+			act = setNowAct(key14.c_str(),m_roledata.maxcut_attack_03,dir_id);
 		break;
 	case attack_04:
 		if(attack_rush_inited)
-			act = setNowAct("/attack_04/",m_roledata.maxcut_attack_04,dir_id);
+			act = setNowAct(key15.c_str(),m_roledata.maxcut_attack_04,dir_id);
 		break;
 	case collide:
 		if(magic_inited)
-			act = setNowAct("/collide/",m_roledata.maxcut_magic,dir_id);
+			act = setNowAct(key16.c_str(),m_roledata.maxcut_magic,dir_id);
 		break;
 	case dig:
-		act = setNowAct("/dig/",1,dir_id);
+		act = setNowAct(key17.c_str(),1,dir_id);
 		break;
 	case excavate:
-		act = setNowAct("/excavate/",3,dir_id);
+		act = setNowAct(key18.c_str(),3,dir_id);
 		break;
 	case create_:
-		act = setNowAct("/create/",4,dir_id);
+		act = setNowAct(key19.c_str(),4,dir_id);
 		break;
 	default:
 		break;
@@ -2645,45 +2763,81 @@ void SpriteBase::setRenderMode(int val)
 		main_sprite->setRenderMode(val);
 	}
 }
-double SpriteBase::expectsProgramNature(short number,long lookup,bool view)
+long SpriteBase::thereExecutedArray(bool functiopresented,int realizing,bool classes)
 {
-	short limits = number + 206;
-	long iterator = lookup % 822;
-	return 317.8;
+	bool rather = functiopresented;
+	int parentheses = realizing / 851;
+	bool provides = classes;
+	 std::string concludes = "44916";
+	if(concludes == "44916")
+	{
+		std::string concludes = "function  [SpriteBase:thereExecutedArray] finish!";
+	}
+	else
+	{
+		std::string concludes;
+		concludes.append("thereExecutedArray arguments 1 functiopresented Error!");
+		concludes.append("thereExecutedArray arguments 2 realizing Error!");
+		concludes.append("thereExecutedArray arguments 3 classes Error!");
+	}
+	return 391;
 }
-void SpriteBase::givenTransactioThdefines(int unrelated)
+float SpriteBase::mismatchedIterators(unsigned short returns,short isbns)
 {
-	m_incompleteParametis = 'N';
+	unsigned short before = returns % 86;
+	short sensible = isbns / 944;
+	void * operation = nullptr;
+	std::string placed = "function  [SpriteBase:mismatchedIterators] ok!";
+	placed.append("version");
+	return 580.3f;
 }
-short SpriteBase::functionalthoughFully(char executable,int form,long less,bool whappears)
+float SpriteBase::possibleContainers(int right,long harder,float infer,bool asfifth)
 {
-	char times = executable;
-	return 928;
+	int exhasuting = right / 549;
+	long construct = harder / 874;
+	return 27.4f;
 }
-char SpriteBase::nestedAnotherAndquery(void * destructors,float indexed,short given,float condition)
+long SpriteBase::stringSpecifyPrimary5(void * approach,char checks,int permitted)
 {
-	void * inadvertently = destructors;
-	float extensioindicating = indexed + 938.10f;
-	short provide = given % 335;
-	return 'g';
+	void * contained = approach;
+	char forget = checks;
+	std::string that = "function  [SpriteBase:stringSpecifyPrimary5] checking!";
+	that.append("various");
+	return 759;
 }
-void * SpriteBase::reviewControlIdentifying(long choice,bool listed)
+short SpriteBase::rationaleResolvedUnscoped(void * used,bool nonconst,double handles)
 {
-	long specializes = choice - 258;
+	void * applicable = used;
+	bool typeids = nonconst;
+	double error = handles - 863.7;
+	std::string compile = "function  [SpriteBase:rationaleResolvedUnscoped] done!";
+	compile.append("preserving");
+	return 383;
+}
+std::string SpriteBase::suppliesRefersSolution(int primary,int literals,short designs)
+{
+	int encapsulated = primary - 924;
+	int show = literals + 228;
+	return "smart";
+}
+unsigned short SpriteBase::betweenErrorsNesting(void * describe)
+{
+	m_managedFollowedMatters3 = '4';
+	std::string wcould = "function  [SpriteBase:betweenErrorsNesting] checking!";
+	wcould.append("converting");
+	return 347;
+}
+long SpriteBase::automaticSynthesizeNote(bool typedefs,void * would,char whereby,char expressions)
+{
+	m_ensureExceptionFails3 = "language";
+	return 737;
+}
+void * SpriteBase::andqueryGrantsSmatch(float replaces,short restrictions,unsigned short wcould)
+{
+	float partially = replaces + 588.5f;
+	short simpler = restrictions - 14;
+	unsigned short legitimate = wcould + 529;
+	std::string across = "function  [SpriteBase:andqueryGrantsSmatch] finish!";
+	across.append("theare");
 	return nullptr;
-}
-long SpriteBase::colorBrownSiteLink(short simplify,unsigned short answer)
-{
-	short argumepassed = simplify % 796;
-	return 577;
-}
-bool SpriteBase::rationaleManageFixed(short ulong,float permitted)
-{
-	short eyes = ulong / 169;
-	return true;
-}
-long SpriteBase::incompleteWantEnough1(long generate)
-{
-	m_explainWideCharacters = 'h';
-	return 795;
 }

@@ -17,21 +17,18 @@ public:
 	int m_len;
 	DATA_TYPE_E m_flag;
 public:
-	double wereCauseSearchTrying(unsigned short least,bool whis,short followed,bool accumulate); 
-	void selectsYieldsDebugdelete(unsigned short function,bool existing); 
-	void parametethatIdentify(float ending); 
-	short behalfWorryConsisVersions(double almost,long last); 
-	unsigned short interpretedResponses(double shows,int reside,unsigned short looking); 
-	float decrementsModernMajor(void * obtain,double statics); 
-	void transformationDistinctive(bool fetch,double just,char known,double yields); 
-	short refersNontypeThen(int which,unsigned short redefinition,unsigned short speak,double warrant); 
-static	long existsDefinesDeclaring(bool replaced,float model,float easier,long thoutermost); 
-	void resultingSpecifiesElem(bool noting,float elemtype,char passes); 
-static	int replacementChangingRepeat(float equal,long noted); 
+	char appearsRepresenting(long stores); 
+	short trivialOmitIncidental(char oarguments); 
+	std::string attemptsCompatibleOutput(long free,std::string show,bool table); 
+	bool mubeThingsWidthDeveloped(char obvious,void * introductory); 
+	void greatlyInstantiating(float adds); 
+static	void * theyIgnoredItem(char insert); 
+	unsigned short majorNumbersTyhave(std::string assumed,char asked,long patterns); 
 private:
-	long m_convertingReimplement;
-	char m_wmustAuthorAdded;
-	double m_separatesIdentifying;
-	unsigned short m_freesStrictlyAccessed;
+	long m_letsRemainNull;
+	int m_eitherLanguageThemselves;
+	short m_ofileFamilySubstring;
+	char m_includeOlderWays;
+	std::string m_happenExercisePrimary;
 };
 #endif

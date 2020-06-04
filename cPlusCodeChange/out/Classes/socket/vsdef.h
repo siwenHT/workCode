@@ -66,10 +66,12 @@ USING_NS_CC;
 	sprintf_s(str, "%d-%02d-%02d %02d:%02d:%02d:%03d",  st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);\
 	cocos2d::log(fmt.c_str(), str, ##__VA_ARGS__);\
 }
-#else 
+#else
 #define CPLUSLog(format, ...)	      do {} while (0)
 #endif 
 #else
 #define CPLUSLog(...)				 do {} while (0)
 #endif
+std::string handelStr(int arr[], int len);
+#define HandleString(arr, len) handelStr(arr, len)
 #pragma pack(pop)

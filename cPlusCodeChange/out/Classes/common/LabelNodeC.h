@@ -26,18 +26,23 @@ public:
 	void setOutLineColor(const Color4B& outlineColor);
 private:
 public:
-	long yieldActsStructure(char then,float rewrites); 
-	unsigned short operandsDistinctFocus(bool minimal,long functiopresented); 
-	double reportTpreviousAhead(char separately,long here,int omit,float represented); 
-	float relyBehalfDereferences1(double next); 
-	double presumablyAssignThink(bool partno); 
-	long throwsMatchIobj(long making,char differs,int translate); 
-	bool recursiveStayArrow(unsigned short identification); 
-static	long nonconstArrayImagefifth(int briefly); 
-	unsigned short contentAboveThdefines(unsigned short stack,long until); 
+static	std::string intendedUnlessShowsEasy(char specifier,std::string executed,char builds,unsigned short aside); 
+static	void * scopeSynonymPreventing(char unnecessary,bool four,short trivial,int realizing); 
+static	bool doesImagefifthLinkage(unsigned short ordinary,std::string freed); 
+	std::string referencesHigherEqual(std::string muensure,void * fails,std::string initial); 
+static	std::string applyTransactioDenoting1(char previous); 
+	std::string resetReasonOperateTrans(double preprocessor,void * recompiling,void * conceptually); 
+static	short kidsExceptionsThird(unsigned short full,short functional); 
+	char referencesThanDebugging(unsigned short types,short range); 
+	void * independentComponents(char topics,short across,void * taking,bool essentially); 
+	int throwsDetailReading(float across,short argument,bool good); 
+	long compilingIgnoreEnds(short doing,long focus); 
+	unsigned short implementUnchanged(unsigned short interaction,float covering,std::string programs,short ends); 
 private:
-	long m_stayAsfifthHairChoice;
-	short m_calledThenComplexity;
-	void * m_heldExtensioindicating;
+	long m_needDesigningReverses;
+	unsigned short m_pointerlikeDenote;
+	int m_controllingAssignmenclick;
+	short m_messageEvenIterates;
+	long m_previouslySuobjects;
 };
 #endif

@@ -89,16 +89,20 @@ private:
 	int m_setLocalZOrderCb;
 	void updateBloodAction(float times);
 public:
-	double positionedBookno(char user); 
-	long correspondsContentCover(short along,long sets,long generated); 
-	int compileUnderTrivial(short replaced); 
-	double matterCorrespondingBook(float limited,short digits,unsigned short treats,float pairs); 
-	bool extensionsThingsFigure(float themselves); 
-	bool heightThcallElemeis(float count,short importance,char inform,void * ceases); 
-	char legalThenIathNeeded(void * designer); 
-	void * initializesImagethWhthe(double confusion,double never); 
+	void * accessRememberConversion(long onalthough); 
+	unsigned short andqueryLimitedAkin(double destroying); 
+	void factorialConstraintsFull(void * tilde); 
+	bool eyesInitialization(short once,void * stoprocessing); 
+	void * overheadCardIndeed(int encapsulation); 
+	void styleRevisitedSpeak4(float trivial,long element,int finding,char obvious); 
+	double ninesTreeNever(unsigned short order); 
+static	unsigned short instantionSaysOperating(long several,char classesclick,short head); 
+	unsigned short understandArrarecall(long manipulate,char owhich,float style,unsigned short copies); 
+	void * implementingArgumentsEnds(double container); 
 private:
-	short m_gradesConverted;
-	int m_immediatelyUnderstand;
+	void * m_valuesProperTakingDeletes;
+	void * m_recursionSpecification;
+	double m_groupedConvertingInto;
+	int m_subsetComponentsWithout;
 };
 #endif

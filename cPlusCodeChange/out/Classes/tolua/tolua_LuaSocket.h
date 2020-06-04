@@ -75,7 +75,7 @@ static int tolua_LuaSocket_LuaSocket_getInstance00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'getInstance'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -101,7 +101,7 @@ static int tolua_LuaSocket_LuaSocket_new00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'new'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -128,7 +128,7 @@ static int tolua_LuaSocket_LuaSocket_new00_local(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'new'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -156,7 +156,7 @@ static int tolua_LuaSocket_LuaSocket_delete00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'delete'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -190,7 +190,7 @@ static int tolua_LuaSocket_LuaSocket_openSocket00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'openSocket'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -222,7 +222,7 @@ static int tolua_LuaSocket_LuaSocket_sendSocket00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'sendSocket'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -252,7 +252,7 @@ static int tolua_LuaSocket_LuaSocket_closeSocket00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'closeSocket'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -281,7 +281,7 @@ static int tolua_LuaSocket_LuaSocket_readThread00(lua_State* tolua_S)
  return 0;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'readThread'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -317,7 +317,7 @@ static int tolua_LuaSocket_LuaSocket_runLuaFunc00(lua_State* tolua_S)
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'runLuaFunc'.",&tolua_err);
+ tolua_error(tolua_S,"",&tolua_err);
  return 0;
 #endif
 }
@@ -346,7 +346,7 @@ static int tolua_LuaSocket_LuaSocket_setCplusShowMsgID(lua_State* tolua_S)
 	return 0;
 #ifndef TOLUA_RELEASE
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'setCplusShowMsgID'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 	return 0;
 #endif
 }

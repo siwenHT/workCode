@@ -15,17 +15,17 @@ public :
 private :
 	cocos2d::Sprite* m_back;  
 public:
-	void * functionalthoughMarkSplit(float select); 
-	char distinctiveAheadAccording(unsigned short file,long results); 
-	bool datsuchLiteralsHence(short propagates); 
-	bool asfifthSimpleOkayVerify(char mube,float assignmenclick,long evaluated,char vice); 
-	double listthExhaustedVersus(char initialization,void * care); 
-	bool unchangedExpandingMacro(int detail,float trans,int adaptors); 
-	void simplerSectionsCopying(float parameteth); 
-	long actuasizeExpressionas(void * ways,long modern); 
-	void interpretedPreventedWhose(unsigned short updates,short subset); 
-	long informationLength(char deal,unsigned short begin,unsigned short overloaded,long substring); 
+static	void * strcmpIntroductoryItas(int inlined); 
+	int specializationAlgorithms(unsigned short nonpointer,short doing); 
+static	char definitionThemExit5(unsigned short manager,void * limit); 
+	char knownMenuApplicable(unsigned short should); 
+	bool definitionsPresented(std::string aside); 
+	int fallModifyList(long owhich,unsigned short initially,long type,short enumerations); 
+	float convertedSwappedTaking(unsigned short want); 
+	int personExhasuting(std::string stringth,char find,double full,char exhasuting); 
 private:
-	bool m_checkEvaluatedDetailSees;
+	short m_instantiationSource;
+	long m_initializtheReside;
+	long m_wordsRefersPointed;
 };
 #endif

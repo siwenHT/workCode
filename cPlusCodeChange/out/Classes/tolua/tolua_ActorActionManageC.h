@@ -33,7 +33,7 @@ int lua_ActorActionManageC_getInstance(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_getInstance'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -52,7 +52,7 @@ int lua_ActorActionManageC_addComponent(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_addComponent'", NULL);
+        tolua_error(tolua_S,"", NULL);
         return 0;
     }
 #endif
@@ -79,7 +79,7 @@ int lua_ActorActionManageC_addComponent(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_addComponent'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -98,7 +98,7 @@ int lua_ActorActionManageC_removeComponent(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_removeComponent'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -134,7 +134,7 @@ int lua_ActorActionManageC_removeComponent(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_removeComponent'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -153,7 +153,7 @@ int lua_ActorActionManageC_getComponentByTypeAndId(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_getComponentByTypeAndId'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -178,7 +178,7 @@ int lua_ActorActionManageC_getComponentByTypeAndId(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_getComponentByTypeAndId'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -197,7 +197,7 @@ int lua_ActorActionManageC_setMainRole(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_setMainRole'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -213,7 +213,7 @@ int lua_ActorActionManageC_setMainRole(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_setMainRole'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -232,7 +232,7 @@ int lua_ActorActionManageC_setVisibleRole(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_setVisibleRole'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -253,7 +253,7 @@ int lua_ActorActionManageC_setVisibleRole(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_setVisibleRole'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -272,7 +272,7 @@ int lua_ActorActionManageC_setHideWithChildren(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_setHideWithChildren'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -308,7 +308,7 @@ int lua_ActorActionManageC_setHideWithChildren(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_setHideWithChildren'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -327,7 +327,7 @@ int lua_ActorActionManageC_gotoDeath(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_gotoDeath'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -345,7 +345,7 @@ int lua_ActorActionManageC_gotoDeath(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_gotoDeath'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -364,7 +364,7 @@ int lua_ActorActionManageC_gotoRevive(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_gotoRevive'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -382,7 +382,7 @@ int lua_ActorActionManageC_gotoRevive(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_gotoRevive'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -401,7 +401,7 @@ int lua_ActorActionManageC_setWhiteCb(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_setWhiteCb'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -422,7 +422,7 @@ int lua_ActorActionManageC_setWhiteCb(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_setWhiteCb'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -441,7 +441,7 @@ int lua_ActorActionManageC_restoreMainRole(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_restoreMainRole'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -465,7 +465,7 @@ int lua_ActorActionManageC_restoreMainRole(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_restoreMainRole'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -484,7 +484,7 @@ int lua_ActorActionManageC_retainMainRole(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_retainMainRole'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -502,7 +502,7 @@ int lua_ActorActionManageC_retainMainRole(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_retainMainRole'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -521,7 +521,7 @@ int lua_ActorActionManageC_copyMainRole(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_copyMainRole'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -542,7 +542,7 @@ int lua_ActorActionManageC_copyMainRole(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_copyMainRole'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -561,7 +561,7 @@ int lua_ActorActionManageC_removeActor(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_removeActor'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -579,7 +579,7 @@ int lua_ActorActionManageC_removeActor(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_removeActor'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -598,7 +598,7 @@ int lua_ActorActionManageC_cleanOtherActor(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_cleanOtherActor'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -616,7 +616,7 @@ int lua_ActorActionManageC_cleanOtherActor(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_cleanOtherActor'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -635,7 +635,7 @@ int lua_ActorActionManageC_setShowLayer(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_setShowLayer'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -656,7 +656,7 @@ int lua_ActorActionManageC_setShowLayer(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_setShowLayer'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -675,7 +675,7 @@ int lua_ActorActionManageC_setVisible(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_setVisible'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -696,7 +696,7 @@ int lua_ActorActionManageC_setVisible(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_setVisible'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -715,7 +715,7 @@ int lua_ActorActionManageC_setVisibleCustom(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_setVisibleCustom'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -780,7 +780,7 @@ int lua_ActorActionManageC_setVisibleCustom(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_setVisibleCustom'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -799,7 +799,7 @@ int lua_ActorActionManageC_setOpacityCustom(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_setOpacityCustom'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -841,7 +841,7 @@ int lua_ActorActionManageC_setOpacityCustom(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_setOpacityCustom'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -860,7 +860,7 @@ int lua_ActorActionManageC_clean(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_clean'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -875,7 +875,7 @@ int lua_ActorActionManageC_clean(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_clean'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -894,7 +894,7 @@ int lua_ActorActionManageC_setMainRoleId(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_setMainRoleId'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -912,7 +912,7 @@ int lua_ActorActionManageC_setMainRoleId(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_setMainRoleId'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -931,7 +931,7 @@ int lua_ActorActionManageC_setVersionChannel(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_ActorActionManageC_setVersionChannel'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -949,7 +949,7 @@ int lua_ActorActionManageC_setVersionChannel(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_ActorActionManageC_setVersionChannel'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }

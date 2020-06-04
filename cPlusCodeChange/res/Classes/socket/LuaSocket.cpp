@@ -399,12 +399,12 @@ bool LuaSocket::onSubThreadStarted()
 	if (ret == false)
 	{
 		m_SocketState = LuaSocketState::SOCKET_CONNECTION_FAILURE;
-		CCLOG("Socket connect fail");
+		// CCLOG("Socket connect fail");
 	}
 	else
 	{
 		m_SocketState = LuaSocketState::SOCKET_CONNECTED;
-		CCLOG("Socket connect ok");
+		// CCLOG("Socket connect ok");
 	}
 	if(ret == false)
 		ret_num = 0;
@@ -455,7 +455,9 @@ void LuaSocket::onUIThreadReceiveMessage(SocketData* data)
 		if(data->m_len < 0)
 		{
 			LuaEventManager::instance()->setSendMsgCount(0);
-			LuaSocket::getInstance()->runLuaFunc("NetError",NULL,0);		
+			int tmpSymbolKey[] = {}; //"NetError"
+			std::string keyA = HandleString(tmpSymbolKey, STRNUMSIG);			
+			LuaSocket::getInstance()->runLuaFunc(keyA.c_str(), NULL, 0);
 			return;
 		}
 
@@ -468,7 +470,9 @@ void LuaSocket::onUIThreadReceiveMessage(SocketData* data)
 			{
 				LuaEventManager::instance()->setSendMsgCount(0);
 			}
-			LuaSocket::getInstance()->runLuaFunc("connectCallback", luaParams, 1);
+			int tmpSymbolKey[] = {}; //"connectCallback"
+			std::string keyB = HandleString(tmpSymbolKey, STRNUMSIG);	
+			LuaSocket::getInstance()->runLuaFunc(keyB.c_str(), luaParams, 1);
 			return;
 		}
 
@@ -480,12 +484,14 @@ void LuaSocket::onUIThreadReceiveMessage(SocketData* data)
 			CLuaParam luaParams[2];
 			luaParams[0] = msg->msgId;
 //			CCLOG("rec msgID:%d", (int)msg->msgId);
-			if (msg->msgId != 4002 && m_showMsgID)
-			{
-				NETLog("LuaSocket::RecvSocket .....msgid:%d,msgLen:%d", msg->msgId, msg->msgLen);
-			}
+			// if (msg->msgId != 4002 && m_showMsgID)
+			// {
+			// 	NETLog("LuaSocket::RecvSocket .....msgid:%d,msgLen:%d", msg->msgId, msg->msgLen);
+			// }
 			luaParams[1] = static_cast<void*>(&pBuff);
-			LuaSocket::getInstance()->runLuaFunc("NetMsgDispacher", luaParams, 2);
+			int tmpSymbolKey[] = {}; //"NetMsgDispacher"
+			std::string keyC = HandleString(tmpSymbolKey, STRNUMSIG);	
+			LuaSocket::getInstance()->runLuaFunc(keyC.c_str(), luaParams, 2);
 
 
 //			LuaMsgBuffer* pBuff = new LuaMsgBuffer();
@@ -579,7 +585,7 @@ int LuaSocket::openSocket(const char *ip , int poush) {
 	memcpy(m_ip,ip,strlen(ip));
 	m_port = poush;
 
-	CCLOG("...............openSocket.ip:%s,port:%d", ip, m_port);
+	// CCLOG("...............openSocket.ip:%s,port:%d", ip, m_port);
 	m_protocolInst->Reset();
 	m_SocketState = LuaSocketState::SOCKET_CONNECTING;
 	cSocket = new ODSocket();
@@ -625,10 +631,10 @@ void LuaSocket::sendSocket(LuaMsgBuffer& luaBuff)
 
 	pMsg->msgCheck = luaBuff.initCheckFlg(sendNum);
 
-	if (m_showMsgID)
-	{
-		NETLog("LuaSocket::sendSocket .....msgid:%d", LuaMsgBuffer::HostValue2Big(pMsg->msgId));
-	}
+	// if (m_showMsgID)
+	// {
+	// 	NETLog("LuaSocket::sendSocket .....msgid:%d", LuaMsgBuffer::HostValue2Big(pMsg->msgId));
+	// }
 	LuaEventManager::instance()->addSendMsgCount();
 	_wsHelper->sendMessageToSubThread(new SocketData(200, sendNum, (char*)pMsg ,WRITE_DATA));
 }

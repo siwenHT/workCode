@@ -35,7 +35,7 @@ int lua_LabelNodeC_create(lua_State* tolua_S)
     return 0;
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_create'.",&tolua_err);
+    tolua_error(tolua_S,"",&tolua_err);
 #endif
     return 0;
 }
@@ -54,7 +54,7 @@ int lua_LabelNodeC_setAdditionalKerning(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_setAdditionalKerning'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -75,7 +75,7 @@ int lua_LabelNodeC_setAdditionalKerning(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_setAdditionalKerning'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -94,7 +94,7 @@ int lua_LabelNodeC_setDimensions(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_setDimensions'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -118,7 +118,7 @@ int lua_LabelNodeC_setDimensions(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_setDimensions'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -137,7 +137,7 @@ int lua_LabelNodeC_setString(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_setString'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -158,7 +158,7 @@ int lua_LabelNodeC_setString(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_setString'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -177,7 +177,7 @@ int lua_LabelNodeC_getString(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_getString'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -195,7 +195,7 @@ int lua_LabelNodeC_getString(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_getString'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -214,7 +214,7 @@ int lua_LabelNodeC_setHorizontalAlignment(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_setHorizontalAlignment'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -235,7 +235,7 @@ int lua_LabelNodeC_setHorizontalAlignment(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_setHorizontalAlignment'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -254,7 +254,7 @@ int lua_LabelNodeC_setVerticalAlignment(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_setVerticalAlignment'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -275,7 +275,7 @@ int lua_LabelNodeC_setVerticalAlignment(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_setVerticalAlignment'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -294,7 +294,7 @@ int lua_LabelNodeC_setLineBreakWithoutSpace(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_setLineBreakWithoutSpace'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -315,7 +315,7 @@ int lua_LabelNodeC_setLineBreakWithoutSpace(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_setLineBreakWithoutSpace'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -334,7 +334,7 @@ int lua_LabelNodeC_setMaxLineWidth(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_setMaxLineWidth'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -355,7 +355,7 @@ int lua_LabelNodeC_setMaxLineWidth(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_setMaxLineWidth'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -374,7 +374,7 @@ int lua_LabelNodeC_setSystemFontSize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_setSystemFontSize'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -395,7 +395,7 @@ int lua_LabelNodeC_setSystemFontSize(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_setSystemFontSize'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -414,7 +414,7 @@ int lua_LabelNodeC_setColor(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_setColor'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -435,7 +435,7 @@ int lua_LabelNodeC_setColor(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_setColor'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -454,7 +454,7 @@ int lua_LabelNodeC_getColor(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_getColor'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -472,7 +472,7 @@ int lua_LabelNodeC_getColor(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_getColor'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -491,7 +491,7 @@ int lua_LabelNodeC_setOutLineSize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_setOutLineSize'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -512,7 +512,7 @@ int lua_LabelNodeC_setOutLineSize(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_setOutLineSize'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -531,7 +531,7 @@ int lua_LabelNodeC_setOutLineColor(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_setOutLineColor'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -552,7 +552,7 @@ int lua_LabelNodeC_setOutLineColor(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_setOutLineColor'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -571,7 +571,7 @@ int lua_LabelNodeC_setLabelChild(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_setLabelChild'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -592,7 +592,7 @@ int lua_LabelNodeC_setLabelChild(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_setLabelChild'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
@@ -611,7 +611,7 @@ int lua_LabelNodeC_getLabelChild(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
 	if (!cobj) 
 	{
-		tolua_error(tolua_S,"invalid 'cobj' in function 'lua_LabelNodeC_getLabelChild'", NULL);
+		tolua_error(tolua_S,"", NULL);
 		return 0;
 	}
 #endif
@@ -629,7 +629,7 @@ int lua_LabelNodeC_getLabelChild(lua_State* tolua_S)
 	return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-	tolua_error(tolua_S,"#ferror in function 'lua_LabelNodeC_getLabelChild'.",&tolua_err);
+	tolua_error(tolua_S,"",&tolua_err);
 #endif
 	return 0;
 }
