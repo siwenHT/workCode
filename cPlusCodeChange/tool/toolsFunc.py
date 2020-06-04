@@ -85,11 +85,26 @@ def find_last(string,str):
         if position == -1:
             return last_position
         last_position = position
+
 def getRandomChar(num, key1 = 33, key2 = 125):
     ret = ""
     count = 1
     while (count <= num):
         ret = ret + chr(random.randint(key1, key2))
+        count = count + 1
+
+    return ret
+
+def getRandomUpDown(num):
+    ret = ""
+    key1 = 97
+    key2 = 122
+    count = 1
+    while (count <= num):
+        tmp = chr(random.randint(key1, key2))
+        if random.randint(1, 3) > 1:
+            tmp = tmp.upper()
+        ret = ret + tmp
         count = count + 1
 
     return ret

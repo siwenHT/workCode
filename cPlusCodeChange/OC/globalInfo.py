@@ -8,7 +8,7 @@
 #添加函数到函数列表中 (结构为双向结构)
 # funcInfo： {}
 # [DEF.Name]:string, 
-# ['params']:{}
+# [DEF.PARAMS]:{}
 #           {[DEF.Type]:string, [DEF.Name]:string}
 #           {[DEF.Type]:string, [DEF.Name]:string}
 #           . . .

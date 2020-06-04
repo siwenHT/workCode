@@ -5,6 +5,16 @@
 #include "SkillCtrl.h"
 #include "LuaBasicConversions.h"
 
+// 导入头文件 CrashReport.h 和 BuglyLuaAgent.h
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include "bugly/CrashReport.h"
+#include "bugly/lua/BuglyLuaAgent.h"
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#include "CrashReport.h"
+#include "BuglyLuaAgent.h"
+#endif
+
+
 //二进制读取文件内容
 static int lua_binaryReadFile(lua_State *L)
 {
@@ -36,6 +46,26 @@ static int lua_setZipSpaceNum(lua_State *L)
 	ZipUtils::setCCZSpaceNum(num);
 	return 1;
 }
+
+static int lua_setBuglyInfo(lua_State *L)
+{
+	bool ok  = true;
+	std::string arg0;
+	ok &= luaval_to_std_string(L, 1, &arg0); 
+	auto engine = LuaEngine::getInstance();
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) || (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+			CrashReport::initCrashReport(arg0.c_str(), true);
+		#else
+			CrashReport::initCrashReport(arg0.c_str(), true);
+		#endif
+
+		// register lua exception handler with lua engine
+		BuglyLuaAgent::registerLuaExceptionHandler(engine);
+	#endif
+
+	return 1;
+}
 	
 
 int lua_register_function(lua_State* L)
@@ -43,6 +73,7 @@ int lua_register_function(lua_State* L)
 	lua_register(L, "binaryReadFile", lua_binaryReadFile);
 	lua_register(L, "UintRightShift", lua_UintRightShift);
 	lua_register(L, "zipSetSpaceNum", lua_setZipSpaceNum);
+	lua_register(L, "setBuglyInfo", lua_setBuglyInfo);
     return 1;
 }
 

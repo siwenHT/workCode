@@ -202,7 +202,7 @@ void SpriteMonster::showNameAndBlood(int name_show,int blood_show,int height,boo
 	//}
 }
 
-void SpriteMonster::subBlood(int blood)
+void SpriteMonster::subBlood(int64 blood)
 {
 	m_hp -= blood;
 	/*sub_pecent = ((float)blood * 5)/m_maxhp;*/
@@ -220,6 +220,16 @@ void SpriteMonster::subBlood(int blood)
 		showNameAndBlood(-1,1,show_h);
 		m_blood_pro->setScaleX(update_pecent);
 	}
+
+	if (update_pecent < 0 )
+	{
+		update_pecent = 0;
+	}
+	else if (update_pecent > 1)
+	{
+		update_pecent = 1;
+	}
+
 	if(m_blood_bg->isVisible())
 	{
 		if(m_showBloodAnim){
@@ -514,7 +524,7 @@ SpriteMonster *SpriteMonster::create(const std::string&pszFileName, std::string 
 	}
 }
 
-void SpriteMonster::setHP(uint64 hp)
+void SpriteMonster::setHP(int64 hp)
 {
 	m_hp = hp;
 	if(m_hp<m_maxhp && m_hp>0){
@@ -527,9 +537,23 @@ void SpriteMonster::setHP(uint64 hp)
 
 	//if(hp == 1) 
 	//	hp = 0;
-	if(m_maxhp < hp)
-		m_maxhp = hp;
+	//if(m_maxhp < hp)
+	//	m_maxhp = hp;
+    if (hp < 0)
+    {
+        hp = 0;
+    }
+
 	float update_pecent = (float)hp/m_maxhp;
+	if (update_pecent < 0 )
+	{
+		update_pecent = 0;
+	}
+	else if (update_pecent > 1)
+	{
+		update_pecent = 1;
+	}
+
 	m_blood_pro->setScaleX(update_pecent);
 	m_blood_back->setScaleX(update_pecent);
 
@@ -664,7 +688,7 @@ void SpriteMonster::removeFootprintsCb(){
 }
 
 bool SpriteMonster::canMove(){
-	if(getCurrActionState() >= ACTION_STATE_DEAD || getCurrActionState() == ACTION_STATE_ATTACK || getCurrActionState() == ACTION_STATE_FLY || getCurrActionState() == ACTION_STATE_SUDDEN)
+	if(getCurrActionState() >= ACTION_STATE_DEAD || getCurrActionState() == ACTION_STATE_FLY || getCurrActionState() == ACTION_STATE_SUDDEN)//|| getCurrActionState() == ACTION_STATE_ATTACK
 		return false;
 	return true;
 }

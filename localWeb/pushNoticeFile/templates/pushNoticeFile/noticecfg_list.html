@@ -1,0 +1,9 @@
+{% if noticecfg_list %}
+    <ul>
+    {% for noticecfg in noticecfg_list %}
+        <li><a href="{% url 'pushNoticeFile:detail' noticecfg.id %}">{{ noticecfg.desc_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No noticecfg_list are available.</p>
+{% endif %}

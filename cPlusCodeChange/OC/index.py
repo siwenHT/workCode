@@ -48,7 +48,7 @@ def changeStrByDic(changeDic, targetStr):
     #         print targetStr + " ===== " + strA + strB
 
     #         targetStr = strA + strB
-    noChange = ['setRootViewController1', "resumeAllEffects", 'pauseAllEffects']
+    noChange = ['setRootViewController', "resumeAllEffects", 'pauseAllEffects']
     pFind = 0
     totlaItems = changeDic.items()
     while True:
@@ -67,17 +67,18 @@ def changeStrByDic(changeDic, targetStr):
                     changeItem = key
 
         noChangeFlg = False
-        for noChangeKey in noChange:
-            if noChangeKey.find(changeItem) > -1:
-                pos1 = targetStr.find(key, pFind)
-                if pos1 > -1:
-                    if pos - pos1 == len(noChangeKey) - len(changeItem):
-                        noChangeFlg = True
-                        print  targetStr[pos1 - 10: pos1 + len(noChangeKey) + 10], " the string no change !!!"
-                        break
+        if pos > -1 and changeItem:
+            for noChangeKey in noChange:
+                if noChangeKey.find(changeItem) > -1:
+                    pos1 = targetStr.find(noChangeKey, pFind)
+                    if pos1 > -1:
+                        if pos - pos1 == len(noChangeKey) - len(changeItem):
+                            noChangeFlg = True
+                            # print  targetStr[pos1 - 10: pos1 + len(noChangeKey)], " the string no change !!!"
+                            break
 
-        if noChangeFlg:
-            pFind = pos + len(changeDic[changeItem])
+        if pos > -1 and noChangeFlg:
+            pFind = pos + len(changeItem)
             continue
         elif pos > -1:
             conA = targetStr[0:pos]
@@ -173,13 +174,11 @@ def changeText(resPath, cleanPath, chanegPath):
                  'loginoutWithParams':1,
                  'getIAPProductID':1,
                 #  'MLog':worldsDic.clsHead() + 'Log',
-                 'SysInfoOC':'JIGAffectsTurnsList',
                  'GameSoftCaller':1,
                 #  'GameSoftCaller_IAP':1,
                  'GameCaller':1,
                  'GameServer':1,
                  'GameSoftDevKit':1,
-                 'channel_ios':"JIGImplicitlySeeminglyRes",
                  'SFHFKeychainUtils':1,
                  'RootViewController':1,
                  'qqqWithParams':1,
@@ -188,7 +187,10 @@ def changeText(resPath, cleanPath, chanegPath):
                  'SFHFKeychainUtilsErrorDomain':1,
                  'ARRYSTRFORMAT':(worldsDic.getOneWorld() + worldsDic.getOneWorld()).upper(),
                  'PathFormat':(worldsDic.getOneWorld() + worldsDic.getOneWorld()).upper(),
-                 'MoviePlayerHelper':1,}
+                 'MoviePlayerHelper':1,
+                 'channel_ios':'MRKValueunsignedParsedExtension',##
+                 'SysInfoOC':'MRKParenthesisLinkinganotherExtension',##
+                 }
     funcName = worldsDic.randomWorldS(50, 'ocClass')
     for key, val in changeDic.items():
         if val == 1:
@@ -310,5 +312,6 @@ def myMain():
     RELACLS.relationCls(G.clsList, createList, changePath, createPath, targetPath)
 
     tool.delFolders(changePath)
-    tool.delFolders(cleanPath)
+    # tool.delFolders(cleanPath)
     tool.delFolders(createPath)
+    tool.delFolders(strPath)

@@ -39,7 +39,7 @@
 
 -(void)setToken:(NSData*)token;
 
--(void) setPlatform:(NSString*)platform;
+// -(void) setPlatform:(NSString*)platform;
 
 -(void) sendToken:(NSString*)deviceTokenStr;
 /*

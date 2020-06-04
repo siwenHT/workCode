@@ -16,9 +16,22 @@ def relationCls(oldclsList, newClsList, oldFilesPath, createFilesPath, targetFil
     externOldClass(oldclsList, newClsList)
     print  '---------------------------------------externOldClass ok'
     # externNewClass(oldclsList, newClsList)
-    print  '---------------------------------------externNewClass ok'
+    # print  '---------------------------------------externNewClass ok'
     saveToFile(oldclsList, oldFilesPath, targetFilesPath)
     saveToFile(newClsList, createFilesPath, targetFilesPath)
+
+    notIncludeCls = 0
+    noLevel1 = 0
+    noLevel2 = 0
+    for clsInfo in newClsList:
+        if not clsInfo.get(DEF.ISINCLUDE):
+            notIncludeCls += 1
+            if clsInfo[DEF.CRTTYPE] == DEF.CLSTYPE.level1:
+                noLevel1 += 1
+            if clsInfo[DEF.CRTTYPE] == DEF.CLSTYPE.level2:
+                noLevel2 += 1
+    
+    print ("num of Not Used:", notIncludeCls, noLevel1, noLevel2)
 
 def externOldClass(oldclsList, newClsList):
     #添加属性
@@ -39,40 +52,42 @@ def externOldClass(oldclsList, newClsList):
             prop[DEF.TYPE] = createFile.randomOcType()
 
             clsInfo[DEF.PROP].append(prop)
-                    
 
     #添加方法
     createFile.createClsList = newClsList
     for clsInfo in oldclsList:
-        num = len(clsInfo[DEF.PROP])
-        num1 = round(num / 3)
-        num2 = round(num * 2.5)
+        num = tool.random.randint(1, 4)
 
-        num1 = num1 < 1 and 1 or num1
-        num2 = num2 < 1 and 2 or num2
-        num = tool.random.randint(1, 3)
+        for i in range(num):
+            funcInfo = createFile.newFunc(clsInfo, DEF.FUNTYPE.inner)
+            funcInfo[DEF.ScopeType] = DEF.SCOPE.Private
+            if i == num - 1:
+                funcInfo[DEF.ScopeType] = DEF.SCOPE.Public
 
-        for _ in range(num):
-            funcInfo = createFile.newFunc(clsInfo)
-            createFile.fillFunc(funcInfo, clsInfo)
+            createFile.fillFunc_ex(funcInfo, clsInfo)
 
         # 老函数调用新函数
         oldList = []
         newList = []
+        funcCfg = ['shared', 'getInstance', 'destroyInstance', 'application', 'getStrByIdx', 'splitJoinString', 'convertHexStrToString']
         for func in clsInfo[DEF.Funcs]:
-            if func[DEF.Name] == 'shared' or 'getInstance' == func[DEF.Name] or 'destroyInstance' == func[DEF.Name]:
+            if func[DEF.Name] in funcCfg:
                 continue
             elif func[DEF.FROM] == DEF.FROMTYPE.old:
                 oldList.append(func)
             else:
                 newList.append(func)
         
-        if len(oldList) > 0:
-            num = tool.random.randint(1, len(oldList))
-            for _ in range(num):
-                callFunc = tool.random.choice(oldList)
-                calledFunc = tool.random.choice(newList)
-                callFunc[DEF.EXTERN].append(calledFunc)
+        # print(clsInfo[DEF.Name], len(oldList), len(newList))
+        if oldList:
+            oldListLen = len(oldList)
+            for func in oldList:
+                if tool.random.randint(1, 3) == 2:
+                    calledFunc = createFile.chooseOne(newList, DEF.ISINCLUDE, 0)
+                    if func[DEF.ScopeType] == calledFunc[DEF.ScopeType]:
+                        func[DEF.EXTERN].append(calledFunc)
+                        calledFunc[DEF.ISINCLUDE] = 1
+                        break
 
 def externNewClass(oldclsList, newClsList):
     #添加方法
@@ -80,13 +95,14 @@ def externNewClass(oldclsList, newClsList):
     for clsInfo in oldclsList:
         num = tool.random.randint(1, 3)
 
-
         for _ in range(num):
             funcInfo = createFile.newFunc(clsInfo)
+            funcInfo[DEF.CRTTYPE] = DEF.FUNTYPE.inner
             createFile.fillFunc(funcInfo, clsInfo)
 
 def saveToFile(clsList, old, target):
     oldPath = ''
+    totalFunc = 0
     for clsInfo in clsList:
         hFilePath = old + '/' + clsInfo[DEF.FILEPATH]
         if oldPath == hFilePath:
@@ -115,6 +131,7 @@ def saveToFile(clsList, old, target):
                     propContent += "@property(nonatomic, assign) " + prop[DEF.TYPE] + " " + prop[DEF.Name] + ";\n"
 
         funContent = ''
+        totalFunc += len(clsInfo[DEF.Funcs])
         for fun in clsInfo[DEF.Funcs]:
             if fun[DEF.FROM] == DEF.FROMTYPE.add:
                 first = True
@@ -125,10 +142,14 @@ def saveToFile(clsList, old, target):
                         first = False
                     else:
                         tmpCon += ' {0}:({1}){2}'.format(param[DEF.Name], param[DEF.TYPE], param[DEF.Name1])
+
+                flg = '-'
+                if fun[DEF.ScopeType] == DEF.SCOPE.Public:
+                    flg = '+'
                 if tmpCon:
-                    funContent += '- ({0}) {1}:{2}'.format(fun[DEF.FUNCRET], fun[DEF.Name], tmpCon) + ';\n'
+                    funContent += flg + ' ({0}) {1}:{2}'.format(fun[DEF.FUNCRET], fun[DEF.Name], tmpCon) + ';\n'
                 else:
-                    funContent += '- ({0}) {1}'.format(fun[DEF.FUNCRET], fun[DEF.Name]) + ';\n'
+                    funContent += flg + ' ({0}) {1}'.format(fun[DEF.FUNCRET], fun[DEF.Name]) + ';\n'
 
         # 找到放入属性的地方
         if propContent or funContent:
@@ -194,10 +215,13 @@ def saveToFile(clsList, old, target):
                         first = False
                     else:
                         tmpCon += ' {0}:({1}){2}'.format(param[DEF.Name], param[DEF.TYPE], param[DEF.Name1])
+                flg = '-'
+                if fun[DEF.ScopeType] == DEF.SCOPE.Public:
+                    flg = '+'                        
                 if tmpCon:
-                    fMContent += '- ({0}) {1}:{2}'.format(fun[DEF.FUNCRET], fun[DEF.Name], tmpCon) + '{\n'
+                    fMContent += flg + ' ({0}) {1}:{2}'.format(fun[DEF.FUNCRET], fun[DEF.Name], tmpCon) + '{\n'
                 else:
-                    fMContent += '- ({0}) {1}'.format(fun[DEF.FUNCRET], fun[DEF.Name]) + '{\n'
+                    fMContent += flg + ' ({0}) {1}'.format(fun[DEF.FUNCRET], fun[DEF.Name]) + '{\n'
                 fMContent += fun[DEF.CONTENT] + '}\n\n'
                 fMContent = tool.unicodeToAscii(fMContent)
         
@@ -245,20 +269,20 @@ def saveToFile(clsList, old, target):
                 for call in func[DEF.EXTERN]:
                     if call[DEF.Name] != func[DEF.Name]:
                         if func[DEF.ScopeType] == DEF.SCOPE.Private:                
-                            content += '\n[self {0}];'.format(call[DEF.Name] + createFile.getFuncCallLine(call))
+                            content += '\n\t[self {0}];'.format(call[DEF.Name] + createFile.getFuncCallLine(call, func))
                         else:
-                            content += '\n[{0} {1}];'.format(clsInfo[DEF.Name], call[DEF.Name] + createFile.getFuncCallLine(call))
+                            content += '\n\t[{0} {1}];'.format(clsInfo[DEF.Name], call[DEF.Name] + createFile.getFuncCallLine(call, func))
                 
                 if content:
                     content += '\n'
-                    filterStr = r'[\n][-+]+[^\n]*' + func[DEF.Name] + '[^\n]*[\n]'
+                    filterStr = r'[\n][-+]+[^\n]*' + func[DEF.Name] + '[^\n\]]*[\n]'
                     ret = tool.re.search(filterStr, mFileContent)
 
                     isOk = False
                     if ret:
                         if ret.span():
-                            if ret.span()[1]:
-                                pos = mFileContent.find('{', ret.span()[1])
+                            if ret.span()[0]:
+                                pos = mFileContent.find('{', ret.span()[0])
                                 if pos > -1:
                                     con1 = mFileContent[:pos+1]
                                     con2 = mFileContent[pos+1:]
@@ -269,8 +293,11 @@ def saveToFile(clsList, old, target):
                                     
 
                     if not isOk:
+                        a = 1
                         print 'file {0} find func {1} error!'.format(tmFilePath, func[DEF.Name])
 
         tool.WriteFile(tmFilePath, mFileContent)
+
+    print("Ios Class:", len(clsList), "Func:", totalFunc,)
 
         # print thFilePath, tmFilePath

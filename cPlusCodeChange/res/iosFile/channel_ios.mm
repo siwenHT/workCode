@@ -220,10 +220,10 @@
         [[GameSoftDevKit shared]closePush];
  
     }
-    // else if([dic[PathFormat("type")] isEqualToString: @"hshn"]){
-    //     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    //     pasteboard.string = dic[@"text"];
-    // }
+    else if([dic[PathFormat("type")] isEqualToString: PathFormat("pasteboard")]){
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = dic[@"text"];
+    }
     else if([dic[PathFormat("type")] isEqualToString: PathFormat("checkIsFullScreen")]){
         if(isFullScreen){
             return PathFormat("ok");

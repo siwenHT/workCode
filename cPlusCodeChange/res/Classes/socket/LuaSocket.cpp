@@ -531,7 +531,7 @@ void LuaSocket::readThread()
 
 		char recvBuf[0x10000] = "\0";
 		int length = 0;
-		length = cSocket->Recv(recvBuf, 0xfff1, 0);
+		length = cSocket->Recv(recvBuf, 0x10000 - 1, 0);
 		return_code = 200;
 
 		//暂时屏蔽 加密解密

@@ -6074,7 +6074,7 @@ int lua_SpriteMonster_getMaxHP(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 0) 
     {
-		int64 ret = cobj->getMaxHP();
+		uint64 ret = cobj->getMaxHP();
 		if (ret){
 				tolua_pushnumber(tolua_S,(lua_Number)ret);
 		}
@@ -6404,9 +6404,9 @@ int lua_SpriteMonster_subBlood(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 1) 
     {
-		int arg0;
+		int64 arg0;
 
-		ok &= luaval_to_int32(tolua_S, 2,&arg0);
+		ok &= luaval_to_long_long(tolua_S, 2,&arg0);
 		if (!ok) { return 0; }
 
 		cobj->subBlood(arg0);

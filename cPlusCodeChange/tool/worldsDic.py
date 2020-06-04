@@ -40,6 +40,7 @@ def initWorldArray(filePath):
 
     global keys
     keys = worldCache.keys()
+    keys = tool.random.sample(keys, 2200)
 
 def getCplusSuffix():
     cfg = ['Helper','Ctr', 'Control', 'Plane','Layer', 'Sence', 'View', 'Sprite', '', 'Baser', "Model", "MG", 'Tool', "Ins", "Map", "Node", "Op", "Manager", "Deal", "Handle", "Action",  "Label", 'Effect']
@@ -54,7 +55,7 @@ def randomWorldS(totalNum, ty):
     while(len(retS) < totalNum):
         randKey = ''
         if ty == "cplusClass":
-            val = getTmpName(2, True, False)
+            val = getTmpName(2, False, False)
             val = val[0].upper() + val[1:]
             randKey = clsTag + val + getCplusSuffix()
         elif ty == 'cplusAttr':
@@ -93,9 +94,7 @@ def randomWorldS(totalNum, ty):
     return retS
 
 def getOneWorld():
-    totalLen = len(keys)
-    numRand = random.randint(1, totalLen)
-    return keys[numRand - 1]
+    return tool.random.choice(keys)
 
 def getRandomTwoWorld():
     totalLen = len(keys)
@@ -118,7 +117,7 @@ def getTmpName(num, addLine = False, addNum = True):
         if i > 0:
             tmpStr = tmpStr.capitalize()
         
-        if addLine and i > 0 and random.randint(1, 4) == 1:
+        if addLine and i > 0 and random.randint(1, 6) == 2:
             ret = ret + '_' + tmpStr
         else:
             ret = ret + tmpStr

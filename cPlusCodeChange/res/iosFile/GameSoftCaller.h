@@ -13,4 +13,11 @@
 
 @interface GameSoftCaller : GameCaller //<IAPManagerDelegate>
 
+-(void)qqqWithParams:(NSDictionary*)ret completion: (void(^)(NSDictionary*))completion;
+-(void)loginoutWithParams:(NSDictionary*)dic completion: (void(^)(NSDictionary*))completion;
+-(void)onEnterGameWithParems:(NSDictionary*)dic;
+-(void)loginWithParams:(NSDictionary*)dic completion: (void(^)(NSDictionary*))completion Andloginoutcallback: (void(^)(NSDictionary*))loginoutcallback;
+-(void)initWithParams:(NSDictionary*)dic;
+
+-(void)showSplash: (void(^)(NSDictionary*))completion;
 @end

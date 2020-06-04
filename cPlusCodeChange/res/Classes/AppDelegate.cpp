@@ -182,32 +182,34 @@ bool AppDelegate::applicationDidFinishLaunching()
 	FileUtils::getInstance()->setSearchPaths(searchPaths);
 	FileUtils::getInstance()->setPopupNotify(false);
 
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) || (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-			int tmpSymbolKey100[] = {}; //"215f4f1d20"
-			std::string kkk1 = HandleString(tmpSymbolKey100, STRNUMSIG);
-            CrashReport::initCrashReport(kkk1.c_str(), false);
-        #else
-            int tmpSymbolKey99[] = {}; //"54fe0dbdfa"
-            std::string kkk1 = HandleString(tmpSymbolKey99, STRNUMSIG);
-            CrashReport::initCrashReport(kkk1.c_str(), false);
-		#endif
-		
-		// register lua exception handler with lua engine
-		BuglyLuaAgent::registerLuaExceptionHandler(engine);
-	#endif
+	//#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) || (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	//	#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	//		//buglyKey = "4fd6c028cd";
+	//		const char kkk1[] = {'4', 'f', 'd', '6', 'c', '0', '2', '8', 'c', 'd', '\0'};
+	//		CrashReport::initCrashReport(kkk1, true);
+	//	#else
+	//		//std::string buglyKey = "af92576494";
+	//		//std::string buglyKey = "54fe0dbdfa";
+	//		const char kkk1[] = {'5', '4', 'f', 'e', '0', 'd', 'b', 'd', 'f', 'a', '\0'};
+	//		CrashReport::initCrashReport(kkk1, true);
+	//	#endif
+
+	//	// register lua exception handler with lua engine
+	//	BuglyLuaAgent::registerLuaExceptionHandler(engine);
+	//#endif
+
 	
 	int tmpSymbolKey1[] = {};//"ZYA14ageb8642F58"
 	std::string key = HandleString(tmpSymbolKey1, STRNUMSIG);
 	int tmpSymbolKey2[] = {}; //"Signal"
 	CCFileUtils::getInstance()->setDataKeyVal(1, key.c_str(), HandleString(tmpSymbolKey2, STRNUMSIG).c_str());
-	int tmpSymbolKey3[] = {}; //"JIOGEK"
-	CCFileUtils::getInstance()->setDataKeyVal(1, key.c_str(), HandleString(tmpSymbolKey3, STRNUMSIG).c_str());
+	// int tmpSymbolKey3[] = {}; //"IEMVLO"
+	// CCFileUtils::getInstance()->setDataKeyVal(1, key.c_str(), HandleString(tmpSymbolKey3, STRNUMSIG).c_str());
 
-	int tmpSymbolKey10[] = {}; //"f23rdfaef32wfew5"
-	std::string key10 = HandleString(tmpSymbolKey10, STRNUMSIG);
-	int tmpSymbolKey11[] = {}; //"IPLS"
-	CCFileUtils::getInstance()->setDataKeyVal(3, key10.c_str(), HandleString(tmpSymbolKey11, STRNUMSIG).c_str());
+	// int tmpSymbolKey10[] = {}; //"f23rdfaef32wfew5"
+	// std::string key10 = HandleString(tmpSymbolKey10, STRNUMSIG);
+	// int tmpSymbolKey11[] = {}; //"WVCM"
+	// CCFileUtils::getInstance()->setDataKeyVal(3, key10.c_str(), HandleString(tmpSymbolKey11, STRNUMSIG).c_str());
 
 #if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
     // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
@@ -265,22 +267,22 @@ void AppDelegate::applicationOnExit()
 
 void AppDelegate::initFiles()
 {
-	// 路径
-	int tmpSymbolKey[] = {}; //"overloaded/specializationDeclaration4.zip"
-	std::string file1 = HandleString(tmpSymbolKey, STRNUMSIG);
+// 	// initFile_ex
+// 	int tmpSymbolKey[] = {}; //"dereferences/associating/reallocatedExamined_4.jpg"
+// 	std::string file1 = HandleString(tmpSymbolKey, STRNUMSIG);
 
-	// zipFile
-	int tmpSymbolKey1[] = {}; //"precedes/Extend_ex.lua"
-	std::string file2 = HandleString(tmpSymbolKey1, STRNUMSIG);
+// 	// DeprecatedExtend_ex
+// 	int tmpSymbolKey1[] = {}; //"dereferences/associating/ribs_Sizehere_Influenced_3.png"
+// 	std::string file2 = HandleString(tmpSymbolKey1, STRNUMSIG);
 
-		// zipFile
-	int tmpSymbolKey3[] = {}; //"sets/splitHex.lua"
-	std::string file3 = HandleString(tmpSymbolKey3, STRNUMSIG);
+// 	// splitHex
+// 	int tmpSymbolKey3[] = {}; //"dereferences/associating/arraylibFeed_2.jpg"
+// 	std::string file3 = HandleString(tmpSymbolKey3, STRNUMSIG);
 
-//	CPLUSLog("AppDelegate::initFiles");
-	FileUtils* ins = FileUtils::getInstance();
-	ins->initResInfoByFile(file1, 1);
-	ins->initResInfoByFile(file2, 2);
-	ins->initResInfoByFile(file3, 3);
-//	CPLUSLog("AppDelegate::initFiles end");
+// //	CPLUSLog("AppDelegate::initFiles");
+// 	FileUtils* ins = FileUtils::getInstance();
+// 	ins->initResInfoByFile(file1, 1);
+// 	ins->initResInfoByFile(file2, 2);
+// 	ins->initResInfoByFile(file3, 3);
+// //	CPLUSLog("AppDelegate::initFiles end");
 }

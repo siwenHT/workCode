@@ -13,30 +13,33 @@ import operator
 
 otherLan = 'OC'
 lanType = 'cplus'  
-def createOneClass(params):
-    if lanType == 'cplus':
-       return cplusTool.createClass(params)
-
-    return '', {}
 
 def saveCreateClass(params):
-    if lanType == 'cplus':
-        cplusTool.saveClass(params)
+    cplusTool.saveClass(params)
 
-def createClassFiles(nameList, ansDic, prefixName = '', destPath = ''):
+def createClassFiles(nameList, destPath = ''):
     classInfo = {}
     tool.delFolders( tool.os.path.abspath(destPath + '/'))
-    totalClassNum = tool.random.randint(150, 230)
-    for _ in range(totalClassNum):
-        # print "begin Create class"
-        tmpClassName, info = createOneClass({DEF.NAMELIST:nameList, DEF.AnalysisRet:ansDic})
+    totalFuncNum = 0
+    totalAttrNum = 0
+    totalClassNum = tool.random.randint(50, 80)
+    num = round(totalClassNum / 4 * 3)
+    num = num > 0 and num or 1
+
+    for i in range(totalClassNum):
+        clsType = DEF.CLSTYPE.level2 if (i > num ) else DEF.CLSTYPE.level1
+        tmpClassName, info = cplusTool.createClass({DEF.NAMELIST:nameList, DEF.CRTTYPE:clsType, "classList": classInfo})
         classInfo[tmpClassName + '.h'] = info
-        # print "className:" , tmpClassName
+
         info[DEF.FULLFILEPATH] = tool.os.path.abspath(destPath + '/' + tmpClassName + '.h')
         saveCreateClass({DEF.CLASS: info})
-        # print "create class OK!:" , tmpClassName
+        
+        totalFuncNum += len(info[DEF.CLASSINFO][DEF.Funcs])
+        totalAttrNum += len(info[DEF.CLASSINFO][DEF.Attrs])
 
-    print 'total class num:' + str(totalClassNum)
+    print 'Total create class num:' + str(totalClassNum)
+    print 'Total create func  num:' + str(totalFuncNum)
+    print 'Total create attr  num:' + str(totalAttrNum)
     return classInfo
 
 #检查一个类的内容.
@@ -82,8 +85,8 @@ def checkClassContent(clsCont, clsInfo, fileName):
                 tmpFunc = {}
                 retInfo['funcs'].append(tmpFunc)
                 tmpFunc['limit'] = 'public'
-                tmpFunc['retType'] = ''
-                tmpFunc['params'] = []
+                tmpFunc[DEF.FUNCRET] = ''
+                tmpFunc[DEF.PARAMS] = []
                 tmpFunc['createFunc'] = 1
                 if lineStr.find('~') > -1:
                     tmpFunc['name'] = '~' + clsInfo['name']
@@ -120,18 +123,18 @@ def checkClassContent(clsCont, clsInfo, fileName):
                     retInfo['funcs'].append(tmpFunc)
                     tmpFunc['name'] = 'get' + strs[2].strip()
                     tmpFunc['limit'] = 'public'
-                    tmpFunc['retType'] = strs[0].strip()
-                    tmpFunc['params'] = []
+                    tmpFunc[DEF.FUNCRET] = strs[0].strip()
+                    tmpFunc[DEF.PARAMS] = []
                     tmpFunc['isGet'] = 1
                     
                     tmpFunc1 = {}
                     retInfo['funcs'].append(tmpFunc1)
                     tmpFunc1['name'] = 'set' + strs[2].strip()
                     tmpFunc1['limit'] = 'public'
-                    tmpFunc1['retType'] = 'void'
+                    tmpFunc1[DEF.FUNCRET] = 'void'
                     tmpPar = {'type':strs[0].strip(), 'name':'var'}
                     
-                    tmpFunc1['params'] = [tmpPar]
+                    tmpFunc1[DEF.PARAMS] = [tmpPar]
                     tmpFunc1['isSet'] = 1
 
                     pSeed = pSeed + pEnd + 1
@@ -160,13 +163,19 @@ def checkClassContent(clsCont, clsInfo, fileName):
 
                 funcRetType = lineStr[0:pName]
                 funcRetType = funcRetType.strip()
-                tmpFunc['retType'] = funcRetType
+                tmpFunc[DEF.FUNCRET] = funcRetType
 
                 if funcRetType.find('virtual') > -1:
                     tmpFunc['isVirtualFunc'] = 1
                 
+                if funcRetType.find('static') > -1:
+                    tmpFunc[DEF.Static] = 1
+
+                if funcRetType.find('inline') > -1:
+                    tmpFunc[DEF.Static] = 1
+                
                 paramsList = []
-                tmpFunc['params'] = paramsList
+                tmpFunc[DEF.PARAMS] = paramsList
                 paramStr = lineStr[pBegin:pEnd]
                 if paramStr:
                     params = paramStr.split(',')
@@ -311,7 +320,12 @@ def checkClassFromContent(content, layer, srcFile):
                     if con:
                         new_con = new_con + con
                 oneClassInfo['classInfo'] = checkClassContent(new_con, oneClassInfo, srcFile)
-
+                oneClassInfo['classInfo'][DEF.CRTTYPE] = DEF.CLSTYPE.level3
+                oneClassInfo['classInfo'][DEF.NewFunc] = []
+                oneClassInfo['classInfo'][DEF.NewAttrs] = []
+                oneClassInfo['classInfo'][DEF.ADDHEAD] = []
+                oneClassInfo['classInfo'][DEF.Name] = pClassName
+                
                 posFind = pClassContentEnd + 1
             else:
                 classInfo.remove(oneClassInfo)
@@ -569,36 +583,58 @@ def setChanDIc(changeDic, itemKey, itemVal):
         changeDic[itemKey] = itemVal
 
 def main():
+
+    # files = 'D:/tools/workCode/cPlusCodeChange/res/Classes/young/GUI/ScrollView/YScrollView.h'
+    # mFileContent = tool.ReadFile(files)
+    # # filterStr = r'[-+]+\(.*\)[\t\f]*'+ 'didRotateFromInterfaceOrientation' + ':*\\n+'
+    # filterStr = r'[\n]+' + 'class YScrollView' + '[^A-Za-z0-9_;][^;\{\n]*[\n]?\{'
+    # ret = re.search(filterStr, mFileContent)
+    # if ret:
+    #     pos = ret.span()[0]
+    #     pos1 = ret.span()[1]
+    #     print pos, mFileContent[pos:pos1]
+    # return
+
     print tool.showTime() + u"准备混淆c++代码"
     worldsDic.initWorldArray('res/worldDic.txt')
 
-    # files = 'D:/tools/workCode/cPlusCodeChange/out/oc_targetIosFile/LXrConvertedClassesHelper.mm'
-    # mFileContent = tool.ReadFile(files)
-    # # filterStr = r'[-+]+\(.*\)[\t\f]*'+ 'didRotateFromInterfaceOrientation' + ':*\\n+'
-    # filterStr = r'[\n][-+]+[^\n]*' + 'didRotateFromInterfaceOrientation' + '[^\n]*[\n]'
-    # ret = re.search(filterStr, mFileContent)
-    # if ret:
-    #     print ret.span()[1]
-    # return
-    retList = []
+    def randomKey(log, totalNum, minNum, maxNum):
+        cfgList = []
+        num = tool.random.randint(minNum, maxNum)
+        for i in range(num):
+            while True:
+                newNum = tool.random.randint(1, totalNum)
+                if newNum in cfgList:
+                    continue
+                cfgList.append(newNum)
+                break
+        
+        print(log, cfgList)
+    
+    cfg = {"idx", "page", "num", "status", "frame", "curInput", "serverInfo", "from", "goin", "goto", "signKey", "ver"}
+    randomKey("BuryPoint:", len(cfg), 3, 8)
+    cfg = {"idx", "page", "num", "status", "frame", "curInput", "serverInfo", "from", "goin", "goto", "signKey", "ver", "errorNo", "trace"}
+    randomKey("loginScene:", len(cfg), 3, 6)
+    randomKey("simulateLoadFile:", 299, 30, 60)
 
-    CplusList = ['overloaded/specializationDeclaration4.zip', 'sets/splitHex.lua', 'precedes/Extend_ex.lua']
-    CplusCfg = [69,56,87,77,88,48,92,34,53,63,109,113,81,65,74,42,114,32,78,55,39,115,118,80,72,45,52,66,104,99,41,106,120,100,82,70,103,101,44,73,49,83,79,121,108,57,43,84,98,107,117,54,35,50,33,97,86,116,47,90,95,75,85,40,122,89,111,76,110,71,37,58,67,112,64,105,102,68,119,51,46]
-    for val in CplusList:
-        newContent = tool.strRandomList(tool.getStrEnc1(val, CplusCfg))
-        retList.append([val, newContent])
+    # retList = []
+    # CplusList = ['84f0e46fe5', 'syntax/tendButton2.png', 'reuse/convertibleVariesQuestion5.txt']
+    # CplusCfg = [71,76,41,117,103,47,90,69,99,78,52,37,56,114,92,85,51,87,50,112,35,70,54,89,32,53,82,100,81,63,118,72,65,33,48,105,80,77,97,49,40,111,42,115,79,75,101,120,98,107,45,102,55,57,110,95,67,104,108,66,83,46,64,106,39,84,119,73,44,43,88,109,68,86,116,58,74,113,122,121,34]
+    # for val in CplusList:
+    #     newContent = tool.strRandomList(tool.getStrEnc1(val, CplusCfg))
+    #     retList.append([val, newContent])
 
-    OCList = ['an.ywl.']
-    OCCfg = [95,40,79,107,49,35,44,89,113,106,67,42,56,116,119,112,104,75,88,63,54,101,117,99,90,118,109,37,92,102,105,115,48,45,66,52,64,68,50,46,76,122,103,78,43,87,108,81,121,65,98,33,86,58,32,85,57,72,74,83,97,34,53,100,55,82,39,111,41,47,110,114,84,73,51,69,77,71,70,120,80]
-    for val in OCList:
-        newContent = tool.strRandomList(tool.getStrEnc1(val, OCCfg))
-        retList.append([val, newContent])
+    # OCList = ['pasteboard']
+    # OCCfg = [99,109,100,65,98,77,49,48,56,50,103,42,82,107,63,43,51,121,52,39,57,33,64,55,104,74,37,102,83,41,117,66,46,120,73,58,86,79,76,80,71,32,88,72,68,118,40,90,111,44,47,105,89,54,92,45,112,108,87,34,81,106,85,78,84,97,113,101,69,70,114,95,122,116,53,75,110,115,119,35,67]
+    # for val in OCList:
+    #     newContent = tool.strRandomList(tool.getStrEnc1(val, OCCfg))
+    #     retList.append([val, newContent])
 
     # worldsDic.setClsHead(tool.getRandomChar(1, 65, 90).upper() + tool.getRandomChar(1, 65, 90).upper()+ tool.getRandomChar(1, 65, 90).upper())
-    worldsDic.setClsHead("JIG")
-    if True:
-        osMain.myMain()
-        # return
+    worldsDic.setClsHead("MRK")
+    # if True:
+    #     osMain.myMain()
+    #     return
 
     # 确认需要创建多少类
     # 创建类
@@ -622,7 +658,7 @@ def main():
     line = tool.strRandomList(cfg)
 
     classPath1 = 'res/Classes'
-    classPath2 = 'out/Classes'
+    classPath2 = 'out/c_cleanClasses'
     classPath3 = 'out/c_changeClass'
     classPath4 = 'out/c_CreateClass'
     classPath5 = 'out/c_dealString'
@@ -637,18 +673,23 @@ def main():
     tool.delFolders(classPath5)
     tool.createDir(tool.os.path.abspath(classPath5) + '/')
 
+    className = worldsDic.randomWorldS(13000, 'cplusClass')
+    classFunc = worldsDic.randomWorldS(19000, 'cplusFunc')
+    classAttr = worldsDic.randomWorldS(19000, 'cplusAttr')
+
+    # createClassList = createClassFiles([className, classFunc, classAttr], classPath4)
+
     encryptionStringCpluse(classPath1, classPath5)
     worldsDic.clearnFiles('cplus', classPath5, classPath2)
-    # print '!!clearnFiles over!!'
+    print '!!clearn cplus Files over!!'
+    if True:
+        return
 
     ansDic = analysisFiles(classPath2, 'cplus')
 
     changeDic = initChangeDic('out/changeText.txt')
     changeLog = {}
 
-    className = worldsDic.randomWorldS(13000, 'cplusClass')
-    classFunc = worldsDic.randomWorldS(19000, 'cplusFunc')
-    classAttr = worldsDic.randomWorldS(19000, 'cplusAttr')
     exFuncName = ['setPosition', 'getPosition', 'getPositionX', 'setPositionX', 'getPositionY','getPositionY', 'setLocalZOrder', 'setOpacity', 'setVisible', 'init', 'setEnable'
     ,'initWithFile', 'getOpacity', 'getLocalZOrder','cleanup', 'setColor', 'create', 'onTouchDown', 'setSwallowTouch', 'SwallowTouch', 'GUID', 'setDimensions', 'setSystemFontSize'
     ,'initWithTexture', 'setAdditionalKerning', 'setHorizontalAlignment', 'setVerticalAlignment', 'setLineBreakWithoutSpace', 'setColor', 'getColor', 'getString', 'setString', 'runAction'
@@ -728,73 +769,49 @@ def main():
     # print changeDic
     # print '==========------------------------------------------------=============='
     # print changeLog
-    print '==========------------------------------------------------=============='
-    print '!!check over!! changeDic:' + str(len(changeDic)) + ",changeLog:" + str(len(changeLog))
-    print '==========------------------------------------------------=============='
-    print 'left className' + str(len(className)) + ", classFunc" + str(len(classFunc)) + ", classAttr" + str(len(classAttr))
+    # print '==========------------------------------------------------=============='
+    # print '!!check over!! changeDic:' + str(len(changeDic)) + ",changeLog:" + str(len(changeLog))
+    # print '==========------------------------------------------------=============='
+    # print 'left className' + str(len(className)) + ", classFunc" + str(len(classFunc)) + ", classAttr" + str(len(classAttr))
     changeLog['createDownloadDir'] = changeDic['createDownloadDir']
 
-    cplusTool.extendClass(ansDic, {DEF.NAMELIST:[className, classFunc, classAttr]})
-    createClassList = createClassFiles([className, classFunc, classAttr], ansDic, '', classPath4)
-
-    staticFunCallStr = ''
-    staticFuncNum = tool.random.randint(30, 80)
-    for filePath, val in ansDic.items():
-        if val['class']:
-            for classInfo in reversed(val['class']):
-                if classInfo[DEF.TYPE] == DEF.CLASS and staticFuncNum > 0:
-                    for funcInfo in classInfo[DEF.CLASSINFO][DEF.Funcs]:
-                        if DEF.FROM in funcInfo and funcInfo[DEF.FROM] == DEF.FROMTYPE.add:
-                            if tool.random.randint(1, 5) == 2 and staticFuncNum > 0 :
-                                staticFuncNum -= 1
-                                funcInfo[DEF.Static] = True
-                                staticFunCallStr += classInfo[DEF.Name] + "::"
-                                
-                                paramStr = cplusTool.getCallFuncLine(funcInfo)
-                                staticFunCallStr += paramStr + ';\n'
-                            elif staticFuncNum == 0:
-                                break
-                elif staticFuncNum == 0:
-                    break
-        elif staticFuncNum == 0:
-            break
-    staticFunCallStr += '\n'
+    createClassList = createClassFiles([className, classFunc, classAttr], classPath4)
     
-    newClassItems = createClassList.items()
+    # 新类已经创建了
+    # 准备扩张老类，扩展包括添加对新类的调用函数, 内部调用新函数
     for filePath, val in ansDic.items():
         if val['class']:
             filePath = val[DEF.FULLFILEPATH]
-            tmpCallOther = []
-            callOtherClass = None
             for classInfo in reversed(val['class']):
                 if classInfo[DEF.TYPE] == DEF.CLASS:
                     if tool.os.path.exists(filePath):
-                        
-                        if tool.random.randint(1, 2) == 2 and not callOtherClass:
-                            tmpClsHead, tmpClsInfo = tool.random.choice(newClassItems)
-                            tmpLine = cplusTool.getCallClsContent(tmpClsInfo)
-                            tmpCallOther.append( '#include \"' + tmpClsHead + '\"\n')
-                            tmpCallOther.append(tmpLine)
-                            callOtherClass = classInfo
-
-                            # print "file add call", filePath, classInfo[DEF.Name], tmpClsHead
-
-                        cplusTool.addExternFuncInfo(filePath , classInfo)
+                        cplusTool.addExternFuncInfo(filePath , classInfo, createClassList, [className, classFunc, classAttr])
                     else:
                         print filePath + " not find ... "
-                        
-            if callOtherClass:
-                cplusTool.addCallClassContent(filePath, callOtherClass, tmpCallOther)
 
     changeLogToLuaFile(changeLog, 'out/roleTargetChenged.lua')
     changeDicToText(changeDic, 'out/changeText.txt')
     osMain.changeTextFiles(changeDic, classPath2, classPath3, True)
-    print '==========------------------------------------------------============== allNewFuncNum' + str(DEF.TCplusNum)
+    # print '==========------------------------------------------------============== '
+
+    noUse = 0
+    for _,clsInfo in createClassList.items():
+        clsInfo = clsInfo[DEF.CLASSINFO]
+        if clsInfo[DEF.ISINCLUDE] == 0:
+            noUse += 1
+
+    print 'allNewFuncNum:' + str(DEF.TCplusNum)
+    print 'allStrNum:' + str(DEF.TCplusStrNum)
+    print 'noUseClass:' + str(noUse)
+
     print "change OK"
 
-    staticFunCallStr = osMain.changeStrByDic(changeDic, staticFunCallStr)
+    # staticFunCallStr = osMain.changeStrByDic(changeDic, staticFunCallStr)
     # print('staticFunCallStr:', staticFunCallStr)
-    tool.WriteFile("out/StaticCallText.txt", staticFunCallStr)
+    # tool.WriteFile("out/StaticCallText.txt", staticFunCallStr)
+
+    # tool.delFolders(classPath2)
+    # tool.delFolders(classPath5)    
     tool.os.system("pause")
 
 if __name__=="__main__":

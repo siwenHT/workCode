@@ -16,7 +16,7 @@ addExternFuncInfo = cs.addExternInfo
 #保存类
 saveClass = cs.saveFile
 
-addCallClassContent = cs.addCallClassContent
+addCallClassHead = cs.addCallClassHead
 
 #在一个类中获取一个调用
 getCallClsContent = cs.getCallClsContent

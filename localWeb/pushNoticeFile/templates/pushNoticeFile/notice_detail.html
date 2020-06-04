@@ -1,0 +1,32 @@
+<style type="text/css">
+    .div1{
+        width: 500px;
+        margin: auto;
+    }
+</style>
+<div class="div1">
+<h1>{{ noticecfg.desc_text }}</h1>
+
+{% if not noticeList %}<p><strong>还没有公告记录</strong></p>{% endif %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<p>
+<form action="{% url 'pushNoticeFile:chooseNotice' noticecfg.id %}" method="post">
+{% csrf_token %}
+    {% for noticelog in noticeList %}
+        <input type="submit" name="noticelog" id="choice{{ forloop.counter }}" value="{{ noticelog.id }}">
+        <label for="noticelog{{ forloop.counter }}">{{ noticelog }}</label><br>
+    {% endfor %}
+</form>
+</p>
+
+<p>
+<form action="{% url 'pushNoticeFile:pushNotice' noticecfg.id %}" method="post">
+{% csrf_token %}
+    <textarea rows="10" cols="80" name="context">{{ oldLog }}</textarea></br>
+    </br>
+    </br>
+    <input type="submit" name="Submit">
+</form>
+</p>
+</div>

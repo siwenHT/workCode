@@ -1,0 +1,2 @@
+ignore : 是否忽略分包的错误
+updateAllFile： 热跟新提交所有更新文件
