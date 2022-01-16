@@ -40,7 +40,7 @@ class ConfigManager:
 
     def showList(self):
         for data in self.dataList:
-            Log.debug(f'channel: {data.getChannelName()}')
+            Log.debug(f'channel: {data.get_channel_link()}')
         
     def getList(self):
         return self.dataList

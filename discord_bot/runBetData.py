@@ -28,5 +28,8 @@ class RunBetData:
     def get_discord_time_interval(self):
         return self.config["time_interval"]
 
-    def getChannelName(self):
+    def get_channel_link(self):
         return self.config['discord_link']
+
+    def get_show_name(self):
+        return self.config.get("discord_name", "未配置")

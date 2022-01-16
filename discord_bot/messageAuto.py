@@ -27,7 +27,7 @@ class messageAuto:
             "host": "discordapp.com",
         }
         header_data['authorization'] = self.token
-        header_data['referer'] = config.getChannelName()
+        header_data['referer'] = config.get_channel_link()
 
         return header_data
 
@@ -35,11 +35,11 @@ class messageAuto:
         headerData = self.prepare_head(config)
         channelId = config.get_discord_channel_id()
         content = config.get_discore_ramdom_message()
-        linkName = config.getChannelName()
+        showName = config.get_show_name()
 
-        self.send_message(headerData, channelId, content, linkName)
+        self.send_message(headerData, channelId, content, showName)
 
-    def send_message(self, header, channel_id, message_content, linkName):
+    def send_message(self, header, channel_id, message_content, showName):
         try:
             message_data = {
                 "content": message_content,
@@ -51,7 +51,7 @@ class messageAuto:
             resp = conn.getresponse()
 
             if 199 < resp.status < 300:
-                Log.debug(f"succ! link: {linkName}, channel:{channel_id} content:{str(message_data)}")
+                Log.debug(f"succ! link: {showName}, channel:{channel_id} content:{str(message_data)}")
                 pass
 
             else:
@@ -77,6 +77,6 @@ class messageAuto:
         #创建调度器：BlockingScheduler
         scheduler = BlockingScheduler()
         #添加任务,时间间隔2S
-        scheduler.add_job(func, 'interval', seconds=1, id='job')
+        scheduler.add_job(func, 'interval', seconds=1, id='job', max_instances=100)
 
         scheduler.start()

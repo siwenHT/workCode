@@ -8363,3 +8363,7 @@ takeChinnesInFiles/res/src/young/observer.lua
 takeChinnesInFiles/res/src/young/young.lua
 takeChinnesInFiles/res/src/young/util/misc.lua
 takeChinnesInFiles/res/src/young/util/util.lua
+discord_bot/test.log
+discord_bot/__pycache__/ConfigManager.cpython-39.pyc
+discord_bot/__pycache__/messageAuto.cpython-39.pyc
+discord_bot/__pycache__/runBetData.cpython-39.pyc
