@@ -17,7 +17,6 @@ import time
 import struct
 import unicodedata
 import datetime
-import selenium
 
 
 def ReadFile(filePath):

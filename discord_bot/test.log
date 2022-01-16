@@ -1,0 +1,157 @@
+2022-01-16 15:45:56,255 logger DEBUG @begin
+2022-01-16 15:45:56,257 logger DEBUG @end
+2022-01-16 15:47:55,819 logger DEBUG @begin
+2022-01-16 15:47:55,820 logger DEBUG @end
+2022-01-16 15:48:45,097 logger DEBUG @begin
+2022-01-16 15:48:48,026 logger DEBUG @end
+2022-01-16 15:58:04,488 logger DEBUG @begin
+2022-01-16 15:58:25,410 logger DEBUG @begin
+2022-01-16 15:59:09,380 logger DEBUG @begin
+2022-01-16 16:05:14,877 logger DEBUG @begin
+2022-01-16 16:05:17,338 logger DEBUG @end
+2022-01-16 16:05:40,593 logger DEBUG @begin
+2022-01-16 16:05:42,891 logger DEBUG @end
+2022-01-16 16:06:06,337 logger DEBUG ==========@begin
+2022-01-16 16:06:06,338 logger DEBUG @end
+2022-01-16 16:06:42,302 logger DEBUG ==========@begin
+2022-01-16 16:06:42,303 logger DEBUG @end
+2022-01-16 16:06:42,304 logger DEBUG @end
+2022-01-16 16:06:42,305 logger DEBUG @end
+2022-01-16 16:08:08,868 logger DEBUG ==========@begin
+2022-01-16 16:08:08,869 logger DEBUG @end
+2022-01-16 16:08:08,870 logger DEBUG @end
+2022-01-16 16:08:08,870 logger DEBUG @end
+2022-01-16 16:09:57,122 logger DEBUG ==========@begin
+2022-01-16 16:09:57,123 logger DEBUG @end
+2022-01-16 16:09:57,124 logger DEBUG @end
+2022-01-16 16:09:57,124 logger DEBUG @end
+2022-01-16 16:10:21,021 logger DEBUG ==========@begin
+2022-01-16 16:10:21,023 logger DEBUG channel: discod链接
+2022-01-16 16:10:21,024 logger DEBUG @end
+2022-01-16 16:10:21,024 logger DEBUG @end
+2022-01-16 16:10:21,024 logger DEBUG @end
+2022-01-16 16:53:54,606 logger WARNING ==========@begin
+2022-01-16 16:53:54,607 logger DEBUG channel: discod链接
+2022-01-16 16:53:54,607 logger WARNING @end
+2022-01-16 16:54:06,415 logger WARNING ==========@begin
+2022-01-16 16:54:06,416 logger DEBUG channel: discod链接
+2022-01-16 16:54:32,134 logger WARNING ==========@begin
+2022-01-16 16:54:32,136 logger DEBUG channel: discod链接
+2022-01-16 16:56:36,014 logger WARNING ==========@begin
+2022-01-16 16:56:36,016 logger DEBUG channel: discod链接
+2022-01-16 16:58:20,893 logger WARNING ==========@begin
+2022-01-16 16:58:20,894 logger DEBUG channel: discod链接
+2022-01-16 16:59:01,121 logger WARNING ==========@begin
+2022-01-16 16:59:01,123 logger DEBUG channel: discod链接
+2022-01-16 17:03:41,911 logger WARNING ==========@begin
+2022-01-16 17:03:41,913 logger DEBUG channel: https://discord.gg/sXBdCRWt
+2022-01-16 17:04:16,740 logger WARNING ==========@begin
+2022-01-16 17:04:16,741 logger DEBUG channel: https://discord.gg/sXBdCRWt
+2022-01-16 17:04:19,458 logger ERROR Exception occurred
+Traceback (most recent call last):
+  File "H:\workCode\discord_bot\messageAuto.py", line 49, in send_message
+    conn.request("POST", f"/api/v6/channels/{channel_id}/messages", message_data, header)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1255, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1301, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1250, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1010, in _send_output
+    self.send(msg)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 950, in send
+    self.connect()
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1424, in connect
+    self.sock = self._context.wrap_socket(self.sock,
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+ConnectionResetError: [WinError 10054] 远程主机强迫关闭了一个现有的连接。
+2022-01-16 17:04:29,558 logger WARNING ==========@begin
+2022-01-16 17:04:29,559 logger DEBUG channel: https://discord.gg/sXBdCRWt
+2022-01-16 17:04:32,794 logger ERROR Exception occurred
+Traceback (most recent call last):
+  File "H:\workCode\discord_bot\messageAuto.py", line 49, in send_message
+    conn.request("POST", f"/api/v6/channels/{channel_id}/messages", message_data, header)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1255, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1301, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1250, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1010, in _send_output
+    self.send(msg)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 950, in send
+    self.connect()
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1424, in connect
+    self.sock = self._context.wrap_socket(self.sock,
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+ConnectionResetError: [WinError 10054] 远程主机强迫关闭了一个现有的连接。
+2022-01-16 17:04:57,567 logger WARNING @end
+2022-01-16 17:05:01,522 logger WARNING ==========@begin
+2022-01-16 17:05:01,524 logger DEBUG channel: https://discord.gg/sXBdCRWt
+2022-01-16 17:05:54,685 logger WARNING ==========@begin
+2022-01-16 17:05:54,687 logger DEBUG channel: https://discord.gg/sXBdCRWt
+2022-01-16 17:05:54,954 logger ERROR Exception occurred
+Traceback (most recent call last):
+  File "H:\workCode\discord_bot\messageAuto.py", line 49, in send_message
+    conn.request("POST", f"/api/v6/channels/{channel_id}/messages", message_data, header)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1255, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1301, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1250, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1010, in _send_output
+    self.send(msg)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 950, in send
+    self.connect()
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1424, in connect
+    self.sock = self._context.wrap_socket(self.sock,
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+ConnectionResetError: [WinError 10054] 远程主机强迫关闭了一个现有的连接。
+2022-01-16 17:11:12,628 logger WARNING ==========@begin
+2022-01-16 17:11:12,630 logger DEBUG channel: https://discord.gg/sXBdCRWt
+2022-01-16 17:11:12,816 logger ERROR Exception occurred
+Traceback (most recent call last):
+  File "H:\workCode\discord_bot\messageAuto.py", line 50, in send_message
+    conn.request("POST", f"/api/v6/channels/{channel_id}/messages", message_data, header)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1255, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1301, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1250, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\hongtao\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1047, in _send_output
+    chunk = f'{len(chunk):X}\r\n'.encode('ascii') + chunk \
+TypeError: can't concat str to bytes
+2022-01-16 17:12:00,423 logger WARNING ==========@begin
+2022-01-16 17:12:00,425 logger DEBUG channel: https://discord.gg/sXBdCRWt
+2022-01-16 17:12:15,445 logger WARNING ==========@begin
+2022-01-16 17:12:15,447 logger DEBUG channel: https://discord.gg/sXBdCRWt
+2022-01-16 17:12:15,916 logger ERROR fail! code: 401, reason : Unauthorized
+2022-01-16 17:12:40,276 logger WARNING ==========@begin
+2022-01-16 17:12:40,278 logger DEBUG channel: https://discord.gg/sXBdCRWt
+2022-01-16 17:13:56,105 logger WARNING ==========@begin
+2022-01-16 17:13:56,106 logger DEBUG channel: discord.gg/sXBdCRWt
+2022-01-16 17:14:08,234 logger ERROR fail! code: 401, reason : Unauthorized
+2022-01-16 17:16:05,085 logger WARNING ==========@begin
+2022-01-16 17:16:05,087 logger DEBUG channel: discord.gg/sXBdCRWt
+2022-01-16 17:16:50,897 logger ERROR fail! code: 401, reason : Unauthorized
+2022-01-16 17:17:24,397 logger WARNING ==========@begin
+2022-01-16 17:17:24,399 logger DEBUG channel: discord.gg/sXBdCRWt
+2022-01-16 17:17:27,450 logger DEBUG succ! link: discord.gg/sXBdCRWt, channel:898746543652343822 content:{'content': '哈哈哈哈', 'tts': 'false'}
+2022-01-16 17:17:30,127 logger WARNING @end

@@ -1,47 +1,32 @@
 # -*- coding: utf-8 -*-
 import os,json
+from pickle import NONE
+from random import choice
 
-op_data_path_discord = os.getcwd()+"/discord_message.json"
-
+# 配置
 class RunBetData:
+    def __init__(self, jsonDict):
+        self.config:json = jsonDict
+        self.timeRecode = NONE
 
-    def __init__(self, configPath):
-        self.config = self._get_json_data_discord(configPath)
+    def get_discord_message_index(self, index):
+        mlen = self.get_discord_message_len()
+        if index > 0 and index < mlen:
+            return self.config['mes'][index]
 
-    def _get_json_data_discord(self, configPath):
-        '''读取json文件'''
-        tmp_json = {}
-        with open(op_data_path_discord, 'r', encoding='UTF-8') as f:
-            tmp_json = json.load(f)
-            f.close()
-        return tmp_json
+        return ""
 
-    def get_discord_message_random(self, index):
-        data_json = self._get_json_data_discord()
-        message_array =  data_json["bot"]
-        return message_array[index]["message"]
-
-    def get_discord_link(self):
-        data_json = self._get_json_data_discord()
-        message_array =  data_json["config"]
-        return message_array["discord_link"]
-
-    def get_discord_token(self):
-        data_json = self._get_json_data_discord()
-        message_array =  data_json["config"]
-        return message_array["token"]
+    def get_discore_ramdom_message(self):
+        return choice(self.config['mes'])
 
     def get_discord_channel_id(self):
-        data_json = self._get_json_data_discord()
-        message_array =  data_json["config"]
-        return message_array["channel_id"]
+        return self.config["channel_id"]
 
     def get_discord_message_len(self):
-        data_json = self._get_json_data_discord()
-        message_array = data_json["bot"]
-        return len(message_array)
+        return len(self.config['mes'])
 
     def get_discord_time_interval(self):
-        data_json = self._get_json_data_discord()
-        message_array = data_json["config"]
-        return message_array["time_interval"]
+        return self.config["time_interval"]
+
+    def getChannelName(self):
+        return self.config['discord_link']
