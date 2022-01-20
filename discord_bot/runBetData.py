@@ -1,13 +1,22 @@
 # -*- coding: utf-8 -*-
-import os,json
+import os, json
 from pickle import NONE
+import toolsFunc as Tool
 from random import choice
+
 
 # 配置
 class RunBetData:
-    def __init__(self, jsonDict):
-        self.config:json = jsonDict
+
+    def __init__(self, filePath):
+        self.filePath = filePath
+        self.config: json = self.get_discord_config(self.filePath)
         self.timeRecode = NONE
+
+    def get_discord_config(self, filePath):
+        fileCon = Tool.ReadFile(filePath)
+        fileCon = Tool.parse_json_str(fileCon.decode('utf-8'))
+        return json.loads(fileCon)
 
     def get_discord_message_index(self, index):
         mlen = self.get_discord_message_len()

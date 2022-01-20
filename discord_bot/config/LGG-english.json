@@ -1,9 +1,8 @@
 {
-  "enable": 1,
   "discord_name":"lgg-英文",
-  "discord_link":"discord.gg/xWuTUWKk",
+  "discord_link":"discord.gg/FJ29BeVP2w",
   "channel_id":"745225751858511916",
-  "time_interval":80,
+  "time_interval":60,
   
   "mes":[
       "go go go",
