@@ -12,6 +12,7 @@ class RunBetData:
         self.filePath = filePath
         self.config: json = self.get_discord_config(self.filePath)
         self.timeRecode = NONE
+        self.errorTime = 0
 
     def get_discord_config(self, filePath):
         fileCon = Tool.ReadFile(filePath)

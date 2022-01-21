@@ -10,13 +10,14 @@ class singleLog:
         self.logger = logging.getLogger("logger")
 
         self.streamHandler = logging.StreamHandler()
-        self.fileHandler  = logging.FileHandler(filename="test.log", mode = 'a')
+        self.fileHandler = logging.FileHandler(filename="test.log", mode='a')
 
         self.logger.setLevel(logging.DEBUG)
         self.streamHandler.setLevel(logging.DEBUG)
         self.fileHandler.setLevel(logging.DEBUG)
 
-        formatter = logging.Formatter("%(asctime)s %(name)s %(levelname)s %(message)s")
+        formatter = logging.Formatter(
+            "%(asctime)s %(name)s %(levelname)s %(message)s")
         self.streamHandler.setFormatter(formatter)
         self.fileHandler.setFormatter(formatter)
 
@@ -28,10 +29,10 @@ class singleLog:
 
     def info(self, msg, *args, **kwargs):
         self.logger.info(msg, *args, **kwargs)
-        
+
     def warning(self, msg, *args, **kwargs):
         self.logger.warning(msg, *args, **kwargs)
-    
+
     def error(self, msg, *args, **kwargs):
         self.logger.error(msg, *args, **kwargs)
 
@@ -40,6 +41,6 @@ class singleLog:
 
     def exception(self, msg, *args, **kwargs):
         self.logger.exception(msg, *args, **kwargs)
-        
+
 
 Log = singleLog()

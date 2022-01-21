@@ -1,12 +1,37 @@
 # -*- coding: utf-8 -*-
+from re import L
+import sys
+import io
+import os
+
+import time
 from thelog import Log
-from selenium import web
+from selenium import webdriver
 #一键收矿
 
-def do():
+
+url = "https://metauce.org/MetisGame"
+
+
+def find_element(dir, key):
     pass
-#打开网址
-#链接钱包
+
+def do():
+    #打开浏览器
+    workPath = os.path.abspath('./res/chrome')
+    browser = webdriver.Chrome(workPath)
+    
+    #打开网址
+    browser.get(url)
+
+    #等待网页打开
+    time.sleep(10)
+
+    #链接钱包
+    browser.find_element_by_class_name("address_token")
+
+    pass
+
 #点击菜单第一个
 #点击play
 #点击挖矿
@@ -15,7 +40,7 @@ def do():
 
 
 def main():
-    pass
+    do()
 
 
 if __name__ == "__main__":

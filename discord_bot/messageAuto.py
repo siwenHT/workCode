@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-import os,json
+import os, json
 from pickle import NONE
 import time, os
 from http.client import HTTPSConnection
@@ -10,24 +10,26 @@ from ConfigManager import ConfigManager as configMG
 from runBetData import RunBetData
 from thelog import Log
 from apscheduler.schedulers.blocking import BlockingScheduler
-
 '''发送消息'''
+
+
 class messageAuto:
 
-    def __init__(self, CMG : configMG) -> None:
-        self.CMG:configMG = CMG
+    def __init__(self, CMG: configMG) -> None:
+        self.CMG: configMG = CMG
 
         self.token = self.CMG.token()
-    
-    
+
     def prepare_head(self, config: RunBetData):
         header_data = {
             "content-type": "application/json",
-            "user-agent": "discordapp.com",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
             "host": "discordapp.com",
+            "origin": "https://discord.com",
+            "accept-language":"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
         }
         header_data['authorization'] = self.token
-        header_data['referer'] = config.get_channel_link()
+        # header_data['referer'] = config.get_channel_link()
 
         return header_data
 
@@ -37,9 +39,9 @@ class messageAuto:
         content = config.get_discore_ramdom_message()
         showName = config.get_show_name()
 
-        self.send_message(headerData, channelId, content, showName)
+        self.send_message(headerData, channelId, content, showName, config)
 
-    def send_message(self, header, channel_id, message_content, showName):
+    def send_message(self, header, channel_id, message_content, showName, config):
         try:
             message_data = {
                 "content": message_content,
@@ -52,15 +54,15 @@ class messageAuto:
 
             if 199 < resp.status < 300:
                 Log.debug(f"succ! link: {showName}, channel:{channel_id} content:{str(message_data)}")
-                pass
 
             else:
                 Log.error(f"fail! code: {resp.status}, reason : {resp.reason}")
-                pass
+                config.errorTime = config.errorTime + 1
 
             resp.close()
 
         except Exception as ex:
+            config.errorTime = config.errorTime + 1
             Log.exception("Exception occurred")
 
     def start(self):
@@ -70,9 +72,13 @@ class messageAuto:
             now = time.time()
             for config in self.CMG.dataList:
                 timeInv = config.get_discord_time_interval()
+                if config.errorTime > 10:
+                    continue
+
                 if config.timeRecode == NONE or now - config.timeRecode > timeInv:
                     config.timeRecode = now
                     self.go_message(config)
+
 
         #创建调度器：BlockingScheduler
         scheduler = BlockingScheduler()

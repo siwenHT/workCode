@@ -7,6 +7,7 @@ from messageAuto import messageAuto
 
 
 # 配置文件路径
+# pip freeze > requirements.txt
 def configPath():
     return os.getcwd() + "/config"
 

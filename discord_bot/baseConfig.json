@@ -1,8 +1,10 @@
 {
-  "token":"ODk3ODg0OTkyMTI5MTA1OTIw.YePzAw.HvfDnCfS77HVg4gBRZqxSkY6Cgs",
-  
-  "file_name":{
-    "LGG-china" : 0,
-    "LGG-english" : 1
+  "token": "ODk3ODg0OTkyMTI5MTA1OTIw.YelNSg.GxfYNlDyjv1cNj_ZNghdgmIniGY",
+  "file_name": {
+    "LGG-china": 0,
+    "shibaIsland": 1,
+    "secondLive": 1,
+    "dominimDao-en": 1,
+    "LGG-english": 1
   }
 }
