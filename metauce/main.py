@@ -6,31 +6,47 @@ import io
 import os
 
 import time
+from turtle import delay
 
 from httpx import options
 from thelog import Log
 from selenium import webdriver
 
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.remote import webelement
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
 
 url = "https://metauce.org/MetisGame"
 url2 = "chrome://version"
-GlobalBrowser: webdriver = None
 
 
 # 一键收矿
 class openUrl:
 
     def __init__(self):
+        self._browser = None
         pass
 
     def closeBrowser(self):
-        if GlobalBrowser:
-            GlobalBrowser.close()
+        if self._browser:
+            self._browser.close()
 
-    def find_elements_loop(self, by, browser: webdriver, key: str, num=1, timeOut: int = 10):
+    def find_element_unit(self, by: str, browser: webdriver, key: str, timeOut: int = 10, timeStep: int = 0.5):
+        while True:
+            retElement = self.find_element_loop(by, browser, key, timeOut, timeStep)
+            if retElement:
+                return retElement
+
+    def find_elements_unit(self, by: str, browser: webdriver, key: str, num: int = 1, timeOut: int = 10, timeStep: int = 0.5):
+        while True:
+            retElement = self.find_elements_loop(by, browser, key, num, 10, timeOut, timeStep)
+            if retElement:
+                return retElement
+
+    def find_elements_loop(self, by: str, browser: webdriver, key: str, num: int = 1, timeOut: int = 10, timeStep: int = 1):
         count = 1
         while True:
             retElements = self.find_elements(by, browser, key)
@@ -40,10 +56,10 @@ class openUrl:
             elif retElements and len(retElements) > num:
                 return retElements
             else:
-                time.sleep(1)
-                count = count + 1
+                time.sleep(timeStep)
+                count = count + timeStep
 
-    def find_element_loop(self, by, browser: webdriver, key: str, timeOut: int = 10):
+    def find_element_loop(self, by: str, browser: webdriver, key: str, timeOut: int = 10, timeStep: int = 1):
         count = 1
         while True:
             retElement = self.find_element(by, browser, key)
@@ -53,8 +69,8 @@ class openUrl:
             elif retElement:
                 return retElement
             else:
-                time.sleep(1)
-                count = count + 1
+                time.sleep(timeStep)
+                count = count + timeStep
 
     def find_elements(self, by: str, browser: webdriver, key: str):
         retElement = None
@@ -73,6 +89,21 @@ class openUrl:
             pass
 
         return retElement
+
+    def element_click(self, element, offsetX: int = 5, offsetY: int = 5, delay: int = 3):
+        try:
+            self._browser.execute_script("arguments[0].click();", element)
+            # element.click()
+        except Exception as ex:
+            try:
+                ActionChains(self._browser).move_to_element_with_offset(element, offsetX, offsetY).click(element).perform()
+            except Exception as ex:
+                pass
+
+        # try:
+        #     element.send_keys(Keys.ENTER)
+        # except Exception as ex:
+        #     Log.exception("Exception element_click  222")
 
     def open_new_tab(self, browser: webdriver):
         oldHandles = browser.window_handles
@@ -129,7 +160,7 @@ class openUrl:
         options = self.get_debug_chrome_opetions()
         browser: webdriver = webdriver.Chrome(service=s, options=options)
         Log.debug(f"finded the browser!")
-        GlobalBrowser = browser
+        self._browser = browser
 
         self.open_new_tab(browser)
         # 打开网址.这个是同步的, 没完全打开不会返回
@@ -139,12 +170,13 @@ class openUrl:
         # 链接钱包
         # elment: webelement = browser.find_element_by_class_name("address_token")
 
+        time.sleep(1)
         # 点击play
         playKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='code']/button[1]"
         elment2: webelement = self.find_element_loop(By.XPATH, browser, playKey)
         if elment2:
             Log.debug(f"finded the play button!")
-            elment2.click()
+            self.element_click(elment2)
             Log.debug(f"click the play button!")
         else:
             Log.debug(f"cannot find the play button!")
@@ -152,22 +184,24 @@ class openUrl:
             return
 
         # 点击挖矿
+        time.sleep(1)
         miningKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='cneter_warp']/div[@class='map']/p/span"
-        mining: webelement = self.find_element_loop(By.XPATH, browser, miningKey)
+        mining: webelement = self.find_element_unit(By.XPATH, browser, miningKey)
         if mining:
             Log.debug(f"finded the mining button!")
-            mining.click()
+            self.element_click(mining, 30, 20)
             Log.debug(f"click the mining button!")
         else:
             Log.debug(f"cannot find the mining button!")
             self.closeBrowser()
             return
 
+        time.sleep(1)
         radioKey = "//div/div/div/label[@class='el-radio']"
-        radioEl: webelement = self.find_element_loop(By.XPATH, browser, radioKey)
+        radioEl: webelement = self.find_element_unit(By.XPATH, browser, radioKey)
         if radioEl:
             Log.debug(f"finded the radioEl button!")
-            radioEl.click()
+            self.element_click(radioEl)
             Log.debug(f"click the radioEl button!")
         else:
             Log.debug(f"cannot find the radioEl button!")
@@ -189,21 +223,47 @@ class openUrl:
 
     # 等待下一次点击挖矿
     def wakuang(self, browser: webdriver):
-        count = 1
+        count = 0
+        timeStep = 2
+        wakuangbox = "iconfont.icon--wakuangjiankong"
+        loadingKey = "loading-mask"
+        while True:
+            time.sleep(timeStep)
+
+            # 在转圈圈就先停一下
+            loadingEl = self.find_element_loop(By.CLASS_NAME, browser, loadingKey, 1)
+            if loadingEl:
+                continue
+
+            wakuangs1 = self.find_element_loop(By.CLASS_NAME, browser, wakuangbox, 1)
+            if wakuangs1:
+                count = 0
+                timeStep = 2
+                self.element_click(wakuangs1)
+                Log.debug(f"click a wakuangbox!")
+                continue
+
+            count += 1
+            Log.debug(f"no box!")
+            if count > 20:
+                timeStep = 30
+
+    # 一次就搞定的
+    def wakuang2(self, browser: webdriver):
         wakuangbox = "iconfont.icon--wakuangjiankong"
         while True:
-            wakuangs1 = self.find_element_loop(By.CLASS_NAME, browser, wakuangbox, 10)
+            wakuangs1 = self.find_elements_loop(By.CLASS_NAME, browser, wakuangbox, 3)
             if wakuangs1:
-                try:
-                    count += 1
+                Log.debug(f"find wakuangbox! num : {len(wakuangs1)}")
+                index = 0
+                for wa in wakuangs1:
+                    index += 1
                     time.sleep(3)
-                    Log.debug(f"find a wakuangbox! {count}")
-                    wakuangs1.click()
-                except Exception as ex:
-                    time.sleep(3)
-                    Log.debug(f"click wakuangbox error!  {count}")
-                    # Log.exception("Exception occurred")
-                    pass
+                    self.element_click(wa)
+                    Log.debug(f"click wakuangbox! {index}")
+
+            else:
+                time.sleep(20)
 
 
 def main():
