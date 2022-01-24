@@ -7,10 +7,12 @@ import os
 
 import time
 from turtle import delay
+from xmlrpc.client import Boolean
 
 from httpx import options
 from thelog import Log
 from selenium import webdriver
+import toolsFunc as Tool
 
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -151,7 +153,7 @@ class openUrl:
 
         return options
 
-    def start(self):
+    def start(self, oneTime: Boolean = False):
         # 打开浏览器
         workPath = os.path.abspath('./res/chrome/chromedriver.exe')
 
@@ -209,17 +211,10 @@ class openUrl:
             return
 
         # 点击所有收获
-        self.wakuang(browser)
-
-        wakuangKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='cneter_warp']/div[@class='collect']"
-        wakuangs: webelement = self.find_elements_loop(By.XPATH, browser, wakuangKey, 5)
-        if wakuangs:
-            Log.debug(f"finded the wakuangs {len(wakuangs)} button!")
-            Log.debug(f"click the mining button!")
+        if oneTime:
+            self.wakuang2(browser)
         else:
-            Log.debug(f"cannot find the mining button!")
-            self.closeBrowser()
-            return
+            self.wakuang(browser)
 
     # 等待下一次点击挖矿
     def wakuang(self, browser: webdriver):
@@ -267,8 +262,13 @@ class openUrl:
 
 
 def main():
+    Tool.showParams()
+
     handler = openUrl()
-    handler.start()
+    if len(sys.argv) > 1:
+        handler.start(True)
+    else:
+        handler.start()
 
 
 if __name__ == "__main__":
