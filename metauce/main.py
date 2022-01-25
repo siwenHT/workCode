@@ -94,8 +94,8 @@ class openUrl:
 
     def element_click(self, element, offsetX: int = 5, offsetY: int = 5, delay: int = 3):
         try:
-            self._browser.execute_script("arguments[0].click();", element)
             # element.click()
+            self._browser.execute_script("arguments[0].click();", element)
         except Exception as ex:
             try:
                 ActionChains(self._browser).move_to_element_with_offset(element, offsetX, offsetY).click(element).perform()
@@ -216,6 +216,17 @@ class openUrl:
         else:
             self.wakuang(browser)
 
+    #修车
+    def repairTruck(self):
+        repairKey = '//*[contains(text(), "Repair truck ")]'
+        repairEl = self.find_element_loop(By.XPATH, self._browser, repairKey, 1)
+        if repairEl:
+            self.element_click(repairEl)
+            Log.debug(f"find a repair truck!")
+            return True
+
+        return False
+
     # 等待下一次点击挖矿
     def wakuang(self, browser: webdriver):
         count = 0
@@ -228,6 +239,9 @@ class openUrl:
             # 在转圈圈就先停一下
             loadingEl = self.find_element_loop(By.CLASS_NAME, browser, loadingKey, 1)
             if loadingEl:
+                continue
+
+            if self.repairTruck():
                 continue
 
             wakuangs1 = self.find_element_loop(By.CLASS_NAME, browser, wakuangbox, 1)
