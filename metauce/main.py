@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from gc import collect
 from lib2to3.pgen2 import driver
 from re import L
 import sys
@@ -95,6 +96,7 @@ class openUrl:
     def element_click(self, element, offsetX: int = 5, offsetY: int = 5, delay: int = 3):
         try:
             # element.click()
+            # ActionChains(self._browser).move_to_element_with_offset(element, offsetX, offsetY).perform()
             self._browser.execute_script("arguments[0].click();", element)
         except Exception as ex:
             try:
@@ -102,21 +104,13 @@ class openUrl:
             except Exception as ex:
                 pass
 
-        # try:
-        #     element.send_keys(Keys.ENTER)
-        # except Exception as ex:
-        #     Log.exception("Exception element_click  222")
-
     def open_new_tab(self, browser: webdriver):
         oldHandles = browser.window_handles
         browser.switch_to.window(oldHandles[-1])
 
-        # self.find_element_loop(By.XPATH, "//body").send_keys()
         browser.execute_script("window.open('http://www.baidu.com');")
-
         handles = browser.window_handles
         browser.switch_to.window(handles[-1])
-        pass
 
     def get_debug_chrome_opetions(self):
         options = webdriver.ChromeOptions()
@@ -198,6 +192,8 @@ class openUrl:
             self.closeBrowser()
             return
 
+        self.removeTruck()
+
         time.sleep(1)
         radioKey = "//div/div/div/label[@class='el-radio']"
         radioEl: webelement = self.find_element_unit(By.XPATH, browser, radioKey)
@@ -210,8 +206,10 @@ class openUrl:
             self.closeBrowser()
             return
 
+        # self.insertTruck()
+
         # 点击所有收获
-        if oneTime:
+        if True or oneTime:
             self.wakuang2(browser)
         else:
             self.wakuang(browser)
@@ -223,31 +221,80 @@ class openUrl:
         if repairEl:
             self.element_click(repairEl)
             Log.debug(f"find a repair truck!")
+            Log.debug(f"repairTruck end!")
             return True
 
+        Log.debug(f"repairTruck end!")
         return False
+
+    #取下车
+    def removeTruck(self):
+        collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
+        collectEls = self.find_elements_loop(By.XPATH, self._browser, collectKey, 5)
+        if collectEls:
+            index = 1
+            count = 1
+            remainKey = ".//div/ul/li[4]/span[2]"
+            removeKey = ".//div[@class='list_c']/div/div/p[@class='ones']"
+            Log.debug(f"removeTruck has {len(collectEls)} truck !")
+            for one in collectEls:
+                remainEl = self.find_element(By.XPATH, one, remainKey)
+                removeEl = self.find_element(By.XPATH, one, removeKey)
+                Log.debug(f"try remove {count}")
+                count += 1
+                if remainEl and remainEl.text == "0" and removeEl:
+                    self.element_click(removeEl)
+                    Log.debug(f" click Remove Truck {index} {removeEl._id} {remainEl._id} {one._id}")
+                    index += 1
+                    time.sleep(0.2)
+
+        Log.debug(f"removeTruck end!")
+
+    #补车
+    def insertTruck(self):
+        collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
+        collectEls = self.find_elements_loop(By.XPATH, self._browser, collectKey, 5)
+        if collectEls:
+            remainKey = ".//div/ul/li[4]/span[2]"
+            carSelKey = ".//div[@class='right']/div[@class='list_data']/ul/li[1]"
+            Log.debug(f"insertTruck has {len(collectEls)} truck !")
+            for index in range(len(collectEls)):
+                one = collectEls[index]
+                remainEl = self.find_element(By.XPATH, one, remainKey)
+                carSelEl = self.find_element(By.XPATH, one, carSelKey)
+                if remainEl and remainEl.text != "0" and carSelEl:
+                    # self.element_click(carSelEl)
+                    carSelEl.click()
+                    addBtnKey = f"//div[@class='cneter_warp']/div[@class='collect'][{index + 1}]//div[@class='list_c']/div/div/p"
+                    addBtn = self.find_element_loop(By.XPATH, self._browser, addBtnKey, 15)
+                    if addBtn:
+                        self.element_click(addBtn)
+                        Log.debug(f" add Truck {index} {carSelEl._id} {remainEl._id} {one._id} {addBtn._id}")
+                        time.sleep(0.2)
+
+        Log.debug(f"removeTruck end!")
 
     # 等待下一次点击挖矿
     def wakuang(self, browser: webdriver):
         count = 0
-        timeStep = 2
+        timeStep = 0.5
         wakuangbox = "iconfont.icon--wakuangjiankong"
         loadingKey = "loading-mask"
         while True:
             time.sleep(timeStep)
 
             # 在转圈圈就先停一下
-            loadingEl = self.find_element_loop(By.CLASS_NAME, browser, loadingKey, 1)
+            loadingEl = self.find_element_loop(By.CLASS_NAME, browser, loadingKey, 0.5)
             if loadingEl:
                 continue
 
             if self.repairTruck():
                 continue
 
-            wakuangs1 = self.find_element_loop(By.CLASS_NAME, browser, wakuangbox, 1)
+            wakuangs1 = self.find_element_loop(By.CLASS_NAME, browser, wakuangbox, 0.5)
             if wakuangs1:
                 count = 0
-                timeStep = 2
+                timeStep = 0.5
                 self.element_click(wakuangs1)
                 Log.debug(f"click a wakuangbox!")
                 continue
@@ -259,22 +306,35 @@ class openUrl:
 
     # 一次就搞定的
     def wakuang2(self, browser: webdriver):
+        timeRecord = {}
         wakuangbox = "iconfont.icon--wakuangjiankong"
         while True:
+            if self.repairTruck():
+                time.sleep(3)
+                continue
+
             wakuangs1 = self.find_elements_loop(By.CLASS_NAME, browser, wakuangbox, 3)
             if wakuangs1:
                 Log.debug(f"find wakuangbox! num : {len(wakuangs1)}")
                 index = 0
                 for wa in wakuangs1:
                     index += 1
-                    time.sleep(3)
-                    self.element_click(wa)
-                    Log.debug(f"click wakuangbox! {index}")
+                    if time.time() - timeRecord.get(wa._id, 0) > 60:
+                        time.sleep(0.5)
+                        self.element_click(wa)
+                        Log.debug(f"click wakuangbox! {index} {wa._id}")
+                        timeRecord[wa._id] = time.time()
+
+                Log.debug(f"click box once end! num : {len(wakuangs1)}")
+                time.sleep(60)
 
             else:
-                time.sleep(20)
+                time.sleep(30)
 
 
+#取车
+#收菜
+#
 def main():
     Tool.showParams()
 
