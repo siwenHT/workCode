@@ -31,6 +31,7 @@ class openUrl:
 
     def __init__(self):
         self._browser = None
+        self._repairTime = {}
         pass
 
     def closeBrowser(self):
@@ -219,10 +220,11 @@ class openUrl:
         repairKey = '//*[contains(text(), "Repair truck ")]'
         repairEl = self.find_element_loop(By.XPATH, self._browser, repairKey, 1)
         if repairEl:
-            self.element_click(repairEl)
-            Log.debug(f"find a repair truck!")
-            Log.debug(f"repairTruck end!")
-            return True
+            if time.time() - self._repairTime.get(repairEl._id, 0) > 60:
+                self.element_click(repairEl)
+                self._repairTime[repairEl._id] = time.time()
+                Log.debug(f"find a repair truck!")
+                return True
 
         Log.debug(f"repairTruck end!")
         return False
