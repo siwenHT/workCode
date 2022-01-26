@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from ast import While
 from gc import collect
 from lib2to3.pgen2 import driver
 from re import L
@@ -14,6 +15,7 @@ from httpx import options
 from thelog import Log
 from selenium import webdriver
 import toolsFunc as Tool
+import functools
 
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -21,6 +23,9 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.remote import webelement
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 url = "https://metauce.org/MetisGame"
 url2 = "chrome://version"
@@ -109,9 +114,9 @@ class openUrl:
         oldHandles = browser.window_handles
         browser.switch_to.window(oldHandles[-1])
 
-        browser.execute_script("window.open('http://www.baidu.com');")
-        handles = browser.window_handles
-        browser.switch_to.window(handles[-1])
+        browser.execute_script("window.open('');")
+        newhandles = browser.window_handles
+        browser.switch_to.window(newhandles[-1])
 
     def get_debug_chrome_opetions(self):
         options = webdriver.ChromeOptions()
@@ -148,19 +153,17 @@ class openUrl:
 
         return options
 
-    def start(self, oneTime: Boolean = False):
+    def openGameUrl(self):
         # 打开浏览器
         workPath = os.path.abspath('./res/chrome/chromedriver.exe')
 
         s = Service(workPath)
-        # options = self.get_chrome_options()
         options = self.get_debug_chrome_opetions()
         browser: webdriver = webdriver.Chrome(service=s, options=options)
         Log.debug(f"finded the browser!")
         self._browser = browser
 
         self.open_new_tab(browser)
-        # 打开网址.这个是同步的, 没完全打开不会返回
         browser.get(url)
         Log.debug(f"open url={url}, is ok!")
 
@@ -172,7 +175,6 @@ class openUrl:
         playKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='code']/button[1]"
         elment2: webelement = self.find_element_loop(By.XPATH, browser, playKey)
         if elment2:
-            Log.debug(f"finded the play button!")
             self.element_click(elment2)
             Log.debug(f"click the play button!")
         else:
@@ -185,7 +187,6 @@ class openUrl:
         miningKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='cneter_warp']/div[@class='map']/p/span"
         mining: webelement = self.find_element_unit(By.XPATH, browser, miningKey)
         if mining:
-            Log.debug(f"finded the mining button!")
             self.element_click(mining, 30, 20)
             Log.debug(f"click the mining button!")
         else:
@@ -193,62 +194,61 @@ class openUrl:
             self.closeBrowser()
             return
 
-        self.removeTruck()
-
-        time.sleep(1)
+    def touchOneRemainBtn(self):
         radioKey = "//div/div/div/label[@class='el-radio']"
-        radioEl: webelement = self.find_element_unit(By.XPATH, browser, radioKey)
+        radioEl: webelement = self.find_element_unit(By.XPATH, self._browser, radioKey)
         if radioEl:
-            Log.debug(f"finded the radioEl button!")
             self.element_click(radioEl)
             Log.debug(f"click the radioEl button!")
         else:
             Log.debug(f"cannot find the radioEl button!")
             self.closeBrowser()
-            return
-
-        # self.insertTruck()
-
-        # 点击所有收获
-        if True or oneTime:
-            self.wakuang2(browser)
-        else:
-            self.wakuang(browser)
+            return False
+        return True
 
     #修车
     def repairTruck(self):
-        repairKey = '//*[contains(text(), "Repair truck ")]'
-        repairEl = self.find_element_loop(By.XPATH, self._browser, repairKey, 1)
-        if repairEl:
-            if time.time() - self._repairTime.get(repairEl._id, 0) > 60:
-                self.element_click(repairEl)
-                self._repairTime[repairEl._id] = time.time()
-                Log.debug(f"find a repair truck!")
-                return True
+        try:
+            repairKey = '//*[contains(text(), "Repair truck ")]'
+            repairEl = self.find_element_loop(By.XPATH, self._browser, repairKey, 1)
+            if repairEl:
+                if time.time() - self._repairTime.get(repairEl._id, 0) > 3600:
+                    self.element_click(repairEl)
+                    self._repairTime[repairEl._id] = time.time()
+                    Log.debug(f"find a repair truck! {repairEl._id}")
+                    return True
+
+        except Exception as ex:
+            time.sleep(10)
+            return True
 
         Log.debug(f"repairTruck end!")
         return False
 
     #取下车
     def removeTruck(self):
-        collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
-        collectEls = self.find_elements_loop(By.XPATH, self._browser, collectKey, 5)
-        if collectEls:
-            index = 1
-            count = 1
-            remainKey = ".//div/ul/li[4]/span[2]"
-            removeKey = ".//div[@class='list_c']/div/div/p[@class='ones']"
-            Log.debug(f"removeTruck has {len(collectEls)} truck !")
-            for one in collectEls:
-                remainEl = self.find_element(By.XPATH, one, remainKey)
-                removeEl = self.find_element(By.XPATH, one, removeKey)
-                Log.debug(f"try remove {count}")
-                count += 1
-                if remainEl and remainEl.text == "0" and removeEl:
-                    self.element_click(removeEl)
-                    Log.debug(f" click Remove Truck {index} {removeEl._id} {remainEl._id} {one._id}")
-                    index += 1
-                    time.sleep(0.2)
+        try:
+            collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
+            collectEls = self.find_elements_loop(By.XPATH, self._browser, collectKey, 5)
+            if collectEls:
+                index = 1
+                count = 1
+                remainKey = ".//div/ul/li[4]/span[2]"
+                removeKey = ".//div[@class='list_c']/div/div/p[@class='ones']"
+                Log.debug(f"removeTruck has {len(collectEls)} truck !")
+                for one in collectEls:
+                    remainEl = self.find_element(By.XPATH, one, remainKey)
+                    removeEl = self.find_element(By.XPATH, one, removeKey)
+                    Log.debug(f"try remove {count}")
+                    count += 1
+                    if remainEl and remainEl.text == "0" and removeEl:
+                        self.element_click(removeEl)
+                        Log.debug(f" click Remove Truck {index} {removeEl._id} {remainEl._id} {one._id}")
+                        index += 1
+                        time.sleep(0.2)
+        except Exception as ex:
+            time.sleep(10)
+            self.removeTruck()
 
         Log.debug(f"removeTruck end!")
 
@@ -256,25 +256,66 @@ class openUrl:
     def insertTruck(self):
         collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
         collectEls = self.find_elements_loop(By.XPATH, self._browser, collectKey, 5)
-        if collectEls:
-            remainKey = ".//div/ul/li[4]/span[2]"
-            carSelKey = ".//div[@class='right']/div[@class='list_data']/ul/li[1]"
-            Log.debug(f"insertTruck has {len(collectEls)} truck !")
-            for index in range(len(collectEls)):
-                one = collectEls[index]
-                remainEl = self.find_element(By.XPATH, one, remainKey)
-                carSelEl = self.find_element(By.XPATH, one, carSelKey)
-                if remainEl and remainEl.text != "0" and carSelEl:
-                    # self.element_click(carSelEl)
-                    carSelEl.click()
-                    addBtnKey = f"//div[@class='cneter_warp']/div[@class='collect'][{index + 1}]//div[@class='list_c']/div/div/p"
-                    addBtn = self.find_element_loop(By.XPATH, self._browser, addBtnKey, 15)
-                    if addBtn:
-                        self.element_click(addBtn)
-                        Log.debug(f" add Truck {index} {carSelEl._id} {remainEl._id} {one._id} {addBtn._id}")
-                        time.sleep(0.2)
+        try:
+            if collectEls:
+                Log.debug(f"insertTruck has {len(collectEls)} truck !")
 
-        Log.debug(f"removeTruck end!")
+                remainKey = ".//div/ul/li[4]/span[2]"
+                carSelKey = f".//div[@class='right']/div[@class='list_data']/ul/li"
+                for index in range(len(collectEls)):
+                    one = collectEls[index]
+                    remainEl = self.find_element(By.XPATH, one, remainKey)
+                    if remainEl and remainEl.text != "0":
+                        carselEls = self.find_elements(By.XPATH, one, carSelKey)
+
+                        Log.debug(f"land {index} not zero remain, has {len(carselEls)} truck!")
+                        if carselEls:
+                            starKey = ".//div/p/i"
+                            numCount = []
+                            for carIdx in range(len(carselEls)):
+                                car = carselEls[carIdx]
+                                if not car.is_displayed():
+                                    continue
+
+                                starEls = self.find_elements(By.XPATH, car, starKey)
+                                if starEls:
+                                    data = {}
+                                    data["carEl"] = car
+                                    data["num"] = len(starEls)
+                                    data["index"] = carIdx
+                                    numCount.append(data)
+
+                            Log.debug(f"car info len:{len(numCount)}")
+                            if numCount:
+
+                                def compare(A, B):
+                                    aNum = A.get('num', 0)
+                                    bNum = B.get('num', 0)
+                                    if aNum > bNum:
+                                        return -1
+                                    elif aNum < bNum:
+                                        return 1
+                                    return 0
+
+                                numCount.sort(key=functools.cmp_to_key(compare))
+                                theCar = numCount[0]['carEl']
+
+                                Log.debug(f"choose the Truck {theCar._id} {numCount[0]['index']} {numCount[0]['num']}")
+                                theClickEl = self.find_element(By.XPATH, theCar, ".//div")
+                                if theClickEl:
+                                    self.element_click(theClickEl)
+                                    addBtnKey = f".//div[@class='list_c']/div/div/p"
+                                    addBtn = self.find_element_loop(By.XPATH, one, addBtnKey, 15)
+                                    if addBtn:
+                                        self.element_click(addBtn)
+                                        Log.debug(f" add Truck {theCar._id} {one._id}")
+                                        return True
+        except Exception as ex:
+            time.sleep(10)
+            return True
+
+        Log.debug(f"insertTruck end!")
+        return False
 
     # 等待下一次点击挖矿
     def wakuang(self, browser: webdriver):
@@ -307,7 +348,7 @@ class openUrl:
                 timeStep = 30
 
     # 一次就搞定的
-    def wakuang2(self, browser: webdriver):
+    def wakuang2(self):
         timeRecord = {}
         wakuangbox = "iconfont.icon--wakuangjiankong"
         while True:
@@ -315,19 +356,22 @@ class openUrl:
                 time.sleep(3)
                 continue
 
-            wakuangs1 = self.find_elements_loop(By.CLASS_NAME, browser, wakuangbox, 3)
-            if wakuangs1:
-                Log.debug(f"find wakuangbox! num : {len(wakuangs1)}")
-                index = 0
-                for wa in wakuangs1:
-                    index += 1
-                    if time.time() - timeRecord.get(wa._id, 0) > 60:
-                        time.sleep(0.5)
-                        self.element_click(wa)
-                        Log.debug(f"click wakuangbox! {index} {wa._id}")
-                        timeRecord[wa._id] = time.time()
+            try:
+                wakuangs1 = self.find_elements_loop(By.CLASS_NAME, self._browser, wakuangbox, 3)
+                if wakuangs1:
+                    Log.debug(f"find wakuangbox! num : {len(wakuangs1)}")
+                    index = 0
+                    for wa in wakuangs1:
+                        index += 1
+                        if time.time() - timeRecord.get(wa._id, 0) > 3600:
+                            time.sleep(0.5)
+                            self.element_click(wa)
+                            Log.debug(f"click wakuangbox! {index} {wa._id}")
+                            timeRecord[wa._id] = time.time()
 
-                Log.debug(f"click box once end! num : {len(wakuangs1)}")
+                    Log.debug(f"click box once end! num : {len(wakuangs1)}")
+                    time.sleep(60)
+            except Exception as ex:
                 time.sleep(60)
 
             else:
@@ -340,11 +384,34 @@ class openUrl:
 def main():
     Tool.showParams()
 
+    def removeTruck():
+        handler = openUrl()
+        handler.openGameUrl()
+        time.sleep(20)
+        handler.removeTruck()
+        handler.closeBrowser()
+
+    def insertTruck():
+        handler = openUrl()
+        handler.openGameUrl()
+        handler.touchOneRemainBtn()
+        time.sleep(20)
+        while True:
+            if handler.insertTruck():
+                time.sleep(20)
+                continue
+            break
+        handler.closeBrowser()
+
     handler = openUrl()
-    if len(sys.argv) > 1:
-        handler.start(True)
-    else:
-        handler.start()
+    handler.openGameUrl()
+    handler.touchOneRemainBtn()
+    handler.wakuang2()
+
+    scheduler = BlockingScheduler()
+    scheduler.add_job(removeTruck, 'interval', seconds=30 * 60, id='removeJob', max_instances=5)
+    scheduler.add_job(insertTruck, 'interval', seconds=40 * 60, id='insertJob', max_instances=5)
+    scheduler.start()
 
 
 if __name__ == "__main__":
