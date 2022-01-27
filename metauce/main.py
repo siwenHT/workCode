@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from ast import While
+import datetime
 from gc import collect
 from lib2to3.pgen2 import driver
 from re import L
@@ -247,8 +248,7 @@ class openUrl:
                         index += 1
                         time.sleep(0.2)
         except Exception as ex:
-            time.sleep(10)
-            self.removeTruck()
+            pass
 
         Log.debug(f"removeTruck end!")
 
@@ -375,7 +375,7 @@ class openUrl:
                 time.sleep(60)
 
             else:
-                time.sleep(30)
+                time.sleep(120)
 
 
 #取车
@@ -385,6 +385,7 @@ def main():
     Tool.showParams()
 
     def removeTruck():
+        Log.debug('removeTruck job')
         handler = openUrl()
         handler.openGameUrl()
         time.sleep(20)
@@ -392,6 +393,7 @@ def main():
         handler.closeBrowser()
 
     def insertTruck():
+        Log.debug('insertTruck job')
         handler = openUrl()
         handler.openGameUrl()
         handler.touchOneRemainBtn()
@@ -403,14 +405,26 @@ def main():
             break
         handler.closeBrowser()
 
-    handler = openUrl()
-    handler.openGameUrl()
-    handler.touchOneRemainBtn()
-    handler.wakuang2()
+    def mainFunc():
+        Log.debug('mainFunc job')
+
+        handler = openUrl()
+        handler.openGameUrl()
+        handler.touchOneRemainBtn()
+        handler.wakuang2()
 
     scheduler = BlockingScheduler()
-    scheduler.add_job(removeTruck, 'interval', seconds=30 * 60, id='removeJob', max_instances=5)
-    scheduler.add_job(insertTruck, 'interval', seconds=40 * 60, id='insertJob', max_instances=5)
+    temp_date = datetime.datetime.now() + datetime.timedelta(seconds=20)
+    temp_date1 = datetime.datetime.now() + datetime.timedelta(seconds=5)
+    temp_date2 = datetime.datetime.now() + datetime.timedelta(seconds=15)
+
+    scheduler.add_job(removeTruck, 'interval', seconds=60 * 60, id='removeJob', max_instances=5)
+    scheduler.add_job(insertTruck, 'interval', seconds=100 * 60, id='insertJob', max_instances=5)
+
+    scheduler.add_job(insertTruck, 'date', run_date=temp_date, max_instances=5)
+    scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
+    scheduler.add_job(mainFunc, 'date', run_date=temp_date1, max_instances=1)
+
     scheduler.start()
 
 
