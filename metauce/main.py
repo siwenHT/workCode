@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from ast import While, arg
+from cgitb import handler
 import datetime
 from gc import collect
 from lib2to3.pgen2 import driver
@@ -217,6 +218,8 @@ class openUrl:
         confirmKey = "confirm-page-container-content"
         confirmBtnKey = "button.btn--rounded.btn-primary.page-container__footer-button"
         chainConfirm = "//span[contains(text(), 'Metis Stardust Testnet')]"
+        dangerousKey = "actionable-message.actionable-message--danger"
+        cancelBtnKey = "button.btn--rounded.btn-secondary.page-container__footer-button"
         chainName = self.find_element_loop(By.XPATH, self._browser, chainConfirm, 3)
         if not chainName:
             Log.error(f"chain is error! please check!")
@@ -225,14 +228,28 @@ class openUrl:
         while True:
             contentEl = self.find_element_loop(By.CLASS_NAME, self._browser, confirmKey, 3)
             if contentEl:
+                dangerousEl = self.find_element_loop(By.CLASS_NAME, self._browser, dangerousKey, 1)
                 btnEl = self.find_element_loop(By.CLASS_NAME, self._browser, confirmBtnKey, 3)
-                if btnEl:
-                    self.element_click(btnEl)
-                    time.sleep(2)
-                    Log.error("Has Confirm on Transaction!!")
+                cancelEl = self.find_element_loop(By.CLASS_NAME, self._browser, cancelBtnKey, 3)
+                if dangerousEl:
+                    Log.info("the transaction has error!!")
+                    if cancelEl:
+                        self.element_click(cancelEl)
+                        time.sleep(1)
+                        Log.info("Has cancel on Transaction!!")
+                else:
+                    if btnEl and btnEl.is_enabled():
+                        self.element_click(btnEl)
+                        time.sleep(1)
+                        Log.info("Has Confirm on Transaction!!")
+                    else:
+                        if cancelEl:
+                            self.element_click(cancelEl)
+                            time.sleep(1)
+                            Log.info("Has cancel on Transaction!!")
             else:
                 self.refreshPage()
-                time.sleep(2)
+                time.sleep(1)
 
     def refreshPage(self):
         try:
@@ -240,6 +257,60 @@ class openUrl:
             Log.debug('refreshPage: Ok')
         except Exception as e:
             Log.info('refreshPage: error!!')
+
+    def checkBuyTime(self):
+        try:
+            tokenNum = "address_token.address_token_p"
+            tokenEl = self.find_element_loop(By.CLASS_NAME, self._browser, tokenNum)
+            if tokenEl:
+                test: str = tokenEl.text()
+                test = test.replace(" Claim ", "")
+                test = test.replace(" MINES ", "")
+                tokenVal = int(test)
+                Log.info(f"tokenVal: {tokenVal}")
+                if tokenVal > 125:
+                    collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
+                    collectEls = self.find_elements_loop(By.XPATH, self._browser, collectKey, 1)
+                    if not collectEls or len(collectEls) < 10:
+                        val = 0 if not collectEls else len(collectEls)
+                        val = (10 - val) * 125
+                        val = val if tokenVal > val else tokenVal
+                        self.minitTruckOrLand(int(val / 125), 1)
+                    elif tokenVal > 1250:
+                        self.minitTruckOrLand(int((tokenVal - 1250) / 125), 2)
+        except Exception as ex:
+            pass
+
+        self.closeBrowser()
+
+    def minitTruckOrLand(self, time, type):
+        key1 = "//ul[@class='el-menu-vertical-demo.el-menu--collapse.el-menu]/li[1]"
+        playKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='code']/button[1]"
+        landKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='cneter_warp']/div[@class='mining']/p/span"
+        carKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='cneter_warp']/div[@class='car']/p/span"
+        try:
+            homeBtnEl = self.find_element_loop(By.XPATH, self._browser, key1)
+            if homeBtnEl:
+                self.element_click(homeBtnEl)
+                playEl = self.find_element_loop(By.XPATH, self._browser, playKey)
+                if playEl:
+                    self.element_click(playEl)
+
+                    touchBtn = None
+                    if type == 1:
+                        touchBtn = self.find_element_loop(By.XPATH, self._browser, landKey)
+                    else:
+                        touchBtn = self.find_element_loop(By.XPATH, self._browser, carKey)
+                    if touchBtn:
+                        self.element_click(touchBtn)
+                        key = "el-button.ones.el-button--default"
+                        tBtn = self.find_element_loop(By.CLASS_NAME, self._browser, key)
+                        if tBtn:
+                            for i in range(time):
+                                self.element_click(tBtn)
+                                time.sleep(5)
+        except Exception as ex:
+            pass
 
     #修车
     def repairTruck(self):
@@ -316,7 +387,7 @@ class openUrl:
                                     continue
 
                                 starEls = self.find_elements(By.XPATH, car, starKey)
-                                if starEls and len(starEls) > starLimit:
+                                if starEls and len(starEls) >= starLimit:
                                     data = {}
                                     data["carEl"] = car
                                     data["num"] = len(starEls)
@@ -426,6 +497,7 @@ class openUrl:
 def main():
     Tool.showParams()
 
+    #打开游戏， 收一波菜，然后去移除一波， 然后再来看需不需要买地  买车 ，然后上车. 再准备收菜.
     def removeTruck():
         Log.info('removeTruck job')
         handler = openUrl(url)
@@ -469,6 +541,15 @@ def main():
         handler.openGameUrl()
         handler.conformTransaction()
 
+    def checkTokenVal():
+        Log.info('checkTokenVal job')
+
+        handler = openUrl(url)
+        handler.openGameUrl()
+        handler.touchMining()
+        handler.touchOneRemainBtn()
+        handler.checkBuyTime()
+
     scheduler = BlockingScheduler()
     temp_date = datetime.datetime.now() + datetime.timedelta(seconds=5)
     temp_date1 = datetime.datetime.now() + datetime.timedelta(seconds=5)
@@ -481,12 +562,13 @@ def main():
         for oneHandler in totalHandler:
             oneHandler.closeBrowser()
 
-    # scheduler.add_job(removeTruck, 'interval', seconds=60 * 60, id='removeJob', max_instances=5)
-    # scheduler.add_job(insertTruck, 'interval', seconds=100 * 60, id='insertJob', max_instances=5)
+    scheduler.add_job(removeTruck, 'interval', seconds=60 * 60, id='removeJob', max_instances=5)
+    scheduler.add_job(insertTruck, 'interval', seconds=100 * 60, id='insertJob', max_instances=5)
+    scheduler.add_job(checkTokenVal, 'interval', seconds=30 * 60, id='insertJob', max_instances=5)
 
-    # scheduler.add_job(insertTruck, 'date', run_date=temp_date, max_instances=5, args=[3])
+    scheduler.add_job(insertTruck, 'date', run_date=temp_date, max_instances=5, args=[3])
     scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
-    # scheduler.add_job(mainFunc, 'date', run_date=temp_date1, max_instances=1)
+    scheduler.add_job(mainFunc, 'date', run_date=temp_date1, max_instances=1)
     scheduler.add_job(openMetaMask, 'date', run_date=temp_date3, max_instances=1)
 
     scheduler.start()
