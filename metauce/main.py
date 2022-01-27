@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ast import While
+from ast import While, arg
 import datetime
 from gc import collect
 from lib2to3.pgen2 import driver
@@ -7,7 +7,7 @@ from re import L
 import sys
 import io
 import os
-
+import atexit
 import time
 from turtle import delay
 from xmlrpc.client import Boolean
@@ -30,19 +30,24 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 url = "https://metauce.org/MetisGame"
 url2 = "chrome://version"
+totalHandler = []
 
 
 # 一键收矿
 class openUrl:
 
-    def __init__(self):
+    def __init__(self, url: str):
         self._browser = None
+        self._handler = None
         self._repairTime = {}
-        pass
+        self._url = url
+        global totalHandler
+        totalHandler.append(self)
 
     def closeBrowser(self):
         if self._browser:
             self._browser.close()
+            self._browser = None
 
     def find_element_unit(self, by: str, browser: webdriver, key: str, timeOut: int = 10, timeStep: int = 0.5):
         while True:
@@ -113,16 +118,21 @@ class openUrl:
 
     def open_new_tab(self, browser: webdriver):
         oldHandles = browser.window_handles
-        browser.switch_to.window(oldHandles[-1])
 
         browser.execute_script("window.open('');")
         newhandles = browser.window_handles
-        browser.switch_to.window(newhandles[-1])
+
+        for newOne in newhandles:
+            if newOne not in oldHandles:
+                self._handler = newOne
+                break
+        browser.switch_to.window(newOne)
 
     def get_debug_chrome_opetions(self):
         options = webdriver.ChromeOptions()
         options.add_experimental_option("debuggerAddress", "127.0.0.1:9527")
         options.add_argument('blink-settings=imagesEnabled=false')  # 不加载图片, 提升速度
+        options.add_argument('--headless')
         return options
 
     def get_chrome_options(self):
@@ -165,35 +175,31 @@ class openUrl:
         self._browser = browser
 
         self.open_new_tab(browser)
-        browser.get(url)
-        Log.debug(f"open url={url}, is ok!")
+        browser.get(self._url)
+        Log.info(f"open url={self._url}, is ok!")
 
-        # 链接钱包
-        # elment: webelement = browser.find_element_by_class_name("address_token")
-
-        time.sleep(1)
-        # 点击play
+    # 到挖矿界面
+    def touchMining(self):
         playKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='code']/button[1]"
-        elment2: webelement = self.find_element_loop(By.XPATH, browser, playKey)
+        elment2: webelement = self.find_element_loop(By.XPATH, self._browser, playKey)
         if elment2:
             self.element_click(elment2)
             Log.debug(f"click the play button!")
         else:
             Log.debug(f"cannot find the play button!")
             self.closeBrowser()
-            return
+            return False
 
-        # 点击挖矿
-        time.sleep(1)
         miningKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='cneter_warp']/div[@class='map']/p/span"
-        mining: webelement = self.find_element_unit(By.XPATH, browser, miningKey)
+        mining: webelement = self.find_element_unit(By.XPATH, self._browser, miningKey)
         if mining:
             self.element_click(mining, 30, 20)
             Log.debug(f"click the mining button!")
         else:
             Log.debug(f"cannot find the mining button!")
             self.closeBrowser()
-            return
+            return False
+        return True
 
     def touchOneRemainBtn(self):
         radioKey = "//div/div/div/label[@class='el-radio']"
@@ -207,6 +213,34 @@ class openUrl:
             return False
         return True
 
+    def conformTransaction(self):
+        confirmKey = "confirm-page-container-content"
+        confirmBtnKey = "button.btn--rounded.btn-primary.page-container__footer-button"
+        chainConfirm = "//span[contains(text(), 'Metis Stardust Testnet')]"
+        chainName = self.find_element_loop(By.XPATH, self._browser, chainConfirm, 3)
+        if not chainName:
+            Log.error(f"chain is error! please check!")
+            return
+
+        while True:
+            contentEl = self.find_element_loop(By.CLASS_NAME, self._browser, confirmKey, 3)
+            if contentEl:
+                btnEl = self.find_element_loop(By.CLASS_NAME, self._browser, confirmBtnKey, 3)
+                if btnEl:
+                    self.element_click(btnEl)
+                    time.sleep(2)
+                    Log.error("Has Confirm on Transaction!!")
+            else:
+                self.refreshPage()
+                time.sleep(2)
+
+    def refreshPage(self):
+        try:
+            self._browser.refresh()
+            Log.debug('refreshPage: Ok')
+        except Exception as e:
+            Log.info('refreshPage: error!!')
+
     #修车
     def repairTruck(self):
         try:
@@ -216,14 +250,14 @@ class openUrl:
                 if time.time() - self._repairTime.get(repairEl._id, 0) > 3600:
                     self.element_click(repairEl)
                     self._repairTime[repairEl._id] = time.time()
-                    Log.debug(f"find a repair truck! {repairEl._id}")
+                    Log.info(f"find a repair truck! {repairEl._id}")
                     return True
 
         except Exception as ex:
             time.sleep(10)
             return True
 
-        Log.debug(f"repairTruck end!")
+        Log.info(f"repairTruck end!")
         return False
 
     #取下车
@@ -232,11 +266,10 @@ class openUrl:
             collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
             collectEls = self.find_elements_loop(By.XPATH, self._browser, collectKey, 5)
             if collectEls:
-                index = 1
                 count = 1
                 remainKey = ".//div/ul/li[4]/span[2]"
                 removeKey = ".//div[@class='list_c']/div/div/p[@class='ones']"
-                Log.debug(f"removeTruck has {len(collectEls)} truck !")
+                Log.info(f"removeTruck has {len(collectEls)} truck !")
                 for one in collectEls:
                     remainEl = self.find_element(By.XPATH, one, remainKey)
                     removeEl = self.find_element(By.XPATH, one, removeKey)
@@ -244,21 +277,20 @@ class openUrl:
                     count += 1
                     if remainEl and remainEl.text == "0" and removeEl:
                         self.element_click(removeEl)
-                        Log.debug(f" click Remove Truck {index} {removeEl._id} {remainEl._id} {one._id}")
-                        index += 1
+                        Log.info(f" click Remove Truck {count} {removeEl._id} {one._id}")
                         time.sleep(0.2)
         except Exception as ex:
             pass
 
-        Log.debug(f"removeTruck end!")
+        Log.info(f"removeTruck end!")
 
     #补车
-    def insertTruck(self):
+    def insertTruck(self, starLimit: int = 0):
         collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
         collectEls = self.find_elements_loop(By.XPATH, self._browser, collectKey, 5)
         try:
             if collectEls:
-                Log.debug(f"insertTruck has {len(collectEls)} truck !")
+                Log.info(f"insertTruck has {len(collectEls)} truck !")
 
                 remainKey = ".//div/ul/li[4]/span[2]"
                 carSelKey = f".//div[@class='right']/div[@class='list_data']/ul/li"
@@ -272,18 +304,25 @@ class openUrl:
                         if carselEls:
                             starKey = ".//div/p/i"
                             numCount = []
+                            showNum = {}
+                            showNum["1"] = 0
+                            showNum["2"] = 0
+                            showNum["3"] = 0
+                            showNum["4"] = 0
+                            showNum["5"] = 0
                             for carIdx in range(len(carselEls)):
                                 car = carselEls[carIdx]
                                 if not car.is_displayed():
                                     continue
 
                                 starEls = self.find_elements(By.XPATH, car, starKey)
-                                if starEls:
+                                if starEls and len(starEls) > starLimit:
                                     data = {}
                                     data["carEl"] = car
                                     data["num"] = len(starEls)
                                     data["index"] = carIdx
                                     numCount.append(data)
+                                    showNum[str(data['num'])] += 1
 
                             Log.debug(f"car info len:{len(numCount)}")
                             if numCount:
@@ -298,9 +337,12 @@ class openUrl:
                                     return 0
 
                                 numCount.sort(key=functools.cmp_to_key(compare))
+
+                                Log.info(f"starTruck num => 5: {showNum['5']}, 4: {showNum['4']}, 3: {showNum['3']}, 2: {showNum['2']}, 1: {showNum['1']}")
+
                                 theCar = numCount[0]['carEl']
 
-                                Log.debug(f"choose the Truck {theCar._id} {numCount[0]['index']} {numCount[0]['num']}")
+                                Log.info(f"choose the Truck {theCar._id} {numCount[0]['index']} {numCount[0]['num']}")
                                 theClickEl = self.find_element(By.XPATH, theCar, ".//div")
                                 if theClickEl:
                                     self.element_click(theClickEl)
@@ -308,13 +350,13 @@ class openUrl:
                                     addBtn = self.find_element_loop(By.XPATH, one, addBtnKey, 15)
                                     if addBtn:
                                         self.element_click(addBtn)
-                                        Log.debug(f" add Truck {theCar._id} {one._id}")
+                                        Log.info(f" add Truck {theCar._id} {one._id}")
                                         return True
         except Exception as ex:
             time.sleep(10)
             return True
 
-        Log.debug(f"insertTruck end!")
+        Log.info(f"insertTruck end!")
         return False
 
     # 等待下一次点击挖矿
@@ -339,7 +381,7 @@ class openUrl:
                 count = 0
                 timeStep = 0.5
                 self.element_click(wakuangs1)
-                Log.debug(f"click a wakuangbox!")
+                Log.info(f"click a wakuangbox {wakuangs1._id}!")
                 continue
 
             count += 1
@@ -359,17 +401,17 @@ class openUrl:
             try:
                 wakuangs1 = self.find_elements_loop(By.CLASS_NAME, self._browser, wakuangbox, 3)
                 if wakuangs1:
-                    Log.debug(f"find wakuangbox! num : {len(wakuangs1)}")
+                    Log.info(f"find wakuangbox! num : {len(wakuangs1)}")
                     index = 0
                     for wa in wakuangs1:
                         index += 1
                         if time.time() - timeRecord.get(wa._id, 0) > 3600:
                             time.sleep(0.5)
                             self.element_click(wa)
-                            Log.debug(f"click wakuangbox! {index} {wa._id}")
+                            Log.info(f"click wakuangbox! {index} {wa._id}")
                             timeRecord[wa._id] = time.time()
 
-                    Log.debug(f"click box once end! num : {len(wakuangs1)}")
+                    Log.info(f"click box once end! num : {len(wakuangs1)}")
                     time.sleep(60)
             except Exception as ex:
                 time.sleep(60)
@@ -385,45 +427,67 @@ def main():
     Tool.showParams()
 
     def removeTruck():
-        Log.debug('removeTruck job')
-        handler = openUrl()
+        Log.info('removeTruck job')
+        handler = openUrl(url)
         handler.openGameUrl()
+        handler.touchMining()
         time.sleep(20)
         handler.removeTruck()
         handler.closeBrowser()
+        Log.info('removeTruck job end')
 
-    def insertTruck():
-        Log.debug('insertTruck job')
-        handler = openUrl()
+    def insertTruck(args):
+        starLimit = 0
+        if args:
+            starLimit = args
+        Log.info(f'insertTruck job! starLimit:{starLimit}')
+        handler = openUrl(url)
         handler.openGameUrl()
+        handler.touchMining()
         handler.touchOneRemainBtn()
         time.sleep(20)
         while True:
-            if handler.insertTruck():
+            if handler.insertTruck(starLimit):
                 time.sleep(20)
                 continue
             break
         handler.closeBrowser()
+        Log.info('insertTruck job end')
 
     def mainFunc():
-        Log.debug('mainFunc job')
+        Log.info('mainFunc job')
 
-        handler = openUrl()
+        handler = openUrl(url)
         handler.openGameUrl()
+        handler.touchMining()
         handler.touchOneRemainBtn()
         handler.wakuang2()
+        Log.info('mainFunc job end')
+
+    def openMetaMask():
+        handler = openUrl("chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html")
+        handler.openGameUrl()
+        handler.conformTransaction()
 
     scheduler = BlockingScheduler()
-    temp_date = datetime.datetime.now() + datetime.timedelta(seconds=20)
+    temp_date = datetime.datetime.now() + datetime.timedelta(seconds=5)
     temp_date1 = datetime.datetime.now() + datetime.timedelta(seconds=5)
     temp_date2 = datetime.datetime.now() + datetime.timedelta(seconds=15)
+    temp_date3 = datetime.datetime.now() + datetime.timedelta(seconds=3)
 
-    scheduler.add_job(removeTruck, 'interval', seconds=60 * 60, id='removeJob', max_instances=5)
-    scheduler.add_job(insertTruck, 'interval', seconds=100 * 60, id='insertJob', max_instances=5)
+    @atexit.register
+    def clearUp():
+        Log.error('clearUp')
+        for oneHandler in totalHandler:
+            oneHandler.closeBrowser()
 
-    scheduler.add_job(insertTruck, 'date', run_date=temp_date, max_instances=5)
+    # scheduler.add_job(removeTruck, 'interval', seconds=60 * 60, id='removeJob', max_instances=5)
+    # scheduler.add_job(insertTruck, 'interval', seconds=100 * 60, id='insertJob', max_instances=5)
+
+    # scheduler.add_job(insertTruck, 'date', run_date=temp_date, max_instances=5, args=[3])
     scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
-    scheduler.add_job(mainFunc, 'date', run_date=temp_date1, max_instances=1)
+    # scheduler.add_job(mainFunc, 'date', run_date=temp_date1, max_instances=1)
+    scheduler.add_job(openMetaMask, 'date', run_date=temp_date3, max_instances=1)
 
     scheduler.start()
 
