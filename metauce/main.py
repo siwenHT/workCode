@@ -42,6 +42,7 @@ class openUrl:
         self._handler = None
         self._repairTime = {}
         self._url = url
+        self._wakuangRun = 0
         global totalHandler
         totalHandler.append(self)
 
@@ -260,13 +261,14 @@ class openUrl:
 
     def checkBuyTime(self):
         try:
+            time.sleep(5)
             tokenNum = "address_token.address_token_p"
             tokenEl = self.find_element_loop(By.CLASS_NAME, self._browser, tokenNum)
             if tokenEl:
-                test: str = tokenEl.text()
-                test = test.replace(" Claim ", "")
-                test = test.replace(" MINES ", "")
-                tokenVal = int(test)
+                test: str = tokenEl.text
+                test = test.replace("Claim ", "")
+                test = test.replace(" MINES", "")
+                tokenVal = float(test)
                 Log.info(f"tokenVal: {tokenVal}")
                 if tokenVal > 125:
                     collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
@@ -276,15 +278,15 @@ class openUrl:
                         val = (10 - val) * 125
                         val = val if tokenVal > val else tokenVal
                         self.minitTruckOrLand(int(val / 125), 1)
-                    elif tokenVal > 1250:
+                    else:
                         self.minitTruckOrLand(int((tokenVal - 1250) / 125), 2)
         except Exception as ex:
             pass
 
         self.closeBrowser()
 
-    def minitTruckOrLand(self, time, type):
-        key1 = "//ul[@class='el-menu-vertical-demo.el-menu--collapse.el-menu]/li[1]"
+    def minitTruckOrLand(self, times, type):
+        key1 = "//div[@class='menu_left']/ul/li"
         playKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='code']/button[1]"
         landKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='cneter_warp']/div[@class='mining']/p/span"
         carKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='cneter_warp']/div[@class='car']/p/span"
@@ -296,18 +298,23 @@ class openUrl:
                 if playEl:
                     self.element_click(playEl)
 
+                    flg = ''
                     touchBtn = None
                     if type == 1:
                         touchBtn = self.find_element_loop(By.XPATH, self._browser, landKey)
+                        flg = 'land'
                     else:
                         touchBtn = self.find_element_loop(By.XPATH, self._browser, carKey)
+                        flg = 'truck'
+
                     if touchBtn:
                         self.element_click(touchBtn)
-                        key = "el-button.ones.el-button--default"
-                        tBtn = self.find_element_loop(By.CLASS_NAME, self._browser, key)
+                        key = "//div[@class='cneter_warp']/div[@class='header_search']/button/span"
+                        tBtn = self.find_element_loop(By.XPATH, self._browser, key)
                         if tBtn:
-                            for i in range(time):
+                            for i in range(times):
                                 self.element_click(tBtn)
+                                Log.info(f"miniting a {flg}!")
                                 time.sleep(5)
         except Exception as ex:
             pass
@@ -483,12 +490,17 @@ class openUrl:
                             timeRecord[wa._id] = time.time()
 
                     Log.info(f"click box once end! num : {len(wakuangs1)}")
-                    time.sleep(60)
+                    time.sleep(10)
             except Exception as ex:
-                time.sleep(60)
+                time.sleep(10)
 
             else:
-                time.sleep(120)
+                time.sleep(20)
+
+            if self._wakuangRun == 2:
+                return
+
+            self._wakuangRun += 1
 
 
 #取车
@@ -508,7 +520,7 @@ def main():
         handler.closeBrowser()
         Log.info('removeTruck job end')
 
-    def insertTruck(args):
+    def insertTruck(args=0):
         starLimit = 0
         if args:
             starLimit = args
@@ -534,6 +546,7 @@ def main():
         handler.touchMining()
         handler.touchOneRemainBtn()
         handler.wakuang2()
+        handler.closeBrowser()
         Log.info('mainFunc job end')
 
     def openMetaMask():
@@ -562,15 +575,27 @@ def main():
         for oneHandler in totalHandler:
             oneHandler.closeBrowser()
 
-    scheduler.add_job(removeTruck, 'interval', seconds=60 * 60, id='removeJob', max_instances=5)
-    scheduler.add_job(insertTruck, 'interval', seconds=100 * 60, id='insertJob', max_instances=5)
-    scheduler.add_job(checkTokenVal, 'interval', seconds=30 * 60, id='insertJob', max_instances=5)
+    def bigRun():
+        while True:
+            try:
+                mainFunc()
+                removeTruck()
+                insertTruck(3)
+                checkTokenVal()
+            except Exception as ex:
+                pass
 
-    scheduler.add_job(insertTruck, 'date', run_date=temp_date, max_instances=5, args=[3])
-    scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
-    scheduler.add_job(mainFunc, 'date', run_date=temp_date1, max_instances=1)
+    # scheduler.add_job(removeTruck, 'interval', seconds=60 * 60, id='removeJob', max_instances=5)
+    # scheduler.add_job(insertTruck, 'interval', seconds=100 * 60, id='insertJob', max_instances=5, args=[3])
+    # scheduler.add_job(checkTokenVal, 'interval', seconds=30 * 60, id='checkTokenVal', max_instances=5)
+
+    # scheduler.add_job(mainFunc, 'date', run_date=temp_date1, max_instances=1)
+    # scheduler.add_job(insertTruck, 'date', run_date=temp_date, max_instances=5, args=[3])
+    # scheduler.add_job(checkTokenVal, 'date', run_date=temp_date, max_instances=5)
+    # scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
+
+    scheduler.add_job(bigRun, 'date', run_date=temp_date, max_instances=5)
     scheduler.add_job(openMetaMask, 'date', run_date=temp_date3, max_instances=1)
-
     scheduler.start()
 
 
