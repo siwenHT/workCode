@@ -14,6 +14,7 @@ from turtle import delay
 from xmlrpc.client import Boolean
 
 from httpx import options
+from websockets import Data
 from thelog import Log
 from selenium import webdriver
 import toolsFunc as Tool
@@ -209,7 +210,19 @@ class openUrl:
         return True
 
     def touchOneRemainBtn(self):
-        radioKey = "//div/div/div/label[@class='el-radio']"
+        radioKey = "//div/div/div[@class='el-radio-group']/label[2]"
+        radioEl: webelement = self.find_element_unit(By.XPATH, self._browser, radioKey)
+        if radioEl:
+            self.element_click(radioEl)
+            Log.debug(f"click the radioEl button!")
+        else:
+            Log.debug(f"cannot find the radioEl button!")
+            self.closeBrowser()
+            return False
+        return True
+
+    def touchDepletedBtn(self):
+        radioKey = "//div/div/div[@class='el-radio-group']/label[3]"
         radioEl: webelement = self.find_element_unit(By.XPATH, self._browser, radioKey)
         if radioEl:
             self.element_click(radioEl)
@@ -221,14 +234,42 @@ class openUrl:
         return True
 
     def conformTransaction(self):
+        unlockKey = "unlock-page__container"
+        inputKey = "MuiInputBase-input.MuiInput-input"
+        OKKey = "button.btn--rounded.btn-default"
         confirmKey = "confirm-page-container-content"
         confirmBtnKey = "button.btn--rounded.btn-primary.page-container__footer-button"
         chainConfirm = "//span[contains(text(), 'Metis Stardust Testnet')]"
         dangerousKey = "actionable-message.actionable-message--danger"
         cancelBtnKey = "button.btn--rounded.btn-secondary.page-container__footer-button"
+        unlockEl = self.find_element_loop(By.CLASS_NAME, self._browser, unlockKey)
+        if unlockEl:
+            input = self.find_element_loop(By.CLASS_NAME, self._browser, inputKey)
+            if input:
+                input.send_keys("Myhxlin170")
+                OKKeyEl = self.find_element_loop(By.CLASS_NAME, self._browser, OKKey)
+                if OKKeyEl:
+                    self.element_click(OKKeyEl)
+                    time.sleep(3)
+            else:
+                Log.error(f"not find the {inputKey}")
+
+        name = self.find_element_loop(By.XPATH, self._browser, "//span")
+        if name:
+            Log.info(f"{name.text}")
+        chainNameKey = "//div[@class='app-header__network-component-wrapper']/div/span"
+        chainNameEl = self.find_element_loop(By.XPATH, self._browser, chainNameKey)
+        if chainNameEl:
+            Log.error(f"chain is {chainNameEl.text}")
+
         chainName = self.find_element_loop(By.XPATH, self._browser, chainConfirm, 3)
         if not chainName:
-            Log.error(f"chain is error! please check!")
+            chainNameKey = "//div[@class='app-header__network-component-wrapper']/div/span"
+            chainNameEl = self.find_element_loop(By.XPATH, self._browser, chainNameKey)
+            if chainNameEl:
+                Log.error(f"chain is {chainNameEl.text}! please check!")
+            else:
+                Log.error(f"chain is error! please check!")
             return
 
         while True:
@@ -266,7 +307,7 @@ class openUrl:
 
     def checkBuyTime(self):
         try:
-            time.sleep(5)
+            time.sleep(10)
             tokenNum = "address_token.address_token_p"
             tokenEl = self.find_element_loop(By.CLASS_NAME, self._browser, tokenNum)
             if tokenEl:
@@ -278,6 +319,9 @@ class openUrl:
                 if tokenVal > 125:
                     collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
                     collectEls = self.find_elements_loop(By.XPATH, self._browser, collectKey, 1)
+                    if collectEls:
+                        Log.info(f"land current num: {len(collectEls)}")
+
                     if not collectEls or len(collectEls) < 10:
                         val = 0 if not collectEls else len(collectEls)
                         val = (10 - val) * 125
@@ -483,20 +527,35 @@ class openUrl:
                 continue
 
             try:
-                wakuangs1 = self.find_elements_loop(By.CLASS_NAME, self._browser, wakuangbox, 3)
-                if wakuangs1:
-                    Log.info(f"find wakuangbox! num : {len(wakuangs1)}")
-                    index = 0
-                    for wa in wakuangs1:
-                        index += 1
-                        if time.time() - timeRecord.get(wa._id, 0) > 3600:
-                            time.sleep(0.5)
-                            self.element_click(wa)
-                            Log.info(f"click wakuangbox! {index} {wa._id}")
-                            timeRecord[wa._id] = time.time()
-
-                    Log.info(f"click box once end! num : {len(wakuangs1)}")
+                time.sleep(10)
+                selAllKey = "//span[@class='el-checkbox__input']/span[@class='el-checkbox__inner']/input"
+                collectAllKey = "//div[@class='header_search']/button[@class='el-button.el-button--default']"
+                flg = False
+                selAllEl = self.find_element_loop(By.XPATH, self._browser, selAllKey)
+                if selAllEl:
+                    self.element_click(selAllEl)
                     time.sleep(10)
+                    collectAllEl = self.find_element_loop(By.XPATH, self._browser, collectAllKey)
+                    if collectAllEl:
+                        self.element_click(collectAllEl)
+                        time.sleep(5)
+                        flg = True
+
+                if not flg:
+                    wakuangs1 = self.find_elements_loop(By.CLASS_NAME, self._browser, wakuangbox, 3)
+                    if wakuangs1:
+                        Log.info(f"find wakuangbox! num : {len(wakuangs1)}")
+                        index = 0
+                        for wa in wakuangs1:
+                            index += 1
+                            if time.time() - timeRecord.get(wa._id, 0) > 3600:
+                                time.sleep(0.5)
+                                self.element_click(wa)
+                                Log.info(f"click wakuangbox! {index} {wa._id}")
+                                timeRecord[wa._id] = time.time()
+
+                        Log.info(f"click box once end! num : {len(wakuangs1)}")
+                        time.sleep(10)
             except Exception as ex:
                 time.sleep(10)
 
@@ -521,6 +580,7 @@ def main():
         handler = openUrl(url)
         handler.openGameUrl()
         handler.touchMining()
+        handler.touchDepletedBtn()
         time.sleep(20)
         handler.removeTruck()
         handler.closeBrowser()
@@ -585,7 +645,7 @@ def main():
         while True:
             try:
                 mainFunc()
-                removeTruck()
+                # removeTruck()
                 insertTruck(3)
                 checkTokenVal()
             except Exception as ex:
@@ -601,7 +661,7 @@ def main():
     # scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
 
     scheduler.add_job(bigRun, 'date', run_date=temp_date, max_instances=5)
-    scheduler.add_job(openMetaMask, 'date', run_date=temp_date3, max_instances=1)
+    scheduler.add_job(openMetaMask, 'date', run_date=datetime.datetime.now(), max_instances=1)
     scheduler.start()
 
 
