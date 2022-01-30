@@ -326,15 +326,16 @@ class openUrl:
                         val = (10 - val) * 125
                         val = val if tokenVal > val else tokenVal
                         self.minitTruckOrLand(int(val / 125), 1)
-                        self.checkBuyTime()
+                        # self.checkBuyTime()
                     else:
-                        self.minitTruckOrLand(int((tokenVal - 1250) / 125), 2)
+                        self.minitTruckOrLand(int(tokenVal / 125), 2)
         except Exception as ex:
             pass
 
         self.closeBrowser()
 
     def minitTruckOrLand(self, times, type):
+        Log.info(f"minitTruckOrLand {times} {type}")
         key1 = "//div[@class='menu_left']/ul/li"
         playKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='code']/button[1]"
         landKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='cneter_warp']/div[@class='mining']/p/span"
@@ -364,7 +365,7 @@ class openUrl:
                             for i in range(times):
                                 self.element_click(tBtn)
                                 Log.info(f"miniting a {flg}!")
-                                time.sleep(5)
+                                time.sleep(8.8)
         except Exception as ex:
             pass
 
@@ -651,14 +652,14 @@ def main():
             except Exception as ex:
                 pass
 
-    # scheduler.add_job(removeTruck, 'interval', seconds=40 * 60, id='removeJob', max_instances=5)
+    scheduler.add_job(removeTruck, 'interval', seconds=30 * 60, id='removeJob', max_instances=5)
     # scheduler.add_job(insertTruck, 'interval', seconds=30 * 60, id='insertJob', max_instances=5, args=[3])
     # scheduler.add_job(checkTokenVal, 'interval', seconds=20 * 60, id='checkTokenVal', max_instances=5)
 
     # scheduler.add_job(mainFunc, 'date', run_date=temp_date1, max_instances=1)
     # scheduler.add_job(insertTruck, 'date', run_date=temp_date, max_instances=5, args=[3])
     # scheduler.add_job(checkTokenVal, 'date', run_date=temp_date, max_instances=5)
-    # scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
+    scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
 
     scheduler.add_job(bigRun, 'date', run_date=temp_date, max_instances=5)
     scheduler.add_job(openMetaMask, 'date', run_date=datetime.datetime.now(), max_instances=1)
