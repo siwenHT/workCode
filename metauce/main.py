@@ -14,7 +14,6 @@ from turtle import delay
 from xmlrpc.client import Boolean
 
 from httpx import options
-from websockets import Data
 from thelog import Log
 from selenium import webdriver
 import toolsFunc as Tool
@@ -528,8 +527,8 @@ class openUrl:
 
             try:
                 time.sleep(10)
-                selAllKey = "//span[@class='el-checkbox__input']/span[@class='el-checkbox__inner']/input"
-                collectAllKey = "//div[@class='header_search']/button[@class='el-button.el-button--default']"
+                selAllKey = "//div[@class='header_search']/label/span/span"
+                collectAllKey = "//div[@class='header_search']/button"
                 flg = False
                 selAllEl = self.find_element_loop(By.XPATH, self._browser, selAllKey)
                 if selAllEl:
@@ -538,6 +537,7 @@ class openUrl:
                     collectAllEl = self.find_element_loop(By.XPATH, self._browser, collectAllKey)
                     if collectAllEl:
                         self.element_click(collectAllEl)
+                        Log.info(f"one time collect all!")
                         time.sleep(5)
                         flg = True
 
