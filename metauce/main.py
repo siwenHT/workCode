@@ -47,9 +47,14 @@ class openUrl:
         totalHandler.append(self)
 
     def closeBrowser(self):
-        if self._browser:
-            self._browser.close()
-            self._browser = None
+        try:
+            if self._browser and self._handler:
+                self._browser.switch_to.window(self._handler)
+                self._browser.close()
+                self._browser = None
+                self._handler = None
+        except Exception as ex:
+            pass
 
     def find_element_unit(self, by: str, browser: webdriver, key: str, timeOut: int = 10, timeStep: int = 0.5):
         while True:
@@ -278,6 +283,7 @@ class openUrl:
                         val = (10 - val) * 125
                         val = val if tokenVal > val else tokenVal
                         self.minitTruckOrLand(int(val / 125), 1)
+                        self.checkBuyTime()
                     else:
                         self.minitTruckOrLand(int((tokenVal - 1250) / 125), 2)
         except Exception as ex:
@@ -335,7 +341,7 @@ class openUrl:
             time.sleep(10)
             return True
 
-        Log.info(f"repairTruck end!")
+        # Log.info(f"repairTruck end!")
         return False
 
     #取下车
@@ -585,9 +591,9 @@ def main():
             except Exception as ex:
                 pass
 
-    # scheduler.add_job(removeTruck, 'interval', seconds=60 * 60, id='removeJob', max_instances=5)
-    # scheduler.add_job(insertTruck, 'interval', seconds=100 * 60, id='insertJob', max_instances=5, args=[3])
-    # scheduler.add_job(checkTokenVal, 'interval', seconds=30 * 60, id='checkTokenVal', max_instances=5)
+    # scheduler.add_job(removeTruck, 'interval', seconds=40 * 60, id='removeJob', max_instances=5)
+    # scheduler.add_job(insertTruck, 'interval', seconds=30 * 60, id='insertJob', max_instances=5, args=[3])
+    # scheduler.add_job(checkTokenVal, 'interval', seconds=20 * 60, id='checkTokenVal', max_instances=5)
 
     # scheduler.add_job(mainFunc, 'date', run_date=temp_date1, max_instances=1)
     # scheduler.add_job(insertTruck, 'date', run_date=temp_date, max_instances=5, args=[3])
