@@ -327,7 +327,7 @@ class openUrl:
                     if collectEls:
                         Log.info(f"land current num: {len(collectEls)}")
 
-                    if not collectEls or len(collectEls) < 10:
+                    if not collectEls or len(collectEls) < 20:
                         val = 0 if not collectEls else len(collectEls)
                         val = (10 - val) * 125
                         val = val if tokenVal > val else tokenVal
