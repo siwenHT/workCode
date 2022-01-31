@@ -13,10 +13,10 @@ class singleLog:
         self.fileHandler = logging.FileHandler(filename="test.log", mode='w')
 
         self.logger.setLevel(logging.DEBUG)
-        self.streamHandler.setLevel(logging.DEBUG)
+        self.streamHandler.setLevel(logging.INFO)
         self.fileHandler.setLevel(logging.DEBUG)
 
-        formatter = logging.Formatter("%(asctime)s %(name)s %(levelname)s %(message)s")
+        formatter = logging.Formatter("%(asctime)s %(threadName)s %(levelname)s %(message)s")
         self.streamHandler.setFormatter(formatter)
         self.fileHandler.setFormatter(formatter)
 
