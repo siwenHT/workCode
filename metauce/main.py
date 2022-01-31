@@ -125,7 +125,7 @@ class openUrl:
 
     def element_hide(self, element):
         try:
-            self._browser.execute_script("arguments[0].style.display='block';", element)
+            self._browser.execute_script("arguments[0].style.display='none';", element)
         except Exception as ex:
             pass
 
@@ -401,25 +401,24 @@ class openUrl:
             collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
             collectEls = self.find_elements_loop(By.XPATH, self._browser, collectKey, 5)
             if collectEls:
-                count = 1
+                count = 0
                 remainKey = ".//div/ul/li[4]/span[2]"
                 removeKey = ".//div[@class='list_c']/div/div/p[@class='ones']"
                 Log.info(f"removeTruck has {len(collectEls)} truck !")
                 for one in collectEls:
+                    count += 1
                     carlistKey = ".//div[@class='right']/div[@class='list_data']"
                     carlistEl = self.find_element(By.XPATH, one, carlistKey)
                     if carlistEl:
-                        self.element_hide(carlistEl)
-
-                for one in collectEls:
-                    remainEl = self.find_element(By.XPATH, one, remainKey)
-                    removeEl = self.find_element(By.XPATH, one, removeKey)
-                    Log.debug(f"try remove {count}")
-                    count += 1
-                    if remainEl and remainEl.text == "0" and removeEl:
-                        self.element_click(removeEl)
-                        Log.info(f" click Remove Truck {count} {removeEl._id} {one._id}")
-                        time.sleep(0.2)
+                        self.element_hide(one)
+                    else:
+                        remainEl = self.find_element(By.XPATH, one, remainKey)
+                        removeEl = self.find_element(By.XPATH, one, removeKey)
+                        Log.debug(f"try remove {count}")
+                        if remainEl and remainEl.text == "0" and removeEl:
+                            self.element_click(removeEl)
+                            Log.info(f" click Remove Truck {count} {removeEl._id} {one._id}")
+                            time.sleep(0.2)
         except Exception as ex:
             pass
 
@@ -595,8 +594,8 @@ def main():
         handler.openGameUrl()
         handler.touchMining()
         handler.touchDepletedBtn()
-        time.sleep(20)
         handler.removeTruck()
+        time.sleep(10)
         handler.closeBrowser()
         Log.info('removeTruck job end')
 
@@ -644,8 +643,8 @@ def main():
         handler.checkBuyTime()
 
     scheduler = BlockingScheduler()
-    temp_date = datetime.datetime.now() + datetime.timedelta(seconds=5)
-    temp_date1 = datetime.datetime.now() + datetime.timedelta(seconds=5)
+    temp_date = datetime.datetime.now() + datetime.timedelta(seconds=10)
+    temp_date1 = datetime.datetime.now() + datetime.timedelta(seconds=12)
     temp_date2 = datetime.datetime.now() + datetime.timedelta(seconds=15)
     temp_date3 = datetime.datetime.now() + datetime.timedelta(seconds=3)
 
@@ -672,7 +671,7 @@ def main():
     # scheduler.add_job(mainFunc, 'date', run_date=temp_date1, max_instances=1)
     # scheduler.add_job(insertTruck, 'date', run_date=temp_date, max_instances=5, args=[3])
     # scheduler.add_job(checkTokenVal, 'date', run_date=temp_date, max_instances=5)
-    # scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
+    scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
 
     scheduler.add_job(bigRun, 'date', run_date=temp_date, max_instances=5)
     scheduler.add_job(openMetaMask, 'date', run_date=datetime.datetime.now(), max_instances=1)
