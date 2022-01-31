@@ -327,14 +327,15 @@ class openUrl:
                     if collectEls:
                         Log.info(f"land current num: {len(collectEls)}")
 
-                    if not collectEls or len(collectEls) < 20:
+                    minLanNum = 10
+                    if not collectEls or len(collectEls) < minLanNum:
                         val = 0 if not collectEls else len(collectEls)
-                        val = (20 - val) * 125
+                        val = (minLanNum - val) * 125
                         val = val if tokenVal > val else tokenVal
                         self.minitTruckOrLand(int(val / 125), 1)
                         # self.checkBuyTime()
                     else:
-                        self.minitTruckOrLand(int(tokenVal / 125), 2)
+                        self.minitTruckOrLand(int((tokenVal - 250) / 125), 2)
         except Exception as ex:
             pass
 
@@ -405,8 +406,8 @@ class openUrl:
                 removeKey = ".//div[@class='list_c']/div/div/p[@class='ones']"
                 Log.info(f"removeTruck has {len(collectEls)} truck !")
                 for one in collectEls:
-                    carlistKey = ".//div[@class='right']"
-                    carlistEl = self.find_element_loop(By.XPATH, one, carlistKey)
+                    carlistKey = ".//div[@class='right']/div[@class='list_data']"
+                    carlistEl = self.find_element(By.XPATH, one, carlistKey)
                     if carlistEl:
                         self.element_hide(carlistEl)
 
@@ -664,14 +665,14 @@ def main():
             except Exception as ex:
                 pass
 
-    scheduler.add_job(removeTruck, 'interval', seconds=30 * 60, id='removeJob', max_instances=5)
+    scheduler.add_job(removeTruck, 'interval', seconds=60 * 60, id='removeJob', max_instances=5)
     # scheduler.add_job(insertTruck, 'interval', seconds=30 * 60, id='insertJob', max_instances=5, args=[3])
     # scheduler.add_job(checkTokenVal, 'interval', seconds=20 * 60, id='checkTokenVal', max_instances=5)
 
     # scheduler.add_job(mainFunc, 'date', run_date=temp_date1, max_instances=1)
     # scheduler.add_job(insertTruck, 'date', run_date=temp_date, max_instances=5, args=[3])
     # scheduler.add_job(checkTokenVal, 'date', run_date=temp_date, max_instances=5)
-    scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
+    # scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
 
     scheduler.add_job(bigRun, 'date', run_date=temp_date, max_instances=5)
     scheduler.add_job(openMetaMask, 'date', run_date=datetime.datetime.now(), max_instances=1)
