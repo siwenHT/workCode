@@ -123,6 +123,12 @@ class openUrl:
             except Exception as ex:
                 pass
 
+    def element_hide(self, element):
+        try:
+            self._browser.execute_script("arguments[0].style.display='block';", element)
+        except Exception as ex:
+            pass
+
     def open_new_tab(self, browser: webdriver):
         oldHandles = browser.window_handles
 
@@ -398,6 +404,12 @@ class openUrl:
                 remainKey = ".//div/ul/li[4]/span[2]"
                 removeKey = ".//div[@class='list_c']/div/div/p[@class='ones']"
                 Log.info(f"removeTruck has {len(collectEls)} truck !")
+                for one in collectEls:
+                    carlistKey = ".//div[@class='right']"
+                    carlistEl = self.find_element_loop(By.XPATH, one, carlistKey)
+                    if carlistEl:
+                        self.element_hide(carlistEl)
+
                 for one in collectEls:
                     remainEl = self.find_element(By.XPATH, one, remainKey)
                     removeEl = self.find_element(By.XPATH, one, removeKey)
