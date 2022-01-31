@@ -18,6 +18,7 @@ from thelog import Log
 from selenium import webdriver
 import toolsFunc as Tool
 import functools
+import threading
 
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -32,6 +33,8 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 url = "https://metauce.org/MetisGame"
 url2 = "chrome://version"
 totalHandler = []
+lock = threading.Lock()
+scheduler = BlockingScheduler()
 
 
 # 一键收矿
@@ -47,6 +50,7 @@ class openUrl:
         totalHandler.append(self)
 
     def closeBrowser(self):
+        lock.acquire()
         try:
             if self._browser and self._handler:
                 self._browser.switch_to.window(self._handler)
@@ -55,6 +59,8 @@ class openUrl:
                 self._handler = None
         except Exception as ex:
             pass
+
+        lock.release()
 
     def find_element_unit(self, by: str, browser: webdriver, key: str, timeOut: int = 10, timeStep: int = 0.5):
         while True:
@@ -139,7 +145,7 @@ class openUrl:
             if newOne not in oldHandles:
                 self._handler = newOne
                 break
-        browser.switch_to.window(newOne)
+        browser.switch_to.window(self._handler)
 
     def get_debug_chrome_opetions(self):
         options = webdriver.ChromeOptions()
@@ -177,7 +183,7 @@ class openUrl:
 
         return options
 
-    def openGameUrl(self):
+    def find_the_browser(self):
         # 打开浏览器
         workPath = os.path.abspath('./res/chrome/chromedriver.exe')
 
@@ -187,8 +193,11 @@ class openUrl:
         Log.debug(f"finded the browser!")
         self._browser = browser
 
-        self.open_new_tab(browser)
-        browser.get(self._url)
+    def openGameUrl(self):
+        self.find_the_browser()
+
+        self.open_new_tab(self._browser)
+        self._browser.get(self._url)
         Log.info(f"open url={self._url}, is ok!")
 
     # 到挖矿界面
@@ -308,7 +317,7 @@ class openUrl:
             self._browser.refresh()
             Log.debug('refreshPage: Ok')
         except Exception as e:
-            Log.info('refreshPage: error!!')
+            Log.debug('refreshPage: error!!')
 
     def checkBuyTime(self):
         try:
@@ -372,7 +381,7 @@ class openUrl:
                             for i in range(times):
                                 self.element_click(tBtn)
                                 Log.info(f"miniting a {flg}!")
-                                time.sleep(8.8)
+                                time.sleep(12)
         except Exception as ex:
             pass
 
@@ -407,8 +416,8 @@ class openUrl:
                 Log.info(f"removeTruck has {len(collectEls)} truck !")
                 for one in collectEls:
                     count += 1
-                    carlistKey = ".//div[@class='right']/div[@class='list_data']"
-                    carlistEl = self.find_element(By.XPATH, one, carlistKey)
+                    carlistKey = ".//div/div[@class='list_data']"
+                    carlistEl = self.find_element_loop(By.XPATH, one, carlistKey)
                     if carlistEl:
                         self.element_hide(one)
                     else:
@@ -420,6 +429,7 @@ class openUrl:
                             Log.info(f" click Remove Truck {count} {removeEl._id} {one._id}")
                             time.sleep(0.2)
         except Exception as ex:
+            Log.exception("removeTruck error:")
             pass
 
         Log.info(f"removeTruck end!")
@@ -581,9 +591,6 @@ class openUrl:
             self._wakuangRun += 1
 
 
-#取车
-#收菜
-#
 def main():
     Tool.showParams()
 
@@ -642,7 +649,6 @@ def main():
         handler.touchOneRemainBtn()
         handler.checkBuyTime()
 
-    scheduler = BlockingScheduler()
     temp_date = datetime.datetime.now() + datetime.timedelta(seconds=10)
     temp_date1 = datetime.datetime.now() + datetime.timedelta(seconds=12)
     temp_date2 = datetime.datetime.now() + datetime.timedelta(seconds=15)
@@ -673,8 +679,25 @@ def main():
     # scheduler.add_job(checkTokenVal, 'date', run_date=temp_date, max_instances=5)
     scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
 
-    scheduler.add_job(bigRun, 'date', run_date=temp_date, max_instances=5)
+    scheduler.add_job(bigRun, 'date', run_date=temp_date, max_instances=5, id="bigrun", name='BigRun')
     scheduler.add_job(openMetaMask, 'date', run_date=datetime.datetime.now(), max_instances=1)
+
+    def checkBrowerHandler():
+        Log.info(f"checkBrowerHandler job")
+        handler = openUrl('')
+        handler.find_the_browser()
+        handlesNum = len(handler._browser.window_handles)
+
+        if True or handlesNum > 3:
+            for one in handler._browser.window_handles:
+                handler._browser.switch_to.window(one)
+                time.sleep(0.5)
+                if handler._browser.title.find("MetaMask"):
+                    Log.debug(f"title:{handler._browser.title}")
+                    handler._browser.close()
+
+    # scheduler.add_job(checkBrowerHandler, 'date', run_date=temp_date2, max_instances=1)
+    scheduler.add_job(checkBrowerHandler, 'interval', seconds=30 * 60, id='checkBrowerHandler', max_instances=1)
     scheduler.start()
 
 
