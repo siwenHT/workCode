@@ -329,7 +329,7 @@ class openUrl:
 
                     if not collectEls or len(collectEls) < 20:
                         val = 0 if not collectEls else len(collectEls)
-                        val = (10 - val) * 125
+                        val = (20 - val) * 125
                         val = val if tokenVal > val else tokenVal
                         self.minitTruckOrLand(int(val / 125), 1)
                         # self.checkBuyTime()
