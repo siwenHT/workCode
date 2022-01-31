@@ -688,7 +688,7 @@ def main():
         handler.find_the_browser()
         handlesNum = len(handler._browser.window_handles)
 
-        if handlesNum > 3:
+        if handlesNum > 4:
             for one in handler._browser.window_handles:
                 handler._browser.switch_to.window(one)
                 time.sleep(0.5)
