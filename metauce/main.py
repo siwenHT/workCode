@@ -688,11 +688,12 @@ def main():
         handler.find_the_browser()
         handlesNum = len(handler._browser.window_handles)
 
+        Log.info(f"checkBrowerHandler {handlesNum}")
         if handlesNum > 4:
             for one in handler._browser.window_handles:
                 handler._browser.switch_to.window(one)
-                time.sleep(0.5)
-                if handler._browser.title.find("MetaMask"):
+                time.sleep(1)
+                if not handler._browser.title.find("MetaMask"):
                     Log.debug(f"title:{handler._browser.title}")
                     handler._browser.close()
 
