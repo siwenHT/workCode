@@ -336,7 +336,7 @@ class openUrl:
                     if collectEls:
                         Log.info(f"land current num: {len(collectEls)}")
 
-                    minLanNum = 10
+                    minLanNum = 15
                     if not collectEls or len(collectEls) < minLanNum:
                         val = 0 if not collectEls else len(collectEls)
                         val = (minLanNum - val) * 125
@@ -352,6 +352,8 @@ class openUrl:
 
     def minitTruckOrLand(self, times, type):
         Log.info(f"minitTruckOrLand {times} {type}")
+        if times == 0:
+            return
         key1 = "//div[@class='menu_left']/ul/li"
         playKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='code']/button[1]"
         landKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='cneter_warp']/div[@class='mining']/p/span"
@@ -448,6 +450,9 @@ class openUrl:
                     one = collectEls[index]
                     remainEl = self.find_element(By.XPATH, one, remainKey)
                     if remainEl and remainEl.text != "0":
+                        fVal = float(remainEl.text)
+                        if fVal < 0:
+                            continue
                         carselEls = self.find_elements(By.XPATH, one, carSelKey)
 
                         Log.debug(f"land {index} not zero remain, has {len(carselEls)} truck!")
