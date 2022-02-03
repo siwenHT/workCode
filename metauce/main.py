@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ast import While, arg
+from ast import Try, While, arg
 from cgitb import handler
 import datetime
 from gc import collect
@@ -595,6 +595,15 @@ class openUrl:
 
             self._wakuangRun += 1
 
+    def clickReward(self):
+        try:
+            key = "//div[@class='row']/div[@class='col-12.px-3']/div[2]"
+            element = self.find_element_loop(By.XPATH, self._browser, key)
+            if element:
+                self.element_click(element)
+        except Exception as ex:
+            pass
+
 
 def main():
     Tool.showParams()
@@ -707,5 +716,20 @@ def main():
     scheduler.start()
 
 
+def main2():
+
+    def touchBtn():
+        try:
+            handler = openUrl('https://www.coingecko.com/account/candy?locale=zh')
+            handler.openGameUrl()
+            handler.clickReward()
+            handler.closeBrowser()
+        except Exception as ex:
+            pass
+
+    scheduler.add_job(touchBtn, 'cron', hour='10', id='touchBtn', max_instances=1)
+    scheduler.start()
+
+
 if __name__ == "__main__":
-    main()
+    main2()
