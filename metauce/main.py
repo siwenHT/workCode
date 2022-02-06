@@ -597,10 +597,10 @@ class openUrl:
 
     def clickReward(self):
         try:
-            key = "//div[@class='row']/div[@class='col-12.px-3']/div[2]"
+            key = "//div[@class='row']/div/form"
             element = self.find_element_loop(By.XPATH, self._browser, key)
             if element:
-                self.element_click(element)
+                element.submit()
         except Exception as ex:
             pass
 
@@ -723,10 +723,11 @@ def main2():
             handler = openUrl('https://www.coingecko.com/account/candy?locale=zh')
             handler.openGameUrl()
             handler.clickReward()
-            handler.closeBrowser()
+            # handler.closeBrowser()
         except Exception as ex:
             pass
 
+    # scheduler.add_job(touchBtn, 'date', run_date=datetime.datetime.now(), max_instances=1)
     scheduler.add_job(touchBtn, 'cron', hour='10', id='touchBtn', max_instances=1)
     scheduler.start()
 
