@@ -72,7 +72,7 @@ class messageAuto:
             now = time.time()
             for config in self.CMG.dataList:
                 timeInv = config.get_discord_time_interval()
-                if config.errorTime > 10:
+                if config.errorTime > config.getErrorLimite():
                     continue
 
                 if config.timeRecode == NONE or now - config.timeRecode > timeInv:
@@ -83,6 +83,6 @@ class messageAuto:
         #创建调度器：BlockingScheduler
         scheduler = BlockingScheduler()
         #添加任务,时间间隔2S
-        scheduler.add_job(func, 'interval', seconds=1, id='job', max_instances=100)
+        scheduler.add_job(func, 'interval', seconds=0.2, id='job', max_instances=100)
 
         scheduler.start()
