@@ -44,6 +44,3 @@ class ConfigManager:
 
     def getList(self):
         return self.dataList
-
-    def getErrorLimite(self):
-        return self.baseJson.get("errorTimes", 10)

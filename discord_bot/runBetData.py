@@ -43,3 +43,6 @@ class RunBetData:
 
     def get_show_name(self):
         return self.config.get("discord_name", "未配置")
+
+    def getErrorLimite(self):
+        return self.config.get("errorTimes", 10)

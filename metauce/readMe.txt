@@ -13,3 +13,5 @@ C:\Program Files\Google\Chrome\Application\chrome.exe --remote-debugging-port=95
 
 
 pip freeze > requirements.txt
+
+taskkill /f /im chrome.exe
