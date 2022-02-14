@@ -2,9 +2,9 @@
   "discord_name": "complex-cn",
   "discord_link": "discord.gg/fYajyvhY",
   "channel_id": "940139325792874537",
-  "time_interval": 3,
-  "errorTimes": 100000,
+  "time_interval": 2.9,
+  "errorTimes": 20,
   "mes": [
-    "Complex to the moon"
+    "Complex to the moon!! Complex to the moon !!Complex to the moon!! "
   ]
 }

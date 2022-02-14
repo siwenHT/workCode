@@ -1,0 +1,12 @@
+{
+  "discord_name": "whitelist-cn",
+  "discord_link": "discord.gg/fnU8VuCs",
+  "channel_id": "932611791232598088",
+  "time_interval": 10,
+  "errorTimes": 20,
+  "mes": [
+    "聊起来",
+    "加油啊",
+    "3级就好了"
+  ]
+}

@@ -47,16 +47,16 @@ class messageAuto:
                 "content": message_content,
                 "tts": "false",
             }
-            conn = HTTPSConnection('127.0.0.1', 7891)
+            conn = HTTPSConnection('127.0.0.1', 7890)
             conn.set_tunnel("discordapp.com", 443)
             conn.request("POST", f"/api/v6/channels/{channel_id}/messages", dumps(message_data), header)
             resp = conn.getresponse()
 
             if 199 < resp.status < 300:
-                Log.debug(f"succ! link: {showName}, channel:{channel_id} content:{str(message_data)}")
-
+                Log.debug(f"succ! link: {showName}, content:{str(message_data)}")
+                config.errorTime = 0
             else:
-                Log.error(f"fail! code: {resp.status}, reason : {resp.reason}")
+                Log.error(f"fail! link: {showName}, code: {resp.status}, reason : {resp.reason}")
                 config.errorTime = config.errorTime + 1
 
             resp.close()

@@ -1,12 +1,16 @@
 {
-  "token": "ODk3ODg0OTkyMTI5MTA1OTIw.YgOlWA.4gKvhpVpGqmUTHFZxn-Qdp5GeO8",
+  "token": "ODk3ODg0OTkyMTI5MTA1OTIw.YgZJDg.emJj42ALyqJgweo97TuU_89sJSE",
   "file_name": {
     "LGG-china": 0,
     "shibaIsland": 0,
     "secondLive": 0,
     "dominimDao-en": 0,
-    "complex-cn": 0,
-    "SnapFingers-cn": 1,
+    "complex-cn": 1,
+    "SnapFingers-cn": 0,
+    "farmsifgalileo_1":0,
+    "farmsifgalileo_2":0,
+    "farmsifgalileo_3":0,
+    "whitelist-cn":0,
     "LGG-english": 0
   }
 }
