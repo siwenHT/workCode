@@ -9,12 +9,13 @@
 '''
 
 # here put the import lib
-
+from Until.MyLog import Log
 
 class BaseJob():
 
     def __init__(self) -> None:
         self._isStop = False
+        self._jobName = ''
         pass
     
     def pause(self):
@@ -23,3 +24,9 @@ class BaseJob():
     def resume(self):
         self._isStop = False
         
+    def done(self):
+        try:
+            self.doJob()
+        except Exception as ex:
+            Log.exception(f"Job:{self._jobName} error:")
+            pass

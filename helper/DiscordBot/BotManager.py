@@ -9,21 +9,25 @@
 '''
 
 # here put the import lib
-from BaseJob import BaseJob
 
 # discord 聊天管理
-class BotManager(BaseJob):
+class BotManager():
 
     def __init__(self) -> None:
         pass
 
-    def LoadBaseConfig():
+    def LoadBaseConfig(self):
         pass
 
-    def LoadBotConfigs():
+    def LoadBotConfigs(self):
         pass
 
-    
+    def doJob(self):
+        pass
+
+    def ChangeBotConfigSetByUI(self):
+        pass
+
 
 
 # # 配置文件路径

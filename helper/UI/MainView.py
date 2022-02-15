@@ -13,8 +13,7 @@ import JobManager
 
 class MainView():
     def __init__(self, jobManager: JobManager) -> None:
-        self.data = {}
-        self.data.jobManager = jobManager
+        self._jobManager : JobManager = jobManager
         pass
 
     def InitUI(self):
