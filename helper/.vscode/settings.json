@@ -4,5 +4,6 @@
         "--style",
         "{column_limit: 200}"
     ],
+    "editor.formatOnSave": true,
     "editor.formatOnType": true
 }

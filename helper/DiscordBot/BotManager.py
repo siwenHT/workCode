@@ -5,42 +5,37 @@
 @Time    :   2022/02/15 01:22:51
 @Author  :   hongtao
 @Contact :   hongtao353@gmail.com
-@Desc    :   聊天机器人配置管理
+@Desc    :   聊天机器人管理
 '''
 
 # here put the import lib
 
-# discord 聊天管理
+import os
+from DiscordBot.BotConfig import BotConfig
+from Until.Scheduler import TheScheduler
+from Until.WinSysytem import Win
+from Until import ToolsFunc as Tool
+
+
 class BotManager():
 
     def __init__(self) -> None:
-        pass
-
-    def LoadBaseConfig(self):
-        pass
+        self._configPath = os.path.join(Win.GetWorkPath(), 'Res/BotConfig')
+        self.LoadBotConfigs()
 
     def LoadBotConfigs(self):
-        pass
+        self._dataList = []
+        fileList = Tool.ListFile(self._configPath)
 
-    def doJob(self):
-        pass
+        switch = Win.DiscordSwitch()
+        for filePath in fileList:
+            (filepath, shotname, extension) = Tool.getFile_path_name_suf(filePath)
+            if switch.get(shotname, 0) == 1:
+                oneData = BotConfig(filePath)
+                self._dataList.append(oneData)
+
+    def GetList(self):
+        return self._dataList
 
     def ChangeBotConfigSetByUI(self):
         pass
-
-
-
-# # 配置文件路径
-# # pip freeze > requirements.txt
-# def configPath():
-#     return os.getcwd() + "/config"
-
-
-# def main():
-#     Log.warning('==========@begin')
-#     CMG = configMG(configPath(), "baseConfig.json")
-#     CMG.showList()
-
-#     auto = messageAuto(CMG)
-#     auto.start()
-#     Log.warning('@end')

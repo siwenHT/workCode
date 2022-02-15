@@ -9,13 +9,14 @@
 '''
 
 # here put the import lib
-from DiscordBot.BotManager import BotManager
 from Until.Scheduler import TheScheduler
 from Jobs.DiscordJob import DiscordJob
+
 
 class JobManager():
 
     def __init__(self) -> None:
+        self._jobs = []
         pass
 
     def pause(self):
@@ -25,5 +26,10 @@ class JobManager():
         pass
 
     def start(self):
-        pass
+        self._jobs.append(DiscordJob())
 
+        for job in self._jobs:
+            job.AddJob()
+
+        TheScheduler.start()
+        pass

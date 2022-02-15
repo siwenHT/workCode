@@ -1,0 +1,7 @@
+2022-02-16 02:39:29,509 logger ERROR fail! link: farmsifgalileo-1, code: 429, reason : Too Many Requests
+2022-02-16 02:39:29,631 logger ERROR fail! link: farmsifgalileo-2, code: 429, reason : Too Many Requests
+2022-02-16 02:39:29,758 logger ERROR fail! link: farmsifgalileo-3, code: 429, reason : Too Many Requests
+2022-02-16 02:39:29,948 logger DEBUG succ! link: gm, content:{'content': 'gm', 'tts': 'false'}
+2022-02-16 02:39:31,817 logger DEBUG succ! link: gm, content:{'content': 'gm', 'tts': 'false'}
+2022-02-16 02:39:41,949 logger DEBUG succ! link: gm, content:{'content': 'gm', 'tts': 'false'}
+2022-02-16 02:39:44,137 logger DEBUG succ! link: gm, content:{'content': 'gm', 'tts': 'false'}

@@ -17,6 +17,9 @@ import time
 import struct
 import unicodedata
 import datetime
+import json
+
+from Until.MyLog import Log
 
 
 def ReadFile(filePath):
@@ -440,3 +443,13 @@ def parse_json_str(jsonStr: str):
             break
 
     return jsonStr
+
+def initJsonFromFile(filePath):
+    fileCon = ReadFile(filePath)
+    fileCon = parse_json_str(fileCon.decode('utf-8'))
+    try:
+        retJson = json.loads(fileCon)
+    except Exception as ex:
+        Log.info(f"file : {filePath} not a json")
+
+    return retJson

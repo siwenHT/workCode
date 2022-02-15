@@ -14,7 +14,9 @@ from Until import ToolsFunc as TOOL
 from Until.MyLog import Log
 from UI.MainView import MainView
 from Until.Scheduler import TheScheduler
-import JobManager
+from Until.WinSysytem import Win
+from JobManager import JobManager
+
 
 def main():
     TOOL.showParams()
@@ -25,7 +27,8 @@ def main():
     #加载界面
     thisView = MainView(JobMG)
 
-    TheScheduler.start()
+    JobMG.start()
+
 
 if __name__ == "__main__":
     main()

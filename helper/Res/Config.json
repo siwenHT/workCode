@@ -1,0 +1,19 @@
+{
+    "http_ip": "127.0.0.1",
+    "http_port": 7890,
+    "discord_token": "ODk3ODg0OTkyMTI5MTA1OTIw.YgrtbQ.P7CnAsuwj95mR02MmyoWj8gxub4",
+    "discord_switch": {
+        "LGG-china": 0,
+        "shibaIsland": 0,
+        "secondLive": 0,
+        "dominimDao-en": 0,
+        "complex-cn": 1,
+        "SnapFingers-cn": 0,
+        "farmsifgalileo_1": 1,
+        "farmsifgalileo_2": 1,
+        "farmsifgalileo_3": 1,
+        "gm": 1,
+        "whitelist-cn": 0,
+        "LGG-english": 0
+    }
+}

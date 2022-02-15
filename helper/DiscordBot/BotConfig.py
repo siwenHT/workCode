@@ -16,41 +16,56 @@ from random import choice
 
 
 class BotConfig():
+
     def __init__(self, filePath) -> None:
         self.filePath = filePath
-        self.config: json = self.get_discord_config(self.filePath)
         self.timeRecode = NONE
         self.errorTime = 0
+        self._idx = 0
 
-    def get_discord_config(self, filePath):
-        fileCon = Tool.ReadFile(filePath)
-        fileCon = Tool.parse_json_str(fileCon.decode('utf-8'))
-        return json.loads(fileCon)
+        self.InitCfg()
 
-    def get_discord_message_index(self, index):
-        mlen = self.get_discord_message_len()
-        if index > 0 and index < mlen:
-            return self.config['mes'][index]
+    def InitCfg(self):
+        self._config: json = Tool.initJsonFromFile(self.filePath)
 
-        return ""
+    def RandomMessage(self):
+        return choice(self._config['mes'])
 
-    def get_discore_ramdom_message(self):
-        return choice(self.config['mes'])
+    def ChannelID(self):
+        return self._config.get("channel_id", "")
 
-    def get_discord_channel_id(self):
-        return self.config["channel_id"]
+    def TimeInterval(self):
+        return self._config["time_interval"]
 
-    def get_discord_message_len(self):
-        return len(self.config['mes'])
+    def ChannelLink(self):
+        return self._config.get('discord_link', "未配置")
 
-    def get_discord_time_interval(self):
-        return self.config["time_interval"]
+    def ShowName(self):
+        return self._config.get("discord_name", "未配置")
 
-    def get_channel_link(self):
-        return self.config['discord_link']
+    def ErrorLimite(self):
+        return self._config.get("errorTimes", 10)
 
-    def get_show_name(self):
-        return self.config.get("discord_name", "未配置")
+    def ChannelIDs(self):
+        return self._config.get("channel_ids", None)
 
-    def getErrorLimite(self):
-        return self.config.get("errorTimes", 10)
+    def StepTime(self):
+        return self._config.get("stepTime", 2)
+
+    def NextChannelID(self):
+        channelIds = self.ChannelIDs()
+        if channelIds:
+            if self._idx < len(channelIds):
+                return channelIds[self._idx]
+            else:
+                return None
+        else:
+            return None
+
+    def StepNextChannel(self):
+        self._idx += 1
+        if self.ChannelIDs() and self._idx >= len(self.ChannelIDs()):
+            self._idx = 0
+
+    def GetCurrentIdx(self):
+        return self._idx

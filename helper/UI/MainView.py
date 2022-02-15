@@ -11,9 +11,11 @@
 # here put the import lib
 import JobManager
 
+
 class MainView():
+
     def __init__(self, jobManager: JobManager) -> None:
-        self._jobManager : JobManager = jobManager
+        self._jobManager: JobManager = jobManager
         pass
 
     def InitUI(self):

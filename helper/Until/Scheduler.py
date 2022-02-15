@@ -14,9 +14,8 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 class Scheduler(BlockingScheduler):
 
-    def __init__(self, gconfig=..., **options):
-        super().__init__(gconfig, **options)
+    def __init__(self, *args, **options):
+        super().__init__(*args, **options)
 
-    
 
 TheScheduler = Scheduler()

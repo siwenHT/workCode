@@ -10,23 +10,27 @@
 
 # here put the import lib
 from Until.MyLog import Log
+from Until.Scheduler import TheScheduler
+
 
 class BaseJob():
 
     def __init__(self) -> None:
         self._isStop = False
         self._jobName = ''
-        pass
-    
-    def pause(self):
+
+    def Pause(self):
         self._isStop = True
 
-    def resume(self):
+    def Resume(self):
         self._isStop = False
-        
-    def done(self):
+
+    def Done(self, *args, **kwargs):
         try:
-            self.doJob()
+            self.DoJob(*args, **kwargs)
         except Exception as ex:
             Log.exception(f"Job:{self._jobName} error:")
             pass
+
+    # def AddJob(self, *args, **kwargs):
+    #     TheScheduler.add_job(self.Done, args=[self], *args, **kwargs)

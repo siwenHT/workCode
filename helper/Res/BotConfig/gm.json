@@ -1,0 +1,13 @@
+{
+  "discord_name": "gm",
+  "channel_ids": [
+    "898746543652343822",
+    "899301084047228929"
+  ],
+  "time_interval": 10,
+  "stepTime": 2,
+  "errorTimes": 20,
+  "mes": [
+    "gm"
+  ]
+}
