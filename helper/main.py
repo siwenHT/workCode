@@ -12,7 +12,7 @@
 import os
 from Until import ToolsFunc as TOOL
 from Until.MyLog import Log
-from UI.MainView import MainView
+from UI.MainWindow import MainWindow
 from Until.Scheduler import TheScheduler
 from Until.WinSysytem import Win
 from JobManager import JobManager
@@ -32,7 +32,7 @@ def main():
     JobMG = JobManager()
 
     #加载界面
-    thisView = MainView(JobMG)
+    # thisView = MainWindow(JobMG)
 
     JobMG.start()
 

@@ -445,11 +445,13 @@ class openUrl:
                 Log.info(f"insertTruck has {len(collectEls)} truck !")
 
                 remainKey = ".//div/ul/li[4]/span[2]"
+                minedKey = f".//div/ul/li[3]"
                 carSelKey = f".//div[@class='right']/div[@class='list_data']/ul/li"
                 for index in range(len(collectEls)):
                     one = collectEls[index]
                     remainEl = self.find_element(By.XPATH, one, remainKey)
-                    if remainEl and remainEl.text != "0":
+                    minedEl = self.find_element(By.XPATH, one, minedKey)
+                    if remainEl and remainEl.text != "0" and minedEl and minedEl.text == 'Mined : 0 MINES':
                         fVal = float(remainEl.text)
                         if fVal < 0:
                             continue
@@ -555,19 +557,19 @@ class openUrl:
 
             try:
                 time.sleep(10)
-                selAllKey = "//div[@class='header_search']/label/span/span"
-                collectAllKey = "//div[@class='header_search']/button"
                 flg = False
-                selAllEl = self.find_element_loop(By.XPATH, self._browser, selAllKey)
-                if selAllEl:
-                    self.element_click(selAllEl)
-                    time.sleep(10)
-                    collectAllEl = self.find_element_loop(By.XPATH, self._browser, collectAllKey)
-                    if collectAllEl:
-                        self.element_click(collectAllEl)
-                        Log.info(f"one time collect all!")
-                        time.sleep(5)
-                        flg = True
+                # selAllKey = "//div[@class='header_search']/label/span/span"
+                # collectAllKey = "//div[@class='header_search']/button"
+                # selAllEl = self.find_element_loop(By.XPATH, self._browser, selAllKey)
+                # if selAllEl:
+                #     self.element_click(selAllEl)
+                #     time.sleep(10)
+                #     collectAllEl = self.find_element_loop(By.XPATH, self._browser, collectAllKey)
+                #     if collectAllEl:
+                #         self.element_click(collectAllEl)
+                #         Log.info(f"one time collect all!")
+                #         time.sleep(5)
+                #         flg = True
 
                 if not flg:
                     wakuangs1 = self.find_elements_loop(By.CLASS_NAME, self._browser, wakuangbox, 3)
@@ -601,8 +603,13 @@ class openUrl:
             element = self.find_element_loop(By.XPATH, self._browser, key)
             if element:
                 element.submit()
+                return True
+            else:
+                Log.info(f"111")
         except Exception as ex:
             pass
+
+        return False
 
 
 def main():
@@ -677,21 +684,17 @@ def main():
     def bigRun():
         while True:
             try:
-                mainFunc()
+                # mainFunc()
                 # removeTruck()
                 insertTruck(3)
                 checkTokenVal()
+
+                time.sleep(60 * 60)
             except Exception as ex:
                 pass
 
     scheduler.add_job(removeTruck, 'interval', seconds=60 * 60, id='removeJob', max_instances=5)
-    # scheduler.add_job(insertTruck, 'interval', seconds=30 * 60, id='insertJob', max_instances=5, args=[3])
-    # scheduler.add_job(checkTokenVal, 'interval', seconds=20 * 60, id='checkTokenVal', max_instances=5)
-
-    # scheduler.add_job(mainFunc, 'date', run_date=temp_date1, max_instances=1)
-    # scheduler.add_job(insertTruck, 'date', run_date=temp_date, max_instances=5, args=[3])
-    # scheduler.add_job(checkTokenVal, 'date', run_date=temp_date, max_instances=5)
-    scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
+    # scheduler.add_job(removeTruck, 'date', run_date=temp_date2, max_instances=5)
 
     scheduler.add_job(bigRun, 'date', run_date=temp_date, max_instances=5, id="bigrun", name='BigRun')
     scheduler.add_job(openMetaMask, 'date', run_date=datetime.datetime.now(), max_instances=1)
@@ -703,34 +706,41 @@ def main():
         handlesNum = len(handler._browser.window_handles)
 
         Log.info(f"checkBrowerHandler {handlesNum}")
-        if handlesNum > 4:
+        if handlesNum > 5:
             for one in handler._browser.window_handles:
                 handler._browser.switch_to.window(one)
                 time.sleep(1)
-                if not handler._browser.title.find("MetaMask"):
+                if handler._browser.title.find("MetaMask") != 0:
                     Log.debug(f"title:{handler._browser.title}")
                     handler._browser.close()
 
     # scheduler.add_job(checkBrowerHandler, 'date', run_date=temp_date2, max_instances=1)
-    scheduler.add_job(checkBrowerHandler, 'interval', seconds=30 * 60, id='checkBrowerHandler', max_instances=1)
-    scheduler.start()
+    scheduler.add_job(checkBrowerHandler, 'interval', seconds=60 * 60, id='checkBrowerHandler', max_instances=1)
 
+    # 这边是领取糖果的
+    errCount = 0
 
-def main2():
-
-    def touchBtn():
+    def touchBtn(errCount):
         try:
+            Log.info(f"touchBtn begin")
             handler = openUrl('https://www.coingecko.com/account/candy?locale=zh')
             handler.openGameUrl()
-            handler.clickReward()
-            # handler.closeBrowser()
+            time.sleep(5)
+            if handler.clickReward():
+                handler.closeBrowser()
+                return
         except Exception as ex:
             pass
 
-    # scheduler.add_job(touchBtn, 'date', run_date=datetime.datetime.now(), max_instances=1)
-    scheduler.add_job(touchBtn, 'cron', hour='10', id='touchBtn', max_instances=1)
+        if errCount < 10:
+            time.sleep(60)
+            errCount += 1
+            touchBtn(errCount)
+
+    # scheduler.add_job(touchBtn, 'date', run_date=datetime.datetime.now(), max_instances=1, args=[errCount])
+    scheduler.add_job(touchBtn, 'cron', hour='10', id='touchBtn', max_instances=1, args=[errCount])
     scheduler.start()
 
 
 if __name__ == "__main__":
-    main2()
+    main()

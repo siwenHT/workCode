@@ -13,7 +13,7 @@ import JobManager
 import tkinter as tk
 
 
-class MainView():
+class MainWindow():
 
     def __init__(self, jobManager: JobManager) -> None:
         self._jobManager: JobManager = jobManager
