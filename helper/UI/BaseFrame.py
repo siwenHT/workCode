@@ -17,4 +17,20 @@ class BaseFrame(tk.Frame):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
-    
+    def CreateButton(self, *args, **kwargs):
+        bt_1 = tk.Button(self, *args, **kwargs)
+        return bt_1
+
+    def DefineLayout(self, obj, cols=1, rows=1):
+
+        def method(trg, col, row):
+            for c in range(cols):
+                trg.columnconfigure(c, weight=1)
+            for r in range(rows):
+                trg.rowconfigure(r, weight=1)
+
+        if type(obj) == list:
+            [method(trg, cols, rows) for trg in obj]
+        else:
+            trg = obj
+            method(trg, cols, rows)

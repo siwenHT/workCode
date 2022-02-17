@@ -11,8 +11,10 @@
 # here put the import lib
 import tkinter as tk
 
+from UI.BaseFrame import BaseFrame
 
-class DiscordFrame(tk.Frame):
+
+class DiscordFrame(BaseFrame):
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)

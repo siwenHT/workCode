@@ -30,10 +30,6 @@ def main():
 
     #加载所有配置任务
     JobMG = JobManager()
-
-    #加载界面
-    # thisView = MainWindow(JobMG)
-
     JobMG.start()
 
 

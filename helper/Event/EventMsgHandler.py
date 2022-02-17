@@ -11,6 +11,7 @@
 # here put the import lib
 
 from Event.EventType import EventType
+from Until.MyLog import Log
 
 
 class EventMsgHandler():
@@ -19,32 +20,38 @@ class EventMsgHandler():
         self.callBacks = {}
         pass
 
-    def RegedistEvent(self, eventType: EventType, callBack: function, caller: object = None):
+    def RegedistEvent(self, eventType: EventType, callBack, caller: object = None):
         if not self.callBacks.get(eventType, None):
             self.callBacks[eventType] = []
 
         callInfo = {}
-        callInfo.callFunc = callBack
-        callInfo.caller = caller
+        callInfo["callFunc"] = callBack
+        callInfo["caller"] = caller
         self.callBacks[eventType].append(callInfo)
 
-    def UnRegedistEvent(self, eventType: EventType, callBack: function):
+    def UnRegedistEvent(self, eventType: EventType, callBack):
         if eventType:
             eventList = self.callBacks.get(eventType, None)
             if eventList:
-                eventList = [item for item in eventList if (item.callBack != callBack)]
+                eventList = [item for item in eventList if (item.get("callFunc") != callBack)]
                 self.callBacks[eventType] = eventList
         else:
             for eventType, eventList in self.callBacks:
-                eventList = [item for item in eventList if (item.callBack != callBack)]
+                eventList = [item for item in eventList if (item.get("callFunc") != callBack)]
                 self.callBacks[eventType] = eventList
 
     def Dispatch(self, eventType: EventType, *args, **kwargs):
-        if eventType:
-            eventList = self.callBacks.get(eventType, None)
-            if eventList:
-                for callInfo in eventList:
-                    if callInfo.caller:
-                        callInfo.callFunc(callInfo.caller, *args, **kwargs)
-                    else:
-                        callInfo.callFunc(*args, **kwargs)
+        try:
+            if eventType:
+                eventList = self.callBacks.get(eventType, None)
+                if eventList:
+                    for callInfo in eventList:
+                        if callInfo.get("caller"):
+                            callInfo.get("callFunc")(eventType, callInfo.get("caller"), *args, **kwargs)
+                        else:
+                            callInfo.get("callFunc")(eventType, *args, **kwargs)
+        except Exception as ex:
+            Log.exception("Dispatch error:")
+
+
+GEventHandler = EventMsgHandler()

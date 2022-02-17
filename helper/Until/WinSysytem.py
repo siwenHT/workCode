@@ -10,6 +10,8 @@
 
 # here put the import lib
 import os
+from Event.EventMsgHandler import GEventHandler
+from Event.EventType import EventType
 from Until import ToolsFunc as TOOL
 from Until.MyLog import Log
 
@@ -21,6 +23,7 @@ class WinSystem():
         self._configFilePath = os.path.join(self.GetWorkPath(), 'Res/Config.json')
 
         self.InitConfig()
+        self.MsgRegeist()
 
     def InitConfig(self):
         self._commonConfig = TOOL.initJsonFromFile(self._configFilePath)
@@ -63,6 +66,14 @@ class WinSystem():
             retStr = retStr + self._ensKey[idx]
 
         return retStr
+
+    def MsgRegeist(self):
+
+        def msgHandler(eventType: EventType):
+            if eventType == EventType.reload_config:
+                self.InitConfig()
+
+        GEventHandler.RegedistEvent(EventType.reload_config, msgHandler)
 
 
 Win = WinSystem()

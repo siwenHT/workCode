@@ -12,6 +12,8 @@
 
 import os
 from DiscordBot.BotConfig import BotConfig
+from Event.EventMsgHandler import GEventHandler
+from Event.EventType import EventType
 from Until.Scheduler import TheScheduler
 from Until.WinSysytem import Win
 from Until import ToolsFunc as Tool
@@ -22,6 +24,7 @@ class BotManager():
     def __init__(self) -> None:
         self._configPath = os.path.join(Win.GetWorkPath(), 'Res/BotConfig')
         self.LoadBotConfigs()
+        self.MsgRegeist()
 
     def LoadBotConfigs(self):
         self._dataList = []
@@ -39,3 +42,11 @@ class BotManager():
 
     def ChangeBotConfigSetByUI(self):
         pass
+
+    def MsgRegeist(self):
+
+        def msgHandler(eventType: EventType):
+            if eventType == EventType.reload_config:
+                self.InitConfig()
+
+        GEventHandler.RegedistEvent(EventType.reload_config, msgHandler)

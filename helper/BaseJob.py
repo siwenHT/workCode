@@ -27,6 +27,9 @@ class BaseJob():
 
     def Done(self, *args, **kwargs):
         try:
+            if self._isStop:
+                return
+
             self.DoJob(*args, **kwargs)
         except Exception as ex:
             Log.exception(f"Job:{self._jobName} error:")

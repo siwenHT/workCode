@@ -21,18 +21,22 @@ class MyLog:
         self.logger = logging.getLogger("logger")
 
         self.streamHandler = logging.StreamHandler()
-        self.fileHandler = logging.FileHandler(filename="test.log", mode='w')
+        self.fileHandler = logging.FileHandler(filename="Res/log/test.log", mode='w')
+        self.fileHandler1 = logging.FileHandler(filename="Res/log/test_info.log", mode='w')
 
         self.logger.setLevel(logging.DEBUG)
-        self.streamHandler.setLevel(logging.DEBUG)
+        self.streamHandler.setLevel(logging.INFO)
         self.fileHandler.setLevel(logging.DEBUG)
+        self.fileHandler1.setLevel(logging.INFO)
 
         formatter = logging.Formatter("%(asctime)s %(name)s %(levelname)s %(message)s")
         self.streamHandler.setFormatter(formatter)
         self.fileHandler.setFormatter(formatter)
+        self.fileHandler1.setFormatter(formatter)
 
         self.logger.addHandler(self.streamHandler)
         self.logger.addHandler(self.fileHandler)
+        self.logger.addHandler(self.fileHandler1)
 
     def debug(self, msg, *args, **kwargs):
         self.logger.debug(msg, *args, **kwargs)
