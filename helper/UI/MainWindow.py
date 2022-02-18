@@ -78,12 +78,15 @@ class MainWindow():
         tab2 = ttk.Frame(tabControl)  # Add a second tab
         tabControl.add(tab2, text='Bot')  # Make second tab visible
 
+        tab3 = ttk.Frame(tabControl)  # Add a second tab
+        tabControl.add(tab3, text='jobList')  # Make second tab visible
+
         tabControl.pack(expand=1, fill="both")  # Pack to make visible
 
         # self._menuFrame = MainMenuFrame(self._window, bg='green')
-        self._mainFrame = MainFrame(tab1, bg='blue')
+        self._mainFrame = MainFrame(tab1, bg='black')
         self._mainFrame.grid(column=0, row=0)
-        self._mainFrame.InitUI()
+        # self._mainFrame.InitUI()
         # self._BotFrame = DiscordFrame(self._window, width=self._width * 2, height=bottomHeight, bg='orange')
 
         # self._menuFrame.place(x=0, y=0, relwidth=self._width * 2, relheight=menuHeight)

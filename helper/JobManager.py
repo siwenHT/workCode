@@ -11,6 +11,7 @@
 # here put the import lib
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
+from Jobs.RefreshTimeLabel import RefreshTimeLabel
 from Jobs.WindowJob import WindowJob
 from Until.Scheduler import TheScheduler
 from Jobs.DiscordJob import DiscordJob
@@ -22,6 +23,9 @@ class JobManager():
         self._jobs = []
         self.MsgRegeist()
 
+    def GetAllJobList(self):
+        pass
+
     def pause(self):
         pass
 
@@ -31,6 +35,7 @@ class JobManager():
     def start(self):
         # self._jobs.append(DiscordJob())
         self._jobs.append(WindowJob())
+        self._jobs.append(RefreshTimeLabel())
 
         for job in self._jobs:
             job.AddJob()

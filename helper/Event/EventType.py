@@ -20,6 +20,7 @@ class EventType(Enum):
     bot_btn_click = 3
     reload_config = 4
     pause_all_job = 5
-    resume_all_job = 5
+    resume_all_job = 6
+    refrest_time_label = 7
 
     End = 1000

@@ -164,6 +164,10 @@ def showTime():
     return datetime.datetime.now().strftime('[%Y-%m-%d %H:%M:%S  %f]')
 
 
+def UtcTime():
+    return datetime.datetime.utcnow().strftime('[%Y-%m-%d %H:%M:%S  %f]')
+
+
 def getRandomStr(num, key1=1, key2=255):
     ret = ""
     count = 1
@@ -443,6 +447,7 @@ def parse_json_str(jsonStr: str):
             break
 
     return jsonStr
+
 
 def initJsonFromFile(filePath):
     fileCon = ReadFile(filePath)

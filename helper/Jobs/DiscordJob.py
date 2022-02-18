@@ -52,4 +52,4 @@ class DiscordJob(BaseJob):
         pass
 
     def AddJob(self):
-        TheScheduler.add_job(self.Done, 'interval', seconds=0.1, id='job', max_instances=100, args=[self])
+        TheScheduler.add_job(self.Done, 'interval', seconds=0.1, id='botJob', max_instances=100, args=[self])
