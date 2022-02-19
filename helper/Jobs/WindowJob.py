@@ -21,12 +21,11 @@ class WindowJob(BaseJob):
 
     def __init__(self) -> None:
         super().__init__()
-        self._jobName = ""
 
     def DoJob(self, *args, **kwargs):
         self._window = MainWindow()
         pass
 
-    def AddJob(self):
+    def AddJob(self, jobParams):
         temp_date3 = datetime.datetime.now() + datetime.timedelta(seconds=1)
-        TheScheduler.add_job(self.Done, 'date', run_date=temp_date3, max_instances=1)
+        self._job = TheScheduler.add_job(self.Done, 'date', run_date=temp_date3, max_instances=1)

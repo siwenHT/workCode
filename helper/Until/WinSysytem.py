@@ -30,8 +30,8 @@ class WinSystem():
 
     def ReloadBrower(self):
         os.system("taskkill /f /im chrome.exe")
-        os.system('chrome.exe --remote-debugging-port=9527 --"%1"')
-        pass
+        os.system('cd /d C:/Program Files/Google/Chrome/Application && start chrome.exe --remote-debugging-port=9527 --"%1"')
+        os.system('cd /d C:/Program Files (x86)/Google/Chrome/Application && start chrome.exe --remote-debugging-port=9527 --"%1"')
 
     def GetWorkPath(self):
         return os.getcwd()
@@ -72,8 +72,11 @@ class WinSystem():
         def msgHandler(eventType: EventType):
             if eventType == EventType.reload_config:
                 self.InitConfig()
+            elif eventType == EventType.reload_chrome:
+                self.ReloadBrower()
 
         GEventHandler.RegedistEvent(EventType.reload_config, msgHandler)
+        GEventHandler.RegedistEvent(EventType.reload_chrome, msgHandler)
 
 
 Win = WinSystem()

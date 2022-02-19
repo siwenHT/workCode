@@ -21,7 +21,7 @@ class RefreshTimeLabel(BaseJob):
         super().__init__()
 
     def DoJob(self, *args, **kwargs):
-        GEventHandler.Dispatch(EventType.refrest_time_label)
+        GEventHandler.Dispatch(EventType.refresh_time_label)
 
-    def AddJob(self):
+    def AddJob(self, jobParams):
         TheScheduler.add_job(self.Done, 'interval', seconds=1, max_instances=1)

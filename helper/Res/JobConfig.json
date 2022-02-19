@@ -1,0 +1,27 @@
+{
+    "MeatMaskJob": {
+        "trigger": "date",
+        "time": "now",
+        "max_instances": 1
+    },
+    "OneBtnPushJob": {
+        "trigger": "date",
+        "time": 1,
+        "max_instances": 1
+    },
+    "CandyRewardJob": {
+        "trigger": "cron",
+        "hour": 10,
+        "max_instances": 1
+    },
+    "MetauceBotJob": {
+        "trigger": "date",
+        "time": 10,
+        "max_instances": 1
+    },
+    "MetauceHelperJob": {
+        "trigger": "interval",
+        "second": 910,
+        "max_instances": 1
+    }
+}

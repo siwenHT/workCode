@@ -14,6 +14,8 @@ from BaseJob import BaseJob
 from DiscordBot.BotConfig import BotConfig
 from DiscordBot.BotManager import BotManager
 from DiscordBot.BotMsgSend import BotMsgSend
+from Event.EventMsgHandler import GEventHandler
+from Event.EventType import EventType
 from Until.MyLog import Log
 from Until.Scheduler import TheScheduler
 from pickle import NONE
@@ -23,7 +25,6 @@ class DiscordJob(BaseJob):
 
     def __init__(self) -> None:
         super().__init__()
-        self._jobName = 'DiscordJob'
         self._botMG = BotManager()
 
     def DoJob(self, *args, **kwargs):
@@ -39,11 +40,13 @@ class DiscordJob(BaseJob):
                 if config.NextChannelID():
                     if config.timeRecode == NONE or now - config.timeRecode > timeInv:
                         config.timeRecode = now
+                        self.ReportJobVal(val=config.ShowName())
                         self.SendMsgWithBotConfig(config)
                         config.StepNextChannel()
             else:
                 if config.timeRecode == NONE or now - config.timeRecode > config.TimeInterval():
                     config.timeRecode = now
+                    self.ReportJobVal(val=config.ShowName())
                     self.SendMsgWithBotConfig(config)
 
     def SendMsgWithBotConfig(self, botConfig: BotConfig):
@@ -51,5 +54,5 @@ class DiscordJob(BaseJob):
         sender.send()
         pass
 
-    def AddJob(self):
-        TheScheduler.add_job(self.Done, 'interval', seconds=0.1, id='botJob', max_instances=100, args=[self])
+    def AddJob(self, jobParams):
+        TheScheduler.add_job(self.Done, 'interval', seconds=0.1, id='botJob', max_instances=100)

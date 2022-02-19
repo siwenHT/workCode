@@ -4,10 +4,10 @@
     "898746543652343822",
     "899301084047228929"
   ],
-  "time_interval": 10,
+  "time_interval": 36000,
   "stepTime": 2,
   "errorTimes": 20,
   "mes": [
-    "gm\ngm\ngm"
+    "gm"
   ]
 }

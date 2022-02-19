@@ -6,13 +6,14 @@
         "shibaIsland": 0,
         "secondLive": 0,
         "dominimDao-en": 0,
-        "complex-cn": 1,
+        "complex-cn": 0,
         "SnapFingers-cn": 0,
         "farmsifgalileo_1": 0,
         "farmsifgalileo_2": 0,
         "farmsifgalileo_3": 0,
-        "gm": 0,
+        "gm": 1,
         "whitelist-cn": 0,
+        "gm copy": 0,
         "LGG-english": 0
     },
     "discord_token": [

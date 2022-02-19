@@ -13,9 +13,9 @@ import tkinter as tk
 from tkinter import ttk
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
+from UI.JobListFrame import JobListFrame
 from UI.MainFrame import MainFrame
 from UI.DiscordFrame import DiscordFrame
-from UI.MainMenuFrame import MainMenuFrame
 
 
 class MainWindow():
@@ -81,11 +81,18 @@ class MainWindow():
         tab3 = ttk.Frame(tabControl)  # Add a second tab
         tabControl.add(tab3, text='jobList')  # Make second tab visible
 
+        tab4 = ttk.Frame(tabControl)  # Add a second tab
+        tabControl.add(tab4, text='一键群发分享')  # Make second tab visible
+
         tabControl.pack(expand=1, fill="both")  # Pack to make visible
 
         # self._menuFrame = MainMenuFrame(self._window, bg='green')
-        self._mainFrame = MainFrame(tab1, bg='black')
+        self._mainFrame = MainFrame(tab1, bg='green')
         self._mainFrame.grid(column=0, row=0)
+
+        self._jobListFrame = JobListFrame(tab3)
+        self._jobListFrame.grid(column=0, row=0)
+
         # self._mainFrame.InitUI()
         # self._BotFrame = DiscordFrame(self._window, width=self._width * 2, height=bottomHeight, bg='orange')
 

@@ -40,13 +40,10 @@ class BotManager():
     def GetList(self):
         return self._dataList
 
-    def ChangeBotConfigSetByUI(self):
-        pass
-
     def MsgRegeist(self):
 
         def msgHandler(eventType: EventType):
             if eventType == EventType.reload_config:
-                self.InitConfig()
+                self.LoadBotConfigs()
 
         GEventHandler.RegedistEvent(EventType.reload_config, msgHandler)

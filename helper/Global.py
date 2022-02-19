@@ -9,12 +9,20 @@
 '''
 
 # here put the import lib
+import threading
+
 g_jobMG = None
+GLock = threading.Lock()
 
 
 def SetJobMG(jobMg):
+    global g_jobMG
     g_jobMG = jobMg
 
 
 def GetJobMG():
     return g_jobMG
+
+
+def GetGlock():
+    return GLock

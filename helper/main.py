@@ -16,6 +16,7 @@ from UI.MainWindow import MainWindow
 from Until.Scheduler import TheScheduler
 from Until.WinSysytem import Win
 from JobManager import JobManager
+from Global import *
 
 
 def main():
@@ -30,6 +31,7 @@ def main():
 
     #加载所有配置任务
     JobMG = JobManager()
+    SetJobMG(JobMG)
     JobMG.start()
 
 

@@ -18,4 +18,4 @@ class Scheduler(BlockingScheduler):
         super().__init__(*args, **options)
 
 
-TheScheduler = Scheduler()
+TheScheduler = Scheduler(timezone='Asia/Shanghai')

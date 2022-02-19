@@ -25,7 +25,7 @@ class MyLog:
         self.fileHandler1 = logging.FileHandler(filename="Res/log/test_info.log", mode='w')
 
         self.logger.setLevel(logging.DEBUG)
-        self.streamHandler.setLevel(logging.INFO)
+        self.streamHandler.setLevel(logging.DEBUG)
         self.fileHandler.setLevel(logging.DEBUG)
         self.fileHandler1.setLevel(logging.INFO)
 

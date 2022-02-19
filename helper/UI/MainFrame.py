@@ -29,20 +29,21 @@ class MainFrame(BaseFrame):
         self.MsgRegeist()
 
     def InitUI(self):
-        row = 0
-        self._baijinTime = tk.Label(self, text=f"北京时间:{TOOL.showTime()}")
-        self._baijinTime.grid(column=0, row=row, sticky=tk.W)
+        frame1 = tk.Frame(self)
+        self._baijinTime = tk.Label(frame1, text=f"北京时间:{TOOL.showTime()}")
+        self._baijinTime.grid(column=0, row=0, sticky=tk.W, pady=3)
+        self._utcTime = tk.Label(frame1, text=f"UTC时间:{TOOL.UtcTime()}")
+        self._utcTime.grid(column=0, row=1, sticky=tk.W, pady=3)
+        frame1.grid(column=0, row=0)
 
-        row += 1
-        self._utcTime = tk.Label(self, text=f"UTC时间:{TOOL.UtcTime()}")
-        self._utcTime.grid(column=0, row=row, sticky=tk.W)
-
-        row += 1
-        btn = self.CreateButton(text="重置配置", command=self.ReloadConfig)
-        btn.grid(column=0, row=row, sticky=tk.W + tk.N)
-
-        self._ctrlJob = self.CreateButton(text="暂停任务", command=self.CtrlJob, bg='green')
-        self._ctrlJob.grid(column=1, row=row, sticky=tk.W + tk.N)
+        frame2 = tk.Frame(self)
+        btn = tk.Button(frame2, text="重置配置", command=self.ReloadConfig)
+        btn.grid(column=0, row=0, sticky=tk.W, padx=5)
+        btn = tk.Button(frame2, text="重启浏览器", command=self.ResetBrower)
+        btn.grid(column=1, row=0, sticky=tk.W, padx=5)
+        self._ctrlJob = tk.Button(frame2, text="暂停任务", command=self.CtrlJob, bg='green')
+        self._ctrlJob.grid(column=2, row=0, sticky=tk.W, padx=5)
+        frame2.grid(column=0, row=1, sticky=tk.W)
 
     def RefreshTimeLabel(self):
         self._baijinTime.config(text=f"北京时间:{TOOL.showTime()}")
@@ -51,13 +52,16 @@ class MainFrame(BaseFrame):
     def MsgRegeist(self):
 
         def msgHandler(eventType: EventType):
-            if eventType == EventType.refrest_time_label:
+            if eventType == EventType.refresh_time_label:
                 self.RefreshTimeLabel()
 
-        GEventHandler.RegedistEvent(EventType.refrest_time_label, msgHandler)
+        GEventHandler.RegedistEvent(EventType.refresh_time_label, msgHandler)
 
     def ReloadConfig(self):
         GEventHandler.Dispatch(EventType.reload_config)
+
+    def ResetBrower(self):
+        GEventHandler.Dispatch(EventType.reload_chrome)
 
     def CtrlJob(self):
         if self._isStop:
