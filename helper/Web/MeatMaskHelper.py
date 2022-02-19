@@ -72,7 +72,7 @@ class MeatMaskHelper(OpenUrl):
         chainNameKey = "//div[@class='app-header__network-component-wrapper']/div/span"
         chainNameEl = self.find_element_loop(By.XPATH, self._browser, chainNameKey)
         if chainNameEl:
-            Log.error(f"chain is {chainNameEl.text}")
+            Log.info(f"chain is {chainNameEl.text}")
 
         timeSleep = 1
         chainName = self.find_element_loop(By.XPATH, self._browser, chainConfirm, 3)

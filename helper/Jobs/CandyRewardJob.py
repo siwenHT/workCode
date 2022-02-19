@@ -10,7 +10,7 @@
 
 # here put the import lib
 import datetime
-from time import time
+import time
 from tkinter import E
 from BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
@@ -41,6 +41,7 @@ class CandyRewardJob(BaseJob):
                     self.ReportJobVal(val="领奖OK了")
                     return
             except Exception as ex:
+                Log.exception("CandyRewardJob error")
                 pass
 
             if errCount < 10:

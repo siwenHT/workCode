@@ -10,7 +10,7 @@
 
 # here put the import lib
 import datetime
-from time import time
+import time
 from BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
@@ -41,7 +41,7 @@ class MetauceHelperJob(BaseJob):
 
                 if checkTime > 5:
                     break
-                elif web.current_window_handle != one:
+                elif web._browser.current_window_handle != one:
                     checkTime += 1
                 else:
                     break

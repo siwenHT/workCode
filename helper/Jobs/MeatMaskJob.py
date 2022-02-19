@@ -10,7 +10,7 @@
 
 # here put the import lib
 import datetime
-from time import time
+import time
 from BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType

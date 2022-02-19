@@ -10,7 +10,7 @@
 
 # here put the import lib
 import datetime
-from time import time
+import time
 from BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
@@ -33,6 +33,7 @@ class MetauceBotJob(BaseJob):
 
                 time.sleep(60 * 60)
             except Exception as ex:
+                Log.exception("MetauceBotJob error")
                 pass
 
     def mainFunc(self):
