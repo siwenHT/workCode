@@ -24,6 +24,8 @@ class MeatMaskJob(BaseJob):
         super().__init__()
 
     def DoJob(self, *args, **kwargs):
+        self.ReportJobVal(val=f"metamask load")
         web = MeatMaskHelper()
-        web.ConfirmChangeNet()
+        web.openGameUrl()
+        web.UnlockConfirm()
         web.ConfirmTransaction()

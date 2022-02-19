@@ -27,7 +27,7 @@ class OpenUrl:
         self._url = url
 
     def closeBrowser(self):
-        GetJobMG().acquire()
+        GetGlock().acquire()
 
         try:
             if self._browser and self._handler:
@@ -38,12 +38,12 @@ class OpenUrl:
         except Exception as ex:
             pass
 
-        GetJobMG().release()
+        GetGlock().release()
 
     '''打开新标签'''
 
     def open_new_tab(self, browser: webdriver):
-        GetJobMG().acquire()
+        GetGlock().acquire()
         oldHandles = browser.window_handles
 
         browser.execute_script("window.open('');")
@@ -54,7 +54,7 @@ class OpenUrl:
                 self._handler = newOne
                 break
         browser.switch_to.window(self._handler)
-        GetJobMG().release()
+        GetGlock().release()
 
     '''刷新网页'''
 

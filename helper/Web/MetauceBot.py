@@ -26,6 +26,7 @@ class MetauceBot(OpenUrl):
 
     def __init__(self):
         super().__init__("https://metauce.org/MetisGame")
+        self._wakuangRun = 0
 
     # 到挖矿界面
     def touchMining(self):

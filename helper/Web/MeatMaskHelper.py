@@ -42,15 +42,10 @@ class MeatMaskHelper(OpenUrl):
                 self.element_click(confirmEl)
                 return True
 
-    def ConfirmTransaction(self):
+    def UnlockConfirm(self):
         unlockKey = "unlock-page__container"
         inputKey = "MuiInputBase-input.MuiInput-input"
         OKKey = "button.btn--rounded.btn-default"
-        confirmKey = "confirm-page-container-content"
-        confirmBtnKey = "button.btn--rounded.btn-primary.page-container__footer-button"
-        chainConfirm = "//span[contains(text(), 'Metis Stardust Testnet')]"
-        dangerousKey = "actionable-message.actionable-message--danger"
-        cancelBtnKey = "button.btn--rounded.btn-secondary.page-container__footer-button"
         unlockEl = self.find_element_loop(By.CLASS_NAME, self._browser, unlockKey)
         if unlockEl:
             input = self.find_element_loop(By.CLASS_NAME, self._browser, inputKey)
@@ -63,9 +58,17 @@ class MeatMaskHelper(OpenUrl):
             else:
                 Log.error(f"not find the {inputKey}")
 
+    def ConfirmTransaction(self):
+        confirmKey = "confirm-page-container-content"
+        confirmBtnKey = "button.btn--rounded.btn-primary.page-container__footer-button"
+        chainConfirm = "//span[contains(text(), 'Metis Stardust Testnet')]"
+        dangerousKey = "actionable-message.actionable-message--danger"
+        cancelBtnKey = "button.btn--rounded.btn-secondary.page-container__footer-button"
+
         name = self.find_element_loop(By.XPATH, self._browser, "//span")
         if name:
             Log.info(f"{name.text}")
+
         chainNameKey = "//div[@class='app-header__network-component-wrapper']/div/span"
         chainNameEl = self.find_element_loop(By.XPATH, self._browser, chainNameKey)
         if chainNameEl:

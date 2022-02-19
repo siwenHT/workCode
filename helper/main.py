@@ -30,6 +30,7 @@ def main():
     #     a = 1
 
     #加载所有配置任务
+    Win.ReloadBrower()
     JobMG = JobManager()
     SetJobMG(JobMG)
     JobMG.start()

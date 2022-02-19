@@ -16,7 +16,7 @@
     },
     "MetauceBotJob": {
         "trigger": "date",
-        "time": 10,
+        "time": 20,
         "max_instances": 1
     },
     "MetauceHelperJob": {
