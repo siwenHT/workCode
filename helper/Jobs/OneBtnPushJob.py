@@ -55,6 +55,10 @@ class OneBtnPushJob(BaseJob):
                     self.ReportJobVal(val=f"{self._curChannel}")
                     self.SendMsgWithBotConfig(config)
                     config.StepNextChannel()
+
+                    # 如果重新回到了原位, 则可以退出了
+                    if config.GetCurrentIdx() == 0:
+                        break
                 else:
                     time.sleep(0.5)
         else:
