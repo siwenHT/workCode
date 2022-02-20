@@ -11,9 +11,9 @@
         "farmsifgalileo_1": 0,
         "farmsifgalileo_2": 0,
         "farmsifgalileo_3": 0,
-        "gm": 1,
+        "GM": 0,
         "whitelist-cn": 0,
-        "gm copy": 0,
+        "temporary": 0,
         "LGG-english": 0
     },
     "discord_token": [

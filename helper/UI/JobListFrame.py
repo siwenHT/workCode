@@ -12,8 +12,9 @@
 
 from re import I
 import string
+import threading
 from turtle import bgcolor
-from BaseJob import BaseJob
+from Jobs.BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
 from UI.BaseFrame import BaseFrame
@@ -25,6 +26,7 @@ class JobListFrame(BaseFrame):
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
+        self.Lock = threading.Lock()
         self.frame = None
         self._isRefreshIng = False
 
@@ -38,10 +40,12 @@ class JobListFrame(BaseFrame):
         self.refreshBtn.grid(column=0, row=self._row, sticky=tk.W + tk.N, pady=5)
 
     def RefreshJobs(self):
+        self.Lock.acquire()
+        self._isRefreshIng = True
         if self.frame:
             self.frame.destroy()
+        self.Lock.release()
 
-        self._isRefreshIng = True
         self.frame = tk.Listbox(self, bg='green')
         self.frame.grid(column=0, row=1, pady=10)
         jobMG = Global.GetJobMG()
@@ -56,7 +60,7 @@ class JobListFrame(BaseFrame):
             col = 0
 
             statuBtn = tk.Button(jobFrame)
-            statuBtn.config(text=("恢复" if item.isStop() else "暂停"), bg=('green' if item.isStop() else 'yellow'))
+            statuBtn.config(text=("恢复" if item.isPause() else "暂停"), bg=('green' if item.isPause() else 'yellow'))
             statuBtn.config(command=lambda idx=count, curBtn=statuBtn: self.StatuBtn(idx, curBtn))
             statuBtn.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
             col += 1
@@ -83,26 +87,43 @@ class JobListFrame(BaseFrame):
 
         self._isRefreshIng = False
 
+    def GetIsRefreshIng(self):
+        self.Lock.acquire()
+        flg = self._isRefreshIng
+        self.Lock.release()
+        return flg
+
     def StatuBtn(self, count, statuBtn: tk.Button):
-        if self._isRefreshIng:
+        if self.GetIsRefreshIng():
             return
-        job = self._joblist[count]
-        job.ChangeStatus()
-        statuBtn.config(text=("恢复" if job.isStop() else "暂停"), bg=('green' if job.isStop() else 'yellow'))
+
+        try:
+            job = self._joblist[count]
+            job.ChangeStatus()
+            statuBtn.config(text=("恢复" if job.isPause() else "暂停"), bg=('green' if job.isPause() else 'yellow'))
+        except Exception as ex:
+            pass
 
     def ResfreshStatusLab(self, jobName="", val=""):
-        if self._isRefreshIng:
+        if self.GetIsRefreshIng():
             return
-        oneMiscs = self.tkMiscs.get(jobName)
-        if oneMiscs:
-            oneMiscs['statuLab'].config(text=str(val))
+
+        try:
+            oneMiscs = self.tkMiscs.get(jobName)
+            if oneMiscs and oneMiscs['statuLab']:
+                oneMiscs['statuLab'].config(text=str(val))
+        except Exception as ex:
+            pass
 
     def ResfreshJobStop(self):
-        if self._isRefreshIng:
+        if self.GetIsRefreshIng():
             return
-        for oneMiscs in self.tkMiscs.values():
-            job = oneMiscs["job"]
-            oneMiscs["statuBtn"].config(text=("恢复" if job.isStop() else "暂停"), bg=('green' if job.isStop() else 'yellow'))
+        try:
+            for oneMiscs in self.tkMiscs.values():
+                job = oneMiscs["job"]
+                oneMiscs["statuBtn"].config(text=("恢复" if job.isPause() else "暂停"), bg=('green' if job.isPause() else 'yellow'))
+        except Exception as ex:
+            pass
 
     def MsgRegeist(self):
 

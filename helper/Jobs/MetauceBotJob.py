@@ -11,7 +11,7 @@
 # here put the import lib
 import datetime
 import time
-from BaseJob import BaseJob
+from Jobs.BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
 from Until.MyLog import Log
@@ -26,30 +26,59 @@ class MetauceBotJob(BaseJob):
     def DoJob(self, *args, **kwargs):
         while True:
             try:
+                if self._isPause:
+                    time.sleep(5)
+                    continue
+
+                self.CheckStop()
                 self.mainFunc()
+                if self._isPause:
+                    time.sleep(5)
+                    continue
+
+                self.CheckStop()
                 self.insertTruck()
+                if self._isPause:
+                    time.sleep(5)
+                    continue
+
+                self.CheckStop()
                 self.checkTokenVal()
+                if self._isPause:
+                    time.sleep(5)
+                    continue
+
+                self.CheckStop()
                 self.removeTruck()
+                if self._isPause:
+                    time.sleep(5)
+                    continue
 
                 time.sleep(60 * 60)
             except Exception as ex:
+                if self._isStop:
+                    self.ReportJobVal(val=f"{self._jobName} exit")
+                    return
+
                 Log.exception("MetauceBotJob error")
                 pass
 
     def mainFunc(self):
         self.ReportJobVal(val="开始启动收矿")
         handler = MetauceBot()
+        handler.SetReportCallBack(lambda repVal: self.ReportJobVal(val=repVal))
         handler.openGameUrl()
         handler.touchMining()
         handler.touchOneRemainBtn()
+
         handler.wakuang()
         handler.closeBrowser()
-        self.ReportJobVal(val="收矿作业完成")
 
     def insertTruck(self):
         starLimit = 3
         self.ReportJobVal(val="准备安装矿车")
         handler = MetauceBot()
+        handler.SetReportCallBack(lambda repVal: self.ReportJobVal(val=repVal))
         handler.openGameUrl()
         handler.touchMining()
         handler.touchOneRemainBtn()
@@ -61,30 +90,29 @@ class MetauceBotJob(BaseJob):
             if handler.insertTruck(starLimit):
                 count += 1
                 self.ReportJobVal(val="安装矿车 {count} 次")
+                self.CheckStop()
 
                 time.sleep(20)
                 continue
             break
         handler.closeBrowser()
-        self.ReportJobVal(val="安装矿车完成 安装了{count}台车")
 
     def checkTokenVal(self):
         self.ReportJobVal(val="准备购买")
         handler = MetauceBot()
+        handler.SetReportCallBack(lambda repVal: self.ReportJobVal(val=repVal))
         handler.openGameUrl()
         handler.touchMining()
         handler.touchOneRemainBtn()
-        self.ReportJobVal(val="准备中...")
         handler.checkBuyTime()
-        self.ReportJobVal(val="购买完成")
 
     def removeTruck(self):
         self.ReportJobVal(val="准备移除车辆")
         handler = MetauceBot()
+        handler.SetReportCallBack(lambda repVal: self.ReportJobVal(val=repVal))
         handler.openGameUrl()
         handler.touchMining()
         handler.touchDepletedBtn()
         handler.removeTruck()
         time.sleep(10)
         handler.closeBrowser()
-        self.ReportJobVal(val="移除车辆完成")

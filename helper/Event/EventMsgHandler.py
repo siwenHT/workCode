@@ -12,13 +12,19 @@
 
 from Event.EventType import EventType
 from Until.MyLog import Log
+from Until.Scheduler import TheScheduler
 
 
 class EventMsgHandler():
 
-    def __init__(self) -> None:
+    def __init__(self):
         self.callBacks = {}
-        pass
+        self.delayCall = []
+        # TheScheduler.add_job(self._dealy_call, trigger="interval", seconds=0.1)
+
+    # def _dealy_call(self):
+    #     for item in self.delayCall:
+    #         self.Dispatch(item["eventType"], *item["args"], **item["kwargs"])
 
     def RegedistEvent(self, eventType: EventType, callBack, caller: object = None):
         if not self.callBacks.get(eventType, None):
@@ -52,6 +58,13 @@ class EventMsgHandler():
                             callInfo.get("callFunc")(eventType, *args, **kwargs)
         except Exception as ex:
             Log.exception("Dispatch error:")
+
+    def DelayDispatch(self, eventType: EventType, *args, **kwargs):
+        item = {}
+        item["eventType"] = eventType
+        item["args"] = args
+        item["kwargs"] = kwargs
+        self.delayCall.append(item)
 
 
 GEventHandler = EventMsgHandler()

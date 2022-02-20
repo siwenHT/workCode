@@ -9,10 +9,10 @@
 '''
 
 # here put the import lib
+import os, time
 from Global import *
 from Until.MyLog import Log
-
-import os, time
+from inspect import isfunction
 from selenium import webdriver
 from selenium.webdriver.remote import webelement
 from selenium.webdriver.common.action_chains import ActionChains
@@ -25,6 +25,19 @@ class OpenUrl:
         self._browser = None
         self._handler = None
         self._url = url
+        self._reportCallBack = None
+        self._needStop = False
+
+    def SetReportCallBack(self, func):
+        if isfunction(func):
+            self._reportCallBack = func
+
+    def ReportVal(self, val: str):
+        if self._reportCallBack:
+            self._reportCallBack(val)
+
+    def SetNeedStop(self, val):
+        self._needStop = val
 
     def closeBrowser(self):
         GetGlock().acquire()
@@ -59,11 +72,7 @@ class OpenUrl:
     '''刷新网页'''
 
     def refreshPage(self):
-        try:
-            self._browser.refresh()
-            Log.debug('refreshPage: Ok')
-        except Exception as e:
-            Log.debug('refreshPage: error!!')
+        self._browser.refresh()
 
     def get_debug_chrome_opetions(self):
         options = webdriver.ChromeOptions()

@@ -28,5 +28,9 @@ class EventType(Enum):
     need_reload_chrome_job = 11  #需要重启浏览器任务
 
     joblist_has_change = 12  #任务列表有变动
+    btn_one_key_push_test = 13  #测试推送内容
+    btn_one_key_push = 14  #测试推送内容
+
+    stop_job = 15  #停止任务
 
     End = 1000

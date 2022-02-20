@@ -9,9 +9,10 @@
 '''
 
 # here put the import lib
+from ast import While
 import datetime
 import time
-from BaseJob import BaseJob
+from Jobs.BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
 from Until.MyLog import Log
@@ -24,8 +25,25 @@ class MeatMaskJob(BaseJob):
         super().__init__()
 
     def DoJob(self, *args, **kwargs):
-        self.ReportJobVal(val=f"metamask load")
-        web = MeatMaskHelper()
-        web.openGameUrl()
-        web.UnlockConfirm()
-        web.ConfirmTransaction()
+        try:
+            self.ReportJobVal(val=f"metamask load")
+            self._web = MeatMaskHelper()
+            self._web.SetReportCallBack(lambda repVal: self.ReportJobVal(val=repVal))
+            self._web.openGameUrl()
+            self._web.UnlockConfirm()
+            self._web.CheckChainName()
+            while True:
+                if self._isPause:
+                    time.sleep(5)
+                    continue
+
+                if self._isStop:
+                    self.ReportJobVal(val=f"{self._jobName} exit")
+                    return
+
+                self._web.ConfirmChangeNet()
+                self._web.ConfirmTransaction()
+                time.sleep(0.5)
+
+        except Exception as ex:
+            self.DoJob()

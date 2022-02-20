@@ -15,7 +15,7 @@ from Until.MyLog import Log
 from UI.MainWindow import MainWindow
 from Until.Scheduler import TheScheduler
 from Until.WinSysytem import Win
-from JobManager import JobManager
+from Jobs.JobManager import JobManager
 from Global import *
 
 
@@ -29,8 +29,8 @@ def main():
     # if retStr == key:
     #     a = 1
 
-    #加载所有配置任务
     Win.ReloadBrower()
+    #加载所有配置任务
     JobMG = JobManager()
     SetJobMG(JobMG)
     JobMG.start()

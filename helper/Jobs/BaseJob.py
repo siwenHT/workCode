@@ -15,30 +15,44 @@ from Event.EventType import EventType
 from Until.MyLog import Log
 from Until.Scheduler import TheScheduler
 
+id = 0
+
 
 class BaseJob():
 
-    def __init__(self) -> None:
+    def __init__(self):
         self._isStop = False
-        self._jobName = type(self).__name__
+        self._isPause = False
+        global id
+        self._id = id
+        id += 1
+        self._typeName = type(self).__name__
+        self._jobName = f"{self._typeName}[{id}]"
 
     def ChangeStatus(self):
-        self._isStop = not self._isStop
-        val = '暂停' if self._isStop else "恢复"
+        self._isPause = not self._isPause
+        val = '暂停' if self._isPause else "恢复"
         Log.info(f"{self._jobName} : {val}")
 
     def Pause(self):
-        self._isStop = True
+        self._isPause = True
 
     def Resume(self):
-        self._isStop = False
+        self._isPause = False
 
-    def isStop(self):
-        return self._isStop
+    def Stop(self):
+        self._isStop = True
+
+    def CheckStop(self):
+        if self._isStop:
+            raise RuntimeError('Job is stop')
+
+    def isPause(self):
+        return self._isPause
 
     def Done(self, *args, **kwargs):
         try:
-            if self._isStop:
+            if self._isPause:
                 return
 
             self.DoJob(*args, **kwargs)
@@ -51,7 +65,7 @@ class BaseJob():
         GEventHandler.Dispatch(EventType.refresh_job_cur_status, jobName=self._jobName, *args, **kwargs)
 
     def AddJob(self, jobParams):
-        theParam = jobParams.get(self._jobName)
+        theParam = jobParams.get(self._typeName)
         if theParam:
             trigger = theParam.get("trigger")
 

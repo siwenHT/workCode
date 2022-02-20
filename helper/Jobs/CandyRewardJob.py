@@ -12,7 +12,7 @@
 import datetime
 import time
 from tkinter import E
-from BaseJob import BaseJob
+from Jobs.BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
 from Until.MyLog import Log
@@ -44,11 +44,11 @@ class CandyRewardJob(BaseJob):
                 Log.exception("CandyRewardJob error")
                 pass
 
+            if self._isStop:
+                return
+
             if errCount < 10:
                 time.sleep(60)
                 errCount += 1
             else:
                 break
-
-    # def AddJob(self, jobParams):
-    #     TheScheduler.add_job(self.Done, trigger='cron', hour='10', max_instances=1)

@@ -35,11 +35,6 @@ class BotMsgSend():
 
     def send(self):
         try:
-            # channel = self._botConfig.NextChannelID() or self._botConfig.ChannelID()
-
-            # Log.debug(f"succ! link: {self._botConfig.ShowName()}, {channel}, content:{str(self._botConfig.RandomMessage())}")
-            # return
-
             message_data = {}
             message_data["content"] = self._botConfig.RandomMessage()
             message_data["tts"] = "false"
@@ -57,12 +52,15 @@ class BotMsgSend():
             if 199 < resp.status < 300:
                 Log.debug(f"succ! link: {showName}, content:{str(message_data)}")
                 self._botConfig.errorTime = 0
+                resp.close()
+                return True
             else:
                 Log.error(f"fail! link: {showName}, code: {resp.status}, reason : {resp.reason}")
                 self._botConfig.errorTime += 1
-
-            resp.close()
+                resp.close()
+                return False
 
         except Exception as ex:
             self._botConfig.errorTime += 1
             Log.exception("Exception occurred")
+            return False

@@ -11,7 +11,7 @@
 # here put the import lib
 import datetime
 import time
-from BaseJob import BaseJob
+from Jobs.BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
 from Until.MyLog import Log
@@ -26,14 +26,14 @@ class MetauceHelperJob(BaseJob):
         super().__init__()
 
     def DoJob(self, *args, **kwargs):
+        count = 0
         try:
             self.ReportJobVal(val="开始检查浏览器网页标题")
             web = OpenUrl("")
             web.find_the_browser()
 
-            count = 0
             num = len(web._browser.window_handles)
-            self.ReportJobVal(val=f"浏览器网页数目 {num}")
+            self.ReportJobVal(val=f"浏览器网页数目: {num}")
             for one in web._browser.window_handles:
                 checkTime = 0
                 while True:

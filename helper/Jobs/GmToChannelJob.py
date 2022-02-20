@@ -9,8 +9,8 @@
 '''
 
 # here put the import lib
-from time import time
-from BaseJob import BaseJob
+import os, time
+from Jobs.TwitterFellowJob import TwitterFellowJob
 from DiscordBot.BotConfig import BotConfig
 from DiscordBot.BotManager import BotManager
 from DiscordBot.BotMsgSend import BotMsgSend
@@ -19,15 +19,11 @@ from Event.EventType import EventType
 from Until.MyLog import Log
 from Until.Scheduler import TheScheduler
 from pickle import NONE
+from Until.WinSysytem import Win
 
 
-class GmToChannelJob(BaseJob):
+class GmToChannelJob(TwitterFellowJob):
 
     def __init__(self) -> None:
         super().__init__()
-
-    def DoJob(self, *args, **kwargs):
-        pass
-
-    def AddJob(self, jobParams):
-        pass
+        self._filePath = os.path.join(Win.GetWorkPath(), "Res/gm.json")

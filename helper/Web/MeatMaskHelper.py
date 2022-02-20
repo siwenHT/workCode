@@ -40,7 +40,8 @@ class MeatMaskHelper(OpenUrl):
             confirmEl = self.find_element(By.XPATH, self._browser, confirmKey)
             if confirmEl:
                 self.element_click(confirmEl)
-                return True
+                time.sleep(1)
+                self.CheckChainName()
 
     def UnlockConfirm(self):
         unlockKey = "unlock-page__container"
@@ -58,60 +59,43 @@ class MeatMaskHelper(OpenUrl):
             else:
                 Log.error(f"not find the {inputKey}")
 
-    def ConfirmTransaction(self):
-        confirmKey = "confirm-page-container-content"
-        confirmBtnKey = "button.btn--rounded.btn-primary.page-container__footer-button"
-        chainConfirm = "//span[contains(text(), 'Metis Stardust Testnet')]"
-        dangerousKey = "actionable-message.actionable-message--danger"
-        cancelBtnKey = "button.btn--rounded.btn-secondary.page-container__footer-button"
-
-        name = self.find_element_loop(By.XPATH, self._browser, "//span")
-        if name:
-            Log.info(f"{name.text}")
-
+    def CheckChainName(self):
+        self._timeSleep = 1
         chainNameKey = "//div[@class='app-header__network-component-wrapper']/div/span"
         chainNameEl = self.find_element_loop(By.XPATH, self._browser, chainNameKey)
         if chainNameEl:
-            Log.info(f"chain is {chainNameEl.text}")
+            chainNameText = chainNameEl.text
+            Log.info(f"chain is {chainNameText}")
 
-        timeSleep = 1
-        chainName = self.find_element_loop(By.XPATH, self._browser, chainConfirm, 3)
-        if not chainName:
-            timeSleep = 3
-            # chainNameKey = "//div[@class='app-header__network-component-wrapper']/div/span"
-            # chainNameEl = self.find_element_loop(By.XPATH, self._browser, chainNameKey)
-            # if chainNameEl:
-            #     Log.error(f"chain is {chainNameEl.text}! please check!")
-            # else:
-            #     Log.error(f"chain is error! please check!")
-            # return
+            self.ReportVal(f"检查链名:{chainNameText}...")
+            if chainNameText.find("Testnet") == -1 and chainNameText.find("testnet") == -1:
+                self._timeSleep = 3
 
-        while True:
-            if self.ConfirmChangeNet():
-                time.sleep(2)
+    def ConfirmTransaction(self):
+        confirmKey = "confirm-page-container-content"
+        confirmBtnKey = "button.btn--rounded.btn-primary.page-container__footer-button"
+        dangerousKey = "actionable-message.actionable-message--danger"
+        cancelBtnKey = "button.btn--rounded.btn-secondary.page-container__footer-button"
 
-            contentEl = self.find_element_loop(By.CLASS_NAME, self._browser, confirmKey, 3)
-            if contentEl:
-                dangerousEl = self.find_element_loop(By.CLASS_NAME, self._browser, dangerousKey, 1)
-                btnEl = self.find_element_loop(By.CLASS_NAME, self._browser, confirmBtnKey, 3)
-                cancelEl = self.find_element_loop(By.CLASS_NAME, self._browser, cancelBtnKey, 3)
-                if dangerousEl:
-                    Log.info("the transaction has error!!")
+        contentEl = self.find_element_loop(By.CLASS_NAME, self._browser, confirmKey, 3)
+        if contentEl:
+            self.ReportVal(f"确认交易")
+            dangerousEl = self.find_element_loop(By.CLASS_NAME, self._browser, dangerousKey, 1)
+            btnEl = self.find_element_loop(By.CLASS_NAME, self._browser, confirmBtnKey, 3)
+            cancelEl = self.find_element_loop(By.CLASS_NAME, self._browser, cancelBtnKey, 3)
+            if dangerousEl:
+                Log.info("the transaction has error!!")
+                if cancelEl:
+                    self.element_click(cancelEl)
+                    Log.info("Has cancel on Transaction!!")
+            else:
+                time.sleep(self._timeSleep)
+                if btnEl and btnEl.is_enabled():
+                    self.element_click(btnEl)
+                    Log.info("Has Confirm on Transaction!!")
+                else:
                     if cancelEl:
                         self.element_click(cancelEl)
-                        time.sleep(timeSleep)
                         Log.info("Has cancel on Transaction!!")
-                else:
-                    time.sleep(timeSleep)
-                    if btnEl and btnEl.is_enabled():
-                        self.element_click(btnEl)
-                        time.sleep(1)
-                        Log.info("Has Confirm on Transaction!!")
-                    else:
-                        if cancelEl:
-                            self.element_click(cancelEl)
-                            time.sleep(1)
-                            Log.info("Has cancel on Transaction!!")
-            else:
-                self.refreshPage()
-                time.sleep(1)
+        else:
+            self.refreshPage()

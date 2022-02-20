@@ -9,9 +9,10 @@
 '''
 
 # here put the import lib
-from BaseJob import BaseJob
+from Jobs.BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
+from Until.MyLog import Log
 from Until.Scheduler import TheScheduler
 
 
@@ -24,4 +25,5 @@ class RefreshTimeLabel(BaseJob):
         GEventHandler.Dispatch(EventType.refresh_time_label)
 
     def AddJob(self, jobParams):
-        TheScheduler.add_job(self.Done, 'interval', seconds=1, max_instances=1)
+        Log.info(f"job: {self._jobName} is Add!")
+        TheScheduler.add_job(self.Done, 'interval', seconds=1, max_instances=1, id='RefreshTimeLabel')

@@ -27,6 +27,7 @@ class MetauceBot(OpenUrl):
     def __init__(self):
         super().__init__("https://metauce.org/MetisGame")
         self._wakuangRun = 0
+        self._repairTime = {}
 
     # 到挖矿界面
     def touchMining(self):
@@ -76,6 +77,7 @@ class MetauceBot(OpenUrl):
         return True
 
     def checkBuyTime(self):
+        self.ReportVal(f"开始花钱...")
         try:
             time.sleep(10)
             tokenNum = "address_token.address_token_p"
@@ -104,6 +106,7 @@ class MetauceBot(OpenUrl):
         except Exception as ex:
             pass
 
+        self.ReportVal(f"花钱完事了...")
         self.closeBrowser()
 
     def minitTruckOrLand(self, times, type):
@@ -165,6 +168,7 @@ class MetauceBot(OpenUrl):
     #取下车
     def removeTruck(self):
         try:
+            self.ReportVal(f"开始取车了...")
             collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
             collectEls = self.find_elements_loop(By.XPATH, self._browser, collectKey, 5)
             if collectEls:
@@ -182,6 +186,7 @@ class MetauceBot(OpenUrl):
                         remainEl = self.find_element(By.XPATH, one, remainKey)
                         removeEl = self.find_element(By.XPATH, one, removeKey)
                         Log.debug(f"try remove {count}")
+                        self.ReportVal(f"取第{count}块地")
                         if remainEl and remainEl.text == "0" and removeEl:
                             self.element_click(removeEl)
                             Log.info(f" click Remove Truck {count} {removeEl._id} {one._id}")
@@ -190,10 +195,11 @@ class MetauceBot(OpenUrl):
             Log.exception("removeTruck error:")
             pass
 
-        Log.info(f"removeTruck end!")
+        self.ReportVal(f"取车完成...")
 
     #补车
     def insertTruck(self, starLimit: int = 0):
+        self.ReportVal(f"开始补车...")
         collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
         collectEls = self.find_elements_loop(By.XPATH, self._browser, collectKey, 5)
         try:
@@ -212,6 +218,9 @@ class MetauceBot(OpenUrl):
                         if fVal < 0:
                             continue
                         carselEls = self.find_elements(By.XPATH, one, carSelKey)
+
+                        if self._needStop:
+                            return
 
                         Log.debug(f"land {index} not zero remain, has {len(carselEls)} truck!")
                         if carselEls:
@@ -255,6 +264,7 @@ class MetauceBot(OpenUrl):
 
                                 theCar = numCount[0]['carEl']
 
+                                self.ReportVal(f"开始第{index}块地,补车...")
                                 Log.info(f"choose the Truck {theCar._id} {numCount[0]['index']} {numCount[0]['num']}")
                                 theClickEl = self.find_element(By.XPATH, theCar, ".//div")
                                 if theClickEl:
@@ -269,13 +279,14 @@ class MetauceBot(OpenUrl):
             time.sleep(10)
             return True
 
-        Log.info(f"insertTruck end!")
+        self.ReportVal(f"补车完成...")
         return False
 
     def wakuang(self):
         timeRecord = {}
         wakuangbox = "iconfont.icon--wakuangjiankong"
         while True:
+            self.ReportVal(f"开始第{self._wakuangRun}轮挖矿...")
             if self.repairTruck():
                 time.sleep(3)
                 continue
@@ -317,6 +328,7 @@ class MetauceBot(OpenUrl):
             else:
                 time.sleep(20)
 
+            self.ReportVal(f"第{self._wakuangRun}轮挖矿完成...")
             if self._wakuangRun == 2:
                 return
 

@@ -9,8 +9,8 @@
 '''
 
 # here put the import lib
-from time import time
-from BaseJob import BaseJob
+import os, time
+from Jobs.BaseJob import BaseJob
 from DiscordBot.BotConfig import BotConfig
 from DiscordBot.BotManager import BotManager
 from DiscordBot.BotMsgSend import BotMsgSend
@@ -29,7 +29,7 @@ class DiscordJob(BaseJob):
 
     def DoJob(self, *args, **kwargs):
 
-        now = time()
+        now = time.time()
         for config in self._botMG._dataList:
             config: BotConfig = config
             if config.errorTime > config.ErrorLimite():
@@ -52,7 +52,7 @@ class DiscordJob(BaseJob):
     def SendMsgWithBotConfig(self, botConfig: BotConfig):
         sender = BotMsgSend(botConfig)
         sender.send()
-        pass
 
     def AddJob(self, jobParams):
-        TheScheduler.add_job(self.Done, 'interval', seconds=0.1, id='botJob', max_instances=100)
+        Log.info(f"job: {self._jobName} is Add!")
+        TheScheduler.add_job(self.Done, 'interval', seconds=0.1, id='DiscordJob', max_instances=100)
