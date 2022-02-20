@@ -26,29 +26,34 @@ class MetauceHelperJob(BaseJob):
         super().__init__()
 
     def DoJob(self, *args, **kwargs):
-        self.ReportJobVal(val="开始检查浏览器网页标题")
-        web = OpenUrl("")
-        web.find_the_browser()
+        try:
+            self.ReportJobVal(val="开始检查浏览器网页标题")
+            web = OpenUrl("")
+            web.find_the_browser()
 
-        count = 0
-        num = len(web._browser.window_handles)
-        self.ReportJobVal(val=f"浏览器网页数目 {num}")
-        for one in web._browser.window_handles:
-            checkTime = 0
-            while True:
-                web._browser.switch_to.window(one)
-                time.sleep(1)
+            count = 0
+            num = len(web._browser.window_handles)
+            self.ReportJobVal(val=f"浏览器网页数目 {num}")
+            for one in web._browser.window_handles:
+                checkTime = 0
+                while True:
+                    web._browser.switch_to.window(one)
+                    time.sleep(1)
 
-                if checkTime > 5:
-                    break
-                elif web._browser.current_window_handle != one:
-                    checkTime += 1
-                else:
-                    break
+                    if checkTime > 5:
+                        break
+                    elif web._browser.current_window_handle != one:
+                        checkTime += 1
+                    else:
+                        break
 
-            flg = web._browser.title.find("Metauce")
-            if flg > -1:
-                count = count + 1
+                flg = web._browser.title.find("Metauce")
+                if flg > -1:
+                    count = count + 1
+        except Exception as ex:
+            Log.exception("MetauceHelperJob error")
+            count = 50
+            pass
 
         self.ReportJobVal(val=f"找到的数目为: {count}")
         if count > 2:
