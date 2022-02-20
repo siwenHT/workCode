@@ -22,7 +22,7 @@ class MyLog:
 
         self.streamHandler = logging.StreamHandler()
         self.fileHandler = logging.FileHandler(filename="Res/log/test.log", mode='w')
-        self.fileHandler1 = logging.FileHandler(filename="Res/log/test_info.log", mode='w')
+        self.fileHandler1 = logging.FileHandler(filename="Res/log/test_info.log", mode='a')
 
         self.logger.setLevel(logging.DEBUG)
         self.streamHandler.setLevel(logging.DEBUG)
