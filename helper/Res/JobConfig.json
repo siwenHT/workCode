@@ -29,15 +29,10 @@
         "hour": "0, 6, 12, 18, 20, 23",
         "max_instances": 1
     },
-    "GmToChannelJobtest": {
+    "GmToChannelJob": {
         "trigger": "cron",
         "hour": "6, 10, 18, 23",
         "minute": 6,
         "max_instances": 1
-    },
-    "GmToChannelJob": {
-        "trigger": "date",
-        "time": 5,
-        "max_instances": 2
     }
 }
