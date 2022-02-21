@@ -23,12 +23,12 @@ class MeatMaskJob(BaseJob):
 
     def __init__(self) -> None:
         super().__init__()
+        self._web = MeatMaskHelper()
+        self._web.SetReportCallBack(lambda repVal: self.ReportJobVal(val=repVal))
 
     def DoJob(self, *args, **kwargs):
         try:
             self.ReportJobVal(val=f"metamask load")
-            self._web = MeatMaskHelper()
-            self._web.SetReportCallBack(lambda repVal: self.ReportJobVal(val=repVal))
             self._web.openGameUrl()
             self._web.UnlockConfirm()
             self._web.CheckChainName()
@@ -37,13 +37,15 @@ class MeatMaskJob(BaseJob):
                     time.sleep(5)
                     continue
 
-                if self._isStop:
-                    self.ReportJobVal(val=f"{self._jobName} exit")
-                    return
-
+                self.CheckStop()
                 self._web.ConfirmChangeNet()
                 self._web.ConfirmTransaction()
                 time.sleep(0.5)
 
         except Exception as ex:
+            if self._isStop:
+                self._web.closeBrowser()
+                self.ReportJobVal(val=f"{self._jobName} exit")
+                return
+
             self.DoJob()

@@ -684,7 +684,7 @@ def main():
     def bigRun():
         while True:
             try:
-                # mainFunc()
+                mainFunc()
                 # removeTruck()
                 insertTruck(3)
                 checkTokenVal()

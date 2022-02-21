@@ -40,8 +40,6 @@ class OpenUrl:
         self._needStop = val
 
     def closeBrowser(self):
-        GetGlock().acquire()
-
         try:
             if self._browser and self._handler:
                 self._browser.switch_to.window(self._handler)
@@ -51,12 +49,9 @@ class OpenUrl:
         except Exception as ex:
             pass
 
-        GetGlock().release()
-
     '''打开新标签'''
 
     def open_new_tab(self, browser: webdriver):
-        GetGlock().acquire()
         oldHandles = browser.window_handles
 
         browser.execute_script("window.open('');")
@@ -67,7 +62,6 @@ class OpenUrl:
                 self._handler = newOne
                 break
         browser.switch_to.window(self._handler)
-        GetGlock().release()
 
     '''刷新网页'''
 
@@ -184,15 +178,19 @@ class OpenUrl:
             pass
 
     def find_the_browser(self):
-        workPath = os.path.abspath('./res/chrome/chromedriver.exe')
-        s = Service(workPath)
-        options = self.get_debug_chrome_opetions()
-        browser: webdriver = webdriver.Chrome(service=s, options=options)
-        Log.debug(f"finded the browser!")
-        self._browser = browser
+        if not self._browser:
+            workPath = os.path.abspath('./res/chrome/chromedriver.exe')
+            s = Service(workPath)
+            options = self.get_debug_chrome_opetions()
+            browser: webdriver = webdriver.Chrome(service=s, options=options)
+            Log.debug(f"finded the browser!")
+            self._browser = browser
 
-    def openGameUrl(self):
+    def openGameUrl(self, url: str = ''):
         self.find_the_browser()
         self.open_new_tab(self._browser)
+        if url and url != '':
+            self._url = url
+
         self._browser.get(self._url)
         Log.info(f"open url={self._url}, is ok!")

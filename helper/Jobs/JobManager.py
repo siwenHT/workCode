@@ -66,8 +66,9 @@ class JobManager():
         self._jobs.append(RefreshTimeLabel())
 
         self._jobs.append(MeatMaskJob())
-        self._jobs.append(MetauceBotJob())
-        self._jobs.append(MetauceHelperJob())
+        # self._jobs.append(MetauceBotJob())
+        # self._jobs.append(MetauceHelperJob())
+
         self._jobs.append(CandyRewardJob())
         self._jobs.append(TwitterFellowJob())
         self._jobs.append(GmToChannelJob())

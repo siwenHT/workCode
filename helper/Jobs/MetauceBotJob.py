@@ -23,9 +23,20 @@ class MetauceBotJob(BaseJob):
     def __init__(self) -> None:
         super().__init__()
 
+        self._starLimit = 3
+        self._web = None
+        self._web = MetauceBot()
+        self._web.SetReportCallBack(lambda repVal: self.ReportJobVal(val=repVal))
+
     def DoJob(self, *args, **kwargs):
         while True:
             try:
+                if self._isPause:
+                    time.sleep(5)
+                    continue
+
+                self.CheckStop()
+                self.mainFunc()
                 if self._isPause:
                     time.sleep(5)
                     continue
@@ -49,6 +60,12 @@ class MetauceBotJob(BaseJob):
                     continue
 
                 self.CheckStop()
+                self._web.touchMedalBtn()
+                if self._isPause:
+                    time.sleep(5)
+                    continue
+
+                self.CheckStop()
                 self.removeTruck()
                 if self._isPause:
                     time.sleep(5)
@@ -57,37 +74,36 @@ class MetauceBotJob(BaseJob):
                 time.sleep(60 * 60)
             except Exception as ex:
                 if self._isStop:
+                    self._web.closeBrowser()
                     self.ReportJobVal(val=f"{self._jobName} exit")
                     return
 
-                Log.exception("MetauceBotJob error")
-                pass
+                Log.exception(f"{self._jobName} error")
+                self.DoJob(*args, **kwargs)
+
+    def Stop(self):
+        self._web.SetNeedStop(True)
+        return super().Stop()
 
     def mainFunc(self):
         self.ReportJobVal(val="开始启动收矿")
-        handler = MetauceBot()
-        handler.SetReportCallBack(lambda repVal: self.ReportJobVal(val=repVal))
-        handler.openGameUrl()
-        handler.touchMining()
-        handler.touchOneRemainBtn()
+        self._web.openGameUrl("https://metauce.org/MetisGame/#/Play")
+        self._web.touchOneRemainBtn()
 
-        handler.wakuang()
-        handler.closeBrowser()
+        self._web.wakuang()
+        self._web.closeBrowser()
 
     def insertTruck(self):
-        starLimit = 3
         self.ReportJobVal(val="准备安装矿车")
-        handler = MetauceBot()
-        handler.SetReportCallBack(lambda repVal: self.ReportJobVal(val=repVal))
-        handler.openGameUrl()
-        handler.touchMining()
+        handler = self._web
+        handler.openGameUrl("https://metauce.org/MetisGame/#/Play")
         handler.touchOneRemainBtn()
         time.sleep(20)
         self.ReportJobVal(val="安装矿车环境准备完毕")
 
         count = 0
         while True:
-            if handler.insertTruck(starLimit):
+            if handler.insertTruck(self._starLimit):
                 count += 1
                 self.ReportJobVal(val="安装矿车 {count} 次")
                 self.CheckStop()
@@ -99,19 +115,15 @@ class MetauceBotJob(BaseJob):
 
     def checkTokenVal(self):
         self.ReportJobVal(val="准备购买")
-        handler = MetauceBot()
-        handler.SetReportCallBack(lambda repVal: self.ReportJobVal(val=repVal))
+        handler = self._web
         handler.openGameUrl()
-        handler.touchMining()
-        handler.touchOneRemainBtn()
         handler.checkBuyTime()
+        handler.closeBrowser()
 
     def removeTruck(self):
         self.ReportJobVal(val="准备移除车辆")
-        handler = MetauceBot()
-        handler.SetReportCallBack(lambda repVal: self.ReportJobVal(val=repVal))
-        handler.openGameUrl()
-        handler.touchMining()
+        handler = self._web
+        handler.openGameUrl("https://metauce.org/MetisGame/#/Play")
         handler.touchDepletedBtn()
         handler.removeTruck()
         time.sleep(10)

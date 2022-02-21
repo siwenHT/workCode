@@ -28,6 +28,9 @@ class MetauceBot(OpenUrl):
         super().__init__("https://metauce.org/MetisGame")
         self._wakuangRun = 0
         self._repairTime = {}
+        self._mintFee = 125
+        self._minLanNum = 5
+        self._metalNum = 0
 
     # 到挖矿界面
     def touchMining(self):
@@ -52,7 +55,11 @@ class MetauceBot(OpenUrl):
             return False
         return True
 
+    '''点击查看挖矿情况'''
+
     def touchOneRemainBtn(self):
+        self.refreshPage()
+        time.sleep(10)
         radioKey = "//div/div/div[@class='el-radio-group']/label[2]"
         radioEl: webelement = self.find_element_unit(By.XPATH, self._browser, radioKey)
         if radioEl:
@@ -64,7 +71,11 @@ class MetauceBot(OpenUrl):
             return False
         return True
 
+    '''点击已经已经完成挖矿的土地'''
+
     def touchDepletedBtn(self):
+        self.refreshPage()
+        time.sleep(10)
         radioKey = "//div/div/div[@class='el-radio-group']/label[3]"
         radioEl: webelement = self.find_element_unit(By.XPATH, self._browser, radioKey)
         if radioEl:
@@ -75,6 +86,31 @@ class MetauceBot(OpenUrl):
             self.closeBrowser()
             return False
         return True
+
+    '''检查能不能构建激活码'''
+
+    def touchMedalBtn(self):
+        try:
+            self.ReportVal(f"构建新徽章{self._metalNum}...")
+            self.closeBrowser()
+            self.openGameUrl("https://metauce.org/MetisGame/#/Medal")
+
+            btnKey = "//div[@class='cneter_warp']/ul/li[1]/button"
+            btnEl: webelement = self.find_element_unit(By.XPATH, self._browser, btnKey)
+            if btnEl:
+                if btnEl.is_enabled():
+                    self.element_click(btnEl)
+                    Log.debug(f"click the medal button!")
+                else:
+                    Log.debug(f"canNot click the medal button!")
+            else:
+                Log.debug(f"cannot find the medal button!")
+                self.closeBrowser()
+        except Exception as ex:
+            Log.exception("touchMedalBtn error")
+            pass
+
+    '''查看够不够买东西'''
 
     def checkBuyTime(self):
         self.ReportVal(f"开始花钱...")
@@ -88,61 +124,45 @@ class MetauceBot(OpenUrl):
                 test = test.replace(" MINES", "")
                 tokenVal = float(test)
                 Log.info(f"tokenVal: {tokenVal}")
-                if tokenVal > 125:
+                if tokenVal > self._mintFee:
                     collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
                     collectEls = self.find_elements_loop(By.XPATH, self._browser, collectKey, 1)
                     if collectEls:
                         Log.info(f"land current num: {len(collectEls)}")
 
-                    minLanNum = 15
-                    if not collectEls or len(collectEls) < minLanNum:
+                    if not collectEls or len(collectEls) < self._minLanNum:
                         val = 0 if not collectEls else len(collectEls)
-                        val = (minLanNum - val) * 125
+                        val = (self._minLanNum - val) * self._mintFee
                         val = val if tokenVal > val else tokenVal
-                        self.minitTruckOrLand(int(val / 125), 1)
+                        self.minitTruckOrLand(int(val / self._mintFee), 1)
                         # self.checkBuyTime()
                     else:
-                        self.minitTruckOrLand(int((tokenVal - 250) / 125), 2)
+                        self.minitTruckOrLand(int((tokenVal - 250) / self._mintFee), 2)
         except Exception as ex:
             pass
 
         self.ReportVal(f"花钱完事了...")
-        self.closeBrowser()
 
     def minitTruckOrLand(self, times, type):
         Log.info(f"minitTruckOrLand {times} {type}")
         if times == 0:
             return
-        key1 = "//div[@class='menu_left']/ul/li"
-        playKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='code']/button[1]"
-        landKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='cneter_warp']/div[@class='mining']/p/span"
-        carKey = "//div/div[@class='main--collapse']/div[@class='warp']/div[@class='cneter_warp']/div[@class='car']/p/span"
+
         try:
-            homeBtnEl = self.find_element_loop(By.XPATH, self._browser, key1)
-            if homeBtnEl:
-                self.element_click(homeBtnEl)
-                playEl = self.find_element_loop(By.XPATH, self._browser, playKey)
-                if playEl:
-                    self.element_click(playEl)
+            flg = 'land' if (type == 1) else "truck"
+            self.closeBrowser()
+            self.openGameUrl("https://metauce.org/MetisGame/#/Map" if (type == 1) else "https://metauce.org/MetisGame/#/Car")
 
-                    flg = ''
-                    touchBtn = None
-                    if type == 1:
-                        touchBtn = self.find_element_loop(By.XPATH, self._browser, landKey)
-                        flg = 'land'
-                    else:
-                        touchBtn = self.find_element_loop(By.XPATH, self._browser, carKey)
-                        flg = 'truck'
+            key = "//div[@class='cneter_warp']/div[@class='header_search']/button/span"
+            tBtn = self.find_element_loop(By.XPATH, self._browser, key)
+            if tBtn:
+                for i in range(times):
+                    self.element_click(tBtn)
+                    Log.info(f"miniting a {flg}!")
+                    time.sleep(12)
 
-                    if touchBtn:
-                        self.element_click(touchBtn)
-                        key = "//div[@class='cneter_warp']/div[@class='header_search']/button/span"
-                        tBtn = self.find_element_loop(By.XPATH, self._browser, key)
-                        if tBtn:
-                            for i in range(times):
-                                self.element_click(tBtn)
-                                Log.info(f"miniting a {flg}!")
-                                time.sleep(12)
+                    if self._needStop:
+                        return
         except Exception as ex:
             pass
 
@@ -177,6 +197,9 @@ class MetauceBot(OpenUrl):
                 removeKey = ".//div[@class='list_c']/div/div/p[@class='ones']"
                 Log.info(f"removeTruck has {len(collectEls)} truck !")
                 for one in collectEls:
+                    if self._needStop:
+                        return
+
                     count += 1
                     carlistKey = ".//div/div[@class='list_data']"
                     carlistEl = self.find_element_loop(By.XPATH, one, carlistKey)
@@ -197,9 +220,9 @@ class MetauceBot(OpenUrl):
 
         self.ReportVal(f"取车完成...")
 
-    #补车
+    #安装卡车
     def insertTruck(self, starLimit: int = 0):
-        self.ReportVal(f"开始补车...")
+        self.ReportVal(f"开始安装卡车...")
         collectKey = "//div[@class='cneter_warp']/div[@class='collect']"
         collectEls = self.find_elements_loop(By.XPATH, self._browser, collectKey, 5)
         try:
@@ -287,6 +310,9 @@ class MetauceBot(OpenUrl):
         wakuangbox = "iconfont.icon--wakuangjiankong"
         while True:
             self.ReportVal(f"开始第{self._wakuangRun}轮挖矿...")
+            if self._needStop:
+                return
+
             if self.repairTruck():
                 time.sleep(3)
                 continue
@@ -329,7 +355,5 @@ class MetauceBot(OpenUrl):
                 time.sleep(20)
 
             self.ReportVal(f"第{self._wakuangRun}轮挖矿完成...")
-            if self._wakuangRun == 2:
-                return
-
             self._wakuangRun += 1
+            return
