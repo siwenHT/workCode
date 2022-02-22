@@ -9,7 +9,7 @@
 '''
 
 # here put the import lib
-import os
+import os, time
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
 from Until import ToolsFunc as TOOL
@@ -32,6 +32,8 @@ class WinSystem():
         os.system("taskkill /f /im chrome.exe")
         os.system('cd /d C:/Program Files/Google/Chrome/Application && start chrome.exe --remote-debugging-port=9527 --"%1"')
         os.system('cd /d C:/Program Files (x86)/Google/Chrome/Application && start chrome.exe --remote-debugging-port=9527 --"%1"')
+        time.sleep(3)
+        GEventHandler.Dispatch(EventType.reload_chrome_over)
 
     def GetWorkPath(self):
         return os.getcwd()

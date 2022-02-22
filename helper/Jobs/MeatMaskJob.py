@@ -48,4 +48,5 @@ class MeatMaskJob(BaseJob):
                 self.ReportJobVal(val=f"{self._jobName} exit")
                 return
 
+            time.sleep(3)
             self.DoJob()

@@ -1,4 +1,11 @@
 {
+    "initJobs": [
+        "MeatMaskJob",
+        "CandyRewardJob",
+        "DiscordJob",
+        "TwitterFellowJob",
+        "GmToChannelJob"
+    ],
     "MeatMaskJob": {
         "trigger": "date",
         "time": 5,

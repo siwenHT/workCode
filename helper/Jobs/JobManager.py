@@ -35,6 +35,7 @@ from Jobs.OneBtnPushJob import OneBtnPushJob
 class JobManager():
 
     def __init__(self):
+        self._jobInitStart = False
         self._jobs = []
         self.MsgRegeist()
         self.LoadJobConfig()
@@ -62,30 +63,41 @@ class JobManager():
 
     def start(self):
         self._jobs.append(WindowJob())
-        self._jobs.append(DiscordJob())
         self._jobs.append(RefreshTimeLabel())
-
-        self._jobs.append(MeatMaskJob())
-        # self._jobs.append(MetauceBotJob())
-        # self._jobs.append(MetauceHelperJob())
-
-        self._jobs.append(CandyRewardJob())
-        self._jobs.append(TwitterFellowJob())
-        self._jobs.append(GmToChannelJob())
 
         for job in self._jobs:
             job.AddJob(self.jobParams)
 
         TheScheduler.start()
 
-    def removeJob(self, jobTypeName: str):
+    '''按配置开启任务'''
+
+    def StartJobByInitConfig(self):
+        if self._jobInitStart:
+            initJobs = self.jobParams.get("initJobs")
+            for jobName in initJobs:
+                self.loadJob(jobName)
+
+    def RestartJobWhoExist(self, jobTypeName: str):
+        job = self.FindTheJob(jobTypeName)
+        if job:
+            self.loadJob(jobTypeName)
+
+    '''任务是否存在'''
+
+    def FindTheJob(self, jobTypeName: str):
         for job in self._jobs:
             job: BaseJob = job
-            if job._jobName.find(jobTypeName) > -1:
-                Log.info(f"remove job {job._jobName}")
-                job.Stop()
-                TheScheduler.remove_job(job._jobName)
-                self._jobs.remove(job)
+            if job._typeName == jobTypeName:
+                return job
+
+    def removeJob(self, jobTypeName: str):
+        job = self.FindTheJob()
+        if job:
+            Log.info(f"remove job {job._jobName}")
+            job.Stop()
+            TheScheduler.remove_job(job._jobName)
+            self._jobs.remove(job)
 
     def loadJob(self, jobTypeName: str, *args, **kwargs):
         self.removeJob(jobTypeName)
@@ -95,11 +107,13 @@ class JobManager():
         newJob.AddJob(self.jobParams)
 
     def OneKeyPush(self, isTest: boolean):
-        Win.ReloadBrower()
-        time.sleep(3)
-        # self.ReportJobVal(val=f"重启了浏览器")
-        GEventHandler.Dispatch(EventType.need_reload_chrome_job)
-        # self.loadJob("OneBtnPushJob", isTest)
+        self.loadJob("OneBtnPushJob", isTest)
+
+    def ChromRestartOver(self):
+        self.RestartJobWhoExist('MeatMaskJob')
+        self.RestartJobWhoExist('MetauceBotJob')
+        self.RestartJobWhoExist('CandyRewardJob')
+        GEventHandler.Dispatch(EventType.joblist_has_change)
 
     def MsgRegeist(self):
 
@@ -112,22 +126,21 @@ class JobManager():
                     job.Resume()
             elif eventType == EventType.reload_job:
                 self.loadJob()
-            elif eventType == EventType.need_reload_chrome_job:
-                self.loadJob("MeatMaskJob")
-                self.loadJob("MetauceBotJob")
-                self.loadJob("CandyRewardJob")
-                GEventHandler.Dispatch(EventType.joblist_has_change)
+            elif eventType == EventType.reload_chrome_over:
+                self.ChromRestartOver()
             elif eventType == EventType.btn_one_key_push:
                 self.OneKeyPush(False)
             elif eventType == EventType.btn_one_key_push_test:
                 self.OneKeyPush(True)
             elif eventType == EventType.stop_job:
                 self.removeJob(args[0])
+            elif eventType == EventType.start_job_by_jobinit:
+                self.StartJobByInitConfig()
 
         GEventHandler.RegedistEvent(EventType.pause_all_job, msgHandler)
         GEventHandler.RegedistEvent(EventType.resume_all_job, msgHandler)
         GEventHandler.RegedistEvent(EventType.reload_job, msgHandler)
-        GEventHandler.RegedistEvent(EventType.need_reload_chrome_job, msgHandler)
+        GEventHandler.RegedistEvent(EventType.reload_chrome_over, msgHandler)
         GEventHandler.RegedistEvent(EventType.btn_one_key_push, msgHandler)
         GEventHandler.RegedistEvent(EventType.btn_one_key_push_test, msgHandler)
         GEventHandler.RegedistEvent(EventType.stop_job, msgHandler)

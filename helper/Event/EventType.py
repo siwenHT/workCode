@@ -25,11 +25,13 @@ class EventType(Enum):
     reload_chrome = 8  #重启谷歌浏览器
     reload_job = 9  #重载某个任务
     refresh_job_cur_status = 10  #刷新任务当前进程
-    need_reload_chrome_job = 11  #需要重启浏览器任务
+    # need_reload_chrome_job = 11  #需要重启浏览器任务
 
     joblist_has_change = 12  #任务列表有变动
     btn_one_key_push_test = 13  #测试推送内容
     btn_one_key_push = 14  #测试推送内容
+    reload_chrome_over = 15  #重启完浏览器
+    start_job_by_jobinit = 16  #按配置启动任务
 
     stop_job = 15  #停止任务
 

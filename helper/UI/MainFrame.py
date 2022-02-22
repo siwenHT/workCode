@@ -25,6 +25,7 @@ class MainFrame(BaseFrame):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self._isPause = True
+        self._jobStart = False
 
         self.InitUI()
         self.MsgRegeist()
@@ -43,7 +44,7 @@ class MainFrame(BaseFrame):
         btn.grid(column=0, row=0, sticky=tk.W, padx=5)
         btn = tk.Button(frame2, text="重启浏览器", command=self.ResetBrower)
         btn.grid(column=1, row=0, sticky=tk.W, padx=5)
-        self._ctrlJob = tk.Button(frame2, text="暂停任务", command=self.CtrlJob, bg='green')
+        self._ctrlJob = tk.Button(frame2, text="启动任务", command=self.CtrlJob, bg='green')
         self._ctrlJob.grid(column=2, row=0, sticky=tk.W, padx=5)
         btn = tk.Button(frame2, text="推送测试", command=lambda: self.OneKeyPush(True))
         btn.grid(column=0, row=1, sticky=tk.W, padx=5)
@@ -62,7 +63,9 @@ class MainFrame(BaseFrame):
         GEventHandler.Dispatch(EventType.reload_chrome)
 
     def CtrlJob(self):
-        if self._isPause:
+        if not self._jobStart:
+            GEventHandler.Dispatch(EventType.start_job_by_jobinit)
+        elif self._isPause:
             GEventHandler.Dispatch(EventType.resume_all_job)
             self._isPause = False
             self._ctrlJob.config(text="暂停任务", bg='green')

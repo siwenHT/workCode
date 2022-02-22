@@ -57,7 +57,5 @@ class MetauceHelperJob(BaseJob):
 
         self.ReportJobVal(val=f"找到的数目为: {count}")
         if count > 2:
-            Win.ReloadBrower()
-            time.sleep(3)
+            GEventHandler.Dispatch(EventType.reload_chrome)
             self.ReportJobVal(val=f"重启了浏览器")
-            GEventHandler.Dispatch(EventType.need_reload_chrome_job)

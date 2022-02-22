@@ -39,7 +39,7 @@ class OneBtnPushJob(BaseJob):
 
         config = self._config
         if self._isTest:
-            self.ReportJobVal(val=f"目前是测试环境，只发送第一个渠道号")
+            self.ReportJobVal(val=f"目前是测试环境,只发送第一个渠道号")
             config._config["channel_id"] = config._config["channel_ids"][0]
             config._config["channel_ids"] = None
 
