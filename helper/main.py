@@ -29,7 +29,6 @@ def main():
     # if retStr == key:
     #     a = 1
 
-    Win.ReloadBrower()
     #加载所有配置任务
     JobMG = JobManager()
     SetJobMG(JobMG)
