@@ -1,12 +1,12 @@
 {
     "initJobs": [
-        "MeatMaskJob",
+        "MetaMaskJob",
         "CandyRewardJob",
         "DiscordJob",
         "TwitterFellowJob",
         "GmToChannelJob"
     ],
-    "MeatMaskJob": {
+    "MetaMaskJob": {
         "trigger": "date",
         "time": 5,
         "max_instances": 2

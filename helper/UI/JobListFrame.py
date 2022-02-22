@@ -49,41 +49,54 @@ class JobListFrame(BaseFrame):
         self.frame = tk.Listbox(self, bg='green')
         self.frame.grid(column=0, row=1, pady=10)
         jobMG = Global.GetJobMG()
-        self._joblist = jobMG.GetAllJobList()
+        self._joblist = jobMG.jobNames
 
         row = 0
         count = 0
         jobFrame = self.frame
         self.tkMiscs = {}
-        for item in self._joblist:
-            item: BaseJob = item
+        for jobTypeName in self._joblist:
+            job: BaseJob = jobMG.FindTheJob(jobTypeName)
             col = 0
+            if job:
+                statuBtn = tk.Button(jobFrame)
+                statuBtn.config(text=("恢复" if job.isPause() else "暂停"), bg=('green' if job.isPause() else 'yellow'))
+                statuBtn.config(command=lambda curJobName=jobTypeName, curBtn=statuBtn: self.StatuBtn(curJobName, curBtn))
+                statuBtn.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
+                col += 1
 
-            statuBtn = tk.Button(jobFrame)
-            statuBtn.config(text=("恢复" if item.isPause() else "暂停"), bg=('green' if item.isPause() else 'yellow'))
-            statuBtn.config(command=lambda idx=count, curBtn=statuBtn: self.StatuBtn(idx, curBtn))
-            statuBtn.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
-            col += 1
+                btn = tk.Button(jobFrame, text='重载')
+                btn.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
+                btn.config(command=lambda curJobName=jobTypeName: self.ReloadJob(curJobName))
+                col += 1
 
-            btn = tk.Button(jobFrame, text='重载')
-            btn.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
-            col += 1
+                nameLab = tk.Label(jobFrame, text=job._jobName)
+                nameLab.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
+                col += 1
 
-            nameLab = tk.Label(jobFrame, text=item._jobName)
-            nameLab.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
-            col += 1
+                statuLab = tk.Label(jobFrame, text=job.GetCurVal())
+                statuLab.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
+                col += 1
+            else:
+                btn = tk.Button(jobFrame, text='启动')
+                btn.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
+                btn.config(command=lambda curJobName=jobTypeName: self.StartJob(curJobName))
+                col += 1
 
-            statuLab = tk.Label(jobFrame, text='运行状况...')
-            statuLab.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
-            col += 1
+                nameLab = tk.Label(jobFrame, text=jobTypeName)
+                nameLab.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
+                col += 1
+
             row += 1
             count += 1
 
             oneMiscs = {}
             oneMiscs["statuBtn"] = statuBtn
             oneMiscs["statuLab"] = statuLab
-            oneMiscs["job"] = item
-            self.tkMiscs[item._jobName] = oneMiscs
+            if job:
+                oneMiscs["job"] = job
+                oneMiscs["jobName"] = job._jobName
+            self.tkMiscs[jobTypeName] = oneMiscs
 
         self._isRefreshIng = False
 
@@ -93,14 +106,24 @@ class JobListFrame(BaseFrame):
         self.Lock.release()
         return flg
 
-    def StatuBtn(self, count, statuBtn: tk.Button):
+    def StartJob(self, jobTypeName: str):
+        GEventHandler.Dispatch(EventType.reload_job, jobTypeName)
+        self.RefreshJobs()
+
+    def ReloadJob(self, jobTypeName: str):
+        GEventHandler.Dispatch(EventType.reload_job, jobTypeName)
+        self.RefreshJobs()
+
+    def StatuBtn(self, curJobName, statuBtn: tk.Button):
         if self.GetIsRefreshIng():
             return
 
         try:
-            job = self._joblist[count]
-            job.ChangeStatus()
-            statuBtn.config(text=("恢复" if job.isPause() else "暂停"), bg=('green' if job.isPause() else 'yellow'))
+            oneMiscs = self.tkMiscs.get(curJobName)
+            if oneMiscs:
+                job = oneMiscs.get("job")
+                job.ChangeStatus()
+                statuBtn.config(text=("恢复" if job.isPause() else "暂停"), bg=('green' if job.isPause() else 'yellow'))
         except Exception as ex:
             pass
 
@@ -109,9 +132,10 @@ class JobListFrame(BaseFrame):
             return
 
         try:
-            oneMiscs = self.tkMiscs.get(jobName)
-            if oneMiscs and oneMiscs['statuLab']:
-                oneMiscs['statuLab'].config(text=str(val))
+            for oneMiscs in self.tkMiscs.values():
+                if oneMiscs.get("jobName", "") == jobName:
+                    if oneMiscs and oneMiscs['statuLab']:
+                        oneMiscs['statuLab'].config(text=str(val))
         except Exception as ex:
             pass
 

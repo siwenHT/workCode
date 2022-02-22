@@ -20,11 +20,11 @@ class EventMsgHandler():
     def __init__(self):
         self.callBacks = {}
         self.delayCall = []
-        # TheScheduler.add_job(self._dealy_call, trigger="interval", seconds=0.1)
+        TheScheduler.add_job(self._dealy_call, trigger="interval", seconds=0.1, id='EventMsgHandler')
 
-    # def _dealy_call(self):
-    #     for item in self.delayCall:
-    #         self.Dispatch(item["eventType"], *item["args"], **item["kwargs"])
+    def _dealy_call(self):
+        for item in self.delayCall:
+            self.Dispatch(item["eventType"], *item["args"], **item["kwargs"])
 
     def RegedistEvent(self, eventType: EventType, callBack, caller: object = None):
         if not self.callBacks.get(eventType, None):

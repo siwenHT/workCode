@@ -23,11 +23,16 @@ class BaseJob():
     def __init__(self):
         self._isStop = False
         self._isPause = False
+        self._jobCurVal = '已加载'
+
         global id
         self._id = id
         id += 1
         self._typeName = type(self).__name__
         self._jobName = f"{self._typeName}[{id}]"
+
+    def GetCurVal(self):
+        return self._jobCurVal
 
     def ChangeStatus(self):
         self._isPause = not self._isPause
@@ -62,6 +67,7 @@ class BaseJob():
 
     def ReportJobVal(self, *args, **kwargs):
         Log.info(f"job:{self._jobName}, report:{kwargs}")
+        self._jobCurVal = kwargs.get('val', "")
         GEventHandler.Dispatch(EventType.refresh_job_cur_status, jobName=self._jobName, *args, **kwargs)
 
     def AddJob(self, jobParams):
@@ -87,5 +93,6 @@ class BaseJob():
                 param['hour'] = theParam.get('hour')
 
             TheScheduler.add_job(self.Done, **param)
+            self._jobCurVal = '已执行'
         else:
             Log.error(f"Not find the {self._jobName} jobParam!")

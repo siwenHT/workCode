@@ -9,7 +9,10 @@
 '''
 
 # here put the import lib
+from multiprocessing import Event
 import os, time
+from Event.EventMsgHandler import GEventHandler
+from Event.EventType import EventType
 from Global import *
 from Until.MyLog import Log
 from inspect import isfunction
@@ -187,10 +190,15 @@ class OpenUrl:
             self._browser = browser
 
     def openGameUrl(self, url: str = ''):
-        self.find_the_browser()
-        self.open_new_tab(self._browser)
-        if url and url != '':
-            self._url = url
+        try:
+            self.find_the_browser()
+            self.open_new_tab(self._browser)
+            if url and url != '':
+                self._url = url
 
-        self._browser.get(self._url)
-        Log.info(f"open url={self._url}, is ok!")
+            self._browser.get(self._url)
+            Log.info(f"open url={self._url}, is ok!")
+        except Exception as ex:
+            Log.exception("openGameUrl error")
+            GEventHandler.Dispatch(EventType.reload_chrome)
+            RuntimeError('Job is stop')

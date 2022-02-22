@@ -19,6 +19,7 @@ from Until.MyLog import Log
 class WinSystem():
 
     def __init__(self) -> None:
+        self._reloadChromTime = 0
         self._ensKey = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz._'
         self._configFilePath = os.path.join(self.GetWorkPath(), 'Res/Config.json')
 
@@ -29,11 +30,13 @@ class WinSystem():
         self._commonConfig = TOOL.initJsonFromFile(self._configFilePath)
 
     def ReloadBrower(self):
-        os.system("taskkill /f /im chrome.exe")
-        os.system('cd /d C:/Program Files/Google/Chrome/Application && start chrome.exe --remote-debugging-port=9527 --"%1"')
-        os.system('cd /d C:/Program Files (x86)/Google/Chrome/Application && start chrome.exe --remote-debugging-port=9527 --"%1"')
-        time.sleep(3)
-        GEventHandler.Dispatch(EventType.reload_chrome_over)
+        if time.time() - self._reloadChromTime > 10:
+            self._reloadChromTime = time.time()
+            os.system("taskkill /f /im chrome.exe")
+            os.system('cd /d C:/Program Files/Google/Chrome/Application && start chrome.exe --remote-debugging-port=9527 --"%1"')
+            os.system('cd /d C:/Program Files (x86)/Google/Chrome/Application && start chrome.exe --remote-debugging-port=9527 --"%1"')
+            time.sleep(3)
+            GEventHandler.Dispatch(EventType.reload_chrome_over)
 
     def GetWorkPath(self):
         return os.getcwd()

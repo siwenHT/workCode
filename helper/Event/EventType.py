@@ -33,6 +33,6 @@ class EventType(Enum):
     reload_chrome_over = 15  #重启完浏览器
     start_job_by_jobinit = 16  #按配置启动任务
 
-    stop_job = 15  #停止任务
+    stop_job = 17  #停止任务
 
     End = 1000

@@ -22,7 +22,7 @@ from Until.MyLog import Log
 
 from Jobs.WindowJob import WindowJob
 from Jobs.DiscordJob import DiscordJob
-from Jobs.MeatMaskJob import MeatMaskJob
+from Jobs.MetaMaskJob import MetaMaskJob
 from Jobs.MetauceBotJob import MetauceBotJob
 from Jobs.CandyRewardJob import CandyRewardJob
 from Jobs.RefreshTimeLabel import RefreshTimeLabel
@@ -45,7 +45,7 @@ class JobManager():
         self.jobNames["DiscordJob"] = DiscordJob
         self.jobNames["CandyRewardJob"] = CandyRewardJob
         self.jobNames["RefreshTimeLabel"] = RefreshTimeLabel
-        self.jobNames["MeatMaskJob"] = MeatMaskJob
+        self.jobNames["MetaMaskJob"] = MetaMaskJob
         self.jobNames["MetauceBotJob"] = MetauceBotJob
         self.jobNames["MetauceHelperJob"] = MetauceHelperJob
         self.jobNames["TwitterFellowJob"] = TwitterFellowJob
@@ -73,10 +73,12 @@ class JobManager():
     '''按配置开启任务'''
 
     def StartJobByInitConfig(self):
-        if self._jobInitStart:
+        if not self._jobInitStart:
             initJobs = self.jobParams.get("initJobs")
             for jobName in initJobs:
                 self.loadJob(jobName)
+            self._jobInitStart = True
+            GEventHandler.Dispatch(EventType.joblist_has_change)
 
     def RestartJobWhoExist(self, jobTypeName: str):
         job = self.FindTheJob(jobTypeName)
@@ -86,13 +88,15 @@ class JobManager():
     '''任务是否存在'''
 
     def FindTheJob(self, jobTypeName: str):
+        retJob = None
         for job in self._jobs:
             job: BaseJob = job
             if job._typeName == jobTypeName:
-                return job
+                retJob = job
+        return retJob
 
     def removeJob(self, jobTypeName: str):
-        job = self.FindTheJob()
+        job = self.FindTheJob(jobTypeName)
         if job:
             Log.info(f"remove job {job._jobName}")
             job.Stop()
@@ -110,7 +114,7 @@ class JobManager():
         self.loadJob("OneBtnPushJob", isTest)
 
     def ChromRestartOver(self):
-        self.RestartJobWhoExist('MeatMaskJob')
+        self.RestartJobWhoExist('MetaMaskJob')
         self.RestartJobWhoExist('MetauceBotJob')
         self.RestartJobWhoExist('CandyRewardJob')
         GEventHandler.Dispatch(EventType.joblist_has_change)
@@ -125,7 +129,7 @@ class JobManager():
                 for job in self._jobs:
                     job.Resume()
             elif eventType == EventType.reload_job:
-                self.loadJob()
+                self.loadJob(args[0])
             elif eventType == EventType.reload_chrome_over:
                 self.ChromRestartOver()
             elif eventType == EventType.btn_one_key_push:
@@ -144,3 +148,4 @@ class JobManager():
         GEventHandler.RegedistEvent(EventType.btn_one_key_push, msgHandler)
         GEventHandler.RegedistEvent(EventType.btn_one_key_push_test, msgHandler)
         GEventHandler.RegedistEvent(EventType.stop_job, msgHandler)
+        GEventHandler.RegedistEvent(EventType.start_job_by_jobinit, msgHandler)

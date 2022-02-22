@@ -20,6 +20,7 @@ class RefreshTimeLabel(BaseJob):
 
     def __init__(self) -> None:
         super().__init__()
+        self.ReportJobVal(val=f"刷新任务进行中")
 
     def DoJob(self, *args, **kwargs):
         GEventHandler.Dispatch(EventType.refresh_time_label)

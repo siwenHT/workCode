@@ -25,6 +25,7 @@ class WindowJob(BaseJob):
 
     def DoJob(self, *args, **kwargs):
         self._window = MainWindow()
+        self.ReportJobVal(val=f"窗口已开")
         pass
 
     def AddJob(self, jobParams):

@@ -47,9 +47,9 @@ class MainFrame(BaseFrame):
         self._ctrlJob = tk.Button(frame2, text="启动任务", command=self.CtrlJob, bg='green')
         self._ctrlJob.grid(column=2, row=0, sticky=tk.W, padx=5)
         btn = tk.Button(frame2, text="推送测试", command=lambda: self.OneKeyPush(True))
-        btn.grid(column=0, row=1, sticky=tk.W, padx=5)
+        btn.grid(column=0, row=1, sticky=tk.W, padx=5, pady=5)
         btn = tk.Button(frame2, text="正式推送", command=lambda: self.OneKeyPush(False))
-        btn.grid(column=1, row=1, sticky=tk.W, padx=5)
+        btn.grid(column=1, row=1, sticky=tk.W, padx=5, pady=5)
         frame2.grid(column=0, row=1, sticky=tk.W)
 
     def RefreshTimeLabel(self):
@@ -65,6 +65,8 @@ class MainFrame(BaseFrame):
     def CtrlJob(self):
         if not self._jobStart:
             GEventHandler.Dispatch(EventType.start_job_by_jobinit)
+            self._jobStart = True
+            self._ctrlJob.config(text="暂停任务", bg='green')
         elif self._isPause:
             GEventHandler.Dispatch(EventType.resume_all_job)
             self._isPause = False

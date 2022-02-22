@@ -21,7 +21,7 @@ from UI.DiscordFrame import DiscordFrame
 class MainWindow():
 
     def __init__(self) -> None:
-        self._width = 300
+        self._width = 400
         self._height = 400
 
         self.InitUI()
@@ -75,17 +75,15 @@ class MainWindow():
 
         tab1 = ttk.Frame(tabControl)  # Create a tab
         tabControl.add(tab1, text='基础')  # Add the tab
+
         tab2 = ttk.Frame(tabControl)  # Add a second tab
         tabControl.add(tab2, text='Bot')  # Make second tab visible
 
         tab3 = ttk.Frame(tabControl)  # Add a second tab
         tabControl.add(tab3, text='jobList')  # Make second tab visible
 
-        tab4 = ttk.Frame(tabControl)  # Add a second tab
-        tabControl.add(tab4, text='一键群发分享')  # Make second tab visible
-
         tabControl.pack(expand=1, fill="both")  # Pack to make visible
-
+ 
         # self._menuFrame = MainMenuFrame(self._window, bg='green')
         self._mainFrame = MainFrame(tab1, bg='green')
         self._mainFrame.grid(column=0, row=0)

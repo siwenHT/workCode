@@ -79,7 +79,6 @@ class MeatMaskHelper(OpenUrl):
 
         contentEl = self.find_element_loop(By.CLASS_NAME, self._browser, confirmKey, 3)
         if contentEl:
-            self.ReportVal(f"确认交易")
             dangerousEl = self.find_element_loop(By.CLASS_NAME, self._browser, dangerousKey, 1)
             btnEl = self.find_element_loop(By.CLASS_NAME, self._browser, confirmBtnKey, 3)
             cancelEl = self.find_element_loop(By.CLASS_NAME, self._browser, cancelBtnKey, 3)
@@ -91,11 +90,38 @@ class MeatMaskHelper(OpenUrl):
             else:
                 time.sleep(self._timeSleep)
                 if btnEl and btnEl.is_enabled():
+                    self.ReportVal(f"确认交易")
                     self.element_click(btnEl)
                     Log.info("Has Confirm on Transaction!!")
                 else:
                     if cancelEl:
                         self.element_click(cancelEl)
                         Log.info("Has cancel on Transaction!!")
+
+    def ConfirmApproveAction(self):
+        approveCancelKey = "//div[@class='page-container__footer']/footer/button[1]"
+        approveOkKey = "//div[@class='page-container__footer']/footer/button[2]"
+
+        cancelEl = self.find_element_loop(By.XPATH, self._browser, approveCancelKey, 2)
+        okEl = self.find_element_loop(By.XPATH, self._browser, approveOkKey, 2)
+        if okEl and okEl.is_enabled():
+            self.element_click(okEl)
+            self.ReportVal(f"授权成功")
         else:
-            self.refreshPage()
+            if cancelEl:
+                self.element_click(cancelEl)
+                self.ReportVal(f"授权失败")
+
+    def ConfirmSignature(self):
+        signCancelKey = "//div[@class='request-signature__footer']/button[1]"
+        signOkKey = "//div[@class='request-signature__footer']/button[2]"
+
+        cancelEl = self.find_element_loop(By.XPATH, self._browser, signCancelKey, 2)
+        okEl = self.find_element_loop(By.XPATH, self._browser, signOkKey, 2)
+        if okEl and okEl.is_enabled():
+            self.element_click(okEl)
+            self.ReportVal(f"签名成功")
+        else:
+            if cancelEl:
+                self.element_click(cancelEl)
+                self.ReportVal(f"签名失败")
