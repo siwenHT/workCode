@@ -93,10 +93,12 @@ class MeatMaskHelper(OpenUrl):
                     self.ReportVal(f"确认交易")
                     self.element_click(btnEl)
                     Log.info("Has Confirm on Transaction!!")
+                    time.sleep(1)
                 else:
                     if cancelEl:
                         self.element_click(cancelEl)
                         Log.info("Has cancel on Transaction!!")
+                        time.sleep(1)
 
     def ConfirmApproveAction(self):
         approveCancelKey = "//div[@class='page-container__footer']/footer/button[1]"

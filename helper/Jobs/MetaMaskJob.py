@@ -57,4 +57,5 @@ class MetaMaskJob(BaseJob):
                 return
 
             time.sleep(5)
+            Log.exception("MetaMaskJob error:")
             self.DoJob()

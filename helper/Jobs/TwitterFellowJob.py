@@ -24,6 +24,7 @@ class TwitterFellowJob(BaseJob):
     def __init__(self) -> None:
         super().__init__()
         self._filePath = os.path.join(Win.GetWorkPath(), "Res/twitterFellow.json")
+        self._count = 0
 
     def LoadConfig(self):
         self._config: BotConfig = BotConfig(self._filePath)
@@ -53,7 +54,8 @@ class TwitterFellowJob(BaseJob):
             self._curChannel = config.ChannelID()
             self.ReportJobVal(val=f"{self._curChannel}")
             self.SendMsgWithBotConfig(config)
-        self.ReportJobVal(val=f"发送完成")
+        self._count += 1
+        self.ReportJobVal(val=f"发送完成 {self._count}")
 
     def SendMsgWithBotConfig(self, botConfig: BotConfig):
         sender = BotMsgSend(botConfig)

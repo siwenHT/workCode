@@ -33,7 +33,8 @@
     },
     "TwitterFellowJob": {
         "trigger": "cron",
-        "hour": "0, 6, 12, 18, 20, 23",
+        "hour": "0, 6, 12, 20",
+        "minute": 18,
         "max_instances": 1
     },
     "GmToChannelJob": {

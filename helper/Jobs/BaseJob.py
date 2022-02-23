@@ -10,6 +10,7 @@
 
 # here put the import lib
 import datetime
+import random
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
 from Until.MyLog import Log
@@ -91,6 +92,7 @@ class BaseJob():
                 param['seconds'] = theParam.get("second")
             elif trigger == "cron":
                 param['hour'] = theParam.get('hour')
+                param['minute'] = random.randint(1, 59)
 
             TheScheduler.add_job(self.Done, **param)
             self._jobCurVal = '已执行'
