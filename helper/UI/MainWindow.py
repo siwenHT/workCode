@@ -21,8 +21,8 @@ from UI.DiscordFrame import DiscordFrame
 class MainWindow():
 
     def __init__(self) -> None:
-        self._width = 400
-        self._height = 400
+        self._width = 415
+        self._height = 480
 
         self.InitUI()
         self.baseView()
@@ -83,7 +83,7 @@ class MainWindow():
         tabControl.add(tab3, text='jobList')  # Make second tab visible
 
         tabControl.pack(expand=1, fill="both")  # Pack to make visible
- 
+
         # self._menuFrame = MainMenuFrame(self._window, bg='green')
         self._mainFrame = MainFrame(tab1, bg='green')
         self._mainFrame.grid(column=0, row=0)

@@ -48,6 +48,8 @@ class JobListFrame(BaseFrame):
 
         self.frame = tk.Listbox(self, bg='green')
         self.frame.grid(column=0, row=1, pady=10)
+        self.DefineLayout(self, cols=1, rows=2)
+
         jobMG = Global.GetJobMG()
         self._joblist = jobMG.jobNames
 
@@ -62,29 +64,29 @@ class JobListFrame(BaseFrame):
                 statuBtn = tk.Button(jobFrame)
                 statuBtn.config(text=("恢复" if job.isPause() else "暂停"), bg=('green' if job.isPause() else 'yellow'))
                 statuBtn.config(command=lambda curJobName=jobTypeName, curBtn=statuBtn: self.StatuBtn(curJobName, curBtn))
-                statuBtn.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
+                statuBtn.grid(column=col, row=row, sticky=tk.EW, padx=5, pady=5)
                 col += 1
 
                 btn = tk.Button(jobFrame, text='重载')
-                btn.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
+                btn.grid(column=col, row=row, sticky=tk.EW, padx=5, pady=5)
                 btn.config(command=lambda curJobName=jobTypeName: self.ReloadJob(curJobName))
                 col += 1
 
                 nameLab = tk.Label(jobFrame, text=job._jobName)
-                nameLab.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
+                nameLab.grid(column=col, row=row, sticky=tk.EW, padx=5, pady=5)
                 col += 1
 
                 statuLab = tk.Label(jobFrame, text=job.GetCurVal())
-                statuLab.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
+                statuLab.grid(column=col, row=row, sticky=tk.EW, padx=5, pady=5)
                 col += 1
             else:
                 btn = tk.Button(jobFrame, text='启动')
-                btn.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
+                btn.grid(column=col, row=row, sticky=tk.EW, padx=5, pady=5)
                 btn.config(command=lambda curJobName=jobTypeName: self.StartJob(curJobName))
                 col += 1
 
                 nameLab = tk.Label(jobFrame, text=jobTypeName)
-                nameLab.grid(column=col, row=row, sticky=tk.W, padx=5, pady=5)
+                nameLab.grid(column=col, row=row, sticky=tk.EW, padx=5, pady=5)
                 col += 1
 
             row += 1
@@ -98,6 +100,7 @@ class JobListFrame(BaseFrame):
                 oneMiscs["jobName"] = job._jobName
             self.tkMiscs[jobTypeName] = oneMiscs
 
+        self.DefineLayout(self.frame, cols=4, rows=row)
         self._isRefreshIng = False
 
     def GetIsRefreshIng(self):
