@@ -4,7 +4,8 @@
         "CandyRewardJob",
         "DiscordJob",
         "TwitterFellowJob",
-        "GmToChannelJob"
+        "GmToChannelJob",
+        "ChiKorokoJob"
     ],
     "MetaMaskJob": {
         "trigger": "date",
@@ -41,6 +42,12 @@
         "trigger": "cron",
         "hour": "6, 10, 18, 23",
         "minute": 6,
+        "max_instances": 1
+    },
+    "ChiKorokoJob": {
+        "trigger": "cron",
+        "hour": "8",
+        "minute": "1, 5, 10",
         "max_instances": 1
     }
 }

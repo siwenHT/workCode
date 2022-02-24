@@ -15,6 +15,7 @@ from xmlrpc.client import boolean
 from Jobs.BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
+from Jobs.ChiKorokoJob import ChiKorokoJob
 from Until.Scheduler import TheScheduler
 from Until.WinSysytem import Win
 from Until import ToolsFunc as TOOL
@@ -51,6 +52,7 @@ class JobManager():
         self.jobNames["TwitterFellowJob"] = TwitterFellowJob
         self.jobNames["GmToChannelJob"] = GmToChannelJob
         self.jobNames["OneBtnPushJob"] = OneBtnPushJob
+        self.jobNames["ChiKorokoJob"] = ChiKorokoJob
 
     '''加载任务参数'''
 
@@ -117,6 +119,8 @@ class JobManager():
         self.RestartJobWhoExist('MetaMaskJob')
         self.RestartJobWhoExist('MetauceBotJob')
         self.RestartJobWhoExist('CandyRewardJob')
+        self.RestartJobWhoExist('ChiKorokoJob')
+
         GEventHandler.Dispatch(EventType.joblist_has_change)
 
     def MsgRegeist(self):
