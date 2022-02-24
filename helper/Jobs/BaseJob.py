@@ -24,7 +24,7 @@ class BaseJob():
     def __init__(self):
         self._isStop = False
         self._isPause = False
-        self._jobCurVal = '已加载'
+        self._jobCurVal = '已构建'
 
         global id
         self._id = id
@@ -92,9 +92,12 @@ class BaseJob():
                 param['seconds'] = theParam.get("second")
             elif trigger == "cron":
                 param['hour'] = theParam.get('hour')
-                param['minute'] = random.randint(1, 59)
+                if theParam.get("minutes"):
+                    param['minute'] = theParam.get("minutes")
+                else:
+                    param['minute'] = random.randint(1, 59)
 
             TheScheduler.add_job(self.Done, **param)
-            self._jobCurVal = '已执行'
+            self._jobCurVal = '已加载任务'
         else:
             Log.error(f"Not find the {self._jobName} jobParam!")
