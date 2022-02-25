@@ -44,15 +44,15 @@ class MetaMaskJob(BaseJob):
                     continue
 
                 self.CheckStop()
-                self._web.ConfirmChangeNet()
-                self._web.ConfirmTransaction()
-                self._web.ConfirmApproveAction()
                 time.sleep(0.2)
+                self._web.ConfirmChangeNet()
+                self._web.ConfirmAccount()
+                self._web.ConfirmTransaction()
+                # self._web.ConfirmApproveAction()
                 self._web.refreshPage()
 
         except Exception as ex:
             if self._isStop:
-                self._web.closeBrowser()
                 self.ReportJobVal(val=f"{self._jobName} exit")
                 return
 

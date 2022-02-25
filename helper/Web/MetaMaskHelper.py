@@ -9,6 +9,7 @@
 '''
 
 # here put the import lib
+from ast import While
 from Global import *
 from Until.MyLog import Log
 from Web.OpenUrl import OpenUrl
@@ -26,43 +27,83 @@ class MeatMaskHelper(OpenUrl):
 
     def __init__(self):
         super().__init__("chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html")
+        self.ConfirmAccountCount = 0
 
     def ConfirmChangeNet(self):
-        changeKey = "//h3[contains(text(), 'Allow this site to switch the network?')]"
-        unlockEl = self.find_element(By.XPATH, self._browser, changeKey)
-        if unlockEl:
+        confirmKey = "//div[@class='confirmation-footer__actions']/button[text()='Switch network']"
+        confirmEl = self.find_element_loop(By.XPATH, self._browser, confirmKey, 1)
+        if confirmEl:
             changeTargetKey = "//div/div/span[contains(text(), 'Testnet')]"
-            targetEl = self.find_element(By.XPATH, self._browser, changeTargetKey)
+            targetEl = self.find_element_loop(By.XPATH, self._browser, changeTargetKey, 1)
             if not targetEl:
-                time.sleep(3)
+                time.sleep(5)
 
-            confirmKey = "//div[@class='confirmation-footer__actions']/button[text()='Switch network']"
-            confirmEl = self.find_element(By.XPATH, self._browser, confirmKey)
-            if confirmEl:
-                self.element_click(confirmEl)
-                time.sleep(1)
-                self.CheckChainName()
+            self.ReportVal(f"切换了主网")
+            self.element_click(confirmEl)
+            time.sleep(1)
+            self.CheckChainName()
+
+    def ConfirmAccount(self, accountidx: int = 1):
+        accountListKey = "//div[@class='choose-account-list']"
+        accountListEl = self.find_element_loop(By.XPATH, self._browser, accountListKey, 1)
+        if accountListEl:
+            clickNum = 0
+            while True:
+                if clickNum > 10:
+                    break
+
+                unselKey = "//div[@class='choose-account-list']/div/div/input"
+                unselEl = self.find_element_loop(By.XPATH, self._browser, unselKey, 2)
+                if unselEl:
+                    self.element_click(unselEl)
+                    clickNum += 1
+
+                inputKey = "check-box.choose-account-list__header-check-box.far.fa-square"
+                noSelKey = f"//div[@class='choose-account-list']/div/div/input[@class='{inputKey}']"
+                noSelEl = self.find_element_loop(By.XPATH, self._browser, unselKey, 2)
+                if noSelEl:
+                    break
+
+            unselKey = "//div[@class='choose-account-list']/div/div/input"
+            unselEl = self.find_element_loop(By.XPATH, self._browser, unselKey, 2)
+            if unselEl:
+                self.element_click(unselEl)
+
+            selKey = f"//div[@class='choose-account-list']/div[2]/div/div[{accountidx}]/div"
+            selEl = self.find_element_loop(By.XPATH, self._browser, selKey, 2)
+            if selEl:
+                self.element_click(selEl)
+
+            okKey = "//div[@class='permissions-connect-choose-account__bottom-buttons']/button[2]"
+            okEl = self.find_element_loop(By.XPATH, self._browser, okKey, 1)
+            if okEl and okEl.is_enabled():
+                self.element_click(okEl)
+                self.ReportVal(f"确认使用了账号{accountidx}")
+            elif self.ConfirmAccountCount >= 3:
+                Log.error("ConfirmAccount fail")
+            else:
+                self.ConfirmAccountCount += 1
+                self.ConfirmAccount(accountidx)
 
     def UnlockConfirm(self):
         unlockKey = "unlock-page__container"
         inputKey = "MuiInputBase-input.MuiInput-input"
         OKKey = "button.btn--rounded.btn-default"
-        unlockEl = self.find_element_loop(By.CLASS_NAME, self._browser, unlockKey)
+        unlockEl = self.find_element_loop(By.CLASS_NAME, self._browser, unlockKey, 1)
         if unlockEl:
-            input = self.find_element_loop(By.CLASS_NAME, self._browser, inputKey)
+            input = self.find_element_loop(By.CLASS_NAME, self._browser, inputKey, 1)
             if input:
                 input.send_keys("Myhxlin170")
-                OKKeyEl = self.find_element_loop(By.CLASS_NAME, self._browser, OKKey)
+                OKKeyEl = self.find_element_loop(By.CLASS_NAME, self._browser, OKKey, 1)
                 if OKKeyEl:
                     self.element_click(OKKeyEl)
-                    time.sleep(3)
             else:
                 Log.error(f"not find the {inputKey}")
 
     def CheckChainName(self):
         self._timeSleep = 1
         chainNameKey = "//div[@class='app-header__network-component-wrapper']/div/span"
-        chainNameEl = self.find_element_loop(By.XPATH, self._browser, chainNameKey)
+        chainNameEl = self.find_element_loop(By.XPATH, self._browser, chainNameKey, 1)
         if chainNameEl:
             chainNameText = chainNameEl.text
             Log.info(f"chain is {chainNameText}")
@@ -77,11 +118,11 @@ class MeatMaskHelper(OpenUrl):
         dangerousKey = "actionable-message.actionable-message--danger"
         cancelBtnKey = "button.btn--rounded.btn-secondary.page-container__footer-button"
 
-        contentEl = self.find_element_loop(By.CLASS_NAME, self._browser, confirmKey, 3)
+        contentEl = self.find_element_loop(By.CLASS_NAME, self._browser, confirmKey, 1)
         if contentEl:
             dangerousEl = self.find_element_loop(By.CLASS_NAME, self._browser, dangerousKey, 1)
-            btnEl = self.find_element_loop(By.CLASS_NAME, self._browser, confirmBtnKey, 3)
-            cancelEl = self.find_element_loop(By.CLASS_NAME, self._browser, cancelBtnKey, 3)
+            btnEl = self.find_element_loop(By.CLASS_NAME, self._browser, confirmBtnKey, 1)
+            cancelEl = self.find_element_loop(By.CLASS_NAME, self._browser, cancelBtnKey, 1)
             if dangerousEl:
                 Log.info("the transaction has error!!")
                 if cancelEl:
@@ -93,19 +134,17 @@ class MeatMaskHelper(OpenUrl):
                     self.ReportVal(f"确认交易")
                     self.element_click(btnEl)
                     Log.info("Has Confirm on Transaction!!")
-                    time.sleep(1)
                 else:
                     if cancelEl:
                         self.element_click(cancelEl)
                         Log.info("Has cancel on Transaction!!")
-                        time.sleep(1)
 
     def ConfirmApproveAction(self):
         approveCancelKey = "//div[@class='page-container__footer']/footer/button[1]"
         approveOkKey = "//div[@class='page-container__footer']/footer/button[2]"
 
-        cancelEl = self.find_element_loop(By.XPATH, self._browser, approveCancelKey, 2)
-        okEl = self.find_element_loop(By.XPATH, self._browser, approveOkKey, 2)
+        cancelEl = self.find_element_loop(By.XPATH, self._browser, approveCancelKey, 1)
+        okEl = self.find_element_loop(By.XPATH, self._browser, approveOkKey, 1)
         if okEl and okEl.is_enabled():
             self.element_click(okEl)
             self.ReportVal(f"授权成功")
@@ -118,8 +157,8 @@ class MeatMaskHelper(OpenUrl):
         signCancelKey = "//div[@class='request-signature__footer']/button[1]"
         signOkKey = "//div[@class='request-signature__footer']/button[2]"
 
-        cancelEl = self.find_element_loop(By.XPATH, self._browser, signCancelKey, 2)
-        okEl = self.find_element_loop(By.XPATH, self._browser, signOkKey, 2)
+        cancelEl = self.find_element_loop(By.XPATH, self._browser, signCancelKey, 1)
+        okEl = self.find_element_loop(By.XPATH, self._browser, signOkKey, 1)
         if okEl and okEl.is_enabled():
             self.element_click(okEl)
             self.ReportVal(f"签名成功")
