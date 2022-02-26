@@ -24,7 +24,7 @@ from selenium.webdriver.chrome.service import Service
 
 class OpenUrl:
 
-    def __init__(self, url: str):
+    def __init__(self, url: str = ''):
         self._browser = None
         self._handler = None
         self._url = url
