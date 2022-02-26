@@ -30,7 +30,7 @@ class MeatMaskHelper(OpenUrl):
         self.ConfirmAccountCount = 0
 
     def ConfirmChangeNet(self):
-        confirmKey = "//div[@class='confirmation-footer__actions']/button[text()='Switch network']"
+        confirmKey = "//div[@class='confirmation-footer__actions']/button[text()='Switch network' or text()='切换网络' ]"
         confirmEl = self.find_element_loop(By.XPATH, self._browser, confirmKey, 1)
         if confirmEl:
             changeTargetKey = "//div/div/span[contains(text(), 'Testnet')]"
@@ -110,7 +110,7 @@ class MeatMaskHelper(OpenUrl):
 
             self.ReportVal(f"检查链名:{chainNameText}...")
             if chainNameText.find("Testnet") == -1 and chainNameText.find("testnet") == -1:
-                self._timeSleep = 3
+                self._timeSleep = 5
 
     def ConfirmTransaction(self):
         confirmKey = "confirm-page-container-content"
