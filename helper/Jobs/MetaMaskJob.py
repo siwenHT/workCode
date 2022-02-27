@@ -48,7 +48,7 @@ class MetaMaskJob(BaseJob):
                 self._web.ConfirmChangeNet()
                 self._web.ConfirmAccount()
                 self._web.ConfirmTransaction()
-                # self._web.ConfirmApproveAction()
+                self._web.ConfirmApproveAction()
                 self._web.refreshPage()
 
         except Exception as ex:
@@ -59,3 +59,6 @@ class MetaMaskJob(BaseJob):
             time.sleep(5)
             Log.exception("MetaMaskJob error:")
             self.DoJob()
+
+    def Done(self, *args, **kwargs):
+        return super().Done(*args, **kwargs)

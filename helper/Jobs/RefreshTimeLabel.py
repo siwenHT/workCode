@@ -28,3 +28,6 @@ class RefreshTimeLabel(BaseJob):
     def AddJob(self, jobParams):
         Log.info(f"job: {self._jobName} is Add!")
         TheScheduler.add_job(self.Done, 'interval', seconds=1, max_instances=1, id='RefreshTimeLabel')
+
+    def Done(self, *args, **kwargs):
+        return super().Done(*args, **kwargs)

@@ -62,9 +62,13 @@ class BaseJob():
                 return
 
             self.DoJob(*args, **kwargs)
+            self.JobEnd()
         except Exception as ex:
             Log.exception(f"Job:{self._jobName} error:")
             pass
+
+    def JobEnd(self):
+        GEventHandler.Dispatch(EventType.job_done_end, jobName=self._jobName)
 
     def ReportJobVal(self, *args, **kwargs):
         Log.info(f"job:{self._jobName}, report:{kwargs}")

@@ -61,3 +61,6 @@ class TwitterFellowJob(BaseJob):
         sender = BotMsgSend(botConfig)
         if not sender.send() and self._curChannel != 0:
             Log.error(f"{self._jobName} error, channel id: {self._curChannel}")
+
+    def Done(self, *args, **kwargs):
+        return super().Done(*args, **kwargs)

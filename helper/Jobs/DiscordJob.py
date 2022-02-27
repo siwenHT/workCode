@@ -56,3 +56,6 @@ class DiscordJob(BaseJob):
     def AddJob(self, jobParams):
         Log.info(f"job: {self._jobName} is Add!")
         TheScheduler.add_job(self.Done, 'interval', seconds=0.1, id='DiscordJob', max_instances=100)
+
+    def Done(self, *args, **kwargs):
+        return super().Done(*args, **kwargs)

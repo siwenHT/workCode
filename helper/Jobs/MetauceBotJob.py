@@ -128,3 +128,6 @@ class MetauceBotJob(BaseJob):
         handler.removeTruck()
         time.sleep(10)
         handler.closeBrowser()
+
+    def Done(self, *args, **kwargs):
+        return super().Done(*args, **kwargs)

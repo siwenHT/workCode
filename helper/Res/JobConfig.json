@@ -49,5 +49,10 @@
         "hour": "5,6,7,8,9",
         "minutes": "1, 5, 10",
         "max_instances": 1
+    },
+    "ChiKorokoJob222": {
+        "trigger": "date",
+        "time": 3,
+        "max_instances": 1
     }
 }

@@ -57,8 +57,11 @@ class JobManager():
     '''加载任务参数'''
 
     def LoadJobConfig(self):
-        filePath = os.path.join(Win.GetWorkPath(), "Res/JobConfig.json")
-        self.jobParams = TOOL.initJsonFromFile(filePath)
+        try:
+            filePath = os.path.join(Win.GetWorkPath(), "Res/JobConfig.json")
+            self.jobParams = TOOL.initJsonFromFile(filePath)
+        except Exception as ex:
+            Log.exception("error")
 
     def GetAllJobList(self):
         return self._jobs
@@ -108,6 +111,7 @@ class JobManager():
     def loadJob(self, jobTypeName: str, *args, **kwargs):
         self.removeJob(jobTypeName)
 
+        self.LoadJobConfig()
         newJob = self.jobNames[jobTypeName](*args, **kwargs)
         self._jobs.append(newJob)
         newJob.AddJob(self.jobParams)
@@ -122,6 +126,14 @@ class JobManager():
         self.RestartJobWhoExist('ChiKorokoJob')
 
         GEventHandler.Dispatch(EventType.joblist_has_change)
+
+    def CheckJobIsEnd(self, *args, **kwargs):
+        jobName = kwargs.get("jobName")
+        if jobName:
+            job = TheScheduler.get_job(jobName)
+            if not job:
+                self.removeJob(jobTypeName=jobName)
+                GEventHandler.Dispatch(EventType.joblist_has_change)
 
     def MsgRegeist(self):
 
@@ -144,6 +156,8 @@ class JobManager():
                 self.removeJob(args[0])
             elif eventType == EventType.start_job_by_jobinit:
                 self.StartJobByInitConfig()
+            elif eventType == EventType.job_done_end:
+                self.CheckJobIsEnd(*args, **kwargs)
 
         GEventHandler.RegedistEvent(EventType.pause_all_job, msgHandler)
         GEventHandler.RegedistEvent(EventType.resume_all_job, msgHandler)
@@ -153,3 +167,4 @@ class JobManager():
         GEventHandler.RegedistEvent(EventType.btn_one_key_push_test, msgHandler)
         GEventHandler.RegedistEvent(EventType.stop_job, msgHandler)
         GEventHandler.RegedistEvent(EventType.start_job_by_jobinit, msgHandler)
+        GEventHandler.RegedistEvent(EventType.job_done_end, msgHandler)

@@ -52,3 +52,6 @@ class CandyRewardJob(BaseJob):
                 errCount += 1
             else:
                 break
+
+    def Done(self, *args, **kwargs):
+        return super().Done(*args, **kwargs)

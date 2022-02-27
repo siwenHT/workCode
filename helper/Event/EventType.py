@@ -34,5 +34,6 @@ class EventType(Enum):
     start_job_by_jobinit = 16  #按配置启动任务
 
     stop_job = 17  #停止任务
+    job_done_end = 18  #单次任务完结
 
     End = 1000

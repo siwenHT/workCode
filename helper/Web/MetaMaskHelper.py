@@ -140,18 +140,21 @@ class MeatMaskHelper(OpenUrl):
                         Log.info("Has cancel on Transaction!!")
 
     def ConfirmApproveAction(self):
-        approveCancelKey = "//div[@class='page-container__footer']/footer/button[1]"
-        approveOkKey = "//div[@class='page-container__footer']/footer/button[2]"
+        approveContentKey = "//div[@class='confirm-approve-content']"
+        approveContentEl = self.find_element_loop(By.XPATH, self._browser, approveContentKey, 1)
+        if approveContentEl:
+            approveCancelKey = "//div[@class='page-container__footer']/footer/button[1]"
+            approveOkKey = "//div[@class='page-container__footer']/footer/button[2]"
 
-        cancelEl = self.find_element_loop(By.XPATH, self._browser, approveCancelKey, 1)
-        okEl = self.find_element_loop(By.XPATH, self._browser, approveOkKey, 1)
-        if okEl and okEl.is_enabled():
-            self.element_click(okEl)
-            self.ReportVal(f"授权成功")
-        else:
-            if cancelEl:
-                self.element_click(cancelEl)
-                self.ReportVal(f"授权失败")
+            cancelEl = self.find_element_loop(By.XPATH, self._browser, approveCancelKey, 1)
+            okEl = self.find_element_loop(By.XPATH, self._browser, approveOkKey, 1)
+            if okEl and okEl.is_enabled():
+                self.element_click(okEl)
+                self.ReportVal(f"授权成功")
+            else:
+                if cancelEl:
+                    self.element_click(cancelEl)
+                    self.ReportVal(f"授权失败")
 
     def ConfirmSignature(self):
         signCancelKey = "//div[@class='request-signature__footer']/button[1]"

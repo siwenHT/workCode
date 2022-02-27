@@ -59,3 +59,6 @@ class MetauceHelperJob(BaseJob):
         if count > 2:
             GEventHandler.Dispatch(EventType.reload_chrome)
             self.ReportJobVal(val=f"重启了浏览器")
+
+    def Done(self, *args, **kwargs):
+        return super().Done(*args, **kwargs)

@@ -32,3 +32,6 @@ class WindowJob(BaseJob):
         temp_date3 = datetime.datetime.now() + datetime.timedelta(seconds=1)
         Log.info(f"job: {self._jobName} is Add!")
         self._job = TheScheduler.add_job(self.Done, 'date', run_date=temp_date3, max_instances=1, id='WindowJob')
+
+    def Done(self, *args, **kwargs):
+        return super().Done(*args, **kwargs)

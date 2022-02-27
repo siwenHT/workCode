@@ -27,3 +27,6 @@ class GmToChannelJob(TwitterFellowJob):
     def __init__(self) -> None:
         super().__init__()
         self._filePath = os.path.join(Win.GetWorkPath(), "Res/gm.json")
+
+    def Done(self, *args, **kwargs):
+        return super().Done(*args, **kwargs)
