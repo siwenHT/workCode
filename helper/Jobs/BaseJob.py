@@ -62,7 +62,6 @@ class BaseJob():
                 return
 
             self.DoJob(*args, **kwargs)
-            self.JobEnd()
         except Exception as ex:
             Log.exception(f"Job:{self._jobName} error:")
             pass
