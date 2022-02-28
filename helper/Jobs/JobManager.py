@@ -15,7 +15,6 @@ from xmlrpc.client import boolean
 from Jobs.BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
-from Jobs.ChiKorokoJob import ChiKorokoJob
 from Until.Scheduler import TheScheduler
 from Until.WinSysytem import Win
 from Until import ToolsFunc as TOOL
@@ -24,13 +23,15 @@ from Until.MyLog import Log
 from Jobs.WindowJob import WindowJob
 from Jobs.DiscordJob import DiscordJob
 from Jobs.MetaMaskJob import MetaMaskJob
+from Jobs.ChiKorokoJob import ChiKorokoJob
+from Jobs.OneBtnPushJob import OneBtnPushJob
 from Jobs.MetauceBotJob import MetauceBotJob
+from Jobs.GmToChannelJob import GmToChannelJob
 from Jobs.CandyRewardJob import CandyRewardJob
 from Jobs.RefreshTimeLabel import RefreshTimeLabel
 from Jobs.MetauceHelperJob import MetauceHelperJob
 from Jobs.TwitterFellowJob import TwitterFellowJob
-from Jobs.GmToChannelJob import GmToChannelJob
-from Jobs.OneBtnPushJob import OneBtnPushJob
+from Jobs.TwitterAutoFollowBackJob import TwitterAutoFollowBackJob
 
 
 class JobManager():
@@ -53,6 +54,7 @@ class JobManager():
         self.jobNames["GmToChannelJob"] = GmToChannelJob
         self.jobNames["OneBtnPushJob"] = OneBtnPushJob
         self.jobNames["ChiKorokoJob"] = ChiKorokoJob
+        self.jobNames["TwitterAutoFollowBackJob"] = TwitterAutoFollowBackJob
 
     '''加载任务参数'''
 

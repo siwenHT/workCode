@@ -50,6 +50,11 @@
         "minutes": "1, 5, 10",
         "max_instances": 1
     },
+    "TwitterAutoFollowBackJob": {
+        "trigger": "cron",
+        "hour": "0-23",
+        "max_instances": 1
+    },
     "ChiKorokoJob222": {
         "trigger": "date",
         "time": 3,

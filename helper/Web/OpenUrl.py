@@ -48,8 +48,9 @@ class OpenUrl:
                 self._browser.switch_to.window(self._handler)
                 if self._browser.current_window_handle == self._handler:
                     self._browser.close()
-                    self._browser = None
-                    self._handler = None
+
+                self._browser = None
+                self._handler = None
         except Exception as ex:
             pass
 

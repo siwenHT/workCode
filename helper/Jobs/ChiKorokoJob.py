@@ -44,10 +44,12 @@ class ChiKorokoJob(BaseJob):
                 btnEl = web.find_element_loop(By.XPATH, web._browser, "//span[@class='mobile-toy-info']/button")
                 if btnEl:
                     web.element_click(btnEl)
-                    web.closeBrowser()
                     self._count += 1
                     self.ReportJobVal(val=f"领奖OK了 :{self._count}")
+                    web.closeBrowser()
                     return
+
+                web.closeBrowser()
             except Exception as ex:
                 Log.exception("ChiKorokoJob error")
                 pass
