@@ -38,10 +38,12 @@ class TwitterAutoFollowBackJob(BaseJob):
                     time.sleep(1)
 
                 else:
+                    self._web.closeBrowser()
                     self.JobEnd()
                     return
         except Exception as ex:
             Log.exception("error")
+            self._web.closeBrowser()
             self.JobEnd()
 
     def Done(self, *args, **kwargs):
