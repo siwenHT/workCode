@@ -5,6 +5,7 @@
         "DiscordJob",
         "TwitterFellowJob",
         "GmToChannelJob",
+        "TwitterAutoFollowBackJob",
         "ChiKorokoJob"
     ],
     "MetaMaskJob": {

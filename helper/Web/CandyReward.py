@@ -35,7 +35,10 @@ class CandyReward(OpenUrl):
                 element.submit()
                 return True
             else:
-                Log.info(f"111")
+                okEl = self.find_element_loop(By.CLASS_NAME, self._browser, "collect-candy-button")
+                if okEl:
+                    self.ReportVal(val=f'已经领取过了')
+                    return
         except Exception as ex:
             pass
 

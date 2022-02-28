@@ -57,6 +57,7 @@ class MetaMaskJob(BaseJob):
                 return
 
             time.sleep(5)
+            self._web.resetBroser()
             Log.exception("MetaMaskJob error:")
             self.DoJob()
 

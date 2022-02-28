@@ -31,6 +31,10 @@ class OpenUrl:
         self._reportCallBack = None
         self._needStop = False
 
+    def resetBroser(self):
+        self._browser = None
+        self._handler = None
+
     def SetReportCallBack(self, func):
         if isfunction(func):
             self._reportCallBack = func
@@ -71,7 +75,11 @@ class OpenUrl:
     '''刷新网页'''
 
     def refreshPage(self):
-        self._browser.refresh()
+        try:
+            self._browser.refresh()
+        except Exception as ex:
+            self.resetBroser()
+            raise RuntimeError("error")
 
     def get_debug_chrome_opetions(self):
         options = webdriver.ChromeOptions()
@@ -203,4 +211,4 @@ class OpenUrl:
         except Exception as ex:
             Log.exception("openGameUrl error")
             GEventHandler.Dispatch(EventType.reload_chrome)
-            RuntimeError('Job is stop')
+            raise RuntimeError('Job is stop')
