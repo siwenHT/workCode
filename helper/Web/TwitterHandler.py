@@ -23,6 +23,12 @@ from selenium.webdriver.chrome.service import Service
 from Web.OpenUrl import OpenUrl
 
 
+class TwitterLimite():
+
+    def __init__(self):
+        pass
+
+
 class TwitterHandler(OpenUrl):
 
     def __init__(self, url: str = ''):

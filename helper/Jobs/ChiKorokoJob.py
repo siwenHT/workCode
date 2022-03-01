@@ -48,6 +48,12 @@ class ChiKorokoJob(BaseJob):
                     self.ReportJobVal(val=f"领奖OK了 :{self._count}")
                     web.closeBrowser()
                     return
+                else:
+                    collectedKey = "//span[contains(text(), 'Collected')]"
+                    if web.find_element(By.XPATH, web._browser, collectedKey):
+                        self.ReportJobVal(val=f"已经领完了")
+                        web.closeBrowser()
+                        return
 
                 web.closeBrowser()
             except Exception as ex:
