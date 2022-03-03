@@ -70,6 +70,9 @@ class OpenUrl:
             if newOne not in oldHandles:
                 self._handler = newOne
                 break
+
+        if not self._handler:
+            self._handler = newhandles[0]
         browser.switch_to.window(self._handler)
 
     '''刷新网页'''

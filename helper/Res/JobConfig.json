@@ -8,6 +8,11 @@
         "TwitterAutoFollowBackJob",
         "ChiKorokoJob"
     ],
+    "DiscordJob": {
+        "trigger": "interval",
+        "second": 0.1,
+        "max_instances": 100
+    },
     "MetaMaskJob": {
         "trigger": "date",
         "time": 5,
@@ -35,13 +40,13 @@
     },
     "TwitterFellowJob": {
         "trigger": "cron",
-        "hour": "0, 6, 12, 20",
+        "hour": "6, 20",
         "minute": 18,
         "max_instances": 1
     },
     "GmToChannelJob": {
         "trigger": "cron",
-        "hour": "6, 10, 18, 23",
+        "hour": "8, 23",
         "minute": 6,
         "max_instances": 1
     },

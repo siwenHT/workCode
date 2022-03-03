@@ -35,6 +35,12 @@ class DiscordJob(BaseJob):
             if config.errorTime > config.ErrorLimite():
                 continue
 
+            if self._isStop:
+                return
+
+            if self._isPause:
+                continue
+
             if config.ChannelIDs():
                 timeInv = config.TimeInterval() if (config.GetCurrentIdx() == 0) else config.StepTime()
                 if config.NextChannelID():
@@ -49,13 +55,13 @@ class DiscordJob(BaseJob):
                     self.ReportJobVal(val=config.ShowName())
                     self.SendMsgWithBotConfig(config)
 
+    def AddJob(self, jobParams):
+        self._botMG.LoadBotConfigs()
+        return super().AddJob(jobParams)
+
     def SendMsgWithBotConfig(self, botConfig: BotConfig):
         sender = BotMsgSend(botConfig)
         sender.send()
-
-    def AddJob(self, jobParams):
-        Log.info(f"job: {self._jobName} is Add!")
-        TheScheduler.add_job(self.Done, 'interval', seconds=0.1, id='DiscordJob', max_instances=100)
 
     def Done(self, *args, **kwargs):
         return super().Done(*args, **kwargs)

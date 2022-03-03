@@ -31,6 +31,7 @@ class TwitterAutoFollowBackJob(BaseJob):
             followKey = "//div[@class='css-1dbjc4n']/div/div/div/div/div/div/div/div/div/div[starts-with(@aria-label,'Follow ')]"
             self._web.openGameUrl()
             while True:
+                self.CheckStop()
                 followEl = self._web.find_element_loop(By.XPATH, self._web._browser, followKey)
                 if followEl:
                     self.ReportJobVal(val=f'点击了关注')
