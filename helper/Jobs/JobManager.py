@@ -127,7 +127,7 @@ class JobManager():
         # self.RestartJobWhoExist('CandyRewardJob')
         # self.RestartJobWhoExist('ChiKorokoJob')
 
-        GEventHandler.Dispatch(EventType.joblist_has_change)
+        GEventHandler.DelayDispatch(EventType.joblist_has_change)
 
     def CheckJobIsEnd(self, *args, **kwargs):
         jobName = kwargs.get("jobName")

@@ -10,6 +10,7 @@
 
 # here put the import lib
 
+from time import time
 from Event.EventType import EventType
 from Until.MyLog import Log
 from Until.Scheduler import TheScheduler
@@ -23,8 +24,10 @@ class EventMsgHandler():
         TheScheduler.add_job(self._dealy_call, trigger="interval", seconds=0.1, id='EventMsgHandler')
 
     def _dealy_call(self):
-        for item in self.delayCall:
-            self.Dispatch(item["eventType"], *item["args"], **item["kwargs"])
+        for item in self.delayCall[:]:
+            if not item.get("time") or time.time() - item.get("time") >= 0:
+                self.Dispatch(item["eventType"], *item["args"], **item["kwargs"])
+                self.delayCall.remove(item)
 
     def RegedistEvent(self, eventType: EventType, callBack, caller: object = None):
         if not self.callBacks.get(eventType, None):
@@ -64,6 +67,8 @@ class EventMsgHandler():
         item["eventType"] = eventType
         item["args"] = args
         item["kwargs"] = kwargs
+        if kwargs.get("time"):
+            item["time"] = time.time() + kwargs.get("time")
         self.delayCall.append(item)
 
 

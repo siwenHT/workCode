@@ -12,6 +12,7 @@
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
 from Jobs.BaseJob import BaseJob
+from Until.MyLog import Log
 
 
 class WebBaseJob(BaseJob):
@@ -25,8 +26,10 @@ class WebBaseJob(BaseJob):
         def msgHandler(eventType: EventType, *args, **kwargs):
             if eventType == EventType.reload_chrome:
                 self.Pause()
+                self.ReportJobVal(val=f"暂停")
             elif eventType == EventType.reload_chrome_over:
                 self.Resume()
+                self.ReportJobVal(val=f"恢复")
 
         GEventHandler.RegedistEvent(EventType.reload_chrome, msgHandler)
         GEventHandler.RegedistEvent(EventType.reload_chrome_over, msgHandler)
