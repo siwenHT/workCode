@@ -14,18 +14,19 @@ import time
 from Jobs.BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
+from Jobs.WebBaseJob import WebBaseJob
 from Until.MyLog import Log
 from Web.MetauceBot import MetauceBot
 
 
-class MetauceBotJob(BaseJob):
+class MetauceBotJob(WebBaseJob):
 
     def __init__(self) -> None:
         super().__init__()
 
         self._starLimit = 3
         self._web = None
-        self._web = MetauceBot()
+        self._web = MetauceBot(self._typeName)
         self._web.SetReportCallBack(lambda repVal: self.ReportJobVal(val=repVal))
 
     def DoJob(self, *args, **kwargs):

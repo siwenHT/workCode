@@ -31,6 +31,6 @@ class TwitterLimite():
 
 class TwitterHandler(OpenUrl):
 
-    def __init__(self, url: str = ''):
-        super().__init__(url)
+    def __init__(self, url: str = '', jobName=''):
+        super().__init__(url, jobName)
         self.minuteLimmite = 11

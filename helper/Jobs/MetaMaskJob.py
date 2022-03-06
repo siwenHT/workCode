@@ -15,17 +15,18 @@ from ast import While
 
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
+from Jobs.WebBaseJob import WebBaseJob
 from Until.MyLog import Log
 from Web.MetaMaskHelper import MeatMaskHelper
 
 from Jobs.BaseJob import BaseJob
 
 
-class MetaMaskJob(BaseJob):
+class MetaMaskJob(WebBaseJob):
 
     def __init__(self) -> None:
         super().__init__()
-        self._web = MeatMaskHelper()
+        self._web = MeatMaskHelper(self._typeName)
         self._web.SetReportCallBack(lambda repVal: self.ReportJobVal(val=repVal))
 
     def DoJob(self, *args, **kwargs):

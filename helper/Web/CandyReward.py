@@ -24,8 +24,8 @@ from selenium.webdriver.common.by import By
 
 class CandyReward(OpenUrl):
 
-    def __init__(self):
-        super().__init__('https://www.coingecko.com/account/candy?locale=zh')
+    def __init__(self, jobName=''):
+        super().__init__('https://www.coingecko.com/account/candy?locale=zh', jobName)
 
     def clickReward(self):
         try:

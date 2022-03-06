@@ -24,8 +24,8 @@ from selenium.webdriver.common.by import By
 
 class MetauceBot(OpenUrl):
 
-    def __init__(self):
-        super().__init__("https://metauce.org/MetisGame")
+    def __init__(self, jobName=''):
+        super().__init__("https://metauce.org/MetisGame", jobName)
         self._wakuangRun = 0
         self._repairTime = {}
         self._mintFee = 125

@@ -15,6 +15,7 @@ from tkinter import E
 from Jobs.BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
+from Jobs.WebBaseJob import WebBaseJob
 from Until.MyLog import Log
 from Until.Scheduler import TheScheduler
 from Web.CandyReward import CandyReward
@@ -22,7 +23,7 @@ from Web.OpenUrl import OpenUrl
 from selenium.webdriver.common.by import By
 
 
-class ChiKorokoJob(BaseJob):
+class ChiKorokoJob(WebBaseJob):
 
     def __init__(self) -> None:
         super().__init__()
@@ -35,7 +36,7 @@ class ChiKorokoJob(BaseJob):
             try:
                 if self._isStop:
                     return
-                web = OpenUrl()
+                web = OpenUrl('', self._typeName)
                 self.ReportJobVal(val="准备打开网页")
                 web.openGameUrl("https://expo.chikoroko.art/")
                 self.ReportJobVal(val="打开完成")
@@ -58,10 +59,11 @@ class ChiKorokoJob(BaseJob):
                 web.closeBrowser()
             except Exception as ex:
                 Log.exception("ChiKorokoJob error")
-                pass
 
             if self._isStop:
                 return
+
+            self.CheckPause()
 
             if errCount < 10:
                 time.sleep(60)

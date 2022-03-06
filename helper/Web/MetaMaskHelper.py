@@ -25,8 +25,8 @@ from selenium.webdriver.common.by import By
 
 class MeatMaskHelper(OpenUrl):
 
-    def __init__(self):
-        super().__init__("chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html")
+    def __init__(self, jobName=''):
+        super().__init__("chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html", jobName)
         self.ConfirmAccountCount = 0
 
     def ConfirmChangeNet(self):

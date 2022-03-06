@@ -10,6 +10,7 @@
 
 # here put the import lib
 import os, time
+import traceback
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
 from Until import ToolsFunc as TOOL
@@ -31,6 +32,7 @@ class WinSystem():
 
     def ReloadBrower(self):
         if time.time() - self._reloadChromTime > 10:
+            Log.info(traceback.format_exc())
             self._reloadChromTime = time.time()
             os.system("taskkill /f /im chrome.exe")
             os.system('cd /d C:/Program Files/Google/Chrome/Application && start chrome.exe --remote-debugging-port=9527 --"%1"')

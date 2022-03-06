@@ -15,12 +15,13 @@ from tkinter import E
 from Jobs.BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
+from Jobs.WebBaseJob import WebBaseJob
 from Until.MyLog import Log
 from Until.Scheduler import TheScheduler
 from Web.CandyReward import CandyReward
 
 
-class CandyRewardJob(BaseJob):
+class CandyRewardJob(WebBaseJob):
 
     def __init__(self) -> None:
         super().__init__()
@@ -30,7 +31,7 @@ class CandyRewardJob(BaseJob):
 
         while True:
             try:
-                web = CandyReward()
+                web = CandyReward('', self._typeName)
                 self.ReportJobVal(val="准备打开网页")
                 web.openGameUrl()
                 self.ReportJobVal(val="打开完成")
@@ -42,10 +43,11 @@ class CandyRewardJob(BaseJob):
                     return
             except Exception as ex:
                 Log.exception("CandyRewardJob error")
-                pass
 
             if self._isStop:
                 return
+
+            self.CheckPause()
 
             if errCount < 10:
                 time.sleep(60)

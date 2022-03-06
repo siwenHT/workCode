@@ -20,16 +20,20 @@ from selenium import webdriver
 from selenium.webdriver.remote import webelement
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.service import Service
+from selenium.common.exceptions import WebDriverException
+from selenium.common import exceptions
+from selenium.common.exceptions import NoSuchWindowException
 
 
 class OpenUrl:
 
-    def __init__(self, url: str = ''):
+    def __init__(self, url: str = '', jobName: str = ''):
         self._browser = None
         self._handler = None
         self._url = url
         self._reportCallBack = None
         self._needStop = False
+        self._jobName = jobName
 
     def resetBroser(self):
         self._browser = None
@@ -80,9 +84,11 @@ class OpenUrl:
     def refreshPage(self):
         try:
             self._browser.refresh()
-        except Exception as ex:
+        except exceptions.NoSuchWindowException as ex:
             self.resetBroser()
-            raise RuntimeError("error")
+            raise RuntimeError(f'{self._jobName} window is lost')
+        except Exception as ex:
+            raise RuntimeError(f"{self._jobName} refreshPage error")
 
     def get_debug_chrome_opetions(self):
         options = webdriver.ChromeOptions()
@@ -205,13 +211,22 @@ class OpenUrl:
     def openGameUrl(self, url: str = ''):
         try:
             self.find_the_browser()
+
             self.open_new_tab(self._browser)
+
             if url and url != '':
                 self._url = url
-
             self._browser.get(self._url)
-            Log.info(f"open url={self._url}, is ok!")
-        except Exception as ex:
-            Log.exception("openGameUrl error")
+
+            Log.info(f"{self._jobName} open url={self._url}, is ok!")
+        except NoSuchWindowException as ex1:
+            Log.exception(f"{self._jobName} openGameUrl error")
+            self.resetBroser()
+            raise RuntimeError(f'{self._jobName} browser handler error!')
+        except WebDriverException as ex:
+            Log.exception(f"{self._jobName} chrome error")
             GEventHandler.Dispatch(EventType.reload_chrome)
-            raise RuntimeError('Job is stop')
+        except Exception as ex2:
+            Log.exception(f"{self._jobName} openGameUrl error")
+            self.resetBroser()
+            raise RuntimeError(f'{self._jobName} some error!')

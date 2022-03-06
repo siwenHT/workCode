@@ -14,16 +14,17 @@ import time
 from tkinter import E
 from Jobs.BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
+from Jobs.WebBaseJob import WebBaseJob
 from Until.MyLog import Log
 from Web.TwitterHandler import TwitterHandler
 from selenium.webdriver.common.by import By
 
 
-class TwitterAutoFollowBackJob(BaseJob):
+class TwitterAutoFollowBackJob(WebBaseJob):
 
     def __init__(self):
         super().__init__()
-        self._web = TwitterHandler("https://twitter.com/TaoHong25462487/followers")
+        self._web = TwitterHandler("https://twitter.com/TaoHong25462487/followers", self._typeName)
         self.ReportJobVal(val=f"加载任务")
 
     def DoJob(self, *args, **kwargs):
@@ -43,7 +44,7 @@ class TwitterAutoFollowBackJob(BaseJob):
                     self.JobEnd()
                     return
         except Exception as ex:
-            Log.exception("error")
+            Log.exception("TwitterAutoFollowBackJob error")
             self._web.closeBrowser()
             self.JobEnd()
 

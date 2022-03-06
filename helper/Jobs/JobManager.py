@@ -122,10 +122,10 @@ class JobManager():
         self.loadJob("OneBtnPushJob", isTest)
 
     def ChromRestartOver(self):
-        self.RestartJobWhoExist('MetaMaskJob')
-        self.RestartJobWhoExist('MetauceBotJob')
-        self.RestartJobWhoExist('CandyRewardJob')
-        self.RestartJobWhoExist('ChiKorokoJob')
+        # self.RestartJobWhoExist('MetaMaskJob')
+        # self.RestartJobWhoExist('MetauceBotJob')
+        # self.RestartJobWhoExist('CandyRewardJob')
+        # self.RestartJobWhoExist('ChiKorokoJob')
 
         GEventHandler.Dispatch(EventType.joblist_has_change)
 

@@ -10,7 +10,7 @@
 
 # here put the import lib
 import datetime
-import random
+import random, time
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
 from Until.MyLog import Log
@@ -52,6 +52,10 @@ class BaseJob():
     def CheckStop(self):
         if self._isStop:
             raise RuntimeError('Job is stop')
+
+    def CheckPause(self, inv: int = 1):
+        if self._isPause:
+            time.sleep(inv)
 
     def isPause(self):
         return self._isPause

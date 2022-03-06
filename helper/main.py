@@ -30,6 +30,7 @@ def main():
     #     a = 1
 
     #加载所有配置任务
+    Log.info("\n\n\n\nNew Begin ......................")
     JobMG = JobManager()
     SetJobMG(JobMG)
     JobMG.start()
