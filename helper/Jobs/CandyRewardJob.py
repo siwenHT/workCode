@@ -31,7 +31,7 @@ class CandyRewardJob(WebBaseJob):
 
         while True:
             try:
-                web = CandyReward('', self._typeName)
+                web = CandyReward(self._typeName)
                 self.ReportJobVal(val="准备打开网页")
                 web.openGameUrl()
                 self.ReportJobVal(val="打开完成")

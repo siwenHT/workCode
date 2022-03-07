@@ -26,6 +26,7 @@ class TwitterAutoFollowBackJob(WebBaseJob):
         super().__init__()
         self._web = TwitterHandler("https://twitter.com/TaoHong25462487/followers", self._typeName)
         self.ReportJobVal(val=f"加载任务")
+        self.count = 0
 
     def DoJob(self, *args, **kwargs):
         try:
@@ -35,8 +36,9 @@ class TwitterAutoFollowBackJob(WebBaseJob):
                 self.CheckStop()
                 followEl = self._web.find_element_loop(By.XPATH, self._web._browser, followKey)
                 if followEl:
-                    self.ReportJobVal(val=f'点击了关注')
                     self._web.element_click(followEl)
+                    self.count += 1
+                    self.ReportJobVal(val=f'点击了关注 {self.count}')
                     time.sleep(1)
 
                 else:
