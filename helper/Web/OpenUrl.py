@@ -201,7 +201,7 @@ class OpenUrl:
 
     def find_the_browser(self):
         if not self._browser:
-            workPath = os.path.abspath('./res/chrome/chromedriver.exe')
+            workPath = os.path.abspath('./res/chrome/chromedriver_99.exe')
             s = Service(workPath)
             options = self.get_debug_chrome_opetions()
             browser: webdriver = webdriver.Chrome(service=s, options=options)

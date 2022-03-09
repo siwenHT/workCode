@@ -35,7 +35,7 @@ class CandyReward(OpenUrl):
                 element.submit()
                 return True
             else:
-                okEl = self.find_element_loop(By.CLASS_NAME, self._browser, "collect-candy-button")
+                okEl = self.find_element_loop(By.CSS_SELECTOR, self._browser, "#next-daily-reward-countdown-timer")
                 if okEl:
                     self.ReportVal(val=f'已经领取过了')
                     return

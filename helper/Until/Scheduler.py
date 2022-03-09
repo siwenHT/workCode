@@ -24,7 +24,8 @@ class Scheduler(BlockingScheduler):
             super().remove_job(job_id, jobstore)
 
     def add_job(self, *args, **kwargs):
-        Log.info(f"job: {kwargs['id']} is Add!")
+        id = kwargs.get('id', 'notSetName')
+        Log.info(f"job: {id} is Add!")
         return super().add_job(*args, **kwargs)
 
 

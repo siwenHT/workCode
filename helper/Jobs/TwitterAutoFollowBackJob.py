@@ -27,9 +27,11 @@ class TwitterAutoFollowBackJob(WebBaseJob):
         self._web = TwitterHandler("https://twitter.com/TaoHong25462487/followers", self._typeName)
         self.ReportJobVal(val=f"加载任务")
         self.count = 0
+        self.runCount = 0
 
     def DoJob(self, *args, **kwargs):
         try:
+            self.runCount += 1
             followKey = "//div[@class='css-1dbjc4n']/div/div/div/div/div/div/div/div/div/div[starts-with(@aria-label,'Follow ')]"
             self._web.openGameUrl()
             while True:
@@ -40,15 +42,14 @@ class TwitterAutoFollowBackJob(WebBaseJob):
                     self.count += 1
                     self.ReportJobVal(val=f'点击了关注 {self.count}')
                     time.sleep(1)
-
-                else:
                     self._web.closeBrowser()
-                    self.JobEnd()
+                else:
+                    self.ReportJobVal(val=f'未发现关注者 {self.runCount}')
+                    self._web.closeBrowser()
                     return
         except Exception as ex:
             Log.exception("TwitterAutoFollowBackJob error")
             self._web.closeBrowser()
-            self.JobEnd()
 
     def Done(self, *args, **kwargs):
         return super().Done(*args, **kwargs)

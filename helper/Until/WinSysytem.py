@@ -43,7 +43,7 @@ class WinSystem():
             def func():
                 GEventHandler.Dispatch(EventType.reload_chrome_over)
 
-            run_date = datetime.datetime.now() + datetime.timedelta(3)
+            run_date = datetime.datetime.now() + datetime.timedelta(seconds=3)
             TheScheduler.add_job(func, trigger="date", run_date=run_date)
 
     def GetWorkPath(self):
