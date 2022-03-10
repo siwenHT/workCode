@@ -90,6 +90,15 @@ class OpenUrl:
         except Exception as ex:
             raise RuntimeError(f"{self._jobName} refreshPage error")
 
+    def Back(self):
+        try:
+            self._browser.back()
+        except exceptions.NoSuchWindowException as ex:
+            self.resetBroser()
+            raise RuntimeError(f'{self._jobName} window is lost')
+        except Exception as ex:
+            raise RuntimeError(f"{self._jobName} Back error")
+
     def get_debug_chrome_opetions(self):
         options = webdriver.ChromeOptions()
         options.add_experimental_option("debuggerAddress", "127.0.0.1:9527")

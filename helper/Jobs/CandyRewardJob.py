@@ -32,11 +32,10 @@ class CandyRewardJob(WebBaseJob):
         while True:
             try:
                 web = CandyReward(self._typeName)
-                self.ReportJobVal(val="准备打开网页")
+                self.ReportJobVal(val="准备开始领奖")
                 web.openGameUrl()
-                self.ReportJobVal(val="打开完成")
                 time.sleep(5)
-                self.ReportJobVal(val="准备点击领奖")
+                self.ReportJobVal(val="准备领奖")
                 if web.clickReward():
                     web.closeBrowser()
                     self.ReportJobVal(val="领奖OK了")

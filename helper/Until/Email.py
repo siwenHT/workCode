@@ -10,9 +10,11 @@
 
 # here put the import lib
 from email.mime.text import MIMEText
+from random import randint
 import smtplib
 from Until.MyLog import Log
 from Until.WinSysytem import Win
+from Until import ToolsFunc as Tool
 
 
 class Email(object):
@@ -24,10 +26,14 @@ class Email(object):
 
         self.sender = Win.MailSender()
         self.receivers = Win.MailReceivers()
+        self.emailCount = 0
 
     def SendText(self, content):
-        #设置email信息
-        #邮件内容设置
+        randomVal = ""
+        for i in range(randint(10, 20)):
+            randomVal = randomVal + str(randint(0, 9))
+
+        content = f"{Tool.showTime()}  {content} ... {randomVal}  ,邮件上限:{self.emailCount}"
         message = MIMEText(content, 'plain', 'utf-8')
         message['Subject'] = 'title'
         message['From'] = self.sender
@@ -36,6 +42,11 @@ class Email(object):
         self.SendMsg(message)
 
     def SendMsg(self, msg):
+
+        if self.emailCount > 50:
+            Log.error("邮件达到上限了")
+            return
+
         #登录并发送邮件
         try:
             smtpObj = smtplib.SMTP()
@@ -48,6 +59,7 @@ class Email(object):
             #退出
             smtpObj.quit()
             Log.info('success')
+            self.emailCount = self.emailCount + 1
         except smtplib.SMTPException as e:
             Log.exception('error')  #打印错误
 

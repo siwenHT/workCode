@@ -10,6 +10,7 @@
 
 # here put the import lib
 from Global import *
+from Until.Email import GEmail
 from Until.MyLog import Log
 from Web.OpenUrl import OpenUrl
 
@@ -33,6 +34,7 @@ class CandyReward(OpenUrl):
             element = self.find_element_loop(By.XPATH, self._browser, key)
             if element:
                 element.submit()
+                GEmail.SendText("领取了糖果")
                 return True
             else:
                 okEl = self.find_element_loop(By.CSS_SELECTOR, self._browser, "#next-daily-reward-countdown-timer")
