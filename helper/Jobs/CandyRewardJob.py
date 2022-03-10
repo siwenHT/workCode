@@ -41,6 +41,8 @@ class CandyRewardJob(WebBaseJob):
                     web.closeBrowser()
                     self.ReportJobVal(val="领奖OK了")
                     return
+
+                web.closeBrowser()
             except Exception as ex:
                 Log.exception("CandyRewardJob error")
 
