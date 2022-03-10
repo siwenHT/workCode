@@ -16,6 +16,12 @@
         "temporary": 0,
         "LGG-english": 0
     },
+    "MailUser": [],
+    "MailPass": [],
+    "MailSender": "hongtao353@163.com",
+    "MailReceivers": [
+        "hongtao353@163.com"
+    ],
     "discord_token": [
         24,
         13,

@@ -80,6 +80,20 @@ class WinSystem():
 
         return retStr
 
+    def MailUser(self):
+        retList = self._commonConfig.get("MailUser", [])
+        return self.SimpDesc(retList)
+
+    def MailPass(self):
+        retList = self._commonConfig.get("MailPass", [])
+        return self.SimpDesc(retList)
+
+    def MailSender(self):
+        return self._commonConfig.get("MailSender", [])
+
+    def MailReceivers(self):
+        return self._commonConfig.get("MailReceivers", [])
+
     def MsgRegeist(self):
 
         def msgHandler(eventType: EventType):

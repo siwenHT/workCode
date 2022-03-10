@@ -115,7 +115,7 @@ class auto_download_chromedrive(object):
             return None
 
         find_url = self.find_local_version(version.split(".")[0], version_href)
-        logger.debug("找到匹配的版本: {find_url}")
+        logger.debug(f"找到匹配的版本: {find_url}")
         if not find_url:
             return None
         version_num = re.search(r"path=(.*?)/", find_url).group(1)
