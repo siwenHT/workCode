@@ -16,6 +16,7 @@ from UI.MainWindow import MainWindow
 from Until.Scheduler import TheScheduler
 from Until.WinSysytem import Win
 from Jobs.JobManager import JobManager
+from Until.Email import GEmail
 from Global import *
 
 

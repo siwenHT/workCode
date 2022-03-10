@@ -23,7 +23,7 @@ class WinSystem():
 
     def __init__(self) -> None:
         self._reloadChromTime = 0
-        self._ensKey = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz._'
+        self._ensKey = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz._@'
         self._configFilePath = os.path.join(self.GetWorkPath(), 'Res/Config.json')
 
         self.InitConfig()

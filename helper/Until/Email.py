@@ -9,7 +9,10 @@
 '''
 
 # here put the import lib
-from WinSysytem import Win
+from email.mime.text import MIMEText
+import smtplib
+from Until.MyLog import Log
+from Until.WinSysytem import Win
 
 
 class Email(object):
@@ -19,35 +22,34 @@ class Email(object):
         self.mail_user = Win.MailUser()
         self.mail_pass = Win.MailPass()
 
-        #邮件发送方邮箱地址
         self.sender = Win.MailSender()
-        #邮件接受方邮箱地址，注意需要[]包裹，这意味着你可以写多个邮件地址群发
         self.receivers = Win.MailReceivers()
 
+    def SendText(self, content):
+        #设置email信息
+        #邮件内容设置
+        message = MIMEText(content, 'plain', 'utf-8')
+        message['Subject'] = 'title'
+        message['From'] = self.sender
+        message['To'] = self.receivers[0]
 
-#设置email信息
-#邮件内容设置
-message = MIMEText('content', 'plain', 'utf-8')
-#邮件主题
-message['Subject'] = 'title'
-#发送方信息
-message['From'] = sender
-#接受方信息
-message['To'] = receivers[0]
+        self.SendMsg(message)
 
-#登录并发送邮件
-try:
-    smtpObj = smtplib.SMTP()
-    #连接到服务器
-    smtpObj.connect(mail_host, 25)
-    #登录到服务器
-    smtpObj.login(mail_user, mail_pass)
-    #发送
-    smtpObj.sendmail(sender, receivers, message.as_string())
-    #退出
-    smtpObj.quit()
-    print('success')
-except smtplib.SMTPException as e:
-    print('error', e)  #打印错误
+    def SendMsg(self, msg):
+        #登录并发送邮件
+        try:
+            smtpObj = smtplib.SMTP()
+            #连接到服务器
+            smtpObj.connect(self.mail_host, 25)
+            #登录到服务器
+            smtpObj.login(self.mail_user, self.mail_pass)
+            #发送
+            smtpObj.sendmail(self.sender, self.receivers, msg.as_string())
+            #退出
+            smtpObj.quit()
+            Log.info('success')
+        except smtplib.SMTPException as e:
+            Log.exception('error')  #打印错误
+
 
 GEmail = Email()

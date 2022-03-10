@@ -21,8 +21,8 @@ from UI.DiscordFrame import DiscordFrame
 class MainWindow():
 
     def __init__(self) -> None:
-        self._width = 415
-        self._height = 480
+        self._width = 480
+        self._height = 680
 
         self.InitUI()
         self.baseView()
