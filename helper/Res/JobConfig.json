@@ -58,8 +58,8 @@
     },
     "TwitterAutoFollowBackJob": {
         "trigger": "cron",
-        "hour": "0-23",
-        "minutes": "35",
+        "hour": "1,6,12,18,23",
+        "minutes": "25",
         "max_instances": 1
     },
     "ChiKorokoJob222": {

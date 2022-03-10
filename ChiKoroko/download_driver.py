@@ -1,3 +1,4 @@
+from asyncio.log import logger
 from win32com.client import Dispatch
 import re
 import stat, zipfile, os, psutil
@@ -13,6 +14,7 @@ class auto_download_chromedrive(object):
         self.local_chrome_paths = [r"C:\Program Files\Google\Chrome\Application\chrome.exe", r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"]
 
         self.headers = {'content-type': 'application/json', 'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:22.0) Gecko/20100101 Firefox/22.0'}
+        self.headers2 = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:22.0) Gecko/20100101 Firefox/22.0'}
 
     def get_version_via_com(self, filename):
         parser = Dispatch("Scripting.FileSystemObject")
@@ -40,7 +42,8 @@ class auto_download_chromedrive(object):
     def download_chromadrive(self, url):
         try:
             r = requests.Session()
-            response = r.get(url, headers=self.headers)
+            r.keep_alive = False
+            response = r.get(url, headers=self.headers2)
             if response.status_code == 200:
                 with open("chromedriver_win32.zip", "wb") as f:
                     f.write(response.content)
@@ -51,6 +54,7 @@ class auto_download_chromedrive(object):
                 return None
         except Exception:
             print("request download chromedriver_win32.zip failed!")
+            logger.exception("11")
             return None
 
     def find_local_version(self, loc_ver, all_ver):
@@ -102,7 +106,8 @@ class auto_download_chromedrive(object):
         if not version:
             print("check chrome browser version failed!")
             return None
-        print("chrome browser version:", version)
+
+        logger.info(f"chrome browser version: {version}")
         '''下载网页端与本地匹配的chromedriver.exe'''
         version_href = self.get_chromedriver_urls()
         if not version_href:
@@ -110,13 +115,13 @@ class auto_download_chromedrive(object):
             return None
 
         find_url = self.find_local_version(version.split(".")[0], version_href)
-        print("找到匹配的版本:\n%s" % find_url)
+        logger.debug("找到匹配的版本: {find_url}")
         if not find_url:
             return None
         version_num = re.search(r"path=(.*?)/", find_url).group(1)
         find_url_2 = find_url.rsplit('/', 2)[0]
         new_url = "{}/{}/chromedriver_win32.zip".format(find_url_2, version_num)
-        print("downloading......\n%s" % new_url)
+        logger.info(f"downloading......:{new_url}")
         ret = self.download_chromadrive(new_url)
         if not ret:
             return None

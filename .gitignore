@@ -1,4 +1,5 @@
 *.pyc
+chromeWorkPath/
 cPlusCodeChange/out/changeText.txt
 cPlusCodeChange/out/roleTargetChenged.lua
 cPlusCodeChange/out/StaticCallText.txt
@@ -8391,3 +8392,5 @@ metauce/test.log
 metauce/__pycache__/thelog.cpython-38.pyc
 metauce/__pycache__/toolsFunc.cpython-38.pyc
 discord_bot/test.log
+discord_bot/test.log
+ChiKoroko/chromeWorkPath/Last Version

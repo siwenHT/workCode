@@ -5,6 +5,7 @@ from selenium.common.exceptions import SessionNotCreatedException  #导入NoSuch
 from selenium.webdriver.chrome.service import Service
 from websockets import serve
 from download_driver import auto_download_chromedrive
+import log
 
 
 class MySelenium(object):
@@ -12,13 +13,14 @@ class MySelenium(object):
     def __init__(self):
         self.basic_url = "https://www.baidu.com/"
         self.executable_path = r"./chromedriver_win32/chromedriver.exe"
+        self.workPath = "./chromeWorkPath"
         self.browser = None
 
     @property
     def start_driver(self):
         try:
             option = webdriver.ChromeOptions()
-            workpath = os.path.join(os.getcwd(), "./chrome")
+            workpath = os.path.join(os.getcwd(), self.workPath)
             option.add_argument(f'--user-data-dir={workpath}')
             option.add_argument("profile-directory=Profile 1")
             workPath = os.path.abspath(self.executable_path)
