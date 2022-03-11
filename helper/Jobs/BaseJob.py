@@ -104,6 +104,9 @@ class BaseJob():
                 else:
                     param['minute'] = random.randint(1, 59)
 
+                if theParam.get("seconds"):
+                    param['second'] = theParam.get("seconds")
+
             TheScheduler.add_job(self.Done, **param)
             self._jobCurVal = '已加载任务'
         else:

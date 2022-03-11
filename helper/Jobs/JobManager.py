@@ -31,6 +31,7 @@ from Jobs.CandyRewardJob import CandyRewardJob
 from Jobs.RefreshTimeLabel import RefreshTimeLabel
 from Jobs.MetauceHelperJob import MetauceHelperJob
 from Jobs.TwitterFellowJob import TwitterFellowJob
+from Jobs.StepnBotJob import StepnBotJob
 from Jobs.TwitterAutoFollowBackJob import TwitterAutoFollowBackJob
 
 
@@ -54,6 +55,7 @@ class JobManager():
         self.jobNames["GmToChannelJob"] = GmToChannelJob
         self.jobNames["OneBtnPushJob"] = OneBtnPushJob
         self.jobNames["ChiKorokoJob"] = ChiKorokoJob
+        self.jobNames["StepnBotJob"] = StepnBotJob
         self.jobNames["TwitterAutoFollowBackJob"] = TwitterAutoFollowBackJob
 
     '''加载任务参数'''

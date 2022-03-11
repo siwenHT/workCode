@@ -12,6 +12,8 @@
 from email.mime.text import MIMEText
 from random import randint
 import smtplib
+from Event.EventMsgHandler import GEventHandler
+from Event.EventType import EventType
 from Until.MyLog import Log
 from Until.WinSysytem import Win
 from Until import ToolsFunc as Tool
@@ -20,13 +22,17 @@ from Until import ToolsFunc as Tool
 class Email(object):
 
     def __init__(self):
+        self.emailCount = 0
+        self.InitCfg()
+        self.MsgRegeist()
+
+    def InitCfg(self):
         self.mail_host = 'smtp.163.com'
         self.mail_user = Win.MailUser()
         self.mail_pass = Win.MailPass()
 
         self.sender = Win.MailSender()
         self.receivers = Win.MailReceivers()
-        self.emailCount = 0
 
     def SendText(self, content):
         randomVal = ""
@@ -62,6 +68,14 @@ class Email(object):
             self.emailCount = self.emailCount + 1
         except smtplib.SMTPException as e:
             Log.exception('error')  #打印错误
+
+    def MsgRegeist(self):
+
+        def msgHandler(eventType: EventType):
+            if eventType == EventType.reload_config:
+                self.InitCfg()
+
+        GEventHandler.RegedistEvent(EventType.reload_config, msgHandler)
 
 
 GEmail = Email()
