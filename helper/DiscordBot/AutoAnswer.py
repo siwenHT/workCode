@@ -75,7 +75,7 @@ class MsgInfo(object):
             sec = ret.group(6)
 
             Log.debug(f"{y}-{m}-{d} {h}:{min}:{sec} == {strTime}")
-            return datetime.now().replace(year=y, month=m, day=d, hour=h, minute=h, second=sec, microsecond=0).timestamp()
+            return datetime.datetime.now().replace(year=y, month=m, day=d, hour=h, minute=h, second=sec, microsecond=0).timestamp()
 
         return 0
 
@@ -118,6 +118,14 @@ class AutoAnswer(object):
         Tool.WriteFile(self._tempFile, data.decode('utf-8'))
         jsonData = Tool.parse_json_str(data.decode('utf-8'))
 
+    def TestGetQ(self):
+        jsonData = Tool.initJsonFromFile(os.path.join(Win.GetWorkPath()))
+        self.GetQuestions(jsonData)
+        pass
+
+    def TestGetA(self):
+        pass
+
     def GetQuestions(self, jsonData):
         items = jsonData.items()
 
@@ -141,7 +149,7 @@ class AutoAnswer(object):
 
     # 获取时间基准.时间要在这个时间之后才进入分析范围
     def GetTimeLocation(self):
-        self._localtionTime = datetime.now().replace(minute=0, second=0, microsecond=0).timestamp()
+        self._localtionTime = datetime.datetime.now().replace(minute=0, second=0, microsecond=0).timestamp()
 
     def MsgRegeist(self):
 
