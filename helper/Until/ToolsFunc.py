@@ -29,9 +29,9 @@ def ReadFile(filePath):
         file_object.close()
         return all_the_text
     except Exception as ex:
-        Log.info("{filePath} not exist!!!")
+        Log.info(f"{filePath} not exist!!!")
 
-    return b""
+    return b"{}"
 
 
 def ReadLineFile(filePath, callBack):
@@ -457,6 +457,18 @@ def parse_json_str(jsonStr: str):
 def initJsonFromFile(filePath):
     fileCon = ReadFile(filePath)
     fileCon = parse_json_str(fileCon.decode('utf-8'))
+    retJson = {}
+    try:
+        retJson = json.loads(fileCon)
+    except Exception as ex:
+        Log.info(f"file : {filePath} not a json")
+
+    return retJson
+
+
+def initJsonFromFileEx(filePath):
+    fileCon = ReadFile(filePath)
+    fileCon = fileCon.decode('utf-8')
     retJson = {}
     try:
         retJson = json.loads(fileCon)

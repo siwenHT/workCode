@@ -35,7 +35,7 @@ class MsgInfo(object):
         self.ParseMsg(msg)
 
     def ParseMsg(self, msg):
-        author = msg.get('auther')
+        author = msg.get('author')
         if author:
             self._authorId = author.get('id')
             self._userName = author.get('username')
@@ -43,8 +43,7 @@ class MsgInfo(object):
         self._msgId = msg.get('id')
         self._content = msg.get('content')
         self._time = self.TimestampToInt(msg.get('timestamp'))
-
-        self._isQuestionStart = self.QuestionIdx()
+        self._isQuestionStart = self.QuestionStartIdx()
 
     def QuestionStartIdx(self):
         if self._content.find("Question starts in") != -1:
@@ -64,23 +63,25 @@ class MsgInfo(object):
             return 0
 
         #2022-03-09T19:31:09.960000+00:00
-        ret = re.search(r'([0-9]+)-([0-9]+)-([0-9]+)T([0-9]+):([0-9]+):([0-9]+)\.', strTime)
+        ret = re.search(r'([0-9]+)-([0-9]+)-([0-9]+)T([0-9]+):([0-9]+):([0-9]+)\.([0-9]+)', strTime)
         if ret:
-            y = ret.group(1)
-            m = ret.group(2)
-            d = ret.group(3)
+            y = int(ret.group(1))
+            m = int(ret.group(2))
+            d = int(ret.group(3))
 
-            h = ret.group(4)
-            min = ret.group(5)
-            sec = ret.group(6)
+            h = int(ret.group(4))
+            min = int(ret.group(5))
+            sec = int(ret.group(6))
 
-            Log.debug(f"{y}-{m}-{d} {h}:{min}:{sec} == {strTime}")
-            return datetime.datetime.now().replace(year=y, month=m, day=d, hour=h, minute=h, second=sec, microsecond=0).timestamp()
+            mic = int(ret.group(7))
+
+            # Log.debug(f"{y}-{m}-{d} {h}:{min}:{sec} {mic} == {strTime}")
+            return datetime.datetime.now().replace(year=y, month=m, day=d, hour=h, minute=h, second=sec, microsecond=mic).timestamp()
 
         return 0
 
     def MsgEnable(self, lTime):
-        return self._time > lTime
+        return True or (self._time > lTime)
 
 
 class question(object):
@@ -110,7 +111,7 @@ class AutoAnswer(object):
     def InitCfg(self):
         self._botConfig = BotConfig(self._channelCfg)
         self._pullBot = BotPullMsg(self._botConfig)
-        self._recodeList = Tool.initJsonFromFile(self._historyFile)
+        self._recodeList = Tool.initJsonFromFileEx(self._historyFile)
 
     def GetRemoteMsg(self, limit=50):
         self.GetTimeLocation()
@@ -119,30 +120,28 @@ class AutoAnswer(object):
         jsonData = Tool.parse_json_str(data.decode('utf-8'))
 
     def TestGetQ(self):
-        jsonData = Tool.initJsonFromFile(os.path.join(Win.GetWorkPath()))
+        self.GetTimeLocation()
+        jsonData = Tool.initJsonFromFileEx(os.path.join(Win.GetWorkPath(), "Res/log/contentq.txt"))
         self.GetQuestions(jsonData)
-        pass
 
     def TestGetA(self):
         pass
 
     def GetQuestions(self, jsonData):
-        items = jsonData.items()
 
         curQ = None
         findStart = False
-        for msg in items:
+        for msg in jsonData:
             tmp = MsgInfo(msg)
-            if not tmp.MsgEnable():
+            if not tmp.MsgEnable(self._localtionTime):
                 continue
 
-            if tmp._isQuestionStart:
-                findStart = True
-                continue
+            # if tmp._isQuestionStart != -1:
+            #     findStart = True
+            #     continue
 
-            if findStart:
-                if not curQ:
-                    curQ = question(msg)
+            if tmp._isBot:
+                Log.debug(f"bot: {msg}")
 
     def GetAnswer(self, jsonData):
         pass
