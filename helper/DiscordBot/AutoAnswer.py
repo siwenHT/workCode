@@ -21,11 +21,33 @@ from Until.MyLog import Log
 from Until.WinSysytem import Win
 
 
+class Question(object):
+
+    def __init__(self, msg={}):
+        self._question = None
+        self._choose = []
+        self._answer = None
+        self._done = False
+        self._Time = None
+        self._msgId = None
+
+    def ParseMsg(self, msg):
+        self._question = msg.get('title')
+
+        fields = msg.get('fields')
+        for ans in fields:
+            ans = {}
+            ans
+
+    def ParseOneAns(self):
+        pass
+
+
 class MsgInfo(object):
 
     def __init__(self, msg={}):
         self._isBot = False
-        self._isQuestionStart = -1
+        self._myQuestion = None
         self._content = ""
         self._authorId = ""
         self._msgId = ""
@@ -43,20 +65,15 @@ class MsgInfo(object):
         self._msgId = msg.get('id')
         self._content = msg.get('content')
         self._time = self.TimestampToInt(msg.get('timestamp'))
-        self._isQuestionStart = self.QuestionStartIdx()
+        self.QuestionCheck()
 
-    def QuestionStartIdx(self):
-        if self._content.find("Question starts in") != -1:
-            if self._content.find('30'):
-                return 1
-            elif self._content.find('15'):
-                return 2
-            elif self._content.find('10'):
-                return 3
-            elif self._content.find('5'):
-                return 4
+    def QuestionCheck(self, msg):
+        embeds = msg.get('embeds')
+        if embeds and embeds.get('type') == 'rich':
+            self._myQuestion = Question(embeds)
 
-        return -1
+    def IsQuestion(self):
+        return self._myQuestion != None
 
     def TimestampToInt(self, strTime):
         if not strTime:
@@ -82,20 +99,6 @@ class MsgInfo(object):
 
     def MsgEnable(self, lTime):
         return True or (self._time > lTime)
-
-
-class question(object):
-
-    def __init__(self, msg={}):
-        self._question = None
-        self._choose = []
-        self._answer = None
-        self._done = False
-        self._Time = None
-        self._msgId = None
-
-    def ParseMsg(self, msg):
-        pass
 
 
 class AutoAnswer(object):
