@@ -11,7 +11,10 @@
 # here put the import lib
 
 from distutils.util import strtobool
+import json
+from json import tool
 import os, time, datetime, re
+from DiscordBot.BotMsgSend import BotMsgSend
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
 from Until import ToolsFunc as Tool
@@ -23,24 +26,68 @@ from Until.WinSysytem import Win
 
 class Question(object):
 
-    def __init__(self, msg={}):
+    def __init__(self, msg={}, time=0):
         self._question = None
-        self._choose = []
+        self._chooses = []
         self._answer = None
         self._done = False
-        self._Time = None
+        self._time = time
         self._msgId = None
+        self._calRet = 0
+
+        self.ParseMsg(msg)
+
+    def __str__(self):
+        ret = f"{self._time} {self._question} "
+        for ans in self._chooses:
+            ret += f"{ans['con']}"
+
+        return ret
 
     def ParseMsg(self, msg):
-        self._question = msg.get('title')
+        self._question = msg.get('title').strip()
 
+        self.IsCalNum(self._question)
         fields = msg.get('fields')
-        for ans in fields:
-            ans = {}
-            ans
+        for oneAns in fields:
+            name = oneAns.get("name")
+            ret = re.match(r'\s*([a-zA-Z])\s*\.(.*)', name)
+            if ret:
+                ans = {}
+                ans['flg'] = ret.group(1)
+                ans['con'] = ret.group(2).strip()
+                ans['idx'] = self.FlgToIdx(ret.group(1))
+                self._chooses.append(ans)
+            else:
+                Log.error(f"name ani error")
 
-    def ParseOneAns(self):
-        pass
+        def takeSecond(elem):
+            return elem['idx']
+
+        self._chooses.sort(key=takeSecond)
+        # Log.debug(self._chooses)
+
+    def FlgToIdx(self, flg):
+        cfg = {'a': 1, 'A': 1, 'b': 2, 'B': 2, 'c': 3, 'C': 3, 'd': 4, 'D': 4, 'e': 5, 'E': 5, 'f': 6, 'F': 6}
+        return cfg[flg]
+
+    def IsCalNum(self, question):
+        totalStr = question.replace(' ', '')
+        ret = re.match(r'([0-9\+\-\*\/\%]+)=\?', totalStr)
+        if ret:
+            self._calRet = eval(ret.group(1))
+            self.GetFlg(self._calRet)
+            Log.debug(f"question:{self._question} = {self._calRet}")
+
+    def GetFlg(self, ans):
+        self._calRet = ans
+        for choose in self._chooses:
+            if choose['con'] == str(ans):
+                self._answer = choose['flg']
+                return self._answer
+
+    def SetAnswer(self, flg):
+        self._answer = self._chooses[self.FlgToIdx(flg) - 1]['con']
 
 
 class MsgInfo(object):
@@ -48,12 +95,13 @@ class MsgInfo(object):
     def __init__(self, msg={}):
         self._isBot = False
         self._myQuestion = None
+        self._answerRightRoleId = None
         self._content = ""
         self._authorId = ""
+        self._startSecond = 0
         self._msgId = ""
         self._time = 0
         self._userName = ''
-        self._stepnQuestionBotId = '927771714241310731'
         self.ParseMsg(msg)
 
     def ParseMsg(self, msg):
@@ -61,19 +109,36 @@ class MsgInfo(object):
         if author:
             self._authorId = author.get('id')
             self._userName = author.get('username')
-            self._isBot = (self._authorId == self._stepnQuestionBotId)
+            self._isBot = author.get('bot')
         self._msgId = msg.get('id')
         self._content = msg.get('content')
         self._time = self.TimestampToInt(msg.get('timestamp'))
-        self.QuestionCheck()
+        self.QuestionCheck(msg)
+        self.AnswerCheck()
+        self.QuestionStartCheck()
+
+    def QuestionStartCheck(self):
+        if self._content.find('Question starts in') > -1:
+            ret = re.search(r'Question starts in ([0-9]+) seconds', self._content)
+            if ret:
+                self._startSecond = int(ret.group(1))
 
     def QuestionCheck(self, msg):
         embeds = msg.get('embeds')
-        if embeds and embeds.get('type') == 'rich':
-            self._myQuestion = Question(embeds)
+        if embeds and embeds[0].get('type') == 'rich' and embeds[0].get('title'):
+            self._myQuestion = Question(embeds[0], self._time)
 
     def IsQuestion(self):
         return self._myQuestion != None
+
+    def AnswerCheck(self):
+        if self._content.find('Chicken Dinner') != -1:
+            ret = re.search(r'<@([0-9]+)> for', self._content)
+            if ret:
+                self._answerRightRoleId = ret.group(1)
+
+    def IsBotAnswer(self):
+        return self._answerRightRoleId != None
 
     def TimestampToInt(self, strTime):
         if not strTime:
@@ -93,65 +158,205 @@ class MsgInfo(object):
             mic = int(ret.group(7))
 
             # Log.debug(f"{y}-{m}-{d} {h}:{min}:{sec} {mic} == {strTime}")
-            return datetime.datetime.now().replace(year=y, month=m, day=d, hour=h, minute=h, second=sec, microsecond=mic).timestamp()
+            return datetime.datetime.now().replace(year=y, month=m, day=d, hour=h, minute=min, second=sec, microsecond=mic).timestamp()
 
         return 0
 
     def MsgEnable(self, lTime):
-        return True or (self._time > lTime)
+        return (self._time > lTime)
 
 
 class AutoAnswer(object):
 
     def __init__(self):
+        self._myId = '932451832163336222'
+        self._questionNum = 4
+        self._localtionTime = None
+        self._nextPullTime = 6
         self._channelCfg = os.path.join(Win.GetWorkPath(), "Res/BotConfig/stepn-answer.json")
         self._historyFile = os.path.join(Win.GetWorkPath(), "Res/log/stepn-history.json")
-        self._tempFile = os.path.join(Win.GetWorkPath(), "Res/log/tempData.json")
-        self._stepnQuestionBotId = '927771714241310731'
+        self._contentFile = os.path.join(Win.GetWorkPath(), "Res/log/content.txt")
+        self._answerFile = os.path.join(Win.GetWorkPath(), "Res/log/answer.txt")
+
         self.InitCfg()
         self.MsgRegeist()
 
     def InitCfg(self):
         self._botConfig = BotConfig(self._channelCfg)
         self._pullBot = BotPullMsg(self._botConfig)
-        self._recodeList = Tool.initJsonFromFileEx(self._historyFile)
+        self.InitHistory()
 
-    def GetRemoteMsg(self, limit=50):
-        self.GetTimeLocation()
-        data = self._pullBot.GetRemoteMessage(limit)
-        Tool.WriteFile(self._tempFile, data.decode('utf-8'))
-        jsonData = Tool.parse_json_str(data.decode('utf-8'))
+    def InitHistory(self):
+        info = Tool.initJsonFromFileEx(self._historyFile)
+        self._lastTime = info.get('lastTime', 0)
+        self._recodeList = info.get('history', {})
 
-    def TestGetQ(self):
-        self.GetTimeLocation()
-        jsonData = Tool.initJsonFromFileEx(os.path.join(Win.GetWorkPath(), "Res/log/contentq.txt"))
-        self.GetQuestions(jsonData)
+    def RepaireQ(self):
+        jsonData = Tool.initJsonFromFileEx(self._contentFile)
+        self.GetQuestions(jsonData, True)
+        self.CalAnswer()
 
-    def TestGetA(self):
-        pass
+    def RepaireA(self):
+        jsonData = Tool.initJsonFromFileEx(self._answerFile)
+        ans = self.GetAnswer(jsonData, True)
+        if ans:
+            self.PrepareRecord(ans)
 
-    def GetQuestions(self, jsonData):
+    def GetAndFilterData(self, recFile, limit=50):
+        bCon = self._pullBot.GetRemoteMessage(limit)
+        Tool.WriteBinFile(recFile, bCon)
+        strCon = bCon.decode('utf-8')
+        JsonList = json.loads(strCon)
+        return JsonList
 
-        curQ = None
-        findStart = False
+    def GetQuestionContent(self):
+        count = 0
+        while True:
+            JsonList = self.GetAndFilterData(self._contentFile, 50)
+            self.GetQuestions(JsonList)
+
+            if count > 10:
+                break
+            elif not self._curQuestion or len(self._curQuestion) < self._questionNum:
+                time.sleep(self._nextPullTime)
+                count += 1
+            else:
+                break
+
+    def GetAnswerContent(self):
+        count = 0
+        while True:
+            JsonList = self.GetAndFilterData(self._answerFile, 80)
+            ans = self.GetAnswer(JsonList)
+
+            if count > 20:
+                break
+            elif not ans:
+                time.sleep(10)
+                count += 1
+            else:
+                self.PrepareRecord(ans)
+                return
+
+    def GetQuestions(self, jsonData, isRepaire=False):
+        questions = []
+
+        checkFirstOk = False
         for msg in jsonData:
-            tmp = MsgInfo(msg)
+            tmp: MsgInfo = MsgInfo(msg)
+            if not checkFirstOk:
+                checkFirstOk = True
+                if isRepaire:
+                    firstMsgTime = tmp._time
+                    self._localtionTime = datetime.datetime.fromtimestamp(firstMsgTime).replace(minute=0, second=0, microsecond=0).timestamp()
+
+                if not tmp.MsgEnable(self._localtionTime):
+                    self._nextPullTime = 30
+                elif tmp._startSecond:
+                    beginTime = tmp._time + tmp._startSecond + 3
+                    self._nextPullTime = beginTime - datetime.datetime.utcnow().timestamp()
+
             if not tmp.MsgEnable(self._localtionTime):
                 continue
 
-            # if tmp._isQuestionStart != -1:
-            #     findStart = True
-            #     continue
+            if tmp._isBot and tmp.IsQuestion():
+                questions.append(tmp._myQuestion)
 
-            if tmp._isBot:
-                Log.debug(f"bot: {msg}")
+            if len(questions) == self._questionNum:
+                break
 
-    def GetAnswer(self, jsonData):
-        pass
+        def takeSecond(elem):
+            return elem._time
+
+        questions.sort(key=takeSecond)
+        Log.info(f"final question:{len(questions)}")
+        self._curQuestion = questions
+
+    def GetAnswer(self, jsonData, isRepaire=False):
+        rightId = None
+        checkFirstOk = False
+        for msg in jsonData:
+            tmp = MsgInfo(msg)
+            if not checkFirstOk:
+                checkFirstOk = True
+                if isRepaire:
+                    firstMsgTime = tmp._time
+                    self._localtionTime = datetime.datetime.fromtimestamp(firstMsgTime).replace(minute=0, second=0, microsecond=0).timestamp()
+
+            if not tmp.MsgEnable(self._localtionTime):
+                continue
+
+            if not rightId and tmp.IsBotAnswer():
+                rightId = tmp._answerRightRoleId
+            elif rightId and tmp._authorId == rightId:
+                if self.TheTimeTheSameDay(tmp._time, self._curQuestion[0]._time):
+                    if rightId == self._myId:
+                        self._lastTime = self._localtionTime
+
+                    ans = tmp._content.strip()
+                    Log.info(f"final ans:{ans},role costTime:{tmp._time - self._curQuestion[0]._time}")
+                    return ans
+        Log.error(f"not find the right ans")
+
+    def PrepareRecord(self, ans):
+        if not self._curQuestion:
+            return
+
+        oldNum = len(self._recodeList)
+        for i in range(len(self._curQuestion or {})):
+            qu = self._curQuestion[i]
+            qu.SetAnswer(ans[i])
+            self._recodeList[qu._question] = qu._answer
+
+        val = {}
+        val['lastTime'] = self._lastTime
+        val['history'] = self._recodeList
+
+        newNum = len(self._recodeList)
+        val = json.dumps(val)
+        Tool.WriteFile(self._historyFile, val)
+        Log.info(f"recode {oldNum} => {newNum}")
+
+    def CalAnswer(self):
+        if not self._curQuestion:
+            return
+
+        result = ['d', 'd', 'd', 'd']
+        findCount = 0
+        count = 0
+        for qu in self._curQuestion:
+            qu: Question = qu
+            flg = qu._answer
+            if not flg:
+                ans = self._recodeList.get(qu._question)
+                flg = qu.GetFlg(ans)
+
+            if flg:
+                findCount += 1
+                result[count] = flg
+                Log.info(f"find one question {qu._question} => {qu._calRet}")
+            count += 1
+
+        if findCount > 0:
+            result = "".join(result)
+            self._botConfig.SetMessage([result])
+            Log.info(f"final CalAnswer findNum: {findCount}")
+            if self._lastTime and not self.TheTimeTheSameDay(self._lastTime, qu._time):
+                return result
+
+            # BotMsgSend(self._botConfig).send()
+            return result
+
+        return ''
 
     # 获取时间基准.时间要在这个时间之后才进入分析范围
     def GetTimeLocation(self):
-        self._localtionTime = datetime.datetime.now().replace(minute=0, second=0, microsecond=0).timestamp()
+        self._localtionTime = datetime.datetime.utcnow().replace(minute=0, second=0, microsecond=0).timestamp()
+
+    def TheTimeTheSameDay(self, times1, times2):
+        t1_str = time.strftime("%Y-%m-%d", time.localtime(times1))
+        t2_str = time.strftime("%Y-%m-%d", time.localtime(times2))
+        return t1_str == t2_str
 
     def MsgRegeist(self):
 

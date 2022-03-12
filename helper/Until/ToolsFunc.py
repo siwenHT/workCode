@@ -109,6 +109,12 @@ def WriteFile(filePath, all_the_text):
     file_object.close()
 
 
+def WriteBinFile(filePath, bCon):
+    file_object = open(filePath, 'wb')
+    file_object.write(bCon)
+    file_object.close()
+
+
 def BakFile(filePath, all_the_text):
     file_bak = filePath[:len(filePath) - 3] + 'bak'
     WriteFile(file_bak, all_the_text)

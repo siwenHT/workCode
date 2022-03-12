@@ -23,7 +23,7 @@ class BotPullMsg(object):
     def __init__(self, botConfig: BotConfig):
         self._botConfig = botConfig
         self._getTime = 0
-        self._invTime = 10
+        self._invTime = 1
 
     def Header(self):
         headers = {}
@@ -58,7 +58,7 @@ class BotPullMsg(object):
                 resp.close()
                 return data
             else:
-                Log.error(f"fail! name: {showName}, code: {resp.status}, reason : {resp.reason}")
+                Log.info(f"fail! name: {showName}, code: {resp.status}, reason : {resp.reason}")
                 self._botConfig.errorTime += 1
                 resp.close()
                 return ""

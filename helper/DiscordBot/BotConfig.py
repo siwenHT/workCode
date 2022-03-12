@@ -31,6 +31,9 @@ class BotConfig():
     def RandomMessage(self):
         return choice(self._config['mes'])
 
+    def SetMessage(self, mes):
+        self._config['mes'] = mes
+
     def ChannelID(self):
         return self._config.get("channel_id", "")
 
