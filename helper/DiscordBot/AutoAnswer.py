@@ -14,6 +14,7 @@ from distutils.util import strtobool
 import json
 from json import tool
 import os, time, datetime, re
+from random import randint, random
 from DiscordBot.BotMsgSend import BotMsgSend
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
@@ -330,7 +331,7 @@ class AutoAnswer(object):
         if not self._curQuestion:
             return
 
-        result = ['d', 'd', 'd', 'd']
+        result = ['C', 'C', 'C', 'C']
         findCount = 0
         count = 0
         for qu in self._curQuestion:
@@ -348,8 +349,11 @@ class AutoAnswer(object):
 
         if findCount > 0:
             result = "".join(result)
+            if randint(1, 10) < 6:
+                result = result.lower()
+
             self._botConfig.SetMessage([result])
-            Log.info(f"final CalAnswer findNum: {findCount}")
+            Log.info(f"final CalAnswer findNum: {findCount},ans: {result}")
             if self._lastTime and not self.TheTimeTheSameDay(self._lastTime, qu._time):
                 return result
 
