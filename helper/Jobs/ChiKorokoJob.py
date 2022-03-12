@@ -42,7 +42,7 @@ class ChiKorokoJob(WebBaseJob):
                 web.openGameUrl("https://expo.chikoroko.art/")
                 time.sleep(5)
                 self.ReportJobVal(val="准备点击")
-                btnEl = web.find_element_loop(By.XPATH, web._browser, "//span[@class='mobile-toy-info']/button")
+                btnEl = web.find_element_loop(By.XPATH, web._browser, "//span[contains(text(), 'Collect now')]")
                 if btnEl:
                     web.element_click(btnEl)
                     self._count += 1
