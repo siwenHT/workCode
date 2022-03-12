@@ -29,6 +29,7 @@ class StepnBotJob(BaseJob):
     def DoJob(self):
         try:
             #拉取问题， 计算答案
+            self._autoAns.ResetData()
             self._autoAns.GetTimeLocation()
             self._autoAns.GetQuestionContent()
 

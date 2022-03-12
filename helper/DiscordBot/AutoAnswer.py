@@ -173,6 +173,7 @@ class AutoAnswer(object):
         self._questionNum = 4
         self._localtionTime = None
         self._nextPullTime = 6
+        self._curQuestion = []
         self._channelCfg = os.path.join(Win.GetWorkPath(), "Res/BotConfig/stepn-answer.json")
         self._historyFile = os.path.join(Win.GetWorkPath(), "Res/log/stepn-history.json")
         self._contentFile = os.path.join(Win.GetWorkPath(), "Res/log/content.txt")
@@ -190,6 +191,9 @@ class AutoAnswer(object):
         info = Tool.initJsonFromFileEx(self._historyFile)
         self._lastTime = info.get('lastTime', 0)
         self._recodeList = info.get('history', {})
+
+    def ResetData(self):
+        self._curQuestion = []
 
     def RepaireQ(self):
         jsonData = Tool.initJsonFromFileEx(self._contentFile)
@@ -239,6 +243,7 @@ class AutoAnswer(object):
                 return
 
     def GetQuestions(self, jsonData, isRepaire=False):
+        oldQuestion = self._curQuestion or []
         questions = []
 
         checkFirstOk = False
@@ -270,7 +275,11 @@ class AutoAnswer(object):
 
         questions.sort(key=takeSecond)
         Log.info(f"final question:{len(questions)}")
-        self._curQuestion = questions
+        if len(questions) > len(oldQuestion):
+            self._curQuestion = questions
+
+            strCon = json.dumps(jsonData)
+            Tool.WriteFile(self._contentFile + ".bk", strCon)
 
     def GetAnswer(self, jsonData, isRepaire=False):
         rightId = None
@@ -315,7 +324,7 @@ class AutoAnswer(object):
         newNum = len(self._recodeList)
         val = json.dumps(val)
         Tool.WriteFile(self._historyFile, val)
-        Log.info(f"recode {oldNum} => {newNum}")
+        Log.info(f"recode change: {oldNum} => {newNum}")
 
     def CalAnswer(self):
         if not self._curQuestion:
