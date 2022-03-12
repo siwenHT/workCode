@@ -47,7 +47,6 @@ class Question(object):
     def ParseMsg(self, msg):
         self._question = msg.get('title').strip()
 
-        self.IsCalNum(self._question)
         fields = msg.get('fields')
         for oneAns in fields:
             name = oneAns.get("name")
@@ -60,6 +59,7 @@ class Question(object):
                 self._chooses.append(ans)
             else:
                 Log.error(f"name ani error")
+        self.IsCalNum(self._question)
 
         def takeSecond(elem):
             return elem['idx']
@@ -77,7 +77,7 @@ class Question(object):
         if ret:
             self._calRet = eval(ret.group(1))
             self.GetFlg(self._calRet)
-            Log.debug(f"question:{self._question} = {self._calRet}")
+            Log.debug(f"question:{self._question} = {self._calRet}  {self._answer}")
 
     def GetFlg(self, ans):
         self._calRet = ans
