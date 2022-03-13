@@ -48,15 +48,16 @@ class JobManager():
         self.jobNames["DiscordJob"] = DiscordJob
         self.jobNames["CandyRewardJob"] = CandyRewardJob
         self.jobNames["RefreshTimeLabel"] = RefreshTimeLabel
-        self.jobNames["MetaMaskJob"] = MetaMaskJob
-        self.jobNames["MetauceBotJob"] = MetauceBotJob
-        self.jobNames["MetauceHelperJob"] = MetauceHelperJob
         self.jobNames["TwitterFellowJob"] = TwitterFellowJob
         self.jobNames["GmToChannelJob"] = GmToChannelJob
-        self.jobNames["OneBtnPushJob"] = OneBtnPushJob
         self.jobNames["ChiKorokoJob"] = ChiKorokoJob
         self.jobNames["StepnBotJob"] = StepnBotJob
         self.jobNames["TwitterAutoFollowBackJob"] = TwitterAutoFollowBackJob
+
+        self.jobNames["OneBtnPushJob"] = OneBtnPushJob
+        self.jobNames["MetaMaskJob"] = MetaMaskJob
+        self.jobNames["MetauceBotJob"] = MetauceBotJob
+        self.jobNames["MetauceHelperJob"] = MetauceHelperJob
 
     '''加载任务参数'''
 

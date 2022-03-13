@@ -1,13 +1,12 @@
 {
     "initJobs": [
-        "MetaMaskJob",
         "CandyRewardJob",
         "DiscordJob",
         "TwitterFellowJob",
         "GmToChannelJob",
         "TwitterAutoFollowBackJob",
-        "ChiKorokoJob",
-        "StepnBotJob"
+        "StepnBotJob",
+        "ChiKorokoJob"
     ],
     "DiscordJob": {
         "trigger": "interval",
