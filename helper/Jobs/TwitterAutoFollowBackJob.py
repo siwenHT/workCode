@@ -32,17 +32,21 @@ class TwitterAutoFollowBackJob(WebBaseJob):
     def DoJob(self, *args, **kwargs):
         try:
             self.runCount += 1
-            followKey = "//div[@class='css-1dbjc4n']/div/div/div/div/div/div/div/div/div/div[starts-with(@aria-label,'Follow ')]"
+            followKey = "//span[text() = 'Follow']"
+            key = ".css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1bro5k0.r-1udh08x"
             self._web.openGameUrl()
             while True:
                 self.CheckStop()
+                whoCanFollow = self._web.find_element(By.CSS_SELECTOR, self._web._browser, key)
+                if whoCanFollow:
+                    self._web.element_hide(whoCanFollow)
+
                 followEl = self._web.find_element_loop(By.XPATH, self._web._browser, followKey)
                 if followEl:
                     self._web.element_click(followEl)
                     self.count += 1
                     self.ReportJobVal(val=f'点击了关注 {self.count}')
                     time.sleep(1)
-                    self._web.closeBrowser()
                 else:
                     self.ReportJobVal(val=f'未发现关注者 {self.runCount}')
                     self._web.closeBrowser()
