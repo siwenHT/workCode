@@ -39,6 +39,7 @@ class StepnBotJob(BaseJob):
             #等待3分钟拉取最近的记录, 解析答案
             time.sleep(60 * 4)
             self._autoAns.GetAnswerContent()
+            self.count += 1
             self.ReportJobVal(val=f"任务完成 {self.count}")
         except Exception as ex:
             Log.exception(f"StepnBotJob error")

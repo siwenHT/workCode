@@ -45,6 +45,10 @@ class ChiKorokoJob(WebBaseJob):
                 btnEl = web.find_element_loop(By.XPATH, web._browser, "//span[contains(text(), 'Collect now')]")
                 if btnEl:
                     web.element_click(btnEl)
+                    newBtnel = web.find_element_loop(By.XPATH, web._browser, "//button")
+                    if newBtnel:
+                        web.element_click(btnEl)
+
                     self._count += 1
                     self.ReportJobVal(val=f"领奖OK了 :{self._count}")
                     GEmail.SendText("领取到一个NFT, 请注意查收")
