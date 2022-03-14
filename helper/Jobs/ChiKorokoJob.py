@@ -58,6 +58,8 @@ class ChiKorokoJob(WebBaseJob):
                     self.ReportJobVal(val=f"有新的领奖 :{self._count}")
                     GEmail.SendText("有新的领奖, 请注意前往领取")
                     time.sleep(3)
+                    web.closeBrowser()
+                    return
                 else:
                     collectedKey = "//span[contains(text(), 'Collected')]"
                     if web.find_element(By.XPATH, web._browser, collectedKey):
