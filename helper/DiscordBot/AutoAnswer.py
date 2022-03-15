@@ -170,7 +170,7 @@ class MsgInfo(object):
 class AutoAnswer(object):
 
     def __init__(self):
-        self._myId = '932451832163336222'
+        self._myId = '897884992129105920'
         self._questionNum = 4
         self._localtionTime = None
         self._nextPullTime = 6
