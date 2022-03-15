@@ -6,6 +6,7 @@
         "GmToChannelJob",
         "TwitterAutoFollowBackJob",
         "StepnBotJob",
+        "StepnBotDailyJob",
         "ChiKorokoJob"
     ],
     "DiscordJob": {
@@ -67,6 +68,13 @@
         "hour": "0-23",
         "minutes": "0",
         "seconds": 32,
+        "max_instances": 1
+    },
+    "StepnBotJobDaily": {
+        "trigger": "cron",
+        "hour": "0-23",
+        "minutes": "0",
+        "seconds": 3,
         "max_instances": 1
     },
     "ChiKorokoJob222": {

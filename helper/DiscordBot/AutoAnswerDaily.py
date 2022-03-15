@@ -15,6 +15,8 @@ import json
 from json import tool
 import os, time, datetime, re
 from random import randint, random
+
+import pytz
 from DiscordBot.BotMsgSend import BotMsgSend
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
@@ -27,18 +29,19 @@ from Until.WinSysytem import Win
 from DiscordBot.MsgAndQuestions import MsgInfo, Question
 
 
-class AutoAnswer(object):
+class AutoAnswerDaily(object):
 
     def __init__(self):
         self._myId = '897884992129105920'
-        self._questionNum = 4
+        self._questionNum = 10
         self._localtionTime = None
         self._nextPullTime = 6
         self._curQuestion = []
-        self._channelCfg = os.path.join(Win.GetWorkPath(), "Res/BotConfig/stepn-answer.json")
+        self._curAnswer = []
+        self._channelCfg = os.path.join(Win.GetWorkPath(), "Res/BotConfig/stepn-answer-daily.json")
         self._historyFile = os.path.join(Win.GetWorkPath(), "Res/log/stepn-history.json")
-        self._contentFile = os.path.join(Win.GetWorkPath(), "Res/log/content.txt")
-        self._answerFile = os.path.join(Win.GetWorkPath(), "Res/log/answer.txt")
+        self._contentFile = os.path.join(Win.GetWorkPath(), "Res/log/content_daily.txt")
+        self._answerFile = os.path.join(Win.GetWorkPath(), "Res/log/answer_daily.txt")
 
         self.InitCfg()
         self.MsgRegeist()
@@ -55,17 +58,18 @@ class AutoAnswer(object):
 
     def ResetData(self):
         self._curQuestion = []
+        self._curAnswer = []
 
-    def RepaireQ(self):
-        jsonData = Tool.initJsonFromFileEx(self._contentFile)
-        self.GetQuestions(jsonData, True)
-        self.CalAnswer()
+    # def RepaireQ(self):
+    #     jsonData = Tool.initJsonFromFileEx(self._contentFile)
+    #     self.GetQuestions(jsonData, True)
+    #     self.CalAnswer()
 
-    def RepaireA(self):
-        jsonData = Tool.initJsonFromFileEx(self._answerFile)
-        ans = self.GetAnswer(jsonData, True)
-        if ans:
-            self.PrepareRecord(ans)
+    # def RepaireA(self):
+    #     jsonData = Tool.initJsonFromFileEx(self._answerFile)
+    #     ans = self.GetAnswer(jsonData, True)
+    #     if ans:
+    #         self.PrepareRecord(ans)
 
     def GetAndFilterData(self, recFile, limit=50):
         bCon = self._pullBot.GetRemoteMessage(limit)
@@ -91,15 +95,19 @@ class AutoAnswer(object):
     def GetAnswerContent(self):
         count = 0
         while True:
-            JsonList = self.GetAndFilterData(self._answerFile, 80)
+            JsonList = self.GetAndFilterData(self._answerFile + str(count) + ".bk", 10)
             ans = self.GetAnswer(JsonList)
 
-            if count > 20:
+            if count > 30:
                 break
             elif not ans:
-                time.sleep(10)
+                if len(self._curAnswer) < 20:
+                    time.sleep(0.8)
+                else:
+                    time.sleep(30)
                 count += 1
             else:
+                time.sleep(5 * 60)
                 self.PrepareRecord(ans)
                 return
 
@@ -117,9 +125,9 @@ class AutoAnswer(object):
                     self._localtionTime = datetime.datetime.fromtimestamp(firstMsgTime).replace(minute=0, second=0, microsecond=0).timestamp()
 
                 if not tmp.MsgEnable(self._localtionTime):
-                    self._nextPullTime = 30
+                    self._nextPullTime = 15
                 elif tmp._startSecond:
-                    beginTime = tmp._time + tmp._startSecond + 3
+                    beginTime = tmp._time + tmp._startSecond + 2
                     self._nextPullTime = beginTime - datetime.datetime.utcnow().timestamp()
 
             if not tmp.MsgEnable(self._localtionTime):
@@ -140,14 +148,15 @@ class AutoAnswer(object):
             self._curQuestion = questions
 
             strCon = json.dumps(jsonData)
-            Tool.WriteFile(self._contentFile + ".bk", strCon)
+            Tool.WriteFile(self._contentFile + "daily.bk", strCon)
 
     def GetAnswer(self, jsonData, isRepaire=False):
         rightId = None
         checkFirstOk = False
+        # 先将所有的答案都存一下，因为答案会被删除掉
         for msg in jsonData:
             tmp = MsgInfo(msg)
-            if not checkFirstOk:
+            if not checkFirstOk and not self._localtionTime:
                 checkFirstOk = True
                 if isRepaire:
                     firstMsgTime = tmp._time
@@ -158,19 +167,35 @@ class AutoAnswer(object):
 
             if tmp._authorId == self._myId:
                 if self._sendAnswerTime:
-                    Log.info(f" server revire my answer time cost: {tmp._time - self._curQuestion[0]._time}")
+                    Log.info(f" server revire my answer time cost: {tmp._time - self._sendAnswerTime}")
 
             if not rightId and tmp.IsBotAnswer():
                 rightId = tmp._answerRightRoleId
-            elif rightId and tmp._authorId == rightId:
-                if self.TheTimeTheSameDay(tmp._time, self._curQuestion[0]._time):
+
+            self._curAnswer.append(tmp)
+
+        #如果bot标记了中奖者,在所有答案中查找中奖者的发言。可能会找不到
+        if rightId:
+            try:
+                ret = ''
+                for msg in self._curAnswer:
+                    ret = ret + str(msg)
+                Tool.WriteFile(self._answerFile + '.allbk', ret)
+            except Exception as ex:
+                pass
+
+            for msg in self._curAnswer:
+                if not tmp.MsgEnable(self._localtionTime):
+                    continue
+
+                if rightId == tmp._authorId:
                     if rightId == self._myId:
-                        self._lastTime = self._localtionTime
-                        GEmail.SendMsg('答题成功了', "stepn答题赢了 记得去填表")
+                        GEmail.SendMsg("SETPN 答题领NFT 赢了", "一定要记得填表")
 
                     ans = tmp._content.strip()
                     Log.info(f"final ans:{ans},role costTime:{tmp._time - self._curQuestion[0]._time}")
                     return ans
+
         Log.error(f"not find the right ans")
 
     def PrepareRecord(self, ans):
@@ -196,7 +221,7 @@ class AutoAnswer(object):
         if not self._curQuestion:
             return
 
-        result = ['C', 'C', 'C', 'C']
+        result = ['C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C']
         findCount = 0
         count = 0
         for qu in self._curQuestion:
@@ -225,7 +250,7 @@ class AutoAnswer(object):
 
             time.sleep(10)
             self._sendAnswerTime = curTime
-            BotMsgSend(self._botConfig).send()
+            # BotMsgSend(self._botConfig).send()
             return result
 
         return ''
@@ -238,6 +263,17 @@ class AutoAnswer(object):
         t1_str = time.strftime("%Y-%m-%d", time.localtime(times1))
         t2_str = time.strftime("%Y-%m-%d", time.localtime(times2))
         return t1_str == t2_str
+
+    def Enable(self):
+        tz = pytz.timezone('Australia/Sydney')
+        syDneyTime = datetime.datetime.now(tz)
+        weekDay = syDneyTime.weekday()
+        cfg = {'0': 3, '1': 6, '2': 9, '3': 12, '4': 15, '5': 18, "6": 21}
+        hour = cfg[str(weekDay)]
+        if syDneyTime.hour == hour:
+            return True
+
+        return False
 
     def MsgRegeist(self):
 

@@ -34,20 +34,23 @@ class Email(object):
         self.sender = Win.MailSender()
         self.receivers = Win.MailReceivers()
 
-    def SendText(self, content):
+    def SendMsg(self, title, content):
+        self.SendText(content, title)
+
+    def SendText(self, content, title='title'):
         randomVal = ""
         for i in range(randint(10, 20)):
             randomVal = randomVal + str(randint(0, 9))
 
         content = f"{Tool.showTime()}  {content} ... {randomVal}  ,邮件上限:{self.emailCount}"
         message = MIMEText(content, 'plain', 'utf-8')
-        message['Subject'] = 'title'
+        message['Subject'] = title
         message['From'] = self.sender
         message['To'] = self.receivers[0]
 
-        self.SendMsg(message)
+        self.Send(message)
 
-    def SendMsg(self, msg):
+    def Send(self, msg):
 
         if self.emailCount > 50:
             Log.error("邮件达到上限了")

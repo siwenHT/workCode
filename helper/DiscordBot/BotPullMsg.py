@@ -23,7 +23,7 @@ class BotPullMsg(object):
     def __init__(self, botConfig: BotConfig):
         self._botConfig = botConfig
         self._getTime = 0
-        self._invTime = 1
+        self._invTime = 0.5
 
     def Header(self):
         headers = {}

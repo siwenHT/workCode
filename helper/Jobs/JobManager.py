@@ -15,6 +15,7 @@ from xmlrpc.client import boolean
 from Jobs.BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
+from Jobs.StepnBotDailyJob import StepnBotDailyJob
 from Until.Scheduler import TheScheduler
 from Until.WinSysytem import Win
 from Until import ToolsFunc as TOOL
@@ -52,6 +53,7 @@ class JobManager():
         self.jobNames["GmToChannelJob"] = GmToChannelJob
         self.jobNames["ChiKorokoJob"] = ChiKorokoJob
         self.jobNames["StepnBotJob"] = StepnBotJob
+        self.jobNames["StepnBotDailyJob"] = StepnBotDailyJob
         self.jobNames["TwitterAutoFollowBackJob"] = TwitterAutoFollowBackJob
 
         self.jobNames["OneBtnPushJob"] = OneBtnPushJob
