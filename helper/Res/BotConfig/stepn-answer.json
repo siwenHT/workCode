@@ -2,6 +2,7 @@
   "discord_name": "stepn-answer",
   "discord_link": "https://discord.com/channels/890163015561932840/920485946686844958",
   "channel_id": "920485946686844958",
+  "tempChannel_id": "898746543652343822",
   "time_interval": 0.8,
   "errorTimes": 10000000,
   "mes": []

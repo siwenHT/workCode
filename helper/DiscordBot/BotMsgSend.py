@@ -41,7 +41,7 @@ class BotMsgSend():
 
             header = self.ParaseHead()
             showName = self._botConfig.ShowName()
-            channel = self._botConfig.NextChannelID() or self._botConfig.ChannelID()
+            channel = self._botConfig.GetTmpChannelID() or self._botConfig.NextChannelID() or self._botConfig.ChannelID()
             httpIp = Win.HttpIp()
             httpPort = Win.HttpPort()
             conn = HTTPSConnection(httpIp, int(httpPort))

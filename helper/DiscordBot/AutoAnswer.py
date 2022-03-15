@@ -296,6 +296,10 @@ class AutoAnswer(object):
             if not tmp.MsgEnable(self._localtionTime):
                 continue
 
+            if tmp._authorId == self._myId:
+                if self._sendAnswerTime:
+                    Log.info(f" server revire my answer time cost: {tmp._time - self._sendAnswerTime}")
+
             if not rightId and tmp.IsBotAnswer():
                 rightId = tmp._answerRightRoleId
             elif rightId and tmp._authorId == rightId:
@@ -353,11 +357,14 @@ class AutoAnswer(object):
                 result = result.lower()
 
             self._botConfig.SetMessage([result])
-            Log.info(f"final CalAnswer findNum: {findCount},ans: {result}")
-            if self._lastTime and not self.TheTimeTheSameDay(self._lastTime, qu._time):
+            curTime = datetime.datetime.utcnow().timestamp()
+            Log.info(f"final CalAnswer findNum: {findCount},ans: {result}, time: {curTime - self._curQuestion[0]._time}")
+            if self._lastTime:
                 return result
 
-            # BotMsgSend(self._botConfig).send()
+            time.sleep(10)
+            self._sendAnswerTime = curTime
+            BotMsgSend(self._botConfig).send()
             return result
 
         return ''

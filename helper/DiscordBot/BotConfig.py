@@ -65,6 +65,9 @@ class BotConfig():
         else:
             return None
 
+    def GetTmpChannelID(self):
+        return self._config.get("tempChannel_id")
+
     def StepNextChannel(self):
         self._idx += 1
         if self.ChannelIDs() and self._idx >= len(self.ChannelIDs()):
