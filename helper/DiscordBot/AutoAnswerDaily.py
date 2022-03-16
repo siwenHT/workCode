@@ -38,6 +38,7 @@ class AutoAnswerDaily(object):
         self._nextPullTime = 6
         self._curQuestion = []
         self._curAnswer = []
+        self._sendAnswerTime = False
         self._channelCfg = os.path.join(Win.GetWorkPath(), "Res/BotConfig/stepn-answer-daily.json")
         self._historyFile = os.path.join(Win.GetWorkPath(), "Res/log/stepn-history.json")
         self._contentFile = os.path.join(Win.GetWorkPath(), "Res/log/content_daily.txt")
@@ -250,7 +251,9 @@ class AutoAnswerDaily(object):
 
             time.sleep(10)
             self._sendAnswerTime = curTime
-            # BotMsgSend(self._botConfig).send()
+            if self._sendDiscordOpen:
+                # BotMsgSend(self._botConfig).send()
+                pass
             return result
 
         return ''

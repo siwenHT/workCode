@@ -35,6 +35,7 @@ class AutoAnswer(object):
         self._localtionTime = None
         self._nextPullTime = 6
         self._curQuestion = []
+        self._sendDiscordOpen = False
         self._channelCfg = os.path.join(Win.GetWorkPath(), "Res/BotConfig/stepn-answer.json")
         self._historyFile = os.path.join(Win.GetWorkPath(), "Res/log/stepn-history.json")
         self._contentFile = os.path.join(Win.GetWorkPath(), "Res/log/content.txt")
@@ -225,7 +226,8 @@ class AutoAnswer(object):
 
             time.sleep(10)
             self._sendAnswerTime = curTime
-            BotMsgSend(self._botConfig).send()
+            if self._sendDiscordOpen:
+                BotMsgSend(self._botConfig).send()
             return result
 
         return ''

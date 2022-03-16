@@ -30,8 +30,11 @@ class StepnBotDailyJob(BaseJob):
         try:
             #拉取问题， 计算答案
             if not self._autoAns.Enable():
+                self.ReportJobVal(val=f"时间校验未通过")
                 return
 
+            self.ReportJobVal(val=f"开始计算答案")
+            self._autoAns._sendDiscordOpen = True
             self._autoAns.ResetData()
             self._autoAns.InitHistory()
             self._autoAns.GetTimeLocation()
@@ -41,6 +44,7 @@ class StepnBotDailyJob(BaseJob):
             self._autoAns.GetAnswerContent()
             self.count += 1
             self.ReportJobVal(val=f"任务完成 {self.count}")
+            self._autoAns._sendDiscordOpen = False
         except Exception as ex:
             Log.exception(f"StepnBotDailyJob error")
             return

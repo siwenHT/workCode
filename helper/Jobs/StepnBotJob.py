@@ -29,6 +29,7 @@ class StepnBotJob(BaseJob):
     def DoJob(self):
         try:
             #拉取问题， 计算答案
+            self._autoAns._sendDiscordOpen = True
             self._autoAns.ResetData()
             self._autoAns.GetTimeLocation()
             self._autoAns.GetQuestionContent()
@@ -41,6 +42,7 @@ class StepnBotJob(BaseJob):
             self._autoAns.GetAnswerContent()
             self.count += 1
             self.ReportJobVal(val=f"任务完成 {self.count}")
+            self._autoAns._sendDiscordOpen = False
         except Exception as ex:
             Log.exception(f"StepnBotJob error")
             return
