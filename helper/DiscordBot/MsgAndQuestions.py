@@ -102,11 +102,23 @@ class MsgInfo(object):
         self._msgId = ""
         self._time = 0
         self._userName = ''
-        self._ogreData = msg
+        self._timestamp = msg.get("timestamp")
         self.ParseMsg(msg)
 
-    def __str__(self):
-        return str(self._ogreData)
+    def getRecode(self):
+
+        author = {}
+        author["id"] = self._authorId
+        author['username'] = self._userName
+        author['bot'] = self._isBot
+
+        ret = {}
+        ret["id"] = self._msgId
+        ret["content"] = self._content
+        ret["author"] = author
+        ret["timestamp"] = self._timestamp
+
+        return ret
 
     def ParseMsg(self, msg):
         author = msg.get('author')

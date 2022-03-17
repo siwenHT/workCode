@@ -32,17 +32,18 @@ from DiscordBot.MsgAndQuestions import MsgInfo, Question
 class AutoAnswerDaily(object):
 
     def __init__(self):
+        self._className = 'AutoAnswerDaily'
         self._myId = '897884992129105920'
         self._questionNum = 10
         self._localtionTime = None
         self._nextPullTime = 6
         self._curQuestion = []
-        self._curAnswer = []
+        self._curAnswer = {}
         self._sendAnswerTime = False
         self._channelCfg = os.path.join(Win.GetWorkPath(), "Res/BotConfig/stepn-answer-daily.json")
-        self._historyFile = os.path.join(Win.GetWorkPath(), "Res/log/stepn-history.json")
-        self._contentFile = os.path.join(Win.GetWorkPath(), "Res/log/content_daily.txt")
-        self._answerFile = os.path.join(Win.GetWorkPath(), "Res/log/answer_daily.txt")
+        self._historyFile = os.path.join(Win.GetWorkPath(), "Res/anwser/stepn-history.json")
+        self._contentFile = os.path.join(Win.GetWorkPath(), "Res/anwser/content_daily.txt")
+        self._answerFile = os.path.join(Win.GetWorkPath(), "Res/anwser/answer_daily.txt")
 
         self.InitCfg()
         self.MsgRegeist()
@@ -59,18 +60,18 @@ class AutoAnswerDaily(object):
 
     def ResetData(self):
         self._curQuestion = []
-        self._curAnswer = []
+        self._curAnswer = {}
 
     # def RepaireQ(self):
     #     jsonData = Tool.initJsonFromFileEx(self._contentFile)
     #     self.GetQuestions(jsonData, True)
     #     self.CalAnswer()
 
-    # def RepaireA(self):
-    #     jsonData = Tool.initJsonFromFileEx(self._answerFile)
-    #     ans = self.GetAnswer(jsonData, True)
-    #     if ans:
-    #         self.PrepareRecord(ans)
+    def RepaireA(self):
+        jsonData = Tool.initJsonFromFileEx(self._answerFile + ".allbk")
+        ans = self.GetAnswer(jsonData, True)
+        if ans and ans != 'Over':
+            self.PrepareRecord(ans)
 
     def GetAndFilterData(self, recFile, limit=50):
         bCon = self._pullBot.GetRemoteMessage(limit)
@@ -128,7 +129,7 @@ class AutoAnswerDaily(object):
                 if not tmp.MsgEnable(self._localtionTime):
                     self._nextPullTime = 15
                 elif tmp._startSecond:
-                    beginTime = tmp._time + tmp._startSecond + 2
+                    beginTime = tmp._time + tmp._startSecond + 4
                     self._nextPullTime = beginTime - datetime.datetime.utcnow().timestamp()
 
             if not tmp.MsgEnable(self._localtionTime):
@@ -136,6 +137,7 @@ class AutoAnswerDaily(object):
 
             if tmp._isBot and tmp.IsQuestion():
                 questions.append(tmp._myQuestion)
+                self._nextPullTime = 0.8
 
             if len(questions) == self._questionNum:
                 break
@@ -144,7 +146,7 @@ class AutoAnswerDaily(object):
             return elem._time
 
         questions.sort(key=takeSecond)
-        Log.info(f"final question:{len(questions)}")
+        Log.info(f"{self._className} final question:{len(questions)}")
         if len(questions) > len(oldQuestion):
             self._curQuestion = questions
 
@@ -168,20 +170,21 @@ class AutoAnswerDaily(object):
 
             if tmp._authorId == self._myId:
                 if self._sendAnswerTime:
-                    Log.info(f" server revire my answer time cost: {tmp._time - self._sendAnswerTime}")
+                    Log.info(f"{self._className} server revire my answer time cost: {tmp._time - self._curQuestion[0]._time}")
 
             if not rightId and tmp.IsBotAnswer():
                 rightId = tmp._answerRightRoleId
 
-            self._curAnswer.append(tmp)
+            if not tmp._isBot:
+                self._curAnswer[tmp._msgId] = tmp
 
         #如果bot标记了中奖者,在所有答案中查找中奖者的发言。可能会找不到
         if rightId:
             try:
-                ret = ''
-                for msg in self._curAnswer:
-                    ret = ret + str(msg)
-                Tool.WriteFile(self._answerFile + '.allbk', ret)
+                ret = []
+                for msg in self._curAnswer.values():
+                    ret.append(msg.getRecode())
+                Tool.WriteFile(self._answerFile + '.allbk', json.dumps(ret))
             except Exception as ex:
                 pass
 
@@ -194,13 +197,14 @@ class AutoAnswerDaily(object):
                         GEmail.SendMsg("SETPN 答题领NFT 赢了", "一定要记得填表")
 
                     ans = tmp._content.strip()
-                    Log.info(f"final ans:{ans},role costTime:{tmp._time - self._curQuestion[0]._time}")
+                    Log.info(f"{self._className} final ans:{ans},role costTime:{tmp._time - self._curQuestion[0]._time}")
                     return ans
+            return 'Over'
 
         Log.error(f"not find the right ans")
 
     def PrepareRecord(self, ans):
-        if not self._curQuestion:
+        if not self._curQuestion or ans == 'Over':
             return
 
         oldNum = len(self._recodeList)

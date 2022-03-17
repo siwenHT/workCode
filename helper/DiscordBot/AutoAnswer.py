@@ -37,9 +37,9 @@ class AutoAnswer(object):
         self._curQuestion = []
         self._sendDiscordOpen = False
         self._channelCfg = os.path.join(Win.GetWorkPath(), "Res/BotConfig/stepn-answer.json")
-        self._historyFile = os.path.join(Win.GetWorkPath(), "Res/log/stepn-history.json")
-        self._contentFile = os.path.join(Win.GetWorkPath(), "Res/log/content.txt")
-        self._answerFile = os.path.join(Win.GetWorkPath(), "Res/log/answer.txt")
+        self._historyFile = os.path.join(Win.GetWorkPath(), "Res/anwser/stepn-history.json")
+        self._contentFile = os.path.join(Win.GetWorkPath(), "Res/anwser/content.txt")
+        self._answerFile = os.path.join(Win.GetWorkPath(), "Res/anwser/answer.txt")
 
         self.InitCfg()
         self.MsgRegeist()
