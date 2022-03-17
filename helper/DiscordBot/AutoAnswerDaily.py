@@ -17,6 +17,7 @@ import os, time, datetime, re
 from random import randint, random
 
 import pytz
+from DiscordBot.AutoAnswer import AutoAnswer
 from DiscordBot.BotMsgSend import BotMsgSend
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
@@ -29,9 +30,10 @@ from Until.WinSysytem import Win
 from DiscordBot.MsgAndQuestions import MsgInfo, Question
 
 
-class AutoAnswerDaily(object):
+class AutoAnswerDaily(AutoAnswer):
 
     def __init__(self):
+        self._getIt = False
         self._className = 'AutoAnswerDaily'
         self._myId = '897884992129105920'
         self._questionNum = 10
@@ -247,15 +249,17 @@ class AutoAnswerDaily(object):
             if randint(1, 10) < 6:
                 result = result.lower()
 
-            self._botConfig.SetMessage([result])
             curTime = datetime.datetime.utcnow().timestamp()
             Log.info(f"final CalAnswer findNum: {findCount},ans: {result}, time: {curTime - self._curQuestion[0]._time}")
-            if self._lastTime:
-                return result
 
-            time.sleep(10)
+            ans = self.SendSwitch(result)
+            if not ans or ans == '':
+                return
+
+            time.sleep(randint(15, 20))
             self._sendAnswerTime = curTime
             if self._sendDiscordOpen:
+                self._botConfig.SetMessage([ans])
                 # BotMsgSend(self._botConfig).send()
                 pass
             return result
@@ -281,6 +285,22 @@ class AutoAnswerDaily(object):
             return True
 
         return False
+
+    def SendSwitch(self, ans):
+        if self._getIt:
+            return ans
+
+        return self.RandomAns(ans)
+
+    def RandomAns(self, ans):
+        cfg = ['A', "b", "C", 'd']
+        num = len(ans)
+
+        ret = ''
+        for i in range(num):
+            ret = ret + cfg[randint(0, 3)]
+
+        return ret
 
     def MsgRegeist(self):
 

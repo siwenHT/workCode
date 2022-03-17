@@ -14,7 +14,7 @@ from distutils.util import strtobool
 import json
 from json import tool
 import os, time, datetime, re
-from random import randint, random
+from random import Random, randint, random
 from DiscordBot.BotMsgSend import BotMsgSend
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
@@ -30,6 +30,7 @@ from DiscordBot.MsgAndQuestions import MsgInfo, Question
 class AutoAnswer(object):
 
     def __init__(self):
+        self._getIt = False
         self._myId = '897884992129105920'
         self._questionNum = 4
         self._localtionTime = None
@@ -218,19 +219,18 @@ class AutoAnswer(object):
             if randint(1, 10) < 6:
                 result = result.lower()
 
-            self._botConfig.SetMessage([result])
             curTime = datetime.datetime.utcnow().timestamp()
             Log.info(f"final CalAnswer findNum: {findCount},ans: {result}, time: {curTime - self._curQuestion[0]._time}")
-            if self._lastTime:
-                return result
+
+            ans = self.SendSwitch(result)
+            if not ans or ans == '':
+                return
 
             time.sleep(randint(8, 10))
             self._sendAnswerTime = curTime
             if self._sendDiscordOpen:
+                self._botConfig.SetMessage([ans])
                 BotMsgSend(self._botConfig).send()
-            return result
-
-        return ''
 
     # 获取时间基准.时间要在这个时间之后才进入分析范围
     def GetTimeLocation(self):
@@ -240,6 +240,42 @@ class AutoAnswer(object):
         t1_str = time.strftime("%Y-%m-%d", time.localtime(times1))
         t2_str = time.strftime("%Y-%m-%d", time.localtime(times2))
         return t1_str == t2_str
+
+    def SendSwitch(self, ans):
+        if self._lastTime:
+            return ''
+
+        if self._getIt:
+            return ans
+
+        if not self.RightTime() or not self.RandomSend():
+            return ''
+
+        return self.RandomAns(ans)
+
+    def RightTime(self):
+        localTime = datetime.datetime.now()
+        if localTime.hour > 8 and localTime < 23:
+            return True
+
+    def RandomSend(self):
+        num = randint(1, 10)
+        if num < 4:
+            return True
+
+    def RandomAns(self, ans):
+        num = randint(1, 10)
+        if num < 7:
+            return ans
+        else:
+            cfg = ['A', "b", "C", 'd']
+            num = len(ans)
+
+            ret = ''
+            for i in range(num):
+                ret = ret + cfg[randint(0, 3)]
+
+            return ret
 
     def MsgRegeist(self):
 
