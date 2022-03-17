@@ -226,7 +226,10 @@ class AutoAnswer(object):
             if not ans or ans == '':
                 return
 
-            time.sleep(randint(8, 10))
+            if self._getIt:
+                time.sleep(4)
+            else:
+                time.sleep(randint(8, 10))
             self._sendAnswerTime = curTime
             if self._sendDiscordOpen:
                 self._botConfig.SetMessage([ans])
