@@ -224,7 +224,7 @@ class AutoAnswer(object):
             if self._lastTime:
                 return result
 
-            time.sleep(10)
+            time.sleep(randint(8, 10))
             self._sendAnswerTime = curTime
             if self._sendDiscordOpen:
                 BotMsgSend(self._botConfig).send()
