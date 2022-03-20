@@ -24,6 +24,8 @@ from selenium.common.exceptions import WebDriverException
 from selenium.common import exceptions
 from selenium.common.exceptions import NoSuchWindowException
 
+from Web.Browser import Browser
+
 
 class OpenUrl:
 
@@ -62,23 +64,6 @@ class OpenUrl:
         except Exception as ex:
             pass
 
-    '''打开新标签'''
-
-    def open_new_tab(self, browser: webdriver):
-        oldHandles = browser.window_handles
-
-        browser.execute_script("window.open('');")
-        newhandles = browser.window_handles
-
-        for newOne in newhandles:
-            if newOne not in oldHandles:
-                self._handler = newOne
-                break
-
-        if not self._handler:
-            self._handler = newhandles[0]
-        browser.switch_to.window(self._handler)
-
     '''刷新网页'''
 
     def refreshPage(self):
@@ -98,42 +83,6 @@ class OpenUrl:
             raise RuntimeError(f'{self._jobName} window is lost')
         except Exception as ex:
             raise RuntimeError(f"{self._jobName} Back error")
-
-    def get_debug_chrome_opetions(self):
-        options = webdriver.ChromeOptions()
-        options.add_experimental_option("debuggerAddress", "127.0.0.1:9527")
-        options.add_argument('blink-settings=imagesEnabled=false')  # 不加载图片, 提升速度
-        options.add_argument('--headless')
-        return options
-
-    def get_chrome_options(self):
-        options = webdriver.ChromeOptions()
-        prefs = {}
-
-        # 设置这两个参数就可以避免密码提示框的弹出
-        prefs["credentials_enable_service"] = False
-        prefs["profile.password_manager_enabled"] = False
-
-        options.add_experimental_option("prefs", prefs)
-        options.add_experimental_option("excludeSwitches", ['disable-automation'])
-        options.add_experimental_option('excludeSwitches', ['enable-logging'])
-
-        options.add_argument('--enable-background-networking')
-        options.add_argument('--disable-infobars')  # 禁止策略化
-        options.add_argument('--no-sandbox')  # 解决DevToolsActivePort文件不存在的报错
-        options.add_argument('window-size=1920x3000')  # 指定浏览器分辨率
-        options.add_argument('--disable-gpu')  # 谷歌文档提到需要加上这个属性来规避bug
-        # options.add_argument('--incognito') # 隐身模式（无痕模式）
-        # options.add_argument('--disable-javascript') # 禁用javascript
-        options.add_argument('--start-maximized')  # 最大化运行（全屏窗口）,不设置，取元素会报错
-        options.add_argument('--disable-infobars')  # 禁用浏览器正在被自动化程序控制的提示
-        options.add_argument('--hide-scrollbars')  # 隐藏滚动条, 应对一些特殊页面
-        options.add_argument('blink-settings=imagesEnabled=false')  # 不加载图片, 提升速度
-        # options.add_argument('--headless') # 浏览器不提供可视化页面. linux下如果系统不支持可视化不加这条会启动失败
-        options.binary_location = r"C:\Program Files\Google\Chrome\Application\chrome.exe"  # 手动指定使用的浏览器位置
-        options.add_argument("--user-data-dir=" + r"C:\Users\hongtao\AppData\Local\Google\Chrome\User Data")
-
-        return options
 
     def find_element_unit(self, by: str, browser: webdriver, key: str, timeOut: int = 10, timeStep: int = 0.5):
         while True:
@@ -208,20 +157,12 @@ class OpenUrl:
         except Exception as ex:
             pass
 
-    def find_the_browser(self):
-        if not self._browser:
-            workPath = os.path.abspath('./res/chrome/chromedriver_99.exe')
-            s = Service(workPath)
-            options = self.get_debug_chrome_opetions()
-            browser: webdriver = webdriver.Chrome(service=s, options=options)
-            Log.debug(f"finded the browser!")
-            self._browser = browser
-
     def openGameUrl(self, url: str = ''):
         try:
-            self.find_the_browser()
+            if not self._browser:
+                self._browser = Browser().GetBrowser()
 
-            self.open_new_tab(self._browser)
+            self._handler = Browser().OpenNewTab(self._browser)
 
             if url and url != '':
                 self._url = url
@@ -232,9 +173,6 @@ class OpenUrl:
             Log.exception(f"{self._jobName} openGameUrl error")
             self.resetBroser()
             raise RuntimeError(f'{self._jobName} browser handler error!')
-        except WebDriverException as ex:
-            Log.exception(f"{self._jobName} chrome error")
-            GEventHandler.Dispatch(EventType.reload_chrome)
         except Exception as ex2:
             Log.exception(f"{self._jobName} openGameUrl error")
             self.resetBroser()

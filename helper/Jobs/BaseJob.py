@@ -62,7 +62,11 @@ class BaseJob():
 
     def Done(self, *args, **kwargs):
         try:
-            if self._isPause:
+
+            while self._isPause:
+                time.sleep(1)
+
+            if self._isStop:
                 return
 
             self.DoJob(*args, **kwargs)

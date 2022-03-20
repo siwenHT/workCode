@@ -26,6 +26,7 @@ from DiscordBot.BotConfig import BotConfig
 from DiscordBot.BotPullMsg import BotPullMsg
 from Until.Email import GEmail
 from Until.MyLog import Log
+from Until.Scheduler import TheScheduler
 from Until.WinSysytem import Win
 from DiscordBot.MsgAndQuestions import MsgInfo, Question
 
@@ -33,15 +34,11 @@ from DiscordBot.MsgAndQuestions import MsgInfo, Question
 class AutoAnswerDaily(AutoAnswer):
 
     def __init__(self):
-        self._getIt = False
+        super().__init__()
         self._className = 'AutoAnswerDaily'
-        self._myId = '897884992129105920'
         self._questionNum = 10
-        self._localtionTime = None
-        self._nextPullTime = 6
-        self._curQuestion = []
         self._curAnswer = {}
-        self._sendAnswerTime = False
+        self._switchKey = "auto_answer_daily_getit"
         self._channelCfg = os.path.join(Win.GetWorkPath(), "Res/BotConfig/stepn-answer-daily.json")
         self._historyFile = os.path.join(Win.GetWorkPath(), "Res/anwser/stepn-history.json")
         self._contentFile = os.path.join(Win.GetWorkPath(), "Res/anwser/content_daily.txt")
@@ -49,16 +46,6 @@ class AutoAnswerDaily(AutoAnswer):
 
         self.InitCfg()
         self.MsgRegeist()
-
-    def InitCfg(self):
-        self._botConfig = BotConfig(self._channelCfg)
-        self._pullBot = BotPullMsg(self._botConfig)
-        self.InitHistory()
-
-    def InitHistory(self):
-        info = Tool.initJsonFromFileEx(self._historyFile)
-        self._lastTime = info.get('lastTime', 0)
-        self._recodeList = info.get('history', {})
 
     def ResetData(self):
         self._curQuestion = []
@@ -99,7 +86,7 @@ class AutoAnswerDaily(AutoAnswer):
     def GetAnswerContent(self):
         count = 0
         while True:
-            JsonList = self.GetAndFilterData(self._answerFile + str(count) + ".bk", 10)
+            JsonList = self.GetAndFilterData(self._answerFile, 10)
             ans = self.GetAnswer(JsonList)
 
             if count > 30:
@@ -201,28 +188,11 @@ class AutoAnswerDaily(AutoAnswer):
                     ans = tmp._content.strip()
                     Log.info(f"{self._className} final ans:{ans},role costTime:{tmp._time - self._curQuestion[0]._time}")
                     return ans
+
+            Log.error(f"not find the right ans")
             return 'Over'
 
         Log.error(f"not find the right ans")
-
-    def PrepareRecord(self, ans):
-        if not self._curQuestion or ans == 'Over':
-            return
-
-        oldNum = len(self._recodeList)
-        for i in range(len(self._curQuestion or {})):
-            qu = self._curQuestion[i]
-            qu.SetAnswer(ans[i])
-            self._recodeList[qu._question] = qu._answer
-
-        val = {}
-        val['lastTime'] = self._lastTime
-        val['history'] = self._recodeList
-
-        newNum = len(self._recodeList)
-        val = json.dumps(val)
-        Tool.WriteFile(self._historyFile, val)
-        Log.info(f"recode change: {oldNum} => {newNum}")
 
     def CalAnswer(self):
         if not self._curQuestion:
@@ -256,27 +226,18 @@ class AutoAnswerDaily(AutoAnswer):
             if not ans or ans == '':
                 return
 
+            delayTime = randint(15, 20)
             if self._getIt:
-                time.sleep(8)
-            else:
-                time.sleep(randint(15, 20))
-            self._sendAnswerTime = curTime
-            if self._sendDiscordOpen:
-                self._botConfig.SetMessage([ans])
-                # BotMsgSend(self._botConfig).send()
-                pass
-            return result
+                delayTime = 8
 
-        return ''
+            def callBack(self):
+                self._sendAnswerTime = curTime
+                if self._sendDiscordOpen:
+                    self._botConfig.SetMessage([ans])
+                    # BotMsgSend(self._botConfig).send()
+                    pass
 
-    # 获取时间基准.时间要在这个时间之后才进入分析范围
-    def GetTimeLocation(self):
-        self._localtionTime = datetime.datetime.utcnow().replace(minute=0, second=0, microsecond=0).timestamp()
-
-    def TheTimeTheSameDay(self, times1, times2):
-        t1_str = time.strftime("%Y-%m-%d", time.localtime(times1))
-        t2_str = time.strftime("%Y-%m-%d", time.localtime(times2))
-        return t1_str == t2_str
+            TheScheduler.delay_call(callBack, delayTime, self)
 
     def Enable(self):
         tz = pytz.timezone('Australia/Sydney')
@@ -304,11 +265,3 @@ class AutoAnswerDaily(AutoAnswer):
             ret = ret + cfg[randint(0, 3)]
 
         return ret
-
-    def MsgRegeist(self):
-
-        def msgHandler(eventType: EventType):
-            if eventType == EventType.reload_config:
-                self.InitCfg()
-
-        GEventHandler.RegedistEvent(EventType.reload_config, msgHandler)

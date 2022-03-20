@@ -32,6 +32,7 @@ class AutoAnswer(object):
     def __init__(self):
         self._getIt = False
         self._myId = '897884992129105920'
+        self._switchKey = "auto_answer_getit"
         self._questionNum = 4
         self._localtionTime = None
         self._nextPullTime = 6
@@ -41,7 +42,7 @@ class AutoAnswer(object):
         self._historyFile = os.path.join(Win.GetWorkPath(), "Res/anwser/stepn-history.json")
         self._contentFile = os.path.join(Win.GetWorkPath(), "Res/anwser/content.txt")
         self._answerFile = os.path.join(Win.GetWorkPath(), "Res/anwser/answer.txt")
-
+        self._configFile = os.path.join(Win.GetWorkPath(), "Res/anwser/switch.json")
         self.InitCfg()
         self.MsgRegeist()
 
@@ -49,6 +50,8 @@ class AutoAnswer(object):
         self._botConfig = BotConfig(self._channelCfg)
         self._pullBot = BotPullMsg(self._botConfig)
         self.InitHistory()
+        info = Tool.initJsonFromFileEx(self._configFile)
+        self._getIt = info.get(self._switchKey)
 
     def InitHistory(self):
         info = Tool.initJsonFromFileEx(self._historyFile)

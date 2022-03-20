@@ -43,8 +43,10 @@ class WinSystem():
             def func():
                 GEventHandler.Dispatch(EventType.reload_chrome_over)
 
-            run_date = datetime.datetime.now() + datetime.timedelta(seconds=3)
-            TheScheduler.add_job(func, trigger="date", run_date=run_date)
+            TheScheduler.delay_call(func, 3)
+
+    def ChangeVpnNode(self):
+        pass
 
     def GetWorkPath(self):
         return os.getcwd()

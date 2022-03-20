@@ -50,6 +50,8 @@ class MetaMaskJob(WebBaseJob):
                 self._web.ConfirmAccount()
                 self._web.ConfirmTransaction()
                 self._web.ConfirmApproveAction()
+                self._web.SollowBottom()
+                self._web.ConfirmOk()
                 self._web.refreshPage()
 
         except Exception as ex:

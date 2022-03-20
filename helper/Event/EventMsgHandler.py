@@ -26,7 +26,11 @@ class EventMsgHandler():
     def _dealy_call(self):
         for item in self.delayCall[:]:
             if not item.get("time") or time.time() - item.get("time") >= 0:
-                self.Dispatch(item["eventType"], *item["args"], **item["kwargs"])
+
+                def call(self, item):
+                    self.Dispatch(item["eventType"], *item["args"], **item["kwargs"])
+
+                TheScheduler.delay_call(call, 0, self, item)
                 self.delayCall.remove(item)
 
     def RegedistEvent(self, eventType: EventType, callBack, caller: object = None):

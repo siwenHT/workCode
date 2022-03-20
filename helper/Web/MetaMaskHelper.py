@@ -28,6 +28,7 @@ class MeatMaskHelper(OpenUrl):
     def __init__(self, jobName=''):
         super().__init__("chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html", jobName)
         self.ConfirmAccountCount = 0
+        self.isTestNet = True
 
     def ConfirmChangeNet(self):
         confirmKey = "//div[@class='confirmation-footer__actions']/button[text()='Switch network' or text()='切换网络' ]"
@@ -109,10 +110,14 @@ class MeatMaskHelper(OpenUrl):
             Log.info(f"chain is {chainNameText}")
 
             self.ReportVal(f"检查链名:{chainNameText}...")
-            if chainNameText.find("Testnet") == -1 and chainNameText.find("testnet") == -1:
+            if chainNameText.find("Test") == -1 and chainNameText.find("test") == -1:
                 self._timeSleep = 5
+                self.isTestNet = False
 
     def ConfirmTransaction(self):
+        if self.isTestNet:
+            return
+
         confirmKey = "confirm-page-container-content"
         confirmBtnKey = "button.btn--rounded.btn-primary.page-container__footer-button"
         dangerousKey = "actionable-message.actionable-message--danger"
@@ -140,6 +145,9 @@ class MeatMaskHelper(OpenUrl):
                         Log.info("Has cancel on Transaction!!")
 
     def ConfirmApproveAction(self):
+        if self.isTestNet:
+            return
+
         approveContentKey = "//div[@class='confirm-approve-content']"
         approveContentEl = self.find_element_loop(By.XPATH, self._browser, approveContentKey, 1)
         if approveContentEl:
@@ -157,6 +165,9 @@ class MeatMaskHelper(OpenUrl):
                     self.ReportVal(f"授权失败")
 
     def ConfirmSignature(self):
+        if self.isTestNet:
+            return
+
         signCancelKey = "//div[@class='request-signature__footer']/button[1]"
         signOkKey = "//div[@class='request-signature__footer']/button[2]"
 
@@ -169,3 +180,54 @@ class MeatMaskHelper(OpenUrl):
             if cancelEl:
                 self.element_click(cancelEl)
                 self.ReportVal(f"签名失败")
+
+    def SollowBottom(self):
+        key = "//img[@src='./images/icons/down-arrow.svg']"
+        el = self.find_element(By.XPATH, self._browser, key)
+        if el:
+            self.element_click(el)
+            time.sleep(0.2)
+
+    def ConfirmOk(self):
+        if not self.isTestNet:
+            return
+
+        el = self.find_element(By.XPATH, self._browser, "//button[contains(text(), '连接') or contains(text(), 'contect')]")
+        if el:
+            self.element_click(cancelEl)
+            self.ReportVal(f"点击连接")
+            return
+
+        dangerousKey = "actionable-message.actionable-message--danger"
+        key1 = "//div[contains(@class, '__footer')]/button[1]"
+        key2 = "//div[contains(@class, '__footer')]/button[2]"
+
+        dangeEl = self.find_element_loop(By.XPATH, self._browser, dangerousKey, 1)
+        if dangeEl:
+            cancelEl = self.find_element_loop(By.XPATH, self._browser, key1, 1)
+            if cancelEl:
+                self.element_click(cancelEl)
+                self.ReportVal(f"交易数据有错误")
+                return
+
+        okEl = self.find_element_loop(By.XPATH, self._browser, key2, 1)
+        if okEl:
+            count = 0
+            while not okEl.is_enabled():
+                time.sleep(0.2)
+                count += 1
+
+                if count > 5:
+                    break
+
+            if okEl.is_enabled():
+                self.element_click(okEl)
+                self.ReportVal(f"测试网交易确认")
+            else:
+                self.ReportVal(f"测试网交易确认按钮不能点击")
+        else:
+            cancelEl = self.find_element_loop(By.XPATH, self._browser, key1, 1)
+            if cancelEl:
+                self.element_click(cancelEl)
+                self.ReportVal(f"未找到确认按钮")
+                return
