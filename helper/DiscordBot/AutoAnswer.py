@@ -258,7 +258,7 @@ class AutoAnswer(object):
 
     def RightTime(self):
         localTime = datetime.datetime.now()
-        if localTime.hour > 8 and localTime < 23:
+        if localTime.hour > 8 and localTime.hour < 23:
             return True
 
     def RandomSend(self):
