@@ -50,10 +50,14 @@ class BotMsgSend():
             resp = conn.getresponse()
 
             if 199 < resp.status < 300:
-                Log.debug(f"succ! link: {showName}, content:{str(message_data)}")
+                data = resp.read()
+                # Log.debug(f"succ! link: {showName}")
                 self._botConfig.errorTime = 0
                 resp.close()
-                return True
+
+                if data == b"":
+                    data = b"{}"
+                return data
             else:
                 Log.error(f"fail! link: {showName}, code: {resp.status}, reason : {resp.reason}")
                 self._botConfig.errorTime += 1

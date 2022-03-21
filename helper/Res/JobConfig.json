@@ -77,6 +77,11 @@
         "seconds": 3,
         "max_instances": 1
     },
+    "UpLevelJob": {
+        "trigger": "interval",
+        "second": 75,
+        "max_instances": 1
+    },
     "ChiKorokoJob222": {
         "trigger": "date",
         "time": 3,
