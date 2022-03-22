@@ -16,6 +16,7 @@ from Jobs.BaseJob import BaseJob
 from Event.EventMsgHandler import GEventHandler
 from Event.EventType import EventType
 from Jobs.StepnBotDailyJob import StepnBotDailyJob
+from Jobs.UpLevelJob import UpLevelJob
 from Until.Scheduler import TheScheduler
 from Until.WinSysytem import Win
 from Until import ToolsFunc as TOOL
@@ -56,6 +57,7 @@ class JobManager():
         self.jobNames["StepnBotDailyJob"] = StepnBotDailyJob
         self.jobNames["TwitterAutoFollowBackJob"] = TwitterAutoFollowBackJob
 
+        self.jobNames["UpLevelJob"] = UpLevelJob
         self.jobNames["OneBtnPushJob"] = OneBtnPushJob
         self.jobNames["MetaMaskJob"] = MetaMaskJob
         self.jobNames["MetauceBotJob"] = MetauceBotJob
