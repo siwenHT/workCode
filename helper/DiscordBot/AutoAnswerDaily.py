@@ -228,14 +228,13 @@ class AutoAnswerDaily(AutoAnswer):
 
             delayTime = randint(15, 20)
             if self._getIt:
-                delayTime = 8
+                delayTime = 4
 
             def callBack(self):
                 self._sendAnswerTime = curTime
                 if self._sendDiscordOpen:
                     self._botConfig.SetMessage([ans])
-                    # BotMsgSend(self._botConfig).send()
-                    pass
+                    BotMsgSend(self._botConfig).send()
 
             TheScheduler.delay_call(callBack, delayTime, self)
 
