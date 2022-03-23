@@ -222,21 +222,27 @@ class AutoAnswerDaily(AutoAnswer):
             curTime = datetime.datetime.utcnow().timestamp()
             Log.info(f"final CalAnswer findNum: {findCount},ans: {result}, time: {curTime - self._curQuestion[0]._time}")
 
-            ans = self.SendSwitch(result)
-            if not ans or ans == '':
-                return
+            # ans = self.SendSwitch(result)
+            # if not ans or ans == '':
+            #     return
 
-            delayTime = randint(15, 20)
-            if self._getIt:
-                delayTime = 4
+            time.sleep(3)
+            self._sendAnswerTime = curTime
+            if self._sendDiscordOpen:
+                self._botConfig.SetMessage([result])
+                BotMsgSend(self._botConfig).send()
 
-            def callBack(self):
-                self._sendAnswerTime = curTime
-                if self._sendDiscordOpen:
-                    self._botConfig.SetMessage([ans])
-                    BotMsgSend(self._botConfig).send()
+            # delayTime = randint(15, 20)
+            # if self._getIt:
+            # delayTime = 3
 
-            TheScheduler.delay_call(callBack, delayTime, self)
+            # def callBack(self):
+            #     self._sendAnswerTime = curTime
+            #     if self._sendDiscordOpen:
+            #         self._botConfig.SetMessage([ans])
+            #         BotMsgSend(self._botConfig).send()
+
+            # TheScheduler.delay_call(callBack, delayTime, self)
 
     def Enable(self):
         tz = pytz.timezone('Australia/Sydney')

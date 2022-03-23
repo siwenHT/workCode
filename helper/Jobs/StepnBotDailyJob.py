@@ -41,7 +41,7 @@ class StepnBotDailyJob(BaseJob):
             self._autoAns.GetQuestionContent()
             #能计算出来的话，答题能顺利完成通知邮箱答题了
             self._autoAns.CalAnswer()
-            self._autoAns.GetAnswerContent()
+            # self._autoAns.GetAnswerContent()
             self.count += 1
             self.ReportJobVal(val=f"任务完成 {self.count}")
             self._autoAns._sendDiscordOpen = False

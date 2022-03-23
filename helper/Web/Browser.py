@@ -73,7 +73,8 @@ class Browser(Singleton):
                         break
 
                 if not newHandler:
-                    raise RuntimeError(f'OpenNewTab window is miss {theBrowser.title}')
+                    newHandler = oldHandles[1]
+                    # raise RuntimeError(f'OpenNewTab window is miss {theBrowser.title}')
 
                 theBrowser.switch_to.window(newHandler)
                 self._openErrorNum = 0
