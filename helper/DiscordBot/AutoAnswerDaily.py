@@ -226,7 +226,7 @@ class AutoAnswerDaily(AutoAnswer):
             # if not ans or ans == '':
             #     return
 
-            time.sleep(3)
+            time.sleep(2)
             self._sendAnswerTime = curTime
             if self._sendDiscordOpen:
                 self._botConfig.SetMessage([result])
