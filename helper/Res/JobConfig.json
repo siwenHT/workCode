@@ -5,7 +5,6 @@
         "TwitterFellowJob",
         "GmToChannelJob",
         "TwitterAutoFollowBackJob",
-        "StepnBotJob",
         "StepnBotDailyJob",
         "ChiKorokoJob"
     ],

@@ -51,9 +51,9 @@ class BotMsgSend():
 
             if 199 < resp.status < 300:
                 data = resp.read()
-                # Log.debug(f"succ! link: {showName}")
-                self._botConfig.errorTime = 0
                 resp.close()
+                Log.debug(f"succ! link: {showName}")
+                self._botConfig.errorTime = 0
 
                 if data == b"":
                     data = b"{}"

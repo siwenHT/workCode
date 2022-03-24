@@ -53,11 +53,11 @@ class JobManager():
         self.jobNames["TwitterFellowJob"] = TwitterFellowJob
         self.jobNames["GmToChannelJob"] = GmToChannelJob
         self.jobNames["ChiKorokoJob"] = ChiKorokoJob
-        self.jobNames["StepnBotJob"] = StepnBotJob
         self.jobNames["StepnBotDailyJob"] = StepnBotDailyJob
         self.jobNames["TwitterAutoFollowBackJob"] = TwitterAutoFollowBackJob
 
         self.jobNames["UpLevelJob"] = UpLevelJob
+        self.jobNames["StepnBotJob"] = StepnBotJob
         self.jobNames["OneBtnPushJob"] = OneBtnPushJob
         self.jobNames["MetaMaskJob"] = MetaMaskJob
         self.jobNames["MetauceBotJob"] = MetauceBotJob
