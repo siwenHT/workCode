@@ -14,9 +14,24 @@
 class RecodeMgr():
 
     def __init__(self):
+        self._data = {}
         pass
 
-    def SetJobRecode(self, _typeName, num = 1):
-        pass
+    def SetJobSucc(self, _typeName):
+        ret = self.GetTypeInfo(_typeName)
+        ret['succ'] += 1
 
-    
+    def SetJobFail(self, _typeName, res=''):
+        ret = self.GetTypeInfo(_typeName)
+        ret['fail'] += 1
+        if res and res != '':
+            ret['failRes'].append(res)
+
+    def GetTypeInfo(self, _typeName):
+        if not self._data.get(_typeName):
+            self._data[_typeName] = {'succ': 0, 'fail': 0, "failRes": []}
+
+        return self._data[_typeName]
+
+    def ShowHtmlString(self):
+        pass
