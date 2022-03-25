@@ -77,7 +77,7 @@ class Question(object):
         if ret:
             self._calRet = eval(ret.group(1))
             self.GetFlg(self._calRet)
-            Log.debug(f"question:{self._question} = {self._calRet}  {self._answer}")
+            # Log.debug(f"question:{self._question} = {self._calRet}  {self._answer}")
 
     def GetFlg(self, ans):
         self._calRet = ans

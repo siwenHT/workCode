@@ -64,7 +64,7 @@ class AutoAnswerDaily(AutoAnswer):
 
     def GetAndFilterData(self, recFile, limit=50):
         bCon = self._pullBot.GetRemoteMessage(limit)
-        Tool.WriteBinFile(recFile, bCon)
+        # Tool.WriteBinFile(recFile, bCon)
         strCon = bCon.decode('utf-8')
         JsonList = json.loads(strCon)
         return JsonList
@@ -72,10 +72,10 @@ class AutoAnswerDaily(AutoAnswer):
     def GetQuestionContent(self):
         count = 0
         while True:
-            JsonList = self.GetAndFilterData(self._contentFile, 50)
+            JsonList = self.GetAndFilterData(self._contentFile, 15)
             self.GetQuestions(JsonList)
 
-            if count > 10:
+            if count > 30:
                 break
             elif not self._curQuestion or len(self._curQuestion) < self._questionNum:
                 time.sleep(self._nextPullTime)
@@ -126,7 +126,7 @@ class AutoAnswerDaily(AutoAnswer):
 
             if tmp._isBot and tmp.IsQuestion():
                 questions.append(tmp._myQuestion)
-                self._nextPullTime = 0.8
+                self._nextPullTime = 0.3
 
             if len(questions) == self._questionNum:
                 break
@@ -140,7 +140,7 @@ class AutoAnswerDaily(AutoAnswer):
             self._curQuestion = questions
 
             strCon = json.dumps(jsonData)
-            Tool.WriteFile(self._contentFile + "daily.bk", strCon)
+            # Tool.WriteFile(self._contentFile + "daily.bk", strCon)
 
     def GetAnswer(self, jsonData, isRepaire=False):
         rightId = None
@@ -211,7 +211,7 @@ class AutoAnswerDaily(AutoAnswer):
             if flg:
                 findCount += 1
                 result[count] = flg
-                Log.info(f"find one question {qu._question} => {qu._calRet}")
+                # Log.info(f"find one question {qu._question} => {qu._calRet}")
             count += 1
 
         if findCount > 0:
